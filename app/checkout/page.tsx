@@ -221,7 +221,9 @@ export default function CheckoutPage() {
                     )}
                     <div className="flex justify-between text-sm">
                       <span className="text-muted-foreground">Frete</span>
-                      <span className="font-semibold">{shippingCost ? formatPrice(shippingCost) : "A calcular"}</span>
+                      <span className="font-semibold">
+                        {shippingCost != null ? formatPrice(shippingCost) : "A calcular"}
+                      </span>
                     </div>
                     <div className="border-t border-border pt-4">
                       <div className="flex justify-between">
@@ -231,7 +233,12 @@ export default function CheckoutPage() {
                     </div>
                   </div>
 
-                  <Button size="lg" className="w-full" onClick={handleFinishOrder} disabled={loading || !shippingCost}>
+                  <Button
+                    size="lg"
+                    className="w-full"
+                    onClick={handleFinishOrder}
+                    disabled={loading || shippingCost == null}
+                  >
                     {loading ? (
                       <>
                         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
