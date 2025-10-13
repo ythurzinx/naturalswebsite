@@ -1,4 +1,41 @@
-  await new Promise((resolve) => setTimeout(resolve, 2000))
+    title: "Cupom inválido",
+        description: validation.message,
+        variant: "destructive",
+      })
+      return
+    }
+
+    if (validation.coupon) {
+      const discount = calculateDiscount(validation.coupon, cart.total)
+      setAppliedCoupon(validation.coupon)
+      setCouponDiscount(discount)
+      toast({
+        title: "Cupom aplicado!",
+        description: `Desconto de ${formatPrice(discount)} aplicado`,
+      })
+    }
+  }
+
+  const handleRemoveCoupon = () => {
+    setAppliedCoupon(null)
+    setCouponDiscount(0)
+    setCouponCode("")
+  }
+
+  const handleFinishOrder = async () => {
+    if (shippingCost == null) {
+      toast({
+        title: "Calcule o frete",
+        description: "Por favor, calcule o frete antes de finalizar.",
+        variant: "destructive",
+      })
+      return
+    }
+
+    setLoading(true)
+
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 2000))
 
       if (appliedCoupon) {
         incrementCouponUsage(appliedCoupon.id)
@@ -11,7 +48,8 @@
 
       clearCart()
       router.push("/")
-    } catch (error) {
+    } catch (error: unknown) {
+      console.error("[checkout] Failed to finish order", error)
       toast({
         title: "Erro ao processar pedido",
         description: "Tente novamente mais tarde.",
@@ -31,7 +69,8 @@
 
   const subtotal = cart.total
   const totalWithDiscount = subtotal - couponDiscount
-  const total = shippingCost ? totalWithDiscount + shippingCost : totalWithDiscount
+  const total =
+    shippingCost != null ? totalWithDiscount + shippingCost : totalWithDiscount
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -51,3 +90,9 @@
                 </CardContent>
               </Card>
 
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Ticket className="h-5 w-5" />
+                    Cupom de Desconto
+                  </CardTitle>
