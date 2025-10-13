@@ -109,7 +109,9 @@ export default function CheckoutPage() {
   }
 
   if (cart.items.length === 0) {
-    router.push("/carrinho")
+    if (typeof window !== "undefined") {
+      router.replace("/carrinho")
+    }
     return null
   }
 
