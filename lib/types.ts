@@ -9,6 +9,9 @@ export interface Product {
   status_estoque: string
   categoria: string
   isGranel: boolean
+  imagem?: string
+  validade?: string
+  isFeatured?: boolean
 }
 
 export interface CartItem {
@@ -26,4 +29,16 @@ export interface ShippingInfo {
   cep: string
   address: string
   cost: number
+}
+
+export interface Coupon {
+  id: string
+  code: string
+  discountType: "percentage" | "fixed"
+  discount: number
+  minPurchase?: number
+  expiryDate?: string
+  usageLimit?: number
+  usedCount: number
+  isActive: boolean
 }
