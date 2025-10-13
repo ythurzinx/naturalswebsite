@@ -72,7 +72,7 @@ export default function CheckoutPage() {
   }
 
   const handleFinishOrder = async () => {
-    if (!shippingCost) {
+    if (shippingCost == null) {
       toast({
         title: "Calcule o frete",
         description: "Por favor, calcule o frete antes de finalizar.",
@@ -97,7 +97,8 @@ export default function CheckoutPage() {
 
       clearCart()
       router.push("/")
-    } catch (error) {
+    } catch (error: unknown) {
+      console.error("[checkout] Failed to finish order", error)
       toast({
         title: "Erro ao processar pedido",
         description: "Tente novamente mais tarde.",
@@ -117,7 +118,8 @@ export default function CheckoutPage() {
 
   const subtotal = cart.total
   const totalWithDiscount = subtotal - couponDiscount
-  const total = shippingCost ? totalWithDiscount + shippingCost : totalWithDiscount
+  const total =
+    shippingCost != null ? totalWithDiscount + shippingCost : totalWithDiscount
 
   return (
     <div className="min-h-screen flex flex-col">
