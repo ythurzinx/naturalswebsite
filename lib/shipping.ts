@@ -5,11 +5,25 @@ interface ShippingCalculation {
   address: string
 }
 
+function getShippingEndpoint() {
+  if (typeof window !== "undefined") {
+    return "/api/calculate-shipping"
+  }
+
+  const base = process.env.NEXT_PUBLIC_SITE_URL || process.env.NEXT_URL || process.env.VERCEL_URL
+  if (base) {
+    const normalizedBase = base.startsWith("http") ? base : `https://${base}`
+    return `${normalizedBase.replace(/\/$/, "")}/api/calculate-shipping`
+  }
+
+  return "http://localhost:3000/api/calculate-shipping"
+}
+
 export async function calculateShipping(cep: string): Promise<ShippingCalculation> {
   try {
     const cleanCep = cep.replace(/\D/g, "")
 
-    const response = await fetch("/api/calculate-shipping", {
+    const response = await fetch(getShippingEndpoint(), {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -18,7 +32,7 @@ export async function calculateShipping(cep: string): Promise<ShippingCalculatio
     })
 
     if (!response.ok) {
-      const errorData = await response.json()
+      const errorData = await response.json().catch(() => ({ error: response.statusText }))
       throw new Error(errorData.error || "Erro ao calcular frete")
     }
 
