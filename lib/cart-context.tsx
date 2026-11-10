@@ -17,16 +17,20 @@ const CartContext = createContext<CartContextType | undefined>(undefined)
 export function CartProvider({ children }: { children: ReactNode }) {
   const [cart, setCart] = useState<Cart>({ items: [], total: 0 })
 
+  const [loaded, setLoaded] = useState(false)
   useEffect(() => {
-    const savedCart = localStorage.getItem("mundo-natural-cart")
-    if (savedCart) {
-      setCart(JSON.parse(savedCart))
-    }
+    try {
+      const stored = JSON.parse(localStorage.getItem("mundo-natural-cart") || "null")
+      if (Array.isArray(stored?.items)) {
+        const items = stored.items.filter((i: CartItem) => typeof i?.product?.id === "string" && Number.isFinite(i.product.valor_unitario) && Number.isInteger(i.quantity) && i.quantity > 0 && !i.product.isGranel)
+        setCart({items, total: calculateTotal(items)})
+      }
+    } catch { /* The cart works in memory when storage is unavailable. */ }
+    setLoaded(true)
   }, [])
-
   useEffect(() => {
-    localStorage.setItem("mundo-natural-cart", JSON.stringify(cart))
-  }, [cart])
+    if (loaded) try { localStorage.setItem("mundo-natural-cart", JSON.stringify(cart)) } catch { /* optional persistence */ }
+  }, [cart, loaded])
 
   const calculateTotal = (items: CartItem[]): number => {
     return items.reduce((sum, item) => {
@@ -47,7 +51,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
         newItems = [...prev.items]
         newItems[existingItemIndex] = {
           ...newItems[existingItemIndex],
-          quantity: newItems[existingItemIndex].quantity + quantity,
+          product,
+          quantity: Math.min(999,newItems[existingItemIndex].quantity + quantity),
           selectedWeight: selectedWeight || newItems[existingItemIndex].selectedWeight,
         }
       } else {

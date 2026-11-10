@@ -9,7 +9,7 @@ const GOOGLE_TIMEOUT_MS = 8000
 const SAME_CITY_KEYWORD = "taboao da serra"
 
 const requestSchema = z.object({
-  cep: z.string({ required_error: "CEP é obrigatório" }).min(1, "CEP é obrigatório"),
+  cep: z.string({ error: "CEP é obrigatório" }).min(1, "CEP é obrigatório"),
 })
 
 type ViaCepResponse = {
@@ -99,7 +99,7 @@ export async function POST(request: NextRequest) {
 
     const validation = requestSchema.safeParse(parsedBody)
     if (!validation.success) {
-      return NextResponse.json({ error: validation.error.errors[0]?.message ?? "CEP inválido" }, { status: 400 })
+      return NextResponse.json({ error: validation.error.issues[0]?.message ?? "CEP inválido" }, { status: 400 })
     }
 
     const cleanCep = validation.data.cep.replace(/\D/g, "")

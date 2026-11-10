@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import type { ReactNode } from "react"
 
 import "@/styles/globals.css"
+import "@/styles/shop.css"
 
 import { CartProvider } from "@/lib/cart-context"
 
