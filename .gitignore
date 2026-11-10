@@ -25,3 +25,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+# Private POS reports and server-side seed batches
+/data/catalog-*.json
+
+.private/
+data/catalog-*.json
+*.sqlite*
