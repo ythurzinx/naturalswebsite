@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import { ShopHeader, ShopFooter, money } from "@/components/shop-shell";
 import { useCart } from "@/lib/cart-context";
+import ComboShelf from "@/components/combo-shelf";
 import publicSeed from "@/data/public-catalog.json";
 
 type Item = {
@@ -116,41 +117,32 @@ export default function Store() {
     <div className="mn">
       <ShopHeader />
       <main className="mn-main">
-        <section className="market-hero">
+        <section className="market-hero hero-combos">
           <div className="hero-copy">
             <div className="hero-kicker">
-              <Leaf size={16} /> Empório de produtos naturais
+              <MapPin size={15} /> Empório de Taboão da Serra
             </div>
             <h1>
-              O natural faz parte
-              <br />
-              da nossa <em>mesa.</em>
+              Combos para
+              <br />o seu <em>dia a dia.</em>
             </h1>
             <p>
-              Grãos, mel, suplementos e lanches da nossa loja de família, agora
-              mais perto de você.
+              Granolas, mel e lanches em combinações da nossa loja de família.
+              Escolha a sua e acerte o pagamento pelo WhatsApp.
             </p>
-            <a className="solid" href="#catalogo">
-              Explorar produtos <ArrowDown size={17} />
+            <a className="solid" href="#combos">
+              Escolher meu combo <ArrowDown size={17} />
             </a>
           </div>
-          <div
-            className="hero-photo"
-            role="img"
-            aria-label="Tigela de grãos integrais"
-          >
-            <span>
-              <MapPin size={15} /> Taboão da Serra, SP
-            </span>
-          </div>
         </section>
+        <ComboShelf add={add} />
         <section id="catalogo">
           <div className="catalog-title">
             <div>
               <span className="eyeline">
-                <i /> NOSSA VITRINE
+                <i /> POR CATEGORIA
               </span>
-              <h2>Catálogo da loja</h2>
+              <h2>Produtos avulsos</h2>
             </div>
             <label className="searchbox">
               <Search size={18} />

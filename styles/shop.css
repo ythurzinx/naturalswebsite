@@ -475,3 +475,261 @@
     font-size: 11px;
   }
 }
+.mn {
+  background: #f9f8f3;
+  color: #263c30;
+}
+.delivery-strip {
+  background: #243e32;
+}
+.mn-main {
+  max-width: 1360px;
+}
+.hero-combos {
+  min-height: 375px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  background: #e9dac2 url("/combos/hero.webp") center center/cover no-repeat;
+  isolation: isolate;
+  position: relative;
+}
+.hero-combos:before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    90deg,
+    rgba(245, 235, 213, 0.96) 1%,
+    rgba(245, 235, 213, 0.87) 30%,
+    rgba(245, 235, 213, 0.08) 62%,
+    transparent 75%
+  );
+}
+.hero-combos .hero-copy {
+  max-width: 59%;
+  padding: 38px clamp(22px, 4vw, 62px);
+}
+.hero-combos .hero-kicker {
+  font-weight: 600;
+  font-size: 12px;
+}
+.hero-combos h1 {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 650;
+  font-size: clamp(47px, 5.4vw, 78px);
+  letter-spacing: -0.075em;
+  line-height: 0.99;
+  margin: 15px 0;
+}
+.hero-combos h1 em {
+  font:
+    italic 1.07em/0.9 Georgia,
+    serif;
+  letter-spacing: -0.065em;
+  color: #526939;
+}
+.hero-combos p {
+  max-width: 375px;
+  font-size: 15px;
+  color: #344c3b;
+}
+.hero-combos .solid {
+  background: #263e2d;
+}
+.combo-section {
+  padding: 36px 0 3px;
+  scroll-margin-top: 12px;
+}
+.combo-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+.combo-heading h2,
+.catalog-title h2 {
+  font:
+    600 clamp(30px, 3vw, 47px) / 1.12 Arial,
+    sans-serif;
+  letter-spacing: -0.065em;
+}
+.combo-heading h2 {
+  margin: 0;
+}
+.combo-heading h2 span {
+  color: #a36a35;
+}
+.combo-heading p,
+.combo-body p {
+  font-size: 14px;
+  color: #546355;
+  line-height: 1.45;
+  margin: 6px 0 0;
+}
+.combo-heading a {
+  font-size: 13px;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.combo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+.combo-card {
+  border: 1px solid #d9daca;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #fffefa;
+  display: flex;
+  flex-direction: column;
+}
+.combo-picture {
+  height: clamp(138px, 14vw, 210px);
+  position: relative;
+  background: #e7e4d2;
+  display: grid;
+  place-items: center;
+}
+.combo-picture img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.combo-picture span {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: #fff9eced;
+  border-radius: 20px;
+  padding: 5px 10px;
+  font-size: 11px;
+  font-weight: 600;
+}
+.combo-body {
+  padding: 17px 18px;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+.combo-body h3 {
+  font:
+    600 clamp(20px, 2vw, 29px) / 1.12 Arial,
+    sans-serif;
+  letter-spacing: -0.055em;
+  margin: 0;
+}
+.combo-body details {
+  font-size: 12px;
+  margin: 12px 0;
+}
+.combo-body summary {
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.combo-body li {
+  margin: 5px 0;
+}
+.combo-buy {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  border-top: 1px solid #e2e3d9;
+  padding-top: 12px;
+  margin-top: auto;
+}
+.combo-buy strong {
+  font-size: 20px;
+  letter-spacing: -0.04em;
+}
+.combo-buy button {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: #2a503a;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+}
+.combo-buy button:disabled {
+  background: #e7ebdf;
+  color: #485b49;
+  opacity: 1;
+}
+@media (max-width: 720px) {
+  .combo-grid {
+    gap: 10px;
+  }
+  .hero-combos .hero-copy {
+    max-width: 77%;
+  }
+  .combo-body {
+    padding: 12px;
+  }
+  .combo-buy {
+    flex-wrap: wrap;
+  }
+  .combo-heading a {
+    white-space: nowrap;
+  }
+}
+@media (max-width: 600px) {
+  .hero-combos {
+    min-height: 400px;
+    background-position: 65% center;
+    align-items: end;
+  }
+  .hero-combos:before {
+    background: linear-gradient(
+      0deg,
+      #eee2c9 3%,
+      rgba(239, 227, 202, 0.94) 38%,
+      rgba(239, 227, 202, 0.12) 88%
+    );
+  }
+  .hero-combos .hero-copy {
+    max-width: 100%;
+    padding: 145px 22px 25px;
+    align-self: end;
+  }
+  .hero-combos h1 {
+    font-size: 46px;
+  }
+  .hero-combos .hero-kicker {
+    font-size: 11px;
+  }
+  .hero-combos p {
+    font-size: 14px;
+  }
+  .combo-grid {
+    grid-template-columns: 1fr;
+  }
+  .combo-picture {
+    height: clamp(155px, 47vw, 240px);
+  }
+  .combo-heading {
+    align-items: start;
+    flex-direction: column;
+  }
+  .combo-heading p {
+    margin-bottom: 1px;
+  }
+  .combo-body {
+    padding: 17px;
+  }
+  .combo-buy {
+    flex-wrap: nowrap;
+  }
+  .combo-section {
+    padding-top: 25px;
+  }
+}
+
+.combo-picture { overflow: hidden; }
+.combo-picture img { position: absolute; inset: 0; }

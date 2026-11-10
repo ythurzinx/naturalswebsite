@@ -1,0 +1,5 @@
+[
+ {"key":"cafe-da-manha","name":"Café da manhã","description":"Granola de banana e mel com mel silvestre para acompanhar frutas ou iogurte.","image":"cafe","members":[{"id":"138","qty":1},{"id":"84","qty":1}]},
+ {"key":"pausa-do-lanche","name":"Pausa do lanche","description":"Uma barra de amendoim e uma bebida de cacau com whey para levar na bolsa.","image":"lanche","members":[{"id":"4095","qty":1},{"id":"5457","qty":1}]},
+ {"key":"dupla-de-granolas","name":"Dupla de granolas","description":"Granola tradicional e granola de banana com canela para variar a cada tigela.","image":"granolas","members":[{"id":"1887","qty":1},{"id":"145","qty":1}]}
+]

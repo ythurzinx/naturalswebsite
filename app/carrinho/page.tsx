@@ -37,6 +37,7 @@ export default function Cart() {
             money(p.price * p.qty),
         ),
         "Subtotal: " + money(r.total),
+        "Pode me passar o total final e as instruções para pagamento por aqui?",
         r.delivery,
         r.delivery === "Entrega local"
           ? "Quero combinar o endereço, o frete e o prazo."
@@ -136,14 +137,15 @@ export default function Cart() {
               <p>
                 {delivery === "Entrega local"
                   ? "Entrega própria em Taboão da Serra e região. A loja confirma cobertura, frete e prazo pelo WhatsApp."
-                  : "Retire na Rua José Duarte Souza, 21, Jardim das Margaridas. Combine o horário pelo WhatsApp."}
+                  : "Retire na Rua José Duarte Souza, 25, Jardim Saint Morritz. Combine o horário pelo WhatsApp."}
               </p>
               <p>
                 Ao continuar, o site registra sua solicitação e abre o WhatsApp.
-                O pagamento é combinado com a loja.
+                A loja confirma o total e envia as instruções de pagamento na
+                conversa.
               </p>
               <button className="solid" disabled={busy} onClick={place}>
-                {busy ? "Registrando…" : "Pedir pelo WhatsApp"}
+                {busy ? "Registrando…" : "Continuar para o WhatsApp"}
               </button>
               {error && (
                 <p role="alert">

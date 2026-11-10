@@ -24,7 +24,8 @@ export function ShopHeader() {
           </span>
         </Link>
         <nav>
-          <Link href="/#catalogo">Catálogo</Link>
+          <Link href="/#combos">Combos</Link>
+          <Link href="/#catalogo">Produtos</Link>
           <Link href="/contato">Nossa loja</Link>
         </nav>
         <Link className="bag" href="/carrinho">

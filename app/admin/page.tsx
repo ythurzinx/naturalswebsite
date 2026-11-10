@@ -1,5 +1,6 @@
 "use client";
 import { FormEvent, useEffect, useState } from "react";
+import ComboEditor from "@/components/combo-editor";
 import ArtStudio from "@/components/art-studio";
 import { ShopHeader, ShopFooter, money, post } from "@/components/shop-shell";
 type Product = {
@@ -28,7 +29,13 @@ const blank: Product = {
   stock: 0,
   active: 0,
 };
-const tabs = ["Produtos", "Pedidos", "Artes para a A1", "Canais de venda"];
+const tabs = [
+  "Produtos",
+  "Pedidos",
+  "Artes para a A1",
+  "Canais de venda",
+  "Combos",
+];
 async function get(view: string, params: Record<string, string> = {}) {
   const r = await fetch(
     "/api/loja?" + new URLSearchParams({ view, ...params }),
@@ -417,6 +424,7 @@ export default function Admin() {
                 ))}
               </section>
             )}
+            {tab === "Combos" && <ComboEditor />}
             {tab === tabs[2] && <ArtStudio />}
             {tab === tabs[3] && (
               <form
