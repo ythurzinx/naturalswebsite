@@ -26,6 +26,8 @@ type Item = {
   weight: string;
   price: number;
   available: number;
+  bulk?: number;
+  photo?: string;
 };
 const groups = [
   "Grãos e cereais",
@@ -40,23 +42,22 @@ const initial = publicSeed.map(([id, name, category, weight, price]) => ({
   category: String(category),
   weight: String(weight),
   price: Number(price),
+  bulk: Number(weight === "a granel (kg)"),
   available: 0,
 }));
-const pretty = (name: string) =>
-  name
-    .toLocaleLowerCase("pt-BR")
-    .replace(/^./, (x) => x.toLocaleUpperCase("pt-BR"));
+const pretty = (name: string) => name;
 export default function Store() {
   const [cat, category] = useState(""),
     [q, search] = useState(""),
     [page, paging] = useState(0),
-    [items, products] = useState<Item[]>(initial),
+    [items, products] = useState<Item[]>(initial.slice(0, 24)),
     [cats, categories] = useState(groups),
     [count, total] = useState(initial.length),
     [ifood, food] = useState(""),
     [notice, say] = useState(""),
     [error, issue] = useState(""),
     [busy, loading] = useState(false);
+  const [grams, setGrams] = useState<Record<string, number>>({});
   const { addToCart } = useCart();
   useEffect(() => {
     const ac = new AbortController();
@@ -77,13 +78,14 @@ export default function Store() {
         issue("");
       } catch {
         if (!ac.signal.aborted) {
-          products(
-            initial.filter(
-              (p) =>
-                (!cat || p.category === cat) &&
-                p.name.toLowerCase().includes(q.toLowerCase()),
-            ),
+          const filtered = initial.filter(
+            (p) =>
+              (!cat || p.category === cat) &&
+              p.name.toLocaleLowerCase().includes(q.toLocaleLowerCase()),
           );
+          products(filtered.slice(page * 24, (page + 1) * 24));
+          total(filtered.length);
+          categories([...new Set(initial.map((p) => p.category))]);
           issue("Estoque temporariamente indisponível.");
         }
       } finally {
@@ -95,7 +97,27 @@ export default function Store() {
       ac.abort();
     };
   }, [cat, q, page]);
+  useEffect(() => {
+    const apply = () => {
+      search(new URLSearchParams(location.search).get("q") || "");
+      paging(0);
+    };
+    apply();
+    window.addEventListener("popstate", apply);
+    return () => window.removeEventListener("popstate", apply);
+  }, []);
   function add(p: Item) {
+    if (p.bulk) {
+      const g = grams[p.id] ?? 100;
+      if (!Number.isInteger(g) || g < 1 || g > 50000) return;
+      p = {
+        ...p,
+        id: "g:" + g + ":" + p.id,
+        weight: g + " g",
+        price: Math.round((p.price * g) / 1000),
+      };
+    }
+
     addToCart(
       {
         id: p.id,
@@ -185,16 +207,47 @@ export default function Store() {
               const Icon = icons[groups.indexOf(p.category)] || Leaf;
               return (
                 <article className="product" key={p.id}>
+                  {p.photo && (
+                    <img className="sku-photo" src={p.photo} alt={p.name} />
+                  )}
                   <div className="product-type">
                     <Icon size={19} />
                     {p.category}
                   </div>
                   <h3>{pretty(p.name)}</h3>
-                  <small>{p.weight || "Unidade"}</small>
+                  {p.bulk ? (
+                    <label className="gram-picker">
+                      {money(p.price)}/kg · Quantos gramas?
+                      <input
+                        type="number"
+                        min="1"
+                        max="50000"
+                        step="1"
+                        value={grams[p.id] ?? 100}
+                        onChange={(e) =>
+                          setGrams({ ...grams, [p.id]: Number(e.target.value) })
+                        }
+                      />
+                    </label>
+                  ) : (
+                    <small>{p.weight || "Unidade"}</small>
+                  )}
                   <div className="product-buy">
-                    <strong>{money(p.price)}</strong>
+                    <strong>
+                      {money(
+                        p.bulk
+                          ? Math.round((p.price * (grams[p.id] ?? 100)) / 1000)
+                          : p.price,
+                      )}
+                    </strong>
                     <button
-                      disabled={!p.available}
+                      disabled={
+                        !p.available ||
+                        (!!p.bulk &&
+                          (!Number.isInteger(grams[p.id] ?? 100) ||
+                            (grams[p.id] ?? 100) < 1 ||
+                            (grams[p.id] ?? 100) > 50000))
+                      }
                       onClick={() => add(p)}
                       aria-label={"Adicionar " + p.name}
                     >

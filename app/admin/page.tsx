@@ -1,5 +1,6 @@
 "use client";
 import { FormEvent, useEffect, useState } from "react";
+import AdminImage from "@/components/admin-image";
 import ComboEditor from "@/components/combo-editor";
 import ArtStudio from "@/components/art-studio";
 import { ShopHeader, ShopFooter, money, post } from "@/components/shop-shell";
@@ -11,6 +12,8 @@ type Product = {
   price: number;
   stock: number;
   active: number;
+  photo?: string;
+  bulk?: number;
 };
 type Order = {
   id: string;
@@ -18,7 +21,15 @@ type Order = {
   total: number;
   created: number;
   delivery: string;
-  items: { name: string; qty: number; price: number }[];
+  customer?: {
+    name: string;
+    email: string;
+    phone: string;
+    address: string;
+    cep: string;
+  };
+  shipping?: number;
+  items: { name: string; qty: number; price: number; weight?: string }[];
 };
 const blank: Product = {
   id: "",
@@ -28,12 +39,14 @@ const blank: Product = {
   price: 0,
   stock: 0,
   active: 0,
+  photo: "",
+  bulk: 0,
 };
 const tabs = [
   "Produtos",
   "Pedidos",
   "Artes para a A1",
-  "Canais de venda",
+  "Loja e entrega",
   "Combos",
 ];
 async function get(view: string, params: Record<string, string> = {}) {
@@ -59,6 +72,9 @@ export default function Admin() {
     [isNew, fresh] = useState(false);
   const [orders, history] = useState<Order[]>([]),
     [phone, contact] = useState(""),
+    [imagePending, setImagePending] = useState(false),
+    [logo, setLogo] = useState(""),
+    [rate, setRate] = useState(""),
     [ifood, channel] = useState(""),
     [revision, reload] = useState(0),
     [file, csv] = useState<File | null>(null);
@@ -88,6 +104,8 @@ export default function Admin() {
           if (live) {
             contact(d.phone);
             channel(d.ifood);
+            setLogo(d.logo || "");
+            setRate((Number(d.rate || 0) / 100).toFixed(2));
           }
         }
       } catch (e) {
@@ -113,7 +131,7 @@ export default function Admin() {
   }
   function save(e: FormEvent) {
     e.preventDefault();
-    if (!edit) return;
+    if (!edit || imagePending) return;
     run(async () => {
       await post({ ...edit, action: "product", create: isNew });
       select(null);
@@ -214,6 +232,32 @@ export default function Admin() {
                 {edit && (
                   <form className="mn-panel" onSubmit={save}>
                     <h2>{isNew ? "Cadastrar produto" : "Editar produto"}</h2>
+                    <AdminImage
+                      onProcessing={setImagePending}
+                      key={isNew ? "new" : edit.id}
+                      label="Foto do produto"
+                      value={edit.photo || ""}
+                      onChange={(photo) =>
+                        select((current) =>
+                          current ? { ...current, photo } : null,
+                        )
+                      }
+                    />
+                    <label>
+                      Forma de venda
+                      <select
+                        value={edit.bulk ? "bulk" : "unit"}
+                        onChange={(e) =>
+                          select({
+                            ...edit,
+                            bulk: Number(e.target.value === "bulk"),
+                          })
+                        }
+                      >
+                        <option value="unit">Por unidade ou pacote</option>
+                        <option value="bulk">A granel, por gramas</option>
+                      </select>
+                    </label>
                     <div className="fields">
                       {(["id", "name", "category", "weight"] as const).map(
                         (k, i) => (
@@ -238,7 +282,9 @@ export default function Admin() {
                         ),
                       )}
                       <label>
-                        Preço de venda (R$)
+                        {edit.bulk
+                          ? "Preço por kg (R$)"
+                          : "Preço por unidade (R$)"}
                         <input
                           type="number"
                           min="0"
@@ -255,7 +301,9 @@ export default function Admin() {
                         />
                       </label>
                       <label>
-                        Estoque em unidades de venda
+                        {edit.bulk
+                          ? "Estoque em gramas"
+                          : "Estoque em unidades de venda"}
                         <input
                           type="number"
                           min="0"
@@ -279,7 +327,7 @@ export default function Admin() {
                       Exibir na vitrine
                     </label>
                     <div className="actions">
-                      <button className="solid" disabled={busy}>
+                      <button className="solid" disabled={busy || imagePending}>
                         Salvar produto
                       </button>
                       <button type="button" onClick={() => select(null)}>
@@ -297,7 +345,9 @@ export default function Admin() {
                         <br />
                         <small>
                           #{p.id} · {p.category} · {p.weight || "Unidade"} ·{" "}
-                          {money(p.price)} · Estoque {p.stock} ·{" "}
+                          {money(p.price)}
+                          {p.bulk ? "/kg" : ""} · Estoque {p.stock}
+                          {p.bulk ? " g" : ""} ·{" "}
                           {p.active ? "Visível" : "Oculto"}
                         </small>
                       </div>
@@ -384,12 +434,31 @@ export default function Admin() {
                       {new Date(o.created).toLocaleString("pt-BR")} ·{" "}
                       {o.delivery}
                     </p>
+                    {o.customer && (
+                      <details>
+                        <summary>Dados do cliente</summary>
+                        <p>
+                          {o.customer.name}
+                          <br />
+                          {o.customer.email}
+                          <br />
+                          {o.customer.phone}
+                        </p>
+                        {o.customer.address && (
+                          <p>
+                            {o.customer.address} · CEP {o.customer.cep}
+                          </p>
+                        )}
+                      </details>
+                    )}
                     {o.items.map((p, i) => (
                       <div key={i}>
-                        {p.qty} × {p.name} · {money(p.price * p.qty)}
+                        {p.qty} × {p.name} {p.weight} · {money(p.price * p.qty)}
                       </div>
                     ))}
-                    <p>Subtotal {money(o.total)}</p>
+                    <p>
+                      Frete {money(o.shipping || 0)} · Total {money(o.total)}
+                    </p>
                     <div className="actions">
                       {(o.status === "A confirmar"
                         ? ["Confirmado", "Cancelado"]
@@ -432,12 +501,36 @@ export default function Admin() {
                 onSubmit={(e) => {
                   e.preventDefault();
                   run(async () => {
-                    await post({ action: "settings", phone, ifood });
-                    notice("Canais de venda atualizados.");
+                    if (imagePending) return;
+                    await post({
+                      action: "settings",
+                      phone,
+                      ifood,
+                      logo,
+                      rate: Math.round(Number(rate) * 100),
+                    });
+                    notice("Configurações da loja atualizadas.");
                   });
                 }}
               >
-                <h2>Canais de venda</h2>
+                <h2>Loja e entrega</h2>
+                <AdminImage
+                  onProcessing={setImagePending}
+                  label="Logo da loja"
+                  value={logo}
+                  onChange={setLogo}
+                />
+                <label>
+                  Tarifa de entrega (R$ por km)
+                  <input
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    required
+                    value={rate}
+                    onChange={(e) => setRate(e.target.value)}
+                  />
+                </label>
                 <label>
                   WhatsApp comercial com 55 e DDD
                   <input
@@ -455,8 +548,8 @@ export default function Admin() {
                     onChange={(e) => channel(e.target.value)}
                   />
                 </label>
-                <button className="solid" disabled={busy}>
-                  Salvar canais
+                <button className="solid" disabled={busy || imagePending}>
+                  Salvar configurações
                 </button>
               </form>
             )}

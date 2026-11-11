@@ -20,7 +20,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const [loaded, setLoaded] = useState(false)
   useEffect(() => {
     try {
-      const stored = JSON.parse(localStorage.getItem("mundo-natural-cart") || "null")
+      const stored = JSON.parse((localStorage.getItem("mn-cookie-choice")==="remember"?localStorage:sessionStorage).getItem("mundo-natural-cart") || "null")
       if (Array.isArray(stored?.items)) {
         const items = stored.items.filter((i: CartItem) => typeof i?.product?.id === "string" && Number.isFinite(i.product.valor_unitario) && Number.isInteger(i.quantity) && i.quantity > 0 && !i.product.isGranel)
         setCart({items, total: calculateTotal(items)})
@@ -29,7 +29,9 @@ export function CartProvider({ children }: { children: ReactNode }) {
     setLoaded(true)
   }, [])
   useEffect(() => {
-    if (loaded) try { localStorage.setItem("mundo-natural-cart", JSON.stringify(cart)) } catch { /* optional persistence */ }
+    if (!loaded)return
+    const persist=()=>{try {sessionStorage.setItem("mundo-natural-cart",JSON.stringify(cart));if(localStorage.getItem("mn-cookie-choice")==="remember")localStorage.setItem("mundo-natural-cart",JSON.stringify(cart))}catch{}}
+    persist();window.addEventListener("mn-cart-choice",persist);return()=>window.removeEventListener("mn-cart-choice",persist)
   }, [cart, loaded])
 
   const calculateTotal = (items: CartItem[]): number => {

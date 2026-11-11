@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { CustomerFields, type Buyer } from "@/components/customer-fields";
 import Link from "next/link";
 import { Minus, Plus, ShoppingBag, Trash2 } from "lucide-react";
 import { useCart } from "@/lib/cart-context";
@@ -10,6 +11,15 @@ export default function Cart() {
     [busy, wait] = useState(false),
     [error, issue] = useState(""),
     [receipt, ready] = useState<{ id: string; url: string } | null>(null);
+  const [customer, change] = useState<Buyer>({
+      name: "",
+      email: "",
+      phone: "",
+      address: "",
+      cep: "",
+    }),
+    [shipping, quote] = useState<number | null>(null);
+  const charge = delivery === "Entrega local" ? shipping : 0;
   async function place() {
     wait(true);
     issue("");
@@ -19,11 +29,18 @@ export default function Cart() {
           qty: i.quantity,
           price: Math.round(i.product.valor_unitario * 100),
         })),
-        stamp = JSON.stringify([delivery, items]),
+        stamp = JSON.stringify([delivery, items, charge]),
         cached = JSON.parse(sessionStorage.getItem("mn-checkout") || "null"),
         token = cached?.stamp === stamp ? cached.token : crypto.randomUUID();
       sessionStorage.setItem("mn-checkout", JSON.stringify({ stamp, token }));
-      const r = await post({ action: "order", items, delivery, token });
+      const r = await post({
+        action: "order",
+        items,
+        delivery,
+        token,
+        customer,
+        shipping: charge,
+      });
       const message = [
         "Olá, Mundo Natural! Quero confirmar o pedido " + r.id,
         ...r.items.map(
@@ -36,7 +53,8 @@ export default function Cart() {
             " — " +
             money(p.price * p.qty),
         ),
-        "Subtotal: " + money(r.total),
+        "Frete: " + money(r.shipping || 0),
+        "Total: " + money(r.total),
         "Pode me passar o total final e as instruções para pagamento por aqui?",
         r.delivery,
         r.delivery === "Entrega local"
@@ -59,7 +77,7 @@ export default function Cart() {
     <div className="mn">
       <ShopHeader />
       <main className="inner">
-        <h1>Sua sacola</h1>
+        <h1>Seu carrinho</h1>
         {receipt ? (
           <section className="mn-panel">
             <h2>Pedido {receipt.id}</h2>
@@ -71,7 +89,7 @@ export default function Cart() {
         ) : !cart.items.length ? (
           <section className="mn-panel">
             <ShoppingBag />
-            <p>Sua sacola está vazia.</p>
+            <p>Seu carrinho está vazio.</p>
             <Link href="/#catalogo" className="solid">
               Escolher produtos
             </Link>
@@ -122,7 +140,13 @@ export default function Cart() {
                 </strong>
               </p>
             </div>
-            <section className="mn-panel">
+            <form
+              className="mn-panel"
+              onSubmit={(e) => {
+                e.preventDefault();
+                place();
+              }}
+            >
               <h2>Como quer receber?</h2>
               <label>
                 Forma de recebimento
@@ -144,7 +168,25 @@ export default function Cart() {
                 A loja confirma o total e envia as instruções de pagamento na
                 conversa.
               </p>
-              <button className="solid" disabled={busy} onClick={place}>
+              <CustomerFields
+                buyer={customer}
+                change={change}
+                delivery={delivery === "Entrega local"}
+                shipping={shipping}
+                quote={quote}
+              />
+              {charge !== null && (
+                <p>
+                  <strong>
+                    Total {money(Math.round(cart.total * 100) + charge)}
+                  </strong>
+                </p>
+              )}
+              <p>
+                Usamos seus dados para atender e entregar este pedido.{" "}
+                <Link href="/privacidade">Ver política de privacidade</Link>
+              </p>
+              <button className="solid" disabled={busy || charge === null}>
                 {busy ? "Registrando…" : "Continuar para o WhatsApp"}
               </button>
               {error && (
@@ -152,7 +194,7 @@ export default function Cart() {
                   {error} <Link href="/#catalogo">Voltar ao catálogo</Link>
                 </p>
               )}
-            </section>
+            </form>
           </>
         )}
       </main>

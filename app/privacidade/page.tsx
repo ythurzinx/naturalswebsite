@@ -8,16 +8,20 @@ export default function Privacy() {
         <section className="mn-panel">
           <h2>Durante a compra</h2>
           <p>
-            A sacola guarda os produtos e as quantidades neste navegador. Ao
-            iniciar um pedido, a aba guarda temporariamente um identificador
-            para evitar duplicação em caso de falha. Você pode apagar esses
-            dados nas configurações do navegador.
+            O carrinho fica nesta sessão e pode ser lembrado em visitas futuras
+            conforme sua preferência de cookies. A sacola guarda os produtos e
+            as quantidades neste navegador. Ao iniciar um pedido, a aba guarda
+            temporariamente um identificador para evitar duplicação em caso de
+            falha. Você pode apagar esses dados nas configurações do navegador.
           </p>
           <p>
             A loja registra o número do pedido, os itens, as quantidades, os
             preços, a data, a forma de recebimento e a situação. O painel da
-            loja permite consultar esses registros. Endereço, telefone de
-            contato e pagamento são combinados diretamente no WhatsApp.
+            loja permite consultar esses registros. Nome completo, telefone e
+            e-mail são coletados na finalização. Para entrega também pedimos
+            endereço e CEP. O CEP é consultado no ViaCEP e o endereço aproximado
+            do CEP é enviado ao Google Maps para calcular o percurso. O
+            pagamento é combinado no WhatsApp.
           </p>
           <h2>Cookies e serviços externos</h2>
           <p>

@@ -1,142 +1,1010 @@
 [
   [
-    "110",
-    "BALA COM EUCALIPTO MEL E PROPOLIS 40G PRODAPYS",
-    "Mel e derivados",
-    "40 g",
-    476
+    "261",
+    "Açafrão em pó - cúrcuma",
+    "Temperos",
+    "a granel (kg)",
+    3000
   ],
   [
-    "108",
-    "BALA COM MEL E ANIS 40G PRODAPYS",
-    "Mel e derivados",
-    "40 g",
-    476
+    "3337",
+    "Açafrão puro em pó",
+    "Temperos",
+    "a granel (kg)",
+    4800
   ],
   [
-    "107",
-    "BALA COM MEL E PROPOLIS 40G PRODAPYS",
-    "Mel e derivados",
-    "40 g",
-    476
+    "2718",
+    "Alecrim",
+    "Temperos",
+    "a granel (kg)",
+    2500
+  ],
+  [
+    "441",
+    "Alho em pó",
+    "Temperos",
+    "a granel (kg)",
+    3400
+  ],
+  [
+    "436",
+    "Alho frito",
+    "Temperos",
+    "a granel (kg)",
+    4900
+  ],
+  [
+    "445",
+    "Alho granulado",
+    "Temperos",
+    "a granel (kg)",
+    4900
+  ],
+  [
+    "376",
+    "Alho-poró",
+    "Temperos",
+    "a granel (kg)",
+    8600
+  ],
+  [
+    "430",
+    "Amaranto em flocos",
+    "Grãos e cereais",
+    "a granel (kg)",
+    3100
+  ],
+  [
+    "277",
+    "Ameixa com caroço",
+    "Lanches e naturais",
+    "a granel (kg)",
+    5500
+  ],
+  [
+    "271",
+    "Ameixa sem caroço",
+    "Lanches e naturais",
+    "a granel (kg)",
+    6999
+  ],
+  [
+    "291",
+    "Amêndoa crua",
+    "Castanhas e sementes",
+    "a granel (kg)",
+    12000
+  ],
+  [
+    "263",
+    "Amêndoa laminada",
+    "Castanhas e sementes",
+    "a granel (kg)",
+    15000
+  ],
+  [
+    "267",
+    "Amêndoa torrada e salgada",
+    "Castanhas e sementes",
+    "a granel (kg)",
+    12000
+  ],
+  [
+    "433",
+    "Amêndoa torrada sem sal",
+    "Castanhas e sementes",
+    "a granel (kg)",
+    12000
+  ],
+  [
+    "270",
+    "Amendoim ovinho",
+    "Castanhas e sementes",
+    "a granel (kg)",
+    3500
+  ],
+  [
+    "4854",
+    "Amendoim vermelho cru HPS",
+    "Castanhas e sementes",
+    "a granel (kg)",
+    5500
+  ],
+  [
+    "318",
+    "Anis estrelado",
+    "Temperos",
+    "a granel (kg)",
+    12700
+  ],
+  [
+    "295",
+    "Arroz 7 grãos",
+    "Grãos e cereais",
+    "a granel (kg)",
+    2800
+  ],
+  [
+    "294",
+    "Arroz agulha integral",
+    "Grãos e cereais",
+    "a granel (kg)",
+    1600
+  ],
+  [
+    "432",
+    "Arroz preto",
+    "Grãos e cereais",
+    "a granel (kg)",
+    4200
+  ],
+  [
+    "429",
+    "Arroz vermelho integral",
+    "Grãos e cereais",
+    "a granel (kg)",
+    2000
+  ],
+  [
+    "269",
+    "Avelã crua",
+    "Castanhas e sementes",
+    "a granel (kg)",
+    18000
   ],
   [
     "4095",
-    "BARRA AMENDOIM 85G",
+    "Barra de amendoim",
     "Lanches e naturais",
     "85 g",
     650
   ],
   [
     "5455",
-    "BEB L PROTEIN+WHEY PIRACANJ 250ML BANANA",
+    "Bebida proteica Piracanjuba Whey sabor banana",
     "Suplementos",
     "250 ml",
     600
   ],
   [
     "5456",
-    "BEB L PROTEIN+WHEY PIRACANJ 250ML FR VERMELHAS",
+    "Bebida proteica Piracanjuba Whey sabor frutas vermelhas",
     "Suplementos",
     "250 ml",
     799
   ],
   [
     "4927",
-    "BISC NESFIT INTEGRAL NESTLE 21G MULTICEREAIS",
+    "Biscoito integral Nesfit Multicereais Nestlé",
     "Lanches e naturais",
     "21 g",
     150
   ],
   [
     "5457",
-    "BL PIRACANJUBA WHEY ZL CACAU 250ML",
+    "Bebida proteica Piracanjuba Whey sabor cacau",
     "Suplementos",
     "250 ml",
     600
   ],
   [
+    "2724",
+    "Boldo do Chile",
+    "Chás e ervas",
+    "a granel (kg)",
+    8800
+  ],
+  [
+    "341",
+    "Canela em pó",
+    "Temperos",
+    "a granel (kg)",
+    3500
+  ],
+  [
+    "316",
+    "Canela em pó pura",
+    "Temperos",
+    "a granel (kg)",
+    8200
+  ],
+  [
+    "426",
+    "Canjica branca",
+    "Grãos e cereais",
+    "a granel (kg)",
+    1600
+  ],
+  [
+    "2723",
+    "Capim cidreira - chá",
+    "Chás e ervas",
+    "a granel (kg)",
+    3500
+  ],
+  [
+    "379",
+    "Castanha de caju com leite condensado caramelizada",
+    "Castanhas e sementes",
+    "a granel (kg)",
+    8900
+  ],
+  [
+    "354",
+    "Castanha de caju SLW1 com sal",
+    "Castanhas e sementes",
+    "a granel (kg)",
+    12000
+  ],
+  [
+    "355",
+    "Castanha de caju W1 sem sal",
+    "Castanhas e sementes",
+    "a granel (kg)",
+    12000
+  ],
+  [
+    "343",
+    "Cavalinha",
+    "Chás e ervas",
+    "a granel (kg)",
+    8900
+  ],
+  [
+    "444",
+    "Cebola desidratada em pó",
+    "Temperos",
+    "a granel (kg)",
+    3500
+  ],
+  [
+    "435",
+    "Cebola flocos",
+    "Temperos",
+    "a granel (kg)",
+    3500
+  ],
+  [
     "4930",
-    "CEREAL INF MUCILON NESTLE LT 400G MILHO",
+    "Cereal infantil Mucilon de milho Nestlé",
     "Grãos e cereais",
     "400 g",
     1500
   ],
   [
+    "346",
+    "Chá verde importado premium",
+    "Chás e ervas",
+    "a granel (kg)",
+    7600
+  ],
+  [
+    "342",
+    "Chá verde nacional - bancha",
+    "Chás e ervas",
+    "a granel (kg)",
+    3500
+  ],
+  [
+    "327",
+    "Chimichurri com pimenta sem sódio",
+    "Temperos",
+    "a granel (kg)",
+    6200
+  ],
+  [
     "1711",
-    "CLORETO DE MAGNESIO P.A 60 CAPSULA CATARINENSE",
+    "Cloreto de magnésio P.A. Catarinense",
     "Suplementos",
     "60 cápsulas",
     3999
   ],
   [
+    "321",
+    "Coentro em pó",
+    "Temperos",
+    "a granel (kg)",
+    1750
+  ],
+  [
+    "339",
+    "Colágeno hidrolisado",
+    "Suplementos",
+    "a granel (kg)",
+    13110
+  ],
+  [
+    "262",
+    "Colorau Paraíba extra",
+    "Temperos",
+    "a granel (kg)",
+    3500
+  ],
+  [
+    "424",
+    "Cranberry desidratado fatiado",
+    "Lanches e naturais",
+    "a granel (kg)",
+    6500
+  ],
+  [
+    "338",
+    "Cravo da Índia em grão",
+    "Temperos",
+    "a granel (kg)",
+    12000
+  ],
+  [
+    "446",
+    "Cravo da Índia em pó",
+    "Temperos",
+    "a granel (kg)",
+    5500
+  ],
+  [
+    "449",
+    "Curry",
+    "Temperos",
+    "a granel (kg)",
+    1900
+  ],
+  [
+    "4857",
+    "Damasco turco",
+    "Lanches e naturais",
+    "a granel (kg)",
+    21000
+  ],
+  [
+    "334",
+    "Ervas finas",
+    "Temperos",
+    "a granel (kg)",
+    3400
+  ],
+  [
+    "296",
+    "Ervilha partida premium",
+    "Grãos e cereais",
+    "a granel (kg)",
+    1250
+  ],
+  [
+    "290",
+    "Farinha de amêndoa calconut",
+    "Grãos e cereais",
+    "a granel (kg)",
+    12000
+  ],
+  [
+    "420",
+    "Farinha de arroz branca",
+    "Grãos e cereais",
+    "a granel (kg)",
+    1300
+  ],
+  [
+    "423",
+    "Farinha de arroz integral",
+    "Grãos e cereais",
+    "a granel (kg)",
+    1300
+  ],
+  [
+    "4100",
+    "Farinha de banana verde integral",
+    "Grãos e cereais",
+    "a granel (kg)",
+    4500
+  ],
+  [
+    "440",
+    "Farinha de batata-doce",
+    "Grãos e cereais",
+    "a granel (kg)",
+    3500
+  ],
+  [
+    "460",
+    "Farinha de centeio fina",
+    "Grãos e cereais",
+    "a granel (kg)",
+    1100
+  ],
+  [
+    "312",
+    "Farinha de chia",
+    "Grãos e cereais",
+    "a granel (kg)",
+    3700
+  ],
+  [
+    "398",
+    "Farinha de coco branca",
+    "Grãos e cereais",
+    "a granel (kg)",
+    2600
+  ],
+  [
+    "340",
+    "Farinha de grão-de-bico",
+    "Grãos e cereais",
+    "a granel (kg)",
+    1650
+  ],
+  [
+    "256",
+    "Farinha de linhaça dourada",
+    "Grãos e cereais",
+    "a granel (kg)",
+    2500
+  ],
+  [
+    "255",
+    "Farinha de linhaça marrom",
+    "Grãos e cereais",
+    "a granel (kg)",
+    1750
+  ],
+  [
+    "421",
+    "Farinha de mandioca fina",
+    "Grãos e cereais",
+    "a granel (kg)",
+    1000
+  ],
+  [
+    "419",
+    "Farinha de mandioca grossa",
+    "Grãos e cereais",
+    "a granel (kg)",
+    1300
+  ],
+  [
+    "390",
+    "Farinha de maracujá",
+    "Grãos e cereais",
+    "a granel (kg)",
+    4000
+  ],
+  [
     "4342",
-    "FARINHA DE MILHO KIMILHO YOKI 500G",
+    "Farinha de milho em flocos pré-cozida Yoki Kimilho",
     "Grãos e cereais",
     "500 g",
     300
   ],
   [
+    "315",
+    "Farinha de quinoa",
+    "Grãos e cereais",
+    "a granel (kg)",
+    3300
+  ],
+  [
+    "297",
+    "Farinha de trigo integral",
+    "Grãos e cereais",
+    "a granel (kg)",
+    1500
+  ],
+  [
+    "439",
+    "Farinha especial sem glúten",
+    "Grãos e cereais",
+    "a granel (kg)",
+    4500
+  ],
+  [
+    "438",
+    "Farinha seca barriga",
+    "Grãos e cereais",
+    "a granel (kg)",
+    5100
+  ],
+  [
+    "3736",
+    "Fava branca pequena",
+    "Grãos e cereais",
+    "a granel (kg)",
+    4900
+  ],
+  [
+    "345",
+    "Fécula de batata",
+    "Grãos e cereais",
+    "a granel (kg)",
+    2000
+  ],
+  [
     "5070",
-    "FEIJAO CAMIL1 KG",
+    "Feijão Camil",
     "Grãos e cereais",
     "1 kg",
     999
   ],
   [
+    "3733",
+    "Feijão branco",
+    "Grãos e cereais",
+    "a granel (kg)",
+    3200
+  ],
+  [
+    "3734",
+    "Feijão de corda",
+    "Grãos e cereais",
+    "a granel (kg)",
+    2000
+  ],
+  [
+    "3735",
+    "Feijão preto",
+    "Grãos e cereais",
+    "a granel (kg)",
+    1000
+  ],
+  [
+    "394",
+    "Figo turco seco",
+    "Lanches e naturais",
+    "a granel (kg)",
+    7800
+  ],
+  [
+    "279",
+    "Frutas cristalizadas",
+    "Lanches e naturais",
+    "a granel (kg)",
+    1900
+  ],
+  [
+    "344",
+    "Fubá mimoso",
+    "Grãos e cereais",
+    "a granel (kg)",
+    1000
+  ],
+  [
+    "299",
+    "Gergelim com casca",
+    "Castanhas e sementes",
+    "a granel (kg)",
+    2700
+  ],
+  [
+    "392",
+    "Gergelim preto",
+    "Castanhas e sementes",
+    "a granel (kg)",
+    3400
+  ],
+  [
+    "391",
+    "Gergelim sem casca",
+    "Castanhas e sementes",
+    "a granel (kg)",
+    3900
+  ],
+  [
+    "443",
+    "Germe de trigo tostado",
+    "Grãos e cereais",
+    "a granel (kg)",
+    3500
+  ],
+  [
+    "417",
+    "Granola completa granny",
+    "Grãos e cereais",
+    "a granel (kg)",
+    4400
+  ],
+  [
     "138",
-    "GRANOLA CROQUI BANANA E MEL 240G",
+    "Granola Croqui de banana e mel",
     "Grãos e cereais",
     "240 g",
     1199
   ],
   [
     "145",
-    "GRANOLA JUNCO BANANA E CANELA ZERO GORDURA 250G",
+    "Granola Junco de banana e canela",
     "Grãos e cereais",
     "250 g",
     811
   ],
   [
     "1887",
-    "GRANOLA JUNCO TRADICIONAL ZERO GORDURA 250G",
+    "Granola tradicional Junco",
     "Grãos e cereais",
     "250 g",
     811
   ],
   [
+    "298",
+    "Grão-de-bico 12mm",
+    "Grãos e cereais",
+    "a granel (kg)",
+    2900
+  ],
+  [
+    "313",
+    "Hibisco em pó",
+    "Chás e ervas",
+    "a granel (kg)",
+    2900
+  ],
+  [
+    "283",
+    "Hibiscus flores - chá",
+    "Chás e ervas",
+    "a granel (kg)",
+    6500
+  ],
+  [
+    "428",
+    "Laranja desidratada fatias",
+    "Lanches e naturais",
+    "a granel (kg)",
+    10000
+  ],
+  [
+    "457",
+    "Lemon pepper",
+    "Temperos",
+    "a granel (kg)",
+    5500
+  ],
+  [
+    "300",
+    "Lentilha canadense",
+    "Grãos e cereais",
+    "a granel (kg)",
+    3200
+  ],
+  [
+    "413",
+    "Lentilha vermelha",
+    "Grãos e cereais",
+    "a granel (kg)",
+    2300
+  ],
+  [
+    "434",
+    "Limão desidratado fatias",
+    "Lanches e naturais",
+    "a granel (kg)",
+    5000
+  ],
+  [
+    "4192",
+    "Louro folhas",
+    "Temperos",
+    "a granel (kg)",
+    6500
+  ],
+  [
+    "2717",
+    "Macadâmia sem sal",
+    "Castanhas e sementes",
+    "a granel (kg)",
+    13400
+  ],
+  [
+    "396",
+    "Manjericão desidratado em flocos",
+    "Temperos",
+    "a granel (kg)",
+    1600
+  ],
+  [
     "120",
-    "MEL COM PEDAÇOS DE FAVO 275ML",
+    "Mel com pedaços de favo",
     "Mel e derivados",
     "275 ml",
     2465
   ],
   [
     "84",
-    "MEL SILVESTRE ALPISNUTRI 220G",
+    "Mel silvestre Alpisnutri",
     "Mel e derivados",
     "220 g",
     2050
   ],
   [
     "128",
-    "MEL SILVESTRE EXTRATO DE PROPOLIS E EUCALIPTO 300G",
-    "Mel e derivados",
-    "300 g",
-    2718
-  ],
-  [
-    "127",
-    "MEL SILVESTRE EXTRATO DE PROPOLIS E GLAUCO 300G",
+    "Mel silvestre com extrato de própolis e eucalipto",
     "Mel e derivados",
     "300 g",
     2718
   ],
   [
     "129",
-    "MEL SILVESTRE EXTRATO DE PROPOLIS E ROMA 300G",
+    "Mel silvestre com extrato de própolis e romã",
     "Mel e derivados",
     "300 g",
     2718
+  ],
+  [
+    "254",
+    "Milho para pipoca",
+    "Grãos e cereais",
+    "a granel (kg)",
+    1300
+  ],
+  [
+    "253",
+    "Mix de castanhas nobres sem sal",
+    "Castanhas e sementes",
+    "a granel (kg)",
+    17000
+  ],
+  [
+    "464",
+    "Mostarda em pó",
+    "Temperos",
+    "a granel (kg)",
+    2800
+  ],
+  [
+    "2962",
+    "Noz-moscada moída",
+    "Temperos",
+    "a granel (kg)",
+    6200
+  ],
+  [
+    "252",
+    "Nozes mariposa 80/20%",
+    "Castanhas e sementes",
+    "a granel (kg)",
+    10999
+  ],
+  [
+    "335",
+    "Pimenta branca moída",
+    "Temperos",
+    "a granel (kg)",
+    4800
+  ],
+  [
+    "388",
+    "Pimenta calabresa flocos",
+    "Temperos",
+    "a granel (kg)",
+    3400
+  ],
+  [
+    "395",
+    "Pimenta jamaica - síria em pó",
+    "Temperos",
+    "a granel (kg)",
+    7200
+  ],
+  [
+    "332",
+    "Pimenta preta em grão",
+    "Temperos",
+    "a granel (kg)",
+    9500
+  ],
+  [
+    "320",
+    "Pimenta preta moída",
+    "Temperos",
+    "a granel (kg)",
+    6900
+  ],
+  [
+    "3338",
+    "Pimenta rosa",
+    "Temperos",
+    "a granel (kg)",
+    9800
+  ],
+  [
+    "4684",
+    "Pistache cru inteiro",
+    "Castanhas e sementes",
+    "a granel (kg)",
+    29999
+  ],
+  [
+    "264",
+    "Pistache torrado e salgado com casca",
+    "Castanhas e sementes",
+    "a granel (kg)",
+    13550
+  ],
+  [
+    "303",
+    "Polvilho azedo",
+    "Grãos e cereais",
+    "a granel (kg)",
+    1500
+  ],
+  [
+    "304",
+    "Polvilho doce - fécula de mandioca",
+    "Grãos e cereais",
+    "a granel (kg)",
+    1300
+  ],
+  [
+    "407",
+    "Proteína de soja miúda caramelo cd4000-20",
+    "Suplementos",
+    "a granel (kg)",
+    3500
+  ],
+  [
+    "408",
+    "Proteína de soja miúda natural nl4000-20",
+    "Suplementos",
+    "a granel (kg)",
+    3500
+  ],
+  [
+    "406",
+    "Quinoa branca em flocos",
+    "Grãos e cereais",
+    "a granel (kg)",
+    2800
+  ],
+  [
+    "285",
+    "Quinoa branca em grão",
+    "Grãos e cereais",
+    "a granel (kg)",
+    3800
+  ],
+  [
+    "348",
+    "Sal do Himalaia fino",
+    "Temperos",
+    "a granel (kg)",
+    1000
+  ],
+  [
+    "378",
+    "Salsa desidratada",
+    "Temperos",
+    "a granel (kg)",
+    3600
+  ],
+  [
+    "411",
+    "Semente de chia t1 premium",
+    "Castanhas e sementes",
+    "a granel (kg)",
+    4500
+  ],
+  [
+    "403",
+    "Semente de girassol sem casca pepita",
+    "Castanhas e sementes",
+    "a granel (kg)",
+    3500
+  ],
+  [
+    "412",
+    "Semente de linhaça dourada",
+    "Castanhas e sementes",
+    "a granel (kg)",
+    3000
+  ],
+  [
+    "414",
+    "Semente de linhaça marrom",
+    "Castanhas e sementes",
+    "a granel (kg)",
+    3000
+  ],
+  [
+    "2960",
+    "Tanchagem",
+    "Chás e ervas",
+    "a granel (kg)",
+    7200
+  ],
+  [
+    "401",
+    "Tapioca granulada fina",
+    "Grãos e cereais",
+    "a granel (kg)",
+    1900
+  ],
+  [
+    "326",
+    "Tempero Ana Maria",
+    "Temperos",
+    "a granel (kg)",
+    5800
+  ],
+  [
+    "336",
+    "Tempero baiano fino",
+    "Temperos",
+    "a granel (kg)",
+    1999
+  ],
+  [
+    "3341",
+    "Tempero baiano sem pimenta",
+    "Temperos",
+    "a granel (kg)",
+    1999
+  ],
+  [
+    "328",
+    "Tempero cebola salsa alho sem sódio",
+    "Temperos",
+    "a granel (kg)",
+    5300
+  ],
+  [
+    "3340",
+    "Tempero gaúcho",
+    "Temperos",
+    "a granel (kg)",
+    5400
+  ],
+  [
+    "389",
+    "Tempero mineirinho",
+    "Temperos",
+    "a granel (kg)",
+    5550
+  ],
+  [
+    "322",
+    "Tempero para carne Edu Guedes",
+    "Temperos",
+    "a granel (kg)",
+    4300
+  ],
+  [
+    "385",
+    "Tempero pega marido",
+    "Temperos",
+    "a granel (kg)",
+    5200
+  ],
+  [
+    "2722",
+    "Tomilho",
+    "Temperos",
+    "a granel (kg)",
+    2200
+  ],
+  [
+    "402",
+    "Trigo para quibe",
+    "Grãos e cereais",
+    "a granel (kg)",
+    1500
+  ],
+  [
+    "281",
+    "Uva-passa branca",
+    "Lanches e naturais",
+    "a granel (kg)",
+    8000
+  ],
+  [
+    "280",
+    "Uva-passa preta",
+    "Lanches e naturais",
+    "a granel (kg)",
+    3800
+  ],
+  [
+    "384",
+    "Vinagrete desidratado sem sódio",
+    "Temperos",
+    "a granel (kg)",
+    6000
   ]
 ]
