@@ -5,6 +5,7 @@ import { CartProvider } from "@/lib/cart-context";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { CookieConsent } from "@/components/cookie-consent";
+import { MobileNavigation } from "@/components/mobile-navigation";
 import "@/styles/globals.css";
 import { publicCatalog } from "@/lib/server/shop";
 import type { Product } from "@/lib/types";
@@ -41,7 +42,10 @@ export const metadata: Metadata = {
     ],
   },
 };
-export const viewport: Viewport = { themeColor: "#274e37" };
+export const viewport: Viewport = {
+  themeColor: "#274e37",
+  viewportFit: "cover",
+};
 export default async function RootLayout({
   children,
 }: {
@@ -58,6 +62,7 @@ export default async function RootLayout({
           <Header />
           {children}
           <Footer />
+          <MobileNavigation />
           <CookieConsent />
         </CartProvider>
       </body>

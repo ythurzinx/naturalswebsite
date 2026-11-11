@@ -92,7 +92,7 @@ export function CheckoutView() {
         </div>
       ) : (
         <div className="cart-layout">
-          <form onSubmit={submit} className="checkout-form">
+          <form id="checkout-form" onSubmit={submit} className="checkout-form">
             <fieldset disabled={payment.busy} className="checkout-fieldset">
               <div className="form-section">
                 <h2>
@@ -376,6 +376,30 @@ export function CheckoutView() {
               <ShieldCheck size={16} /> Confira os itens antes de confirmar
             </span>
           </aside>
+          <div className="mobile-purchase-bar">
+            <div>
+              <small>{online ? "Total a pagar" : "Sua seleção"}</small>
+              <strong>{formatPrice(cart.total)}</strong>
+            </div>
+            <button
+              form="checkout-form"
+              type="submit"
+              className="button"
+              disabled={
+                payment.busy ||
+                (online &&
+                  (payment.checking ||
+                    !payment.available ||
+                    method !== "pickup"))
+              }
+            >
+              {payment.busy
+                ? "Aguarde…"
+                : online
+                  ? "Pagar agora"
+                  : "Ir ao WhatsApp"}
+            </button>
+          </div>
         </div>
       )}
     </main>

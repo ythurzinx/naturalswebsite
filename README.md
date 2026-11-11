@@ -1,5 +1,7 @@
 # Mundo Natural
 
+**Deploy:** siga [Colocar a loja no ar](docs/DEPLOY.md). O repositório está preparado para **Hostinger Node.js 22 + MySQL** pela branch `main`.
+
 Loja Next.js com 619 produtos, busca, categorias, favoritos, carrinho por peso e **Mercado Pago Checkout Pro via Orders API para Pix e cartão**, com alternativa de atendimento pelo WhatsApp.
 
 Os 306 produtos a granel exibem preço por **100 g**. A seleção começa em 100 g e avança de 100 em 100 g, até 5.000 g por porção, com peso editável no carrinho. Produtos embalados continuam por unidade. O valor de 100 g é arredondado em centavos antes de multiplicar pelos blocos e pelas porções, usando a mesma regra no catálogo, carrinho e pagamento.
@@ -37,6 +39,8 @@ A versão online recebe pagamentos de compras com retirada sem frete. Entregas e
 
 ## Administração e persistência
 
+No celular, a loja oferece navegação inferior, controles de peso com passos de 100 g e ação fixa com o total no carrinho e checkout. O painel tem filtros de produtos e pedidos, seleção de até 50 produtos para alterar disponibilidade, consulta individual de pagamento, saúde do catálogo e produtos mais vendidos com base em pedidos pagos.
+
 Crie um MySQL dedicado na Hostinger, configure `DATABASE_URL` e execute `npm run db:migrate`. O catálogo inicial é combinado com as alterações persistentes do painel. Fotos são normalizadas e armazenadas no banco, sem depender de arquivos locais que poderiam se perder no redeploy.
 
 Execute `npm run admin:setup` no seu terminal para gerar o hash da senha, o segredo de sessão e a chave do autenticador. Configure `ADMIN_USERNAME`, `ADMIN_PASSWORD_HASH`, `ADMIN_SESSION_SECRET` e `ADMIN_TOTP_SECRET` no painel da Hostinger. Nunca faça commit de valores reais. O acesso usa sessão protegida no servidor, limite de tentativas, CSRF e, com a chave configurada, TOTP com bloqueio de reutilização.
@@ -64,4 +68,6 @@ A imagem transparente da logo foi preparada da referência visual; o arquivo ori
 
 `npm test` cobre carrinho, consentimento, criação/verificação de pedidos, manipulação de valores, CSRF, autorização de leitura, idempotência e Webhooks. `npm run test:production` verifica o Next.js compilado por HTTP sem credenciais e sem cobranças. A CI executa esses controles, tipos, auditoria de dependências e build. O Dependabot propõe atualizações; elas não são mescladas automaticamente.
 
-Os testes de API usam fixtures e não substituem a homologação com uma conta de teste do Mercado Pago. É necessário conferir HTTPS, Pix/cartão, retorno e Webhooks na conta e no domínio finais antes de abrir as vendas. A inspeção visual em navegador e a varredura automatizada do Codex Security não foram disponibilizadas pelo ambiente desta implementação.
+`npm run verify` reúne os controles do projeto. `npm run test:browser` exercita o Chromium em duas telas de celular e uma de computador, incluindo seleção por peso, carrinho, falha de pagamento e administração com dados de teste isolados. Veja [CONTRIBUTING.md](CONTRIBUTING.md).
+
+Os testes usam fixtures e não substituem a homologação com uma conta de teste do Mercado Pago. Confira HTTPS, Pix/cartão, retorno e Webhooks na conta e no domínio finais antes de abrir as vendas. O fluxo automatizado do Codex Security não estava disponível; a revisão de código é manual e acompanhada dos testes documentados.

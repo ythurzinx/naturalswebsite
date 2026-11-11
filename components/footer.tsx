@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   Leaf,
   Instagram,
@@ -9,6 +10,8 @@ import {
 } from "lucide-react";
 import { store, whatsappUrl } from "@/lib/store";
 export function Footer() {
+  const pathname = usePathname();
+  if (pathname.startsWith("/admin")) return null;
   return (
     <footer className="site-footer">
       <div className="shell footer-grid">

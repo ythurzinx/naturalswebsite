@@ -25,7 +25,7 @@ import {
 } from "lucide-react";
 import { Modal } from "./modal";
 import { ProductImage } from "./product-card";
-import { formatPrice } from "@/lib/products";
+import { formatPrice, normalize } from "@/lib/products";
 import type { Product } from "@/lib/types";
 import { referencePriceCents } from "@/lib/pricing.mjs";
 type AdminProduct = Product & {
@@ -74,6 +74,19 @@ type Stats = {
   missingRefunds: number;
   incompletePayments: number;
   chart: { day: number; cents: number }[];
+  catalogHealth: {
+    total: number;
+    active: number;
+    missingPhotos: number;
+    missingCosts: number;
+  };
+  topProducts: {
+    id: string;
+    name: string;
+    portions: number;
+    grams: number;
+    grossCents: number;
+  }[];
 };
 type ProductDraft = {
   id?: string;
@@ -146,6 +159,11 @@ export function AdminDashboard() {
     [draft, setDraft] = useState<ProductDraft | null>(null),
     [order, setOrder] = useState<Order | null>(null),
     [costConfirm, setCostConfirm] = useState(false);
+  const [productFilter, setProductFilter] = useState("all"),
+    [selectedProducts, setSelectedProducts] = useState<string[]>([]),
+    [batchActive, setBatchActive] = useState<boolean | null>(null),
+    [orderSearch, setOrderSearch] = useState(""),
+    [orderFilter, setOrderFilter] = useState("all");
   const [expenseDescription, setExpenseDescription] = useState(""),
     [expenseAmount, setExpenseAmount] = useState(""),
     [expenseDate, setExpenseDate] = useState(() =>
@@ -353,7 +371,7 @@ export function AdminDashboard() {
         "Taxas",
         "Data",
       ],
-      ...orders.map((row) => [
+      ...filteredOrders.map((row) => [
         row.id,
         row.customer_name,
         row.customer_email,
@@ -463,10 +481,26 @@ export function AdminDashboard() {
     { id: "expenses", label: "Despesas", icon: ReceiptText },
     { id: "audit", label: "Atividade", icon: Activity },
   ];
-  const filtered = products.filter((p) =>
-    `${p.nome_produto} ${p.categoria}`
-      .toLowerCase()
-      .includes(search.toLowerCase()),
+  const filtered = products.filter(
+    (p) =>
+      normalize(`${p.nome_produto} ${p.categoria}`).includes(
+        normalize(search),
+      ) &&
+      (productFilter === "all" ||
+        (productFilter === "active" && p.active) ||
+        (productFilter === "inactive" && !p.active) ||
+        (productFilter === "photos" && !p.imageSha) ||
+        (productFilter === "costs" && p.costCents === null)),
+  );
+  const filteredOrders = orders.filter(
+    (item) =>
+      normalize(
+        `${item.id} ${item.customer_name} ${item.customer_email}`,
+      ).includes(normalize(orderSearch)) &&
+      (orderFilter === "all" ||
+        (["ready", "completed"].includes(orderFilter)
+          ? item.fulfillment_status === orderFilter
+          : item.state === orderFilter)),
   );
   return (
     <main id="conteudo" className="shell admin-app">
@@ -685,6 +719,70 @@ export function AdminDashboard() {
                     </p>
                   </section>
                 </div>
+                {stats.catalogHealth && (
+                  <section className="admin-panel">
+                    <h2>Prepare seu catálogo</h2>
+                    <div className="admin-health-actions">
+                      <button
+                        onClick={() => {
+                          setProductFilter("active");
+                          setTab("products");
+                        }}
+                      >
+                        <strong>{stats.catalogHealth.active}</strong>
+                        <span>produtos disponíveis</span>
+                      </button>
+                      <button
+                        onClick={() => {
+                          setProductFilter("photos");
+                          setTab("products");
+                        }}
+                      >
+                        <strong>{stats.catalogHealth.missingPhotos}</strong>
+                        <span>produtos sem foto própria</span>
+                      </button>
+                      <button
+                        onClick={() => {
+                          setProductFilter("costs");
+                          setTab("products");
+                        }}
+                      >
+                        <strong>{stats.catalogHealth.missingCosts}</strong>
+                        <span>produtos sem custo cadastrado</span>
+                      </button>
+                    </div>
+                  </section>
+                )}
+                {stats.topProducts && (
+                  <section className="admin-panel">
+                    <h2>Produtos mais vendidos</h2>
+                    <p className="fine-print">
+                      Vendas brutas de pedidos com pagamento integral aprovado
+                      no período.
+                    </p>
+                    {!stats.topProducts.length ? (
+                      <p className="admin-empty">
+                        A lista será preenchida após as primeiras vendas.
+                      </p>
+                    ) : (
+                      <ol className="admin-top-products">
+                        {stats.topProducts.map((product) => (
+                          <li key={product.id}>
+                            <div>
+                              <strong>{product.name}</strong>
+                              <small>
+                                {product.grams
+                                  ? `${product.grams.toLocaleString("pt-BR")} g`
+                                  : `${product.portions} unidades`}
+                              </small>
+                            </div>
+                            <strong>{currency(product.grossCents)}</strong>
+                          </li>
+                        ))}
+                      </ol>
+                    )}
+                  </section>
+                )}
               </>
             )}
           </>
@@ -719,10 +817,76 @@ export function AdminDashboard() {
               {filtered.length} produtos. Preço e custo por 100 g para itens a
               granel e por unidade para os demais.
             </p>
+            <div className="admin-filter-row">
+              <label>
+                Mostrar produtos
+                <select
+                  value={productFilter}
+                  onChange={(event) => {
+                    setProductFilter(event.target.value);
+                    setProductLimit(100);
+                  }}
+                >
+                  <option value="all">Todos</option>
+                  <option value="active">Disponíveis</option>
+                  <option value="inactive">Indisponíveis</option>
+                  <option value="photos">Sem foto própria</option>
+                  <option value="costs">Sem custo</option>
+                </select>
+              </label>
+              <span>{selectedProducts.length} selecionados · máximo 50</span>
+            </div>
+            {selectedProducts.length > 0 && (
+              <div
+                className="admin-batch-actions"
+                role="region"
+                aria-label="Ações para produtos selecionados"
+              >
+                <button
+                  disabled={busy}
+                  className="button button-small"
+                  onClick={() => setBatchActive(true)}
+                >
+                  Disponibilizar selecionados
+                </button>
+                <button
+                  disabled={busy}
+                  className="button button-outline button-small"
+                  onClick={() => setBatchActive(false)}
+                >
+                  Indisponibilizar selecionados
+                </button>
+                <button
+                  className="text-button"
+                  onClick={() => setSelectedProducts([])}
+                >
+                  Limpar seleção
+                </button>
+              </div>
+            )}
             <div className="admin-table-wrap">
-              <table className="admin-table">
+              <table className="admin-table admin-product-table">
                 <thead>
                   <tr>
+                    <th>
+                      <input
+                        type="checkbox"
+                        aria-label="Selecionar até 50 produtos visíveis"
+                        checked={
+                          filtered.length > 0 &&
+                          filtered
+                            .slice(0, 50)
+                            .every((p) => selectedProducts.includes(p.id))
+                        }
+                        onChange={(event) =>
+                          setSelectedProducts(
+                            event.target.checked
+                              ? filtered.slice(0, 50).map((p) => p.id)
+                              : [],
+                          )
+                        }
+                      />
+                    </th>
                     <th>Produto</th>
                     <th>Preço</th>
                     <th>Custo</th>
@@ -734,6 +898,25 @@ export function AdminDashboard() {
                 <tbody>
                   {filtered.slice(0, productLimit).map((p) => (
                     <tr key={p.id}>
+                      <td className="admin-selection-cell">
+                        <input
+                          type="checkbox"
+                          aria-label={`Selecionar ${p.nome_produto}`}
+                          checked={selectedProducts.includes(p.id)}
+                          disabled={
+                            busy ||
+                            (selectedProducts.length >= 50 &&
+                              !selectedProducts.includes(p.id))
+                          }
+                          onChange={() =>
+                            setSelectedProducts((ids) =>
+                              ids.includes(p.id)
+                                ? ids.filter((id) => id !== p.id)
+                                : [...ids, p.id],
+                            )
+                          }
+                        />
+                      </td>
                       <td>
                         <div className="admin-product-cell">
                           <ProductImage product={p} />
@@ -745,8 +928,10 @@ export function AdminDashboard() {
                           </div>
                         </div>
                       </td>
-                      <td>{currency(referencePriceCents(p))}</td>
-                      <td>
+                      <td data-label="Preço">
+                        {currency(referencePriceCents(p))}
+                      </td>
+                      <td data-label="Custo">
                         {p.costCents == null ? (
                           <span className="admin-warning">Não cadastrado</span>
                         ) : (
@@ -757,19 +942,19 @@ export function AdminDashboard() {
                           )
                         )}
                       </td>
-                      <td>
+                      <td data-label="Margem bruta">
                         {p.costCents == null
                           ? "—"
                           : `${(((p.priceCents - p.costCents) / p.priceCents) * 100).toFixed(1)}%`}
                       </td>
-                      <td>
+                      <td data-label="Situação">
                         <span
                           className={`admin-badge ${p.active ? "paid" : "canceled"}`}
                         >
                           {p.active ? "Ativo" : "Indisponível"}
                         </span>
                       </td>
-                      <td>
+                      <td data-label="Editar">
                         <button
                           className="icon-button"
                           onClick={() => edit(p)}
@@ -783,6 +968,11 @@ export function AdminDashboard() {
                 </tbody>
               </table>
             </div>
+            {!filtered.length && (
+              <p className="admin-empty">
+                Nenhum produto corresponde aos filtros.
+              </p>
+            )}
             {filtered.length > productLimit && (
               <button
                 className="button button-outline button-small"
@@ -805,7 +995,7 @@ export function AdminDashboard() {
                   className="button button-outline button-small"
                   onClick={exportOrders}
                 >
-                  Exportar CSV
+                  Exportar filtrados
                 </button>
                 <button
                   disabled={busy}
@@ -823,12 +1013,40 @@ export function AdminDashboard() {
                     })
                   }
                 >
-                  <RefreshCw size={15} /> Sincronizar pendentes
+                  <RefreshCw size={15} /> Conferir pagamentos
                 </button>
               </div>
             </div>
+            <div className="admin-filter-row">
+              <label>
+                Buscar pedido
+                <input
+                  type="search"
+                  value={orderSearch}
+                  onChange={(event) => setOrderSearch(event.target.value)}
+                  placeholder="Nome, e-mail ou código"
+                />
+              </label>
+              <label>
+                Situação do pedido
+                <select
+                  value={orderFilter}
+                  onChange={(event) => setOrderFilter(event.target.value)}
+                >
+                  <option value="all">Todos</option>
+                  <option value="pending">Pagamento pendente</option>
+                  <option value="paid">Pago</option>
+                  <option value="ready">Pronto para retirada</option>
+                  <option value="completed">Retirado</option>
+                  <option value="refunded">Reembolso</option>
+                  <option value="failed">Recusado</option>
+                  <option value="canceled">Cancelado</option>
+                </select>
+              </label>
+              <span>{filteredOrders.length} pedidos</span>
+            </div>
             <div className="admin-table-wrap">
-              <table className="admin-table">
+              <table className="admin-table admin-order-table">
                 <thead>
                   <tr>
                     <th>Pedido / cliente</th>
@@ -840,19 +1058,19 @@ export function AdminDashboard() {
                   </tr>
                 </thead>
                 <tbody>
-                  {orders.map((item) => (
+                  {filteredOrders.map((item) => (
                     <tr key={item.id}>
                       <td>
                         <strong className="admin-id">{item.id}</strong>
                         <small>{item.customer_name || "Comprador"}</small>
                       </td>
-                      <td>{currency(item.total_cents)}</td>
-                      <td>
+                      <td data-label="Total">{currency(item.total_cents)}</td>
+                      <td data-label="Pagamento">
                         <span className={`admin-badge ${item.state}`}>
                           {stateLabel[item.state] || item.state}
                         </span>
                       </td>
-                      <td>
+                      <td data-label="Retirada">
                         {
                           (
                             {
@@ -863,8 +1081,8 @@ export function AdminDashboard() {
                           )[item.fulfillment_status]
                         }
                       </td>
-                      <td>{date(item.created_at)}</td>
-                      <td>
+                      <td data-label="Data">{date(item.created_at)}</td>
+                      <td data-label="Ações">
                         <button
                           className="text-button"
                           onClick={() =>
@@ -886,8 +1104,10 @@ export function AdminDashboard() {
                   ))}
                 </tbody>
               </table>
-              {!orders.length && (
-                <p className="admin-empty">Nenhum pedido registrado ainda.</p>
+              {!filteredOrders.length && (
+                <p className="admin-empty">
+                  Nenhum pedido corresponde aos filtros.
+                </p>
               )}
             </div>
             <a
@@ -1193,6 +1413,23 @@ export function AdminDashboard() {
             <span className={`admin-badge ${order.state}`}>
               {stateLabel[order.state]}
             </span>
+            <button
+              disabled={busy}
+              className="button button-outline button-small"
+              onClick={() =>
+                void action(async () => {
+                  const value = await api<{ order: Order }>(
+                    `orders/${order.id}/sync`,
+                    "POST",
+                  );
+                  setOrder(value.order);
+                  setNotice("Pagamento consultado no Mercado Pago.");
+                  await reload();
+                })
+              }
+            >
+              <RefreshCw size={15} /> Consultar pagamento deste pedido
+            </button>
             <div className="admin-table-wrap">
               <table className="admin-table">
                 <thead>
@@ -1252,6 +1489,42 @@ export function AdminDashboard() {
             )}
           </>
         )}
+      </Modal>
+      <Modal
+        open={batchActive !== null}
+        onOpenChange={(open) => {
+          if (!open) setBatchActive(null);
+        }}
+        title={
+          batchActive
+            ? "Disponibilizar produtos?"
+            : "Indisponibilizar produtos?"
+        }
+      >
+        <p>
+          A situação de {selectedProducts.length} produtos será alterada no
+          catálogo e no checkout. Preços, custos e fotos serão preservados.
+        </p>
+        <button
+          disabled={busy}
+          className="button full-width"
+          onClick={() =>
+            void action(async () => {
+              await api("products/availability", "PATCH", {
+                ids: selectedProducts,
+                active: batchActive,
+              });
+              setSelectedProducts([]);
+              setBatchActive(null);
+              setNotice(
+                "Disponibilidade atualizada e registrada no histórico.",
+              );
+              await reload();
+            })
+          }
+        >
+          Confirmar alteração
+        </button>
       </Modal>
       <Modal
         open={costConfirm}

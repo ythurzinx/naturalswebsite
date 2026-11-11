@@ -8,4 +8,10 @@ async function handle(
   const { path } = await params;
   return admin.handle(request, path);
 }
-export { handle as GET, handle as POST, handle as PUT, handle as DELETE };
+export {
+  handle as GET,
+  handle as POST,
+  handle as PUT,
+  handle as PATCH,
+  handle as DELETE,
+};

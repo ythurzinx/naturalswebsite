@@ -1,6 +1,7 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   Search,
   MapPin,
@@ -16,6 +17,7 @@ import { useCart } from "@/lib/cart-context";
 import { groups } from "@/lib/products";
 import { whatsappUrl } from "@/lib/store";
 export function Header() {
+  const pathname = usePathname();
   const { itemCount, favorites } = useCart();
   const [menu, setMenu] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -38,6 +40,20 @@ export function Header() {
       document.removeEventListener("keydown", escape);
     };
   }, [menu]);
+  if (pathname.startsWith("/admin"))
+    return (
+      <header className="admin-brand-bar">
+        <Link href="/" aria-label="Voltar à loja Mundo Natural">
+          <img
+            src="/images/mundo-natural-logo.png"
+            alt="Mundo Natural"
+            width="50"
+            height="46"
+          />{" "}
+          Mundo Natural <span>Administração</span>
+        </Link>
+      </header>
+    );
   return (
     <>
       <div className="announcement">

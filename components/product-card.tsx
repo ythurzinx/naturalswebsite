@@ -5,12 +5,9 @@ import { useCart } from "@/lib/cart-context";
 import { formatPrice, productTile } from "@/lib/products";
 import type { Product } from "@/lib/types";
 import { Modal } from "./modal";
+import { WeightSelector } from "./weight-selector";
 import { lineTotal, normalizeQuantity } from "@/lib/commerce.mjs";
-import {
-  BULK_STEP_GRAMS,
-  BULK_WEIGHTS,
-  referencePriceCents,
-} from "@/lib/pricing.mjs";
+import { BULK_STEP_GRAMS, referencePriceCents } from "@/lib/pricing.mjs";
 export function ProductImage({
   product,
   className = "",
@@ -135,22 +132,17 @@ export function ProductCard({ product }: { product: Product }) {
               {product.isGranel ? "Preço por 100 g" : "Preço por unidade"}
             </p>
             {product.isGranel ? (
-              <label className="field-label">
+              <div className="field-label">
                 Escolha o peso (de 100 em 100 g)
-                <select
+                <WeightSelector
+                  name={product.nome_produto}
                   value={weight}
-                  onChange={(e) => {
-                    setWeight(Number(e.target.value));
+                  onChange={(nextWeight) => {
+                    setWeight(nextWeight);
                     setAdded(false);
                   }}
-                >
-                  {BULK_WEIGHTS.map((w) => (
-                    <option key={w} value={w}>
-                      {w.toLocaleString("pt-BR")} g
-                    </option>
-                  ))}
-                </select>
-              </label>
+                />
+              </div>
             ) : (
               <p>{product.peso_produto}</p>
             )}

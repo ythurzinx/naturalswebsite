@@ -11,6 +11,7 @@ import {
 } from "../lib/server/admin-auth.mjs";
 import {
   validateProduct,
+  validateAvailability,
   normalizeProductImage,
   createAdminService,
 } from "../lib/server/admin-service.mjs";
@@ -103,6 +104,24 @@ test("uploaded photos are reencoded and metadata is removed", async () => {
     normalizeProductImage(Buffer.alloc(5 * 1024 * 1024 + 1)),
   );
 });
+test("availability batches reject duplicate, excessive and malformed selections", () => {
+  assert.deepEqual(
+    validateAvailability({ ids: ["prod-1", "prod-2"], active: false }),
+    { ids: ["prod-1", "prod-2"], active: false },
+  );
+  for (const value of [
+    null,
+    [],
+    { ids: [], active: true },
+    { ids: ["prod-1", "prod-1"], active: true },
+    { ids: Array.from({ length: 51 }, (_, i) => `prod-${i}`), active: true },
+    { ids: ["prod-1"], active: "false" },
+    { ids: ["prod-1; DROP TABLE mn_orders"], active: true },
+    { ids: ["../../secret"], active: true },
+    { ids: ["prod-1"], active: true, priceCents: 1 },
+  ])
+    assert.throws(() => validateAvailability(value));
+});
 test("unconfigured admin routes never expose catalog costs or permit writes", async () => {
   const service = createAdminService({
     config: null,
@@ -114,6 +133,8 @@ test("unconfigured admin routes never expose catalog costs or permit writes", as
     [["dashboard"], "GET"],
     [["products"], "POST"],
     [["images"], "POST"],
+    [["products", "availability"], "PATCH"],
+    [["orders", "ORD01FIXTURETEST", "sync"], "POST"],
   ]) {
     const response = await service.handle(
       new Request("https://loja.example/api/admin/" + path.join("/"), {

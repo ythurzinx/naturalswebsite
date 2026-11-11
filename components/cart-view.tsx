@@ -14,7 +14,8 @@ import {
 import { useCart } from "@/lib/cart-context";
 import { formatPrice } from "@/lib/products";
 import { itemKey, lineTotal } from "@/lib/commerce.mjs";
-import { BULK_WEIGHTS, referencePriceCents } from "@/lib/pricing.mjs";
+import { referencePriceCents } from "@/lib/pricing.mjs";
+import { WeightSelector } from "./weight-selector";
 import { ProductImage } from "./product-card";
 export function CartView() {
   const {
@@ -85,25 +86,16 @@ export function CartView() {
                       {item.product.isGranel ? " por 100 g" : " por unidade"}
                     </span>
                     {item.product.isGranel && (
-                      <label className="field-label cart-weight-field">
+                      <div className="field-label cart-weight-field">
                         Peso por porção
-                        <select
-                          aria-label={`Peso de ${item.product.nome_produto}`}
-                          value={item.selectedWeight}
-                          onChange={(event) =>
-                            updateWeight(
-                              itemKey(item),
-                              Number(event.target.value),
-                            )
+                        <WeightSelector
+                          name={item.product.nome_produto}
+                          value={item.selectedWeight || 100}
+                          onChange={(weight) =>
+                            updateWeight(itemKey(item), weight)
                           }
-                        >
-                          {BULK_WEIGHTS.map((weight) => (
-                            <option key={weight} value={weight}>
-                              {weight.toLocaleString("pt-BR")} g
-                            </option>
-                          ))}
-                        </select>
-                      </label>
+                        />
+                      </div>
                     )}
                     <div className="quantity-control">
                       <button
@@ -184,6 +176,15 @@ export function CartView() {
               </span>
             </div>
           </aside>
+          <div className="mobile-purchase-bar">
+            <div>
+              <small>Total da seleção</small>
+              <strong>{formatPrice(cart.total)}</strong>
+            </div>
+            <Link href="/checkout" className="button">
+              Continuar <ArrowRight size={17} />
+            </Link>
+          </div>
         </div>
       )}
     </main>
