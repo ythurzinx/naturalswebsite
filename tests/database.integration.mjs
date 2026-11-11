@@ -203,6 +203,16 @@ test("orders, costs and fees persist; retries and sync do not duplicate revenue"
       },
       body: JSON.stringify(body),
     });
+  await repo.saveProduct({ ...product("prod-1"), priceCents: 15999 });
+  const stale = await f.service.checkout(request());
+  assert.equal(stale.status, 409);
+  assert.equal((await stale.json()).code, "PRICE_CHANGED");
+  assert.equal(
+    f.calls.length,
+    0,
+    "stale prices must be rejected before contacting the payment provider",
+  );
+  await repo.saveProduct(product("prod-1"));
   const response = await f.service.checkout(request());
   assert.equal(response.status, 200, await response.clone().text());
   let stats = await repo.dashboard();

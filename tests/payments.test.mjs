@@ -270,6 +270,36 @@ test("Origin, same-site metadata and CSRF checks prevent cross-site checkout", a
   }
   assert.equal(f.calls.length, 0);
 });
+test("duplicate authenticated cookies cannot bypass checkout or order ownership", async () => {
+  const f = setup(),
+    session = await f.session();
+  const [sessionName, sessionValue] = [...f.jar][0];
+  const rejected = await f.service.checkout(
+    f.request("/api/checkout", "POST", input(), {
+      "X-CSRF-Token": session.csrfToken,
+      Cookie: `${sessionName}=${sessionValue}; ${sessionName}=forged`,
+    }),
+  );
+  assert.equal(rejected.status, 403);
+  assert.equal(f.calls.length, 0);
+
+  const accepted = await f.checkout(input(), session.csrfToken);
+  assert.equal(accepted.status, 200);
+  const id = (await accepted.json()).orderId;
+  const [orderName, orderValue] = [...f.jar].find(([name]) =>
+    name.endsWith("mn-orders"),
+  );
+  const calls = f.calls.length;
+  const status = await f.service.status(
+    f.request(`/api/orders/${id}`, "GET", undefined, {
+      Cookie: `${orderName}=${orderValue}; ${orderName}=forged`,
+    }),
+    id,
+  );
+  assert.equal(status.status, 404);
+  assert.equal(f.calls.length, calls);
+});
+
 test("payment status needs ownership and never trusts redirect query parameters", async () => {
   const f = setup(),
     response = await f.checkout(),
