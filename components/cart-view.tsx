@@ -65,9 +65,8 @@ export function CartView() {
                         : item.product.peso_produto}
                     </p>
                     <span>
-                      Referência:{" "}
-                      {formatPrice(lineTotal({ ...item, quantity: 1 }))} /{" "}
-                      {item.product.isGranel ? "porção" : "unidade"}
+                      Preço: {formatPrice(lineTotal({ ...item, quantity: 1 }))}{" "}
+                      / {item.product.isGranel ? "porção" : "unidade"}
                     </span>
                     <div className="quantity-control">
                       <button
@@ -112,7 +111,7 @@ export function CartView() {
           <aside className="order-summary">
             <h2>Resumo da sua seleção</h2>
             <div>
-              <span>Subtotal de referência</span>
+              <span>Subtotal</span>
               <strong>{formatPrice(cart.total)}</strong>
             </div>
             <div>
@@ -120,18 +119,18 @@ export function CartView() {
               <span>A combinar com a loja</span>
             </div>
             <div className="summary-total">
-              <span>Total de referência</span>
+              <span>Total</span>
               <strong>{formatPrice(cart.total)}</strong>
             </div>
             <p>
-              Preços e disponibilidade serão confirmados pela equipe antes do
-              pagamento. Nenhum valor é cobrado no site.
+              Escolha Pix ou cartão pelo Mercado Pago para retirada na loja.
+              Para entregas, confirme o frete pelo atendimento antes de pagar.
             </p>
             <Link href="/checkout" className="button full-width">
               Continuar com minha seleção <ArrowRight size={17} />
             </Link>
             <span className="summary-assurance">
-              <MessageCircle size={16} /> Finalização com atendimento humano
+              <MessageCircle size={16} /> Pix, cartão ou atendimento
             </span>
             <div className="summary-benefits">
               <span>

@@ -6,10 +6,15 @@ import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { CookieConsent } from "@/components/cookie-consent";
 import "@/styles/globals.css";
+import { publicCatalog } from "@/lib/server/shop";
+import type { Product } from "@/lib/types";
+// A fresh response is required for per-request script nonces.
+export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ||
-      "https://mundo-natural-taboao.macacois.chatgpt.site",
+    process.env.APP_URL ||
+      process.env.NEXT_PUBLIC_SITE_URL ||
+      "https://example.invalid",
   ),
   title: {
     default: "Mundo Natural | Seu mundo mais natural",
@@ -37,11 +42,16 @@ export const metadata: Metadata = {
   },
 };
 export const viewport: Viewport = { themeColor: "#274e37" };
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default async function RootLayout({
+  children,
+}: {
+  children: ReactNode;
+}) {
+  const initialCatalog = (await publicCatalog(true)) as Product[];
   return (
     <html lang="pt-BR">
       <body className={GeistSans.className}>
-        <CartProvider>
+        <CartProvider initialCatalog={initialCatalog}>
           <a href="#conteudo" className="skip-link">
             Pular para o conteúdo
           </a>

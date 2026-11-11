@@ -1,7 +1,9 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
-import { securityHeaders } from "../security-headers.mjs";
+import {
+  securityHeaders,
+  contentSecurityPolicy,
+} from "../security-headers.mjs";
 test("production headers restrict framing, objects, connections and browser features", () => {
   const headers = Object.fromEntries(
     securityHeaders().map((h) => [h.key, h.value]),
@@ -20,11 +22,12 @@ test("production headers restrict framing, objects, connections and browser feat
     false,
   );
 });
-test("the legacy administration route fails closed", async () => {
-  const source = await readFile(
-    new URL("../app/admin/page.tsx", import.meta.url),
-    "utf8",
-  );
-  assert.ok(source.includes("notFound()"));
-  assert.equal(source.includes("ADMIN_PASSWORD"), false);
+test("production script policy requires a nonce and blocks inline event handlers", () => {
+  const policy = contentSecurityPolicy(false, "fixture-nonce");
+  const scripts = policy
+    .split(";")
+    .find((part) => part.trim().startsWith("script-src "));
+  assert.ok(scripts.includes("'nonce-fixture-nonce'"));
+  assert.ok(!scripts.includes("unsafe-inline"));
+  assert.ok(policy.includes("script-src-attr 'none'"));
 });

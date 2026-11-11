@@ -106,7 +106,10 @@ export function Storefront({
     [limit, setLimit] = useState(24),
     [slide, setSlide] = useState(0),
     [filters, setFilters] = useState(false);
-  const { favorites, ready } = useCart();
+  const { favorites, ready, catalog: products } = useCart();
+  const currentFeatured = featured
+    .map((original) => products.find((p) => p.id === original.id))
+    .filter((p): p is NonNullable<typeof p> => !!p);
   const onQuery = useCallback(
     (q: string, category: string, curated: boolean) => {
       setQuery(q);
@@ -120,7 +123,7 @@ export function Storefront({
     let list = favoritesOnly
       ? products.filter((p) => favorites.includes(p.id))
       : selection || (!catalog && group === "Todos" && !query)
-        ? featured
+        ? currentFeatured
         : products;
     list = searchProducts(list, query).filter((p) => inGroup(p, group));
     if (sort === "recommended" && catalog)
@@ -149,7 +152,16 @@ export function Storefront({
         a.nome_produto.localeCompare(b.nome_produto, "pt-BR"),
       );
     return list;
-  }, [query, group, catalog, selection, sort, favoritesOnly, favorites]);
+  }, [
+    query,
+    group,
+    catalog,
+    selection,
+    sort,
+    favoritesOnly,
+    favorites,
+    products,
+  ]);
   const current = slides[slide];
   const CatalogHeading = catalog || favoritesOnly ? "h1" : "h2";
   return (
@@ -397,8 +409,8 @@ export function Storefront({
               Ordenar por
               <select value={sort} onChange={(e) => setSort(e.target.value)}>
                 <option value="recommended">Nossa seleção</option>
-                <option value="price-asc">Menor valor de referência</option>
-                <option value="price-desc">Maior valor de referência</option>
+                <option value="price-asc">Menor preço</option>
+                <option value="price-desc">Maior preço</option>
                 <option value="name">Nome: A a Z</option>
               </select>
             </label>
@@ -468,9 +480,8 @@ export function Storefront({
           </div>
         )}
         <p className="catalog-disclaimer">
-          Valores de referência do catálogo, sujeitos à confirmação. Consulte
-          disponibilidade e informações de alergênicos com a loja. Imagens
-          ilustrativas.
+          Preços informados pela loja. Consulte disponibilidade e informações de
+          alergênicos com a loja. Imagens ilustrativas.
         </p>
       </section>
       {!catalog && !favoritesOnly && (

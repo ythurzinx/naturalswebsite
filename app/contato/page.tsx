@@ -5,7 +5,7 @@ export const metadata = { title: "Fale com a gente" };
 const faqs = [
   [
     "Como faço uma compra?",
-    "Explore o catálogo, escolha as porções e adicione os produtos ao carrinho. Depois, continue no WhatsApp para enviar sua seleção. Nossa equipe confirma os preços, o estoque e a forma de pagamento antes de concluir a compra.",
+    "Explore o catálogo, escolha as porções e adicione os produtos ao carrinho. Na finalização, escolha Pix ou cartão pelo Mercado Pago para retirada na loja, ou continue no WhatsApp para combinar os detalhes. Para entrega, consulte o orçamento antes de pagar.",
   ],
   [
     "Vocês fazem entregas?",
@@ -13,11 +13,11 @@ const faqs = [
   ],
   [
     "Os preços do catálogo estão atualizados?",
-    "Os valores apresentados são referências da planilha existente da loja. Eles não garantem o preço atual ou a disponibilidade do produto. A equipe confirma ambos antes do pagamento.",
+    "Os preços são informados pela loja a partir do seu catálogo. O total é conferido antes de abrir o pagamento. A inclusão no carrinho não reserva estoque; se tiver dúvidas sobre disponibilidade, fale com a equipe.",
   ],
   [
     "Como funcionam os produtos a granel?",
-    "Você pode escolher porções de 100 g, 250 g, 500 g ou 1 kg nos detalhes do produto. O valor de referência é proporcional ao peso. O atendimento confirma a pesagem e o preço final.",
+    "Você pode escolher porções de 100 g, 250 g, 500 g ou 1 kg nos detalhes do produto. O preço da porção é proporcional ao peso, com arredondamento para centavos antes de multiplicar a quantidade.",
   ],
   [
     "Tenho uma alergia ou restrição alimentar. Como escolher?",
@@ -25,7 +25,7 @@ const faqs = [
   ],
   [
     "Como acompanho uma compra ou peço uma troca?",
-    "Fale com a loja pelo WhatsApp e informe os dados da compra, sem enviar senhas ou informações completas do cartão. A equipe orientará sobre acompanhamento, trocas, cancelamentos e devoluções conforme as condições aplicáveis.",
+    "Após o pagamento online, acompanhe o status na página de retorno do Mercado Pago, no mesmo navegador. Para atendimento ou trocas, fale com a loja pelo WhatsApp e informe o número do pedido, sem enviar senhas ou informações completas do cartão. A equipe orientará sobre acompanhamento, trocas, cancelamentos e devoluções conforme as condições aplicáveis.",
   ],
 ];
 export default function ContactPage() {

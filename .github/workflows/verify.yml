@@ -8,13 +8,31 @@ permissions:
 jobs:
   check:
     runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mariadb:11.4@sha256:d1891ede5a559f1086f55053bb8cc1569b0298338c4d72d71725a7f74f6ba620
+        env:
+          MARIADB_ROOT_PASSWORD: local-integration-fixture
+          MARIADB_DATABASE: mn_test
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mariadb-admin ping --user=root --password=local-integration-fixture"
+          --health-interval=10s --health-timeout=5s --health-retries=10
+    env:
+      # Disposable CI database only; no production credentials are used.
+      INTEGRATION_DATABASE_URL: mysql://root:local-integration-fixture@127.0.0.1:3306/mn_test
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: 22
           cache: npm
       - run: npm ci
       - run: npm test
+      - run: npm run test:database
       - run: npm run typecheck
+      - run: npm run check:launch -- --code-only
+      - run: npm audit --omit=dev --audit-level=high
       - run: npm run build
+      - run: npm run test:production

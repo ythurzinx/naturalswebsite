@@ -15,25 +15,26 @@ export default function TermsPage() {
         </h1>
         <h2>1. Explore e escolha</h2>
         <p>
-          O site apresenta o catálogo de referência da Mundo Natural. Os valores
-          foram importados da planilha existente da loja e podem estar
-          desatualizados. As imagens são ilustrativas e não representam
-          necessariamente a marca, a embalagem ou o lote disponível.
+          O site apresenta os produtos e os preços informados pela Mundo
+          Natural. Confira sua seleção e o total antes de confirmar o pagamento.
+          As imagens são ilustrativas e não representam necessariamente a marca,
+          a embalagem ou o lote disponível.
         </p>
         <h2>2. Monte sua seleção</h2>
         <p>
           Adicionar produtos ao carrinho cria uma lista de interesse. Essa ação
           não reserva estoque, não confirma um pedido e não inicia cobrança.
           Para produtos a granel, os valores são proporcionais ao peso
-          escolhido; a pesagem final será confirmada pela loja.
+          escolhido. O preço de cada porção é arredondado para centavos antes de
+          multiplicar a quantidade.
         </p>
         <h2>3. Confirme com a equipe</h2>
         <p>
-          Envie sua seleção pelo WhatsApp. Antes de pagar, confirme o preço
-          atualizado, a disponibilidade, os ingredientes, os alergênicos, a
-          validade, a forma de pagamento e as condições de entrega ou retirada.
-          Suplementos e fitoterápicos exigem atenção às informações do
-          fabricante e às orientações de um profissional habilitado quando
+          Se tiver dúvidas, converse com a equipe antes de pagar. Confirme a
+          disponibilidade, os ingredientes, os alergênicos, a validade e as
+          condições de retirada. Para entrega, solicite o orçamento pelo
+          atendimento. Suplementos e fitoterápicos exigem atenção às informações
+          do fabricante e às orientações de um profissional habilitado quando
           aplicável.
         </p>
         <h2>4. Combine o recebimento</h2>
@@ -44,9 +45,14 @@ export default function TermsPage() {
         </p>
         <h2>5. Pagamento e acompanhamento</h2>
         <p>
-          Esta versão do site não processa pagamentos e não coleta dados de
-          cartão. O atendimento informa os meios disponíveis. A conclusão e o
-          acompanhamento da compra ocorrem diretamente com a loja.
+          Para compras com retirada, quando disponível, o site permite pagar com
+          Pix ou cartão no ambiente do Mercado Pago. A loja não recebe nem
+          armazena o número do cartão. A confirmação depende da aprovação do
+          pagamento; retornar à loja não significa que a compra foi paga.
+          Acompanhe o status na página de retorno ou no atendimento. As
+          condições de parcelamento e eventuais custos são exibidos pelo Mercado
+          Pago antes da confirmação. Guarde o número do pedido e combine a
+          retirada.
         </p>
         <h2>Trocas, cancelamentos e devoluções</h2>
         <p>

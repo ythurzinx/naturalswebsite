@@ -39,8 +39,8 @@ export function CookieConsent() {
             <div>
               <strong>Seu bem-estar também é digital.</strong>
               <p>
-                Usamos armazenamento essencial para o carrinho. Você escolhe se
-                quer lembrar seus favoritos.{" "}
+                Carrinho e pagamento usam armazenamento essencial. Você escolhe
+                se quer lembrar seus favoritos.{" "}
                 <Link href="/privacidade">Saiba mais</Link>
               </p>
             </div>
@@ -74,7 +74,8 @@ export function CookieConsent() {
             </strong>
             <p>
               Mantêm seu carrinho por até 30 dias e registram sua escolha de
-              privacidade por até 180 dias, neste navegador.
+              privacidade por até 180 dias, neste navegador. O pagamento usa uma
+              sessão protegida por até 1 hora e acesso ao pedido por até 7 dias.
             </p>
           </div>
           <span className="essential-label">Sempre ativos</span>

@@ -44,6 +44,16 @@ export default function PrivacyPage() {
           local. Nessa situação, sua seleção pode se perder ao recarregar a
           página.
         </p>
+        <h2>Sessão de pagamento e acesso ao pedido</h2>
+        <p>
+          O checkout usa um cookie essencial protegido, com duração de até 1
+          hora. Outro cookie essencial permite consultar até cinco pedidos
+          recentes neste navegador por até 7 dias. Eles guardam identificadores
+          e dados de validação, sem nome, e-mail ou número de cartão. Se você
+          bloquear cookies essenciais, o pagamento online e o acompanhamento
+          podem ficar indisponíveis; o atendimento pelo WhatsApp continua
+          disponível.
+        </p>
         <h2>Cookies, publicidade e rastreamento</h2>
         <p>
           O código desta loja não instala ferramentas de análise de audiência,
@@ -58,6 +68,23 @@ export default function PrivacyPage() {
           recusar as preferências opcionais sem perder acesso à loja. Limpar os
           dados do site nas configurações do navegador apaga o carrinho, os
           favoritos e a escolha registrada.
+        </p>
+        <h2>Quando você paga com Mercado Pago</h2>
+        <p>
+          Ao escolher pagar online, seu nome, e-mail e os itens da compra são
+          enviados ao Mercado Pago para criar e processar o pedido. Os dados de
+          cartão ou Pix são informados diretamente no ambiente desse serviço,
+          que aplica suas próprias políticas de privacidade e segurança. A loja
+          consulta o resultado do pagamento para atender sua compra.
+        </p>
+        <p>
+          Os registros de pedido e pagamento ficam no Mercado Pago e podem ser
+          acessados pela loja para atendimento, conciliação, reembolso e
+          cumprimento das obrigações aplicáveis. A loja mantém no seu banco os
+          pedidos, itens, nome e e-mail para atendimento e conciliação. Números
+          de cartão não são armazenados pela loja. A hospedagem pode registrar
+          dados técnicos e identificadores de pedido para segurança e
+          diagnóstico.
         </p>
         <h2>Quando você usa o WhatsApp</h2>
         <p>

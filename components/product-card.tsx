@@ -5,6 +5,7 @@ import { useCart } from "@/lib/cart-context";
 import { formatPrice, productTile } from "@/lib/products";
 import type { Product } from "@/lib/types";
 import { Modal } from "./modal";
+import { lineTotal } from "@/lib/commerce.mjs";
 export function ProductImage({
   product,
   className = "",
@@ -13,6 +14,15 @@ export function ProductImage({
   className?: string;
 }) {
   const packaged = /Suplementos|Fitoterápicos/.test(product.categoria);
+  if (
+    product.imagem &&
+    /^\/api\/product-images\/[a-f0-9]{64}$/.test(product.imagem)
+  )
+    return (
+      <div className={`product-photo product-custom-photo ${className}`}>
+        <img src={product.imagem} alt={product.nome_produto} loading="lazy" />
+      </div>
+    );
   return (
     <div
       className={`product-photo tile-${productTile(product)} ${packaged ? "packaged-photo" : ""} ${className}`}
@@ -29,8 +39,7 @@ export function ProductCard({ product }: { product: Product }) {
     [weight, setWeight] = useState(250),
     [quantity, setQuantity] = useState(1),
     [added, setAdded] = useState(false);
-  const favorite = favorites.includes(product.id),
-    price = product.valor_unitario * (product.isGranel ? weight / 1000 : 1);
+  const favorite = favorites.includes(product.id);
   function add() {
     addToCart(product, quantity, weight);
     setAdded(true);
@@ -77,7 +86,7 @@ export function ProductCard({ product }: { product: Product }) {
                   product.valor_unitario * (product.isGranel ? 0.25 : 1),
                 )}
               </strong>
-              <small>valor de referência</small>
+              <small>{product.isGranel ? "por porção" : "por unidade"}</small>
             </div>
             <button
               className={`add-button ${added ? "added" : ""}`}
@@ -115,10 +124,12 @@ export function ProductCard({ product }: { product: Product }) {
               e informações de alergênicos com a nossa equipe.
             </p>
             <strong className="detail-price">
-              {formatPrice(price * quantity)}
+              {formatPrice(
+                lineTotal({ product, quantity, selectedWeight: weight }),
+              )}
             </strong>
             <p className="muted">
-              Valor de referência{" "}
+              Preço da seleção{" "}
               {product.isGranel &&
                 `· ${formatPrice(product.valor_unitario)}/kg`}
             </p>
@@ -162,8 +173,8 @@ export function ProductCard({ product }: { product: Product }) {
               {added ? "Adicionado ao carrinho" : "Adicionar ao carrinho"}
             </button>
             <p className="fine-print">
-              Imagem ilustrativa. A seleção não reserva estoque. O total é
-              confirmado pela loja antes do pagamento.
+              Imagem ilustrativa. A seleção não reserva estoque. Confira
+              ingredientes e alergênicos com a loja antes de pagar.
             </p>
           </div>
         </div>

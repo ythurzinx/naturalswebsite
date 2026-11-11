@@ -8,7 +8,7 @@ import {
   type ReactNode,
 } from "react";
 import type { Cart, CartItem, Product } from "./types";
-import { products } from "./products";
+import { products as baseProducts } from "./products";
 import {
   CART_KEY,
   hydrateCart,
@@ -25,6 +25,7 @@ import {
   readConsent,
 } from "./privacy.mjs";
 interface StoreContext {
+  catalog: Product[];
   cart: Cart;
   ready: boolean;
   itemCount: number;
@@ -36,7 +37,17 @@ interface StoreContext {
   toggleFavorite: (id: string) => void;
 }
 const Context = createContext<StoreContext | undefined>(undefined);
-export function CartProvider({ children }: { children: ReactNode }) {
+export function CartProvider({
+  children,
+  initialCatalog,
+}: {
+  children: ReactNode;
+  initialCatalog?: Product[];
+}) {
+  const [products, setProducts] = useState<Product[]>(
+    initialCatalog || baseProducts,
+  );
+  const catalogRef = useRef(products);
   const [items, setItems] = useState<CartItem[]>([]),
     [ready, setReady] = useState(false);
   const [favorites, setFavorites] = useState<string[]>([]),
@@ -74,7 +85,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
     const sync = (event: StorageEvent) => {
       if (event.key === CART_KEY) {
         skipNextWrite.current = true;
-        setItems(hydrateCart(event.newValue, products));
+        setItems(hydrateCart(event.newValue, catalogRef.current));
       }
       if (event.key === CONSENT_KEY) onConsent();
     };
@@ -83,6 +94,47 @@ export function CartProvider({ children }: { children: ReactNode }) {
     return () => {
       window.removeEventListener(CONSENT_EVENT, onConsent);
       window.removeEventListener("storage", sync);
+    };
+  }, []);
+  useEffect(() => {
+    const controller = new AbortController();
+    async function refresh() {
+      try {
+        const response = await fetch("/api/catalog", {
+          cache: "no-store",
+          signal: controller.signal,
+        });
+        if (!response.ok) return;
+        const data = await response.json();
+        if (
+          !Array.isArray(data.products) ||
+          data.products.length > 5000 ||
+          data.products.some(
+            (p: Product) =>
+              typeof p.id !== "string" ||
+              typeof p.nome_produto !== "string" ||
+              !Number.isFinite(p.valor_unitario) ||
+              p.valor_unitario <= 0,
+          )
+        )
+          return;
+        catalogRef.current = data.products;
+        setProducts(data.products);
+        setItems((current) =>
+          hydrateCart(serializeCart(current), data.products),
+        );
+        setFavorites((current) =>
+          current.filter((id) =>
+            data.products.some((p: Product) => p.id === id),
+          ),
+        );
+      } catch {}
+    }
+    void refresh();
+    window.addEventListener("focus", refresh);
+    return () => {
+      controller.abort();
+      window.removeEventListener("focus", refresh);
     };
   }, []);
   useEffect(() => {
@@ -130,6 +182,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   return (
     <Context.Provider
       value={{
+        catalog: products,
         cart: { items, total: cartTotal(items) },
         ready,
         itemCount: items.reduce((sum, item) => sum + item.quantity, 0),
