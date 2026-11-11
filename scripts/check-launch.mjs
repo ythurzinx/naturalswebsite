@@ -3,6 +3,7 @@ import { existsSync } from "node:fs";
 import { paymentConfiguration } from "../lib/server/payment-service.mjs";
 import { adminConfiguration } from "../lib/server/admin-auth.mjs";
 import { createDatabase } from "../lib/server/database.mjs";
+import { referencePriceCents } from "../lib/pricing.mjs";
 for (const file of [".env.local", ".env"]) {
   if (existsSync(file)) process.loadEnvFile(file);
 }
@@ -26,7 +27,8 @@ check(
       (p) =>
         typeof p.id === "string" &&
         Number.isFinite(p.valor_unitario) &&
-        p.valor_unitario > 0,
+        p.valor_unitario > 0 &&
+        referencePriceCents(p) > 0,
     ),
 );
 check(

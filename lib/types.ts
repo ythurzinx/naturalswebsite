@@ -3,7 +3,7 @@ export interface Product {
   nome_produto: string;
   peso_produto: string;
   quantidade: number;
-  valor_unitario: number;
+  valor_unitario: number; // Canonical source: per kg for bulk, per unit otherwise.
   total_unitario: number;
   estoque_minimo: number;
   status_estoque: string;

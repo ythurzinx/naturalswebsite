@@ -23,10 +23,11 @@ export default function TermsPage() {
         <h2>2. Monte sua seleção</h2>
         <p>
           Adicionar produtos ao carrinho cria uma lista de interesse. Essa ação
-          não reserva estoque, não confirma um pedido e não inicia cobrança.
-          Para produtos a granel, os valores são proporcionais ao peso
-          escolhido. O preço de cada porção é arredondado para centavos antes de
-          multiplicar a quantidade.
+          não reserva estoque, não confirma um pedido e não inicia cobrança. Os
+          produtos a granel têm preço por 100 g e são vendidos de 100 em 100 g.
+          O valor de 100 g é arredondado para centavos e multiplicado pelos
+          blocos de 100 g escolhidos e pela quantidade de porções. Confira o
+          peso e o total antes de pagar.
         </p>
         <h2>3. Confirme com a equipe</h2>
         <p>

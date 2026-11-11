@@ -2,6 +2,8 @@
 
 Loja Next.js com 619 produtos, busca, categorias, favoritos, carrinho por peso e **Mercado Pago Checkout Pro via Orders API para Pix e cartão**, com alternativa de atendimento pelo WhatsApp.
 
+Os 306 produtos a granel exibem preço por **100 g**. A seleção começa em 100 g e avança de 100 em 100 g, até 5.000 g por porção, com peso editável no carrinho. Produtos embalados continuam por unidade. O valor de 100 g é arredondado em centavos antes de multiplicar pelos blocos e pelas porções, usando a mesma regra no catálogo, carrinho e pagamento.
+
 ## Rodar e verificar
 
 Node.js 22 e npm:
@@ -40,6 +42,8 @@ Crie um MySQL dedicado na Hostinger, configure `DATABASE_URL` e execute `npm run
 Execute `npm run admin:setup` no seu terminal para gerar o hash da senha, o segredo de sessão e a chave do autenticador. Configure `ADMIN_USERNAME`, `ADMIN_PASSWORD_HASH`, `ADMIN_SESSION_SECRET` e `ADMIN_TOTP_SECRET` no painel da Hostinger. Nunca faça commit de valores reais. O acesso usa sessão protegida no servidor, limite de tentativas, CSRF e, com a chave configurada, TOTP com bloqueio de reutilização.
 
 O lucro estimado exige custos e taxas conhecidos. Custos ficam registrados por pedido; preencher custos históricos ausentes exige uma ação explícita do administrador. Nenhuma margem é inventada.
+
+O painel exibe e recebe preço/custo a granel por 100 g. O catálogo importado e as colunas existentes do MySQL mantêm a base interna por kg para compatibilidade; `lib/pricing.mjs` converte a unidade de venda. O editor envia `priceUnit: "100g"`, convertido para a base interna no servidor. Não divida manualmente os valores armazenados por dez. Pedidos e custos históricos permanecem registrados pelo valor da porção original.
 
 ## Dados e operação
 

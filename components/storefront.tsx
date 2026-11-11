@@ -28,6 +28,7 @@ import {
 import { useCart } from "@/lib/cart-context";
 import { whatsappUrl } from "@/lib/store";
 import { ProductCard } from "./product-card";
+import { referencePriceCents } from "@/lib/pricing.mjs";
 
 function QuerySync({
   onQuery,
@@ -67,7 +68,7 @@ const slides = [
       </>
     ),
     description:
-      "Grãos, sementes e castanhas a granel. Escolha a quantidade que combina com você e monte sua seleção.",
+      "Grãos, sementes e castanhas a granel. Preços por 100 g e quantidades de 100 em 100 g para montar sua seleção.",
     image: "hero-grains",
   },
   {
@@ -137,15 +138,11 @@ export function Storefront({
       });
     if (sort === "price-asc")
       list = [...list].sort(
-        (a, b) =>
-          a.valor_unitario * (a.isGranel ? 0.25 : 1) -
-          b.valor_unitario * (b.isGranel ? 0.25 : 1),
+        (a, b) => referencePriceCents(a) - referencePriceCents(b),
       );
     if (sort === "price-desc")
       list = [...list].sort(
-        (a, b) =>
-          b.valor_unitario * (b.isGranel ? 0.25 : 1) -
-          a.valor_unitario * (a.isGranel ? 0.25 : 1),
+        (a, b) => referencePriceCents(b) - referencePriceCents(a),
       );
     if (sort === "name")
       list = [...list].sort((a, b) =>
@@ -348,7 +345,7 @@ export function Storefront({
               <p className="section-description">
                 {favoritesOnly
                   ? "Guarde o que combina com você e volte quando quiser."
-                  : "Explore nosso catálogo e monte sua seleção. A gente cuida do resto com você."}
+                  : "A granel com preços por 100 g: escolha 100 g, 200 g, 300 g e monte sua seleção."}
               </p>
             )}
           </div>

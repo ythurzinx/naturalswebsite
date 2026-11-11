@@ -14,9 +14,18 @@ import {
 import { useCart } from "@/lib/cart-context";
 import { formatPrice } from "@/lib/products";
 import { itemKey, lineTotal } from "@/lib/commerce.mjs";
+import { BULK_WEIGHTS, referencePriceCents } from "@/lib/pricing.mjs";
 import { ProductImage } from "./product-card";
 export function CartView() {
-  const { cart, ready, updateQuantity, removeFromCart, itemCount } = useCart();
+  const {
+    cart,
+    ready,
+    updateQuantity,
+    updateWeight,
+    removeFromCart,
+    itemCount,
+    needsWeightReview,
+  } = useCart();
   return (
     <main id="conteudo" className="shell page-main">
       <div className="breadcrumbs">
@@ -31,6 +40,13 @@ export function CartView() {
       <p className="section-description">
         Um pouquinho de natureza para levar para a sua rotina.
       </p>
+      {needsWeightReview && (
+        <p className="admin-notice" role="status">
+          A venda a granel agora é de 100 em 100 g. As porções antigas com
+          outros pesos foram retiradas do carrinho. Escolha novamente o peso
+          desses produtos antes de finalizar.
+        </p>
+      )}
       {!ready ? (
         <p className="empty-state" role="status">
           Preparando seu carrinho…
@@ -65,9 +81,30 @@ export function CartView() {
                         : item.product.peso_produto}
                     </p>
                     <span>
-                      Preço: {formatPrice(lineTotal({ ...item, quantity: 1 }))}{" "}
-                      / {item.product.isGranel ? "porção" : "unidade"}
+                      {formatPrice(referencePriceCents(item.product) / 100)}
+                      {item.product.isGranel ? " por 100 g" : " por unidade"}
                     </span>
+                    {item.product.isGranel && (
+                      <label className="field-label cart-weight-field">
+                        Peso por porção
+                        <select
+                          aria-label={`Peso de ${item.product.nome_produto}`}
+                          value={item.selectedWeight}
+                          onChange={(event) =>
+                            updateWeight(
+                              itemKey(item),
+                              Number(event.target.value),
+                            )
+                          }
+                        >
+                          {BULK_WEIGHTS.map((weight) => (
+                            <option key={weight} value={weight}>
+                              {weight.toLocaleString("pt-BR")} g
+                            </option>
+                          ))}
+                        </select>
+                      </label>
+                    )}
                     <div className="quantity-control">
                       <button
                         aria-label={`Diminuir ${item.product.nome_produto}`}
@@ -78,7 +115,13 @@ export function CartView() {
                       >
                         <Minus size={14} />
                       </button>
-                      <span aria-label="Quantidade">{item.quantity}</span>
+                      <span
+                        aria-label={
+                          item.product.isGranel ? "Porções" : "Quantidade"
+                        }
+                      >
+                        {item.quantity}
+                      </span>
                       <button
                         aria-label={`Aumentar ${item.product.nome_produto}`}
                         disabled={item.quantity >= 99}

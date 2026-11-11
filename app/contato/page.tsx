@@ -17,7 +17,7 @@ const faqs = [
   ],
   [
     "Como funcionam os produtos a granel?",
-    "Você pode escolher porções de 100 g, 250 g, 500 g ou 1 kg nos detalhes do produto. O preço da porção é proporcional ao peso, com arredondamento para centavos antes de multiplicar a quantidade.",
+    "Os produtos a granel têm preço por 100 g. Escolha 100 g, 200 g, 300 g e assim por diante, até 5.000 g por porção. Você também pode ajustar o peso no carrinho. O valor de 100 g é arredondado para centavos antes de multiplicar os blocos e as porções.",
   ],
   [
     "Tenho uma alergia ou restrição alimentar. Como escolher?",

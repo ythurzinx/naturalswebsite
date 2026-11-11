@@ -27,6 +27,7 @@ import { Modal } from "./modal";
 import { ProductImage } from "./product-card";
 import { formatPrice } from "@/lib/products";
 import type { Product } from "@/lib/types";
+import { referencePriceCents } from "@/lib/pricing.mjs";
 type AdminProduct = Product & {
   priceCents: number;
   costCents: number | null;
@@ -269,6 +270,7 @@ export function AdminDashboard() {
         ...fields,
         priceCents: amount(price),
         costCents: cost.trim() ? amount(cost) : null,
+        priceUnit: fields.isBulk ? "100g" : "unit",
       });
       setDraft(null);
       setNotice(
@@ -297,9 +299,15 @@ export function AdminDashboard() {
       category: product.categoria,
       weightLabel: product.peso_produto,
       isBulk: product.isGranel,
-      price: (product.priceCents / 100).toFixed(2),
+      price: (referencePriceCents(product) / 100).toFixed(2),
       cost:
-        product.costCents == null ? "" : (product.costCents / 100).toFixed(2),
+        product.costCents == null
+          ? ""
+          : (
+              (product.isGranel
+                ? Math.round(product.costCents / 10)
+                : product.costCents) / 100
+            ).toFixed(2),
       active: product.active,
       imageSha: product.imageSha,
     });
@@ -708,8 +716,8 @@ export function AdminDashboard() {
               </button>
             </div>
             <p className="muted">
-              {filtered.length} produtos. Custo por kg para itens a granel e por
-              unidade para os demais.
+              {filtered.length} produtos. Preço e custo por 100 g para itens a
+              granel e por unidade para os demais.
             </p>
             <div className="admin-table-wrap">
               <table className="admin-table">
@@ -732,17 +740,21 @@ export function AdminDashboard() {
                           <div>
                             <strong>{p.nome_produto}</strong>
                             <small>
-                              {p.isGranel ? "Preço por kg" : p.peso_produto}
+                              {p.isGranel ? "Preço por 100 g" : p.peso_produto}
                             </small>
                           </div>
                         </div>
                       </td>
-                      <td>{currency(p.priceCents)}</td>
+                      <td>{currency(referencePriceCents(p))}</td>
                       <td>
                         {p.costCents == null ? (
                           <span className="admin-warning">Não cadastrado</span>
                         ) : (
-                          currency(p.costCents)
+                          currency(
+                            p.isGranel
+                              ? Math.round(p.costCents / 10)
+                              : p.costCents,
+                          )
                         )}
                       </td>
                       <td>
@@ -1090,7 +1102,12 @@ export function AdminDashboard() {
                     <input
                       required
                       maxLength={80}
-                      value={draft.weightLabel}
+                      readOnly={draft.isBulk}
+                      value={
+                        draft.isBulk
+                          ? "A granel · preço por 100 g"
+                          : draft.weightLabel
+                      }
                       onChange={(e) =>
                         setDraft({ ...draft, weightLabel: e.target.value })
                       }
@@ -1104,11 +1121,12 @@ export function AdminDashboard() {
                         setDraft({ ...draft, isBulk: e.target.checked })
                       }
                     />{" "}
-                    Produto a granel (preço e custo por kg)
+                    Produto a granel (preço e custo por 100 g)
                   </label>
                   <div className="form-row">
                     <label className="field-label">
-                      Preço de venda (R$)
+                      Preço de venda (R${" "}
+                      {draft.isBulk ? "/ 100 g" : "/ unidade"})
                       <input
                         required
                         type="number"
@@ -1121,7 +1139,8 @@ export function AdminDashboard() {
                       />
                     </label>
                     <label className="field-label">
-                      Custo (R$, opcional)
+                      Custo (R$ {draft.isBulk ? "/ 100 g" : "/ unidade"},
+                      opcional)
                       <input
                         type="number"
                         min="0"

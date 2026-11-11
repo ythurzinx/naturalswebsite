@@ -1094,7 +1094,7 @@
   {
     "id": "prod-92",
     "nome_produto": "Biscoito Goiabinha",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 60.0,
     "total_unitario": 0,
@@ -1106,7 +1106,7 @@
   {
     "id": "prod-93",
     "nome_produto": "Soja em Grãos",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 30.0,
     "total_unitario": 0,
@@ -1118,7 +1118,7 @@
   {
     "id": "prod-94",
     "nome_produto": "Soja em Grãos",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 30.0,
     "total_unitario": 0,
@@ -1130,7 +1130,7 @@
   {
     "id": "prod-95",
     "nome_produto": "Mix de Quinua Preta",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 34.0,
     "total_unitario": 0,
@@ -1142,7 +1142,7 @@
   {
     "id": "prod-96",
     "nome_produto": "Quinua Branca",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 38.0,
     "total_unitario": 0,
@@ -1154,7 +1154,7 @@
   {
     "id": "prod-97",
     "nome_produto": "Coco Chips",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 78.0,
     "total_unitario": 0,
@@ -1166,7 +1166,7 @@
   {
     "id": "prod-98",
     "nome_produto": "Coco Chips Skin",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 75.0,
     "total_unitario": 0,
@@ -1178,7 +1178,7 @@
   {
     "id": "prod-99",
     "nome_produto": "Uva Passa Branca",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 58.0,
     "total_unitario": 0,
@@ -1190,7 +1190,7 @@
   {
     "id": "prod-100",
     "nome_produto": "Colageno Hidrolisado",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 99.0,
     "total_unitario": 0,
@@ -1214,7 +1214,7 @@
   {
     "id": "prod-102",
     "nome_produto": "Palito de Chocolate",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 49.99,
     "total_unitario": 0,
@@ -1226,7 +1226,7 @@
   {
     "id": "prod-103",
     "nome_produto": "Uva Passa c/ Chocolate",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 155.0,
     "total_unitario": 0,
@@ -1238,7 +1238,7 @@
   {
     "id": "prod-104",
     "nome_produto": "Amarula c/ Chocolate",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 150.0,
     "total_unitario": 0,
@@ -1250,7 +1250,7 @@
   {
     "id": "prod-105",
     "nome_produto": "Cocada Leite Condensado",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 45.0,
     "total_unitario": 0,
@@ -1262,7 +1262,7 @@
   {
     "id": "prod-106",
     "nome_produto": "Biscoito Margarida",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 75.0,
     "total_unitario": 0,
@@ -1274,7 +1274,7 @@
   {
     "id": "prod-107",
     "nome_produto": "Doce de Leite",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 52.0,
     "total_unitario": 0,
@@ -1286,7 +1286,7 @@
   {
     "id": "prod-108",
     "nome_produto": "Gotas de Chocolate",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 200.0,
     "total_unitario": 0,
@@ -1298,7 +1298,7 @@
   {
     "id": "prod-109",
     "nome_produto": "Chocolate Branco em Gotas",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 90.0,
     "total_unitario": 0,
@@ -1310,7 +1310,7 @@
   {
     "id": "prod-110",
     "nome_produto": "Gotas de Chocolatea Harnd",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 58.0,
     "total_unitario": 0,
@@ -1322,7 +1322,7 @@
   {
     "id": "prod-111",
     "nome_produto": "Choco Power Ball",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 40.0,
     "total_unitario": 0,
@@ -1334,7 +1334,7 @@
   {
     "id": "prod-112",
     "nome_produto": "Amendoa c/ Chocolate",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 175.0,
     "total_unitario": 0,
@@ -1346,7 +1346,7 @@
   {
     "id": "prod-113",
     "nome_produto": "Cereja c/ Chocolate",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 140.0,
     "total_unitario": 0,
@@ -1358,7 +1358,7 @@
   {
     "id": "prod-114",
     "nome_produto": "Castanha de Caju ao Leite",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 180.0,
     "total_unitario": 0,
@@ -1370,7 +1370,7 @@
   {
     "id": "prod-115",
     "nome_produto": "Castanha do Pará ao leite",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 135.0,
     "total_unitario": 0,
@@ -1382,7 +1382,7 @@
   {
     "id": "prod-116",
     "nome_produto": "Banana Passa ao leite 70%",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 190.0,
     "total_unitario": 0,
@@ -1394,7 +1394,7 @@
   {
     "id": "prod-117",
     "nome_produto": "Canela em pó Pura",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 82.0,
     "total_unitario": 0,
@@ -1406,7 +1406,7 @@
   {
     "id": "prod-118",
     "nome_produto": "Semente de Linhaça Dourada",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 18.0,
     "total_unitario": 0,
@@ -1418,7 +1418,7 @@
   {
     "id": "prod-119",
     "nome_produto": "Semente de Linhaça Marrom",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 18.0,
     "total_unitario": 0,
@@ -1430,7 +1430,7 @@
   {
     "id": "prod-120",
     "nome_produto": "Semente de abóbora s/ Casca",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 66.0,
     "total_unitario": 0,
@@ -1442,7 +1442,7 @@
   {
     "id": "prod-121",
     "nome_produto": "Mix de Sementes",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 65.0,
     "total_unitario": 0,
@@ -1454,7 +1454,7 @@
   {
     "id": "prod-122",
     "nome_produto": "Amaranto em Grão",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 39.0,
     "total_unitario": 0,
@@ -1466,7 +1466,7 @@
   {
     "id": "prod-123",
     "nome_produto": "Granulado Chocolate",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 34.0,
     "total_unitario": 0,
@@ -1478,7 +1478,7 @@
   {
     "id": "prod-124",
     "nome_produto": "Chocolate 50% Cacau",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 39.0,
     "total_unitario": 0,
@@ -1502,7 +1502,7 @@
   {
     "id": "prod-126",
     "nome_produto": "Farinha De Maracujá",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 22.0,
     "total_unitario": 0,
@@ -1514,7 +1514,7 @@
   {
     "id": "prod-127",
     "nome_produto": "Farinha de Amendoa",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 81.0,
     "total_unitario": 0,
@@ -1526,7 +1526,7 @@
   {
     "id": "prod-128",
     "nome_produto": "Canela em Pó",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 35.0,
     "total_unitario": 0,
@@ -1538,7 +1538,7 @@
   {
     "id": "prod-129",
     "nome_produto": "Cacau Alcalino",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 35.0,
     "total_unitario": 0,
@@ -1550,7 +1550,7 @@
   {
     "id": "prod-130",
     "nome_produto": "Granulado em Flocos",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 34.0,
     "total_unitario": 0,
@@ -1562,7 +1562,7 @@
   {
     "id": "prod-131",
     "nome_produto": "Amendoim Confeitado",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 25.0,
     "total_unitario": 0,
@@ -1574,7 +1574,7 @@
   {
     "id": "prod-132",
     "nome_produto": "Amendoim Crocante com Chocolate",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 25.0,
     "total_unitario": 0,
@@ -1586,7 +1586,7 @@
   {
     "id": "prod-133",
     "nome_produto": "Amendoim Confeitado",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 25.0,
     "total_unitario": 0,
@@ -1598,7 +1598,7 @@
   {
     "id": "prod-134",
     "nome_produto": "Gergelim Preto",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 36.0,
     "total_unitario": 0,
@@ -1610,7 +1610,7 @@
   {
     "id": "prod-135",
     "nome_produto": "Gergelim c/ Casca",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 27.0,
     "total_unitario": 0,
@@ -1622,7 +1622,7 @@
   {
     "id": "prod-136",
     "nome_produto": "Gergelim s/ Casca",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 39.0,
     "total_unitario": 0,
@@ -1634,7 +1634,7 @@
   {
     "id": "prod-137",
     "nome_produto": "Farinha de Arroz integral",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 13.0,
     "total_unitario": 0,
@@ -1646,7 +1646,7 @@
   {
     "id": "prod-138",
     "nome_produto": "Semolina de Trigo Fina",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 21.5,
     "total_unitario": 0,
@@ -1658,7 +1658,7 @@
   {
     "id": "prod-139",
     "nome_produto": "Pistache Cru Inteiro",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 265.0,
     "total_unitario": 0,
@@ -1670,7 +1670,7 @@
   {
     "id": "prod-140",
     "nome_produto": "Farinha de Arroz Branca",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 12.0,
     "total_unitario": 0,
@@ -1682,7 +1682,7 @@
   {
     "id": "prod-141",
     "nome_produto": "Pistache Torrado e Salgado",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 230.0,
     "total_unitario": 0,
@@ -1694,7 +1694,7 @@
   {
     "id": "prod-142",
     "nome_produto": "Choco Color",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 80.0,
     "total_unitario": 0,
@@ -1706,7 +1706,7 @@
   {
     "id": "prod-143",
     "nome_produto": "Deliket",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 36.0,
     "total_unitario": 0,
@@ -1718,7 +1718,7 @@
   {
     "id": "prod-144",
     "nome_produto": "Cranberry Desidratado",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 65.0,
     "total_unitario": 0,
@@ -1730,7 +1730,7 @@
   {
     "id": "prod-145",
     "nome_produto": "Mix de Frutas Vermelhas",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 136.0,
     "total_unitario": 0,
@@ -1742,7 +1742,7 @@
   {
     "id": "prod-146",
     "nome_produto": "Blueberry",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 100.0,
     "total_unitario": 0,
@@ -1754,7 +1754,7 @@
   {
     "id": "prod-147",
     "nome_produto": "Bala de Coco",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 25.0,
     "total_unitario": 0,
@@ -1766,7 +1766,7 @@
   {
     "id": "prod-148",
     "nome_produto": "Bala de Algas Marinhas",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 73.0,
     "total_unitario": 0,
@@ -1778,7 +1778,7 @@
   {
     "id": "prod-149",
     "nome_produto": "Bala de Banana c/Açucar",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 39.0,
     "total_unitario": 0,
@@ -1790,7 +1790,7 @@
   {
     "id": "prod-150",
     "nome_produto": "Bala de Banana s/Açúcar",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 44.0,
     "total_unitario": 0,
@@ -1802,7 +1802,7 @@
   {
     "id": "prod-151",
     "nome_produto": "Bala Fini Banana",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 63.5,
     "total_unitario": 0,
@@ -1814,7 +1814,7 @@
   {
     "id": "prod-152",
     "nome_produto": "Mistura CAPCAKE",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 25.0,
     "total_unitario": 0,
@@ -1826,7 +1826,7 @@
   {
     "id": "prod-153",
     "nome_produto": "Hibisco Em Pó",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 29.0,
     "total_unitario": 0,
@@ -1838,7 +1838,7 @@
   {
     "id": "prod-154",
     "nome_produto": "Gengibre Cristalizado",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 146.0,
     "total_unitario": 0,
@@ -1850,7 +1850,7 @@
   {
     "id": "prod-155",
     "nome_produto": "Macadamia S/Sal",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 134.0,
     "total_unitario": 0,
@@ -1862,7 +1862,7 @@
   {
     "id": "prod-156",
     "nome_produto": "Chocolate Cacau 50%",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 39.0,
     "total_unitario": 0,
@@ -1874,7 +1874,7 @@
   {
     "id": "prod-157",
     "nome_produto": "Farinha Especial sem Glúten",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 45.0,
     "total_unitario": 0,
@@ -1886,7 +1886,7 @@
   {
     "id": "prod-158",
     "nome_produto": "Dolomita",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 10.0,
     "total_unitario": 0,
@@ -1898,7 +1898,7 @@
   {
     "id": "prod-159",
     "nome_produto": "Argila Branca",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 15.0,
     "total_unitario": 0,
@@ -1910,7 +1910,7 @@
   {
     "id": "prod-160",
     "nome_produto": "Argila Verde",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 15.0,
     "total_unitario": 0,
@@ -1922,7 +1922,7 @@
   {
     "id": "prod-161",
     "nome_produto": "Doce de Abóbora",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 52.0,
     "total_unitario": 0,
@@ -1934,7 +1934,7 @@
   {
     "id": "prod-162",
     "nome_produto": "Agnus c/Creme de Avelã",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 93.0,
     "total_unitario": 0,
@@ -1946,7 +1946,7 @@
   {
     "id": "prod-163",
     "nome_produto": "Lentilha Vegetariana",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 32.0,
     "total_unitario": 0,
@@ -1958,7 +1958,7 @@
   {
     "id": "prod-164",
     "nome_produto": "Mix de Legumes Desitradato",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 60.0,
     "total_unitario": 0,
@@ -1970,7 +1970,7 @@
   {
     "id": "prod-165",
     "nome_produto": "Mix de Pimentas",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 77.0,
     "total_unitario": 0,
@@ -1982,7 +1982,7 @@
   {
     "id": "prod-166",
     "nome_produto": "Pimenta Calabresa Flocos",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 34.0,
     "total_unitario": 0,
@@ -1994,7 +1994,7 @@
   {
     "id": "prod-167",
     "nome_produto": "Pimenta Preta em Grão",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 45.0,
     "total_unitario": 0,
@@ -2006,7 +2006,7 @@
   {
     "id": "prod-168",
     "nome_produto": "Pimenta Rosa",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 98.0,
     "total_unitario": 0,
@@ -2018,7 +2018,7 @@
   {
     "id": "prod-169",
     "nome_produto": "Pimenta Branca Moida",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 48.0,
     "total_unitario": 0,
@@ -2030,7 +2030,7 @@
   {
     "id": "prod-170",
     "nome_produto": "Fumaça em Pó",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 25.0,
     "total_unitario": 0,
@@ -2042,7 +2042,7 @@
   {
     "id": "prod-171",
     "nome_produto": "Pimenta Jamaica - Siria",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 72.0,
     "total_unitario": 0,
@@ -2054,7 +2054,7 @@
   {
     "id": "prod-172",
     "nome_produto": "Pimenta Caiena",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 46.0,
     "total_unitario": 0,
@@ -2066,7 +2066,7 @@
   {
     "id": "prod-173",
     "nome_produto": "Cebola em Flocos",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 35.0,
     "total_unitario": 0,
@@ -2078,7 +2078,7 @@
   {
     "id": "prod-174",
     "nome_produto": "Cebola Desidratada",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 35.0,
     "total_unitario": 0,
@@ -2102,7 +2102,7 @@
   {
     "id": "prod-176",
     "nome_produto": "Leite de Coco em Pó",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 140.0,
     "total_unitario": 0,
@@ -2114,7 +2114,7 @@
   {
     "id": "prod-177",
     "nome_produto": "Chantinho Mix em Pó",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 42.0,
     "total_unitario": 0,
@@ -2126,7 +2126,7 @@
   {
     "id": "prod-178",
     "nome_produto": "Stevia em Pó",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 180.0,
     "total_unitario": 0,
@@ -2138,7 +2138,7 @@
   {
     "id": "prod-179",
     "nome_produto": "Gelatina Pura",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 140.0,
     "total_unitario": 0,
@@ -2150,7 +2150,7 @@
   {
     "id": "prod-180",
     "nome_produto": "Açúcar de Coco",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 45.0,
     "total_unitario": 0,
@@ -2162,7 +2162,7 @@
   {
     "id": "prod-181",
     "nome_produto": "Xylitol Adoçante Natural",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 65.0,
     "total_unitario": 0,
@@ -2174,7 +2174,7 @@
   {
     "id": "prod-182",
     "nome_produto": "Fubá Mimoso",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 10.0,
     "total_unitario": 0,
@@ -2186,7 +2186,7 @@
   {
     "id": "prod-183",
     "nome_produto": "Farinha de Milho Amarela",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 15.0,
     "total_unitario": 0,
@@ -2198,7 +2198,7 @@
   {
     "id": "prod-184",
     "nome_produto": "Pega Marido",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 52.0,
     "total_unitario": 0,
@@ -2210,7 +2210,7 @@
   {
     "id": "prod-185",
     "nome_produto": "Zathar",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 18.0,
     "total_unitario": 0,
@@ -2222,7 +2222,7 @@
   {
     "id": "prod-186",
     "nome_produto": "Edu Guedes",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 43.0,
     "total_unitario": 0,
@@ -2246,7 +2246,7 @@
   {
     "id": "prod-188",
     "nome_produto": "Cebola, Salsa Alho",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 53.0,
     "total_unitario": 0,
@@ -2258,7 +2258,7 @@
   {
     "id": "prod-189",
     "nome_produto": "Ana Maria",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 58.0,
     "total_unitario": 0,
@@ -2270,7 +2270,7 @@
   {
     "id": "prod-190",
     "nome_produto": "Chimi Churri Tradicional",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 62.0,
     "total_unitario": 0,
@@ -2282,7 +2282,7 @@
   {
     "id": "prod-191",
     "nome_produto": "Chimi Churri Defumado",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 60.0,
     "total_unitario": 0,
@@ -2294,7 +2294,7 @@
   {
     "id": "prod-192",
     "nome_produto": "Mineirinho",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 55.5,
     "total_unitario": 0,
@@ -2306,7 +2306,7 @@
   {
     "id": "prod-193",
     "nome_produto": "Chimi Churri c/ Pimenta",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 60.0,
     "total_unitario": 0,
@@ -2318,7 +2318,7 @@
   {
     "id": "prod-194",
     "nome_produto": "Páprica Picante",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 19.99,
     "total_unitario": 0,
@@ -2330,7 +2330,7 @@
   {
     "id": "prod-195",
     "nome_produto": "Lemon Pepper",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 49.0,
     "total_unitario": 0,
@@ -2342,7 +2342,7 @@
   {
     "id": "prod-196",
     "nome_produto": "Pápricaa Doce Defumada",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 22.0,
     "total_unitario": 0,
@@ -2354,7 +2354,7 @@
   {
     "id": "prod-197",
     "nome_produto": "Páprica Doce",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 20.0,
     "total_unitario": 0,
@@ -2366,7 +2366,7 @@
   {
     "id": "prod-198",
     "nome_produto": "Bahiano sem Pimenta",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 19.99,
     "total_unitario": 0,
@@ -2378,7 +2378,7 @@
   {
     "id": "prod-199",
     "nome_produto": "Bahiano Fino",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 19.99,
     "total_unitario": 0,
@@ -2390,7 +2390,7 @@
   {
     "id": "prod-200",
     "nome_produto": "Açafrão - Cúrcumã",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 30.0,
     "total_unitario": 0,
@@ -2402,7 +2402,7 @@
   {
     "id": "prod-201",
     "nome_produto": "Açafrão Puro",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 48.0,
     "total_unitario": 0,
@@ -2414,7 +2414,7 @@
   {
     "id": "prod-202",
     "nome_produto": "Alho Granulado",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 33.0,
     "total_unitario": 0,
@@ -2426,7 +2426,7 @@
   {
     "id": "prod-203",
     "nome_produto": "Alho Frito",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 49.0,
     "total_unitario": 0,
@@ -2438,7 +2438,7 @@
   {
     "id": "prod-204",
     "nome_produto": "Alho em Pó",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 25.0,
     "total_unitario": 0,
@@ -2450,7 +2450,7 @@
   {
     "id": "prod-205",
     "nome_produto": "Creme de Cebola",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 33.0,
     "total_unitario": 0,
@@ -2462,7 +2462,7 @@
   {
     "id": "prod-206",
     "nome_produto": "Café de Milho",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 15.9,
     "total_unitario": 0,
@@ -2474,7 +2474,7 @@
   {
     "id": "prod-207",
     "nome_produto": "Tomilho",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 22.0,
     "total_unitario": 0,
@@ -2486,7 +2486,7 @@
   {
     "id": "prod-208",
     "nome_produto": "Cravo da India em Grão",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 120.0,
     "total_unitario": 0,
@@ -2510,7 +2510,7 @@
   {
     "id": "prod-210",
     "nome_produto": "Canela em Pau",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 100.0,
     "total_unitario": 0,
@@ -2522,7 +2522,7 @@
   {
     "id": "prod-211",
     "nome_produto": "Limão Desidratado",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 50.0,
     "total_unitario": 0,
@@ -2534,7 +2534,7 @@
   {
     "id": "prod-212",
     "nome_produto": "Fibra de Maçã",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 69.0,
     "total_unitario": 0,
@@ -2546,7 +2546,7 @@
   {
     "id": "prod-213",
     "nome_produto": "Feno Grego",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 30.0,
     "total_unitario": 0,
@@ -2558,7 +2558,7 @@
   {
     "id": "prod-214",
     "nome_produto": "Catuaba em Pó",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 45.0,
     "total_unitario": 0,
@@ -2570,7 +2570,7 @@
   {
     "id": "prod-215",
     "nome_produto": "Marapuama em Pó",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 24.0,
     "total_unitario": 0,
@@ -2582,7 +2582,7 @@
   {
     "id": "prod-216",
     "nome_produto": "Alho Poró",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 86.0,
     "total_unitario": 0,
@@ -2594,7 +2594,7 @@
   {
     "id": "prod-217",
     "nome_produto": "Cevada",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 15.0,
     "total_unitario": 0,
@@ -2606,7 +2606,7 @@
   {
     "id": "prod-218",
     "nome_produto": "Berinjela em Pó",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 35.0,
     "total_unitario": 0,
@@ -2618,7 +2618,7 @@
   {
     "id": "prod-219",
     "nome_produto": "Raiz de Curcúmã",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 45.0,
     "total_unitario": 0,
@@ -2630,7 +2630,7 @@
   {
     "id": "prod-220",
     "nome_produto": "Alecrim",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 25.0,
     "total_unitario": 0,
@@ -2642,7 +2642,7 @@
   {
     "id": "prod-221",
     "nome_produto": "Manjericão Desidratado",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 16.0,
     "total_unitario": 0,
@@ -2654,7 +2654,7 @@
   {
     "id": "prod-222",
     "nome_produto": "Ervas Finas",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 34.0,
     "total_unitario": 0,
@@ -2666,7 +2666,7 @@
   {
     "id": "prod-223",
     "nome_produto": "Vinagrate Desitratado",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 60.0,
     "total_unitario": 0,
@@ -2678,7 +2678,7 @@
   {
     "id": "prod-224",
     "nome_produto": "Salsa Desitradado",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 36.0,
     "total_unitario": 0,
@@ -2690,7 +2690,7 @@
   {
     "id": "prod-225",
     "nome_produto": "Cominho Moido",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 45.0,
     "total_unitario": 0,
@@ -2702,7 +2702,7 @@
   {
     "id": "prod-226",
     "nome_produto": "Caldo de Carne",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 15.5,
     "total_unitario": 0,
@@ -2714,7 +2714,7 @@
   {
     "id": "prod-227",
     "nome_produto": "Caldo de Galinha",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 19.99,
     "total_unitario": 0,
@@ -2726,7 +2726,7 @@
   {
     "id": "prod-228",
     "nome_produto": "Colorau Paraiba Extra",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 28.5,
     "total_unitario": 0,
@@ -2738,7 +2738,7 @@
   {
     "id": "prod-229",
     "nome_produto": "Coentro em Flocos",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 50.0,
     "total_unitario": 0,
@@ -2750,7 +2750,7 @@
   {
     "id": "prod-230",
     "nome_produto": "Limão e Ervas Finas",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 41.0,
     "total_unitario": 0,
@@ -2762,7 +2762,7 @@
   {
     "id": "prod-231",
     "nome_produto": "Extrato de Soja Natural",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 24.0,
     "total_unitario": 0,
@@ -2774,7 +2774,7 @@
   {
     "id": "prod-232",
     "nome_produto": "Coentro em Pó",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 17.5,
     "total_unitario": 0,
@@ -2786,7 +2786,7 @@
   {
     "id": "prod-233",
     "nome_produto": "Mostarda em Pó",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 28.0,
     "total_unitario": 0,
@@ -2798,7 +2798,7 @@
   {
     "id": "prod-234",
     "nome_produto": "Curry",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 19.0,
     "total_unitario": 0,
@@ -2810,7 +2810,7 @@
   {
     "id": "prod-235",
     "nome_produto": "Caldo de Bacon",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 12.0,
     "total_unitario": 0,
@@ -2822,7 +2822,7 @@
   {
     "id": "prod-236",
     "nome_produto": "Farinha de Banana Verde",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 24.0,
     "total_unitario": 0,
@@ -2834,7 +2834,7 @@
   {
     "id": "prod-237",
     "nome_produto": "Germe de Trigo Tostado",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 35.0,
     "total_unitario": 0,
@@ -2846,7 +2846,7 @@
   {
     "id": "prod-238",
     "nome_produto": "Noz Moscada Moida",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 62.0,
     "total_unitario": 0,
@@ -2858,7 +2858,7 @@
   {
     "id": "prod-239",
     "nome_produto": "Flor de Sal",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 46.0,
     "total_unitario": 0,
@@ -2870,7 +2870,7 @@
   {
     "id": "prod-240",
     "nome_produto": "Levedo de Cerveja em Pó",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 53.0,
     "total_unitario": 0,
@@ -2882,7 +2882,7 @@
   {
     "id": "prod-241",
     "nome_produto": "Ajinomoto Glutamato",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 35.0,
     "total_unitario": 0,
@@ -2894,7 +2894,7 @@
   {
     "id": "prod-242",
     "nome_produto": "Coco Chips Branco",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 75.0,
     "total_unitario": 0,
@@ -2906,7 +2906,7 @@
   {
     "id": "prod-243",
     "nome_produto": "Semente de Girasol s/ Casca",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 35.0,
     "total_unitario": 0,
@@ -2918,7 +2918,7 @@
   {
     "id": "prod-244",
     "nome_produto": "Tâmara C/ Caroço",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 42.0,
     "total_unitario": 0,
@@ -2930,7 +2930,7 @@
   {
     "id": "prod-245",
     "nome_produto": "Tâmara S/ Caroço",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 45.0,
     "total_unitario": 0,
@@ -2942,7 +2942,7 @@
   {
     "id": "prod-246",
     "nome_produto": "Sal do Himalaia Fino",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 9.0,
     "total_unitario": 0,
@@ -2954,7 +2954,7 @@
   {
     "id": "prod-247",
     "nome_produto": "Açúcar Demerara",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 15.5,
     "total_unitario": 0,
@@ -2966,7 +2966,7 @@
   {
     "id": "prod-248",
     "nome_produto": "Açúcar Mascavo",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 11.0,
     "total_unitario": 0,
@@ -2978,7 +2978,7 @@
   {
     "id": "prod-249",
     "nome_produto": "Sal Marinho",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 8.0,
     "total_unitario": 0,
@@ -2990,7 +2990,7 @@
   {
     "id": "prod-250",
     "nome_produto": "Coco Ralado em Flocos",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 85.0,
     "total_unitario": 0,
@@ -3002,7 +3002,7 @@
   {
     "id": "prod-251",
     "nome_produto": "Coco Ralado Fino",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 46.0,
     "total_unitario": 0,
@@ -3014,7 +3014,7 @@
   {
     "id": "prod-252",
     "nome_produto": "Amendoim Salsa e Cebola",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 31.0,
     "total_unitario": 0,
@@ -3026,7 +3026,7 @@
   {
     "id": "prod-253",
     "nome_produto": "Amendoim Natural",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 31.0,
     "total_unitario": 0,
@@ -3038,7 +3038,7 @@
   {
     "id": "prod-254",
     "nome_produto": "Castanha de Caju S/Sal",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 120.0,
     "total_unitario": 0,
@@ -3050,7 +3050,7 @@
   {
     "id": "prod-255",
     "nome_produto": "Amendoim Picante",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 31.0,
     "total_unitario": 0,
@@ -3062,7 +3062,7 @@
   {
     "id": "prod-256",
     "nome_produto": "Castanha de Caju C/ Sal",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 120.0,
     "total_unitario": 0,
@@ -3074,7 +3074,7 @@
   {
     "id": "prod-257",
     "nome_produto": "Amendoim Mendorato",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 31.0,
     "total_unitario": 0,
@@ -3086,7 +3086,7 @@
   {
     "id": "prod-258",
     "nome_produto": "Castanha do Pará Quebrada",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 69.99,
     "total_unitario": 0,
@@ -3098,7 +3098,7 @@
   {
     "id": "prod-259",
     "nome_produto": "Amendoim Ovinho",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 35.0,
     "total_unitario": 0,
@@ -3110,7 +3110,7 @@
   {
     "id": "prod-260",
     "nome_produto": "Amendoim Doce Vermelho",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 28.0,
     "total_unitario": 0,
@@ -3122,7 +3122,7 @@
   {
     "id": "prod-261",
     "nome_produto": "Amendoim Sem Pele e Sem sal",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 24.0,
     "total_unitario": 0,
@@ -3134,7 +3134,7 @@
   {
     "id": "prod-262",
     "nome_produto": "Amendoim Sem Pele com Sal",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 24.0,
     "total_unitario": 0,
@@ -3146,7 +3146,7 @@
   {
     "id": "prod-263",
     "nome_produto": "Amendoim s/ Pele c/ Alho",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 36.0,
     "total_unitario": 0,
@@ -3158,7 +3158,7 @@
   {
     "id": "prod-264",
     "nome_produto": "Amendoim Hanner Frito",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 28.0,
     "total_unitario": 0,
@@ -3170,7 +3170,7 @@
   {
     "id": "prod-265",
     "nome_produto": "Macarrão Tricolor",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 24.0,
     "total_unitario": 0,
@@ -3182,7 +3182,7 @@
   {
     "id": "prod-266",
     "nome_produto": "Nozes Mariposa",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 109.99,
     "total_unitario": 0,
@@ -3194,7 +3194,7 @@
   {
     "id": "prod-267",
     "nome_produto": "Castanha de Caju c/ Leite condensado",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 89.0,
     "total_unitario": 0,
@@ -3206,7 +3206,7 @@
   {
     "id": "prod-268",
     "nome_produto": "MarshMallow Torcido",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 63.0,
     "total_unitario": 0,
@@ -3218,7 +3218,7 @@
   {
     "id": "prod-269",
     "nome_produto": "Fini Amoras",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 77.0,
     "total_unitario": 0,
@@ -3230,7 +3230,7 @@
   {
     "id": "prod-270",
     "nome_produto": "Castanha de Caju Crua",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 119.99,
     "total_unitario": 0,
@@ -3242,7 +3242,7 @@
   {
     "id": "prod-271",
     "nome_produto": "Cookies de Amendoim",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 57.0,
     "total_unitario": 0,
@@ -3254,7 +3254,7 @@
   {
     "id": "prod-272",
     "nome_produto": "Gomets",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 23.0,
     "total_unitario": 0,
@@ -3266,7 +3266,7 @@
   {
     "id": "prod-273",
     "nome_produto": "Gengibre em Pó",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 45.0,
     "total_unitario": 0,
@@ -3278,7 +3278,7 @@
   {
     "id": "prod-274",
     "nome_produto": "Guaraná em Pó",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 56.0,
     "total_unitario": 0,
@@ -3290,7 +3290,7 @@
   {
     "id": "prod-275",
     "nome_produto": "Farinha de Uva",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 49.99,
     "total_unitario": 0,
@@ -3302,7 +3302,7 @@
   {
     "id": "prod-276",
     "nome_produto": "Farinha de Beterraba",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 120.0,
     "total_unitario": 0,
@@ -3314,7 +3314,7 @@
   {
     "id": "prod-277",
     "nome_produto": "Mix de Castanhas Nobres",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 121.0,
     "total_unitario": 0,
@@ -3326,7 +3326,7 @@
   {
     "id": "prod-278",
     "nome_produto": "Frutas Cristalizadas",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 19.0,
     "total_unitario": 0,
@@ -3338,7 +3338,7 @@
   {
     "id": "prod-279",
     "nome_produto": "Uva Passa Branca",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 58.0,
     "total_unitario": 0,
@@ -3350,7 +3350,7 @@
   {
     "id": "prod-280",
     "nome_produto": "Ameixa s/ Caroço",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 55.0,
     "total_unitario": 0,
@@ -3362,7 +3362,7 @@
   {
     "id": "prod-281",
     "nome_produto": "Uva Passa Preta",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 38.0,
     "total_unitario": 0,
@@ -3374,7 +3374,7 @@
   {
     "id": "prod-282",
     "nome_produto": "Milho Mostarde e Mel",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 69.0,
     "total_unitario": 0,
@@ -3386,7 +3386,7 @@
   {
     "id": "prod-283",
     "nome_produto": "Amendoim Vermelho Cru",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 38.0,
     "total_unitario": 0,
@@ -3398,7 +3398,7 @@
   {
     "id": "prod-284",
     "nome_produto": "Xerém de Amendoim",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 25.0,
     "total_unitario": 0,
@@ -3410,7 +3410,7 @@
   {
     "id": "prod-285",
     "nome_produto": "Farinha de Amendoim",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 24.0,
     "total_unitario": 0,
@@ -3422,7 +3422,7 @@
   {
     "id": "prod-286",
     "nome_produto": "Xerém de Castanha de Caju",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 55.0,
     "total_unitario": 0,
@@ -3434,7 +3434,7 @@
   {
     "id": "prod-287",
     "nome_produto": "Amendoa Torrada s/ Sal",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 81.0,
     "total_unitario": 0,
@@ -3446,7 +3446,7 @@
   {
     "id": "prod-288",
     "nome_produto": "Amendoa Defumada",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 120.0,
     "total_unitario": 0,
@@ -3458,7 +3458,7 @@
   {
     "id": "prod-289",
     "nome_produto": "Proteina de Soja Miuda",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 20.0,
     "total_unitario": 0,
@@ -3470,7 +3470,7 @@
   {
     "id": "prod-290",
     "nome_produto": "Amendoa Laminada",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 83.5,
     "total_unitario": 0,
@@ -3482,7 +3482,7 @@
   {
     "id": "prod-291",
     "nome_produto": "Suspiro Novais",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 74.0,
     "total_unitario": 0,
@@ -3494,7 +3494,7 @@
   {
     "id": "prod-292",
     "nome_produto": "Proteina de Soja Miuda",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 20.0,
     "total_unitario": 0,
@@ -3506,7 +3506,7 @@
   {
     "id": "prod-293",
     "nome_produto": "Arroz Preto",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 42.0,
     "total_unitario": 0,
@@ -3518,7 +3518,7 @@
   {
     "id": "prod-294",
     "nome_produto": "Arroz Cateto",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 16.0,
     "total_unitario": 0,
@@ -3530,7 +3530,7 @@
   {
     "id": "prod-295",
     "nome_produto": "Arroz Vermelho Integral",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 20.0,
     "total_unitario": 0,
@@ -3542,7 +3542,7 @@
   {
     "id": "prod-296",
     "nome_produto": "Arroz Agulha Integral",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 16.0,
     "total_unitario": 0,
@@ -3554,7 +3554,7 @@
   {
     "id": "prod-297",
     "nome_produto": "Arroz 7 Grãos",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 28.0,
     "total_unitario": 0,
@@ -3566,7 +3566,7 @@
   {
     "id": "prod-298",
     "nome_produto": "Trigo em Grão",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 10.0,
     "total_unitario": 0,
@@ -3578,7 +3578,7 @@
   {
     "id": "prod-299",
     "nome_produto": "Arroz á Grega",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 25.0,
     "total_unitario": 0,
@@ -3590,7 +3590,7 @@
   {
     "id": "prod-300",
     "nome_produto": "Mix de Frutas Completas",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 110.0,
     "total_unitario": 0,
@@ -3602,7 +3602,7 @@
   {
     "id": "prod-301",
     "nome_produto": "Amêndoa Crua",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 120.0,
     "total_unitario": 0,
@@ -3614,7 +3614,7 @@
   {
     "id": "prod-302",
     "nome_produto": "Banana Chips Salgada",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 50.0,
     "total_unitario": 0,
@@ -3626,7 +3626,7 @@
   {
     "id": "prod-303",
     "nome_produto": "Banana Chips Canela",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 50.0,
     "total_unitario": 0,
@@ -3638,7 +3638,7 @@
   {
     "id": "prod-304",
     "nome_produto": "Aros Cebola",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 145.0,
     "total_unitario": 0,
@@ -3650,7 +3650,7 @@
   {
     "id": "prod-305",
     "nome_produto": "Floco de Arroz Crocante",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 30.0,
     "total_unitario": 0,
@@ -3662,7 +3662,7 @@
   {
     "id": "prod-306",
     "nome_produto": "Biscoito de Linhaça c/ Azeite",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 65.0,
     "total_unitario": 0,
@@ -3686,7 +3686,7 @@
   {
     "id": "prod-308",
     "nome_produto": "Flocão de Milho",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 12.0,
     "total_unitario": 0,
@@ -3698,7 +3698,7 @@
   {
     "id": "prod-309",
     "nome_produto": "Biscoito de Arroz com Barbecure",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 102.0,
     "total_unitario": 0,
@@ -3710,7 +3710,7 @@
   {
     "id": "prod-310",
     "nome_produto": "Farinha de Madioca Grosso",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 10.0,
     "total_unitario": 0,
@@ -3722,7 +3722,7 @@
   {
     "id": "prod-311",
     "nome_produto": "Biscoito de Polvilho c/ Chia",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 90.0,
     "total_unitario": 0,
@@ -3734,7 +3734,7 @@
   {
     "id": "prod-312",
     "nome_produto": "Farinha Panko",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 34.0,
     "total_unitario": 0,
@@ -3746,7 +3746,7 @@
   {
     "id": "prod-313",
     "nome_produto": "Farinha de Mandioca Fina",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 10.0,
     "total_unitario": 0,
@@ -3758,7 +3758,7 @@
   {
     "id": "prod-314",
     "nome_produto": "Trigo P/ Kibe",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 15.0,
     "total_unitario": 0,
@@ -3770,7 +3770,7 @@
   {
     "id": "prod-315",
     "nome_produto": "Farinha de Rosca",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 12.0,
     "total_unitario": 0,
@@ -3782,7 +3782,7 @@
   {
     "id": "prod-316",
     "nome_produto": "Macarrão de Arroz Penne",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 15.0,
     "total_unitario": 0,
@@ -3794,7 +3794,7 @@
   {
     "id": "prod-317",
     "nome_produto": "Macarrão integral Parafuso",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 23.0,
     "total_unitario": 0,
@@ -3806,7 +3806,7 @@
   {
     "id": "prod-318",
     "nome_produto": "Macarrão de Arroz Parafuso",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 15.0,
     "total_unitario": 0,
@@ -3818,7 +3818,7 @@
   {
     "id": "prod-319",
     "nome_produto": "Macarrão Integral Penne",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 23.0,
     "total_unitario": 0,
@@ -3830,7 +3830,7 @@
   {
     "id": "prod-320",
     "nome_produto": "Milho para Pipoca",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 12.0,
     "total_unitario": 0,
@@ -3842,7 +3842,7 @@
   {
     "id": "prod-321",
     "nome_produto": "Canjica Branca",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 16.0,
     "total_unitario": 0,
@@ -3854,7 +3854,7 @@
   {
     "id": "prod-322",
     "nome_produto": "Quirela de Milho",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 6.5,
     "total_unitario": 0,
@@ -3866,7 +3866,7 @@
   {
     "id": "prod-323",
     "nome_produto": "Canjica Amarela",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 16.0,
     "total_unitario": 0,
@@ -3878,7 +3878,7 @@
   {
     "id": "prod-324",
     "nome_produto": "Sembei ao Leite",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 80.0,
     "total_unitario": 0,
@@ -3890,7 +3890,7 @@
   {
     "id": "prod-325",
     "nome_produto": "Sembei Amendoim",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 80.0,
     "total_unitario": 0,
@@ -3902,7 +3902,7 @@
   {
     "id": "prod-326",
     "nome_produto": "Feijão Roxão",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 23.0,
     "total_unitario": 0,
@@ -3914,7 +3914,7 @@
   {
     "id": "prod-327",
     "nome_produto": "Feijão Preto",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 17.0,
     "total_unitario": 0,
@@ -3926,7 +3926,7 @@
   {
     "id": "prod-328",
     "nome_produto": "Fava Branca Grauda",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 15.0,
     "total_unitario": 0,
@@ -3938,7 +3938,7 @@
   {
     "id": "prod-329",
     "nome_produto": "Biscoito Beijo de Moça",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 90.0,
     "total_unitario": 0,
@@ -3950,7 +3950,7 @@
   {
     "id": "prod-330",
     "nome_produto": "Purê de Batata em Flocos",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 45.0,
     "total_unitario": 0,
@@ -3974,7 +3974,7 @@
   {
     "id": "prod-332",
     "nome_produto": "Biscoito Rosquinha Salgada",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 90.0,
     "total_unitario": 0,
@@ -3986,7 +3986,7 @@
   {
     "id": "prod-333",
     "nome_produto": "Roscas de Milho e Erva Doce",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 79.0,
     "total_unitario": 0,
@@ -3998,7 +3998,7 @@
   {
     "id": "prod-334",
     "nome_produto": "Cookies de Café",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 52.0,
     "total_unitario": 0,
@@ -4010,7 +4010,7 @@
   {
     "id": "prod-335",
     "nome_produto": "Ebicen",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 120.0,
     "total_unitario": 0,
@@ -4022,7 +4022,7 @@
   {
     "id": "prod-336",
     "nome_produto": "Batata Mexicana c/ Cebola",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 98.0,
     "total_unitario": 0,
@@ -4034,7 +4034,7 @@
   {
     "id": "prod-337",
     "nome_produto": "Cookies de Amendoas",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 52.0,
     "total_unitario": 0,
@@ -4046,7 +4046,7 @@
   {
     "id": "prod-338",
     "nome_produto": "Batata Mexicana Tradicional",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 98.0,
     "total_unitario": 0,
@@ -4058,7 +4058,7 @@
   {
     "id": "prod-339",
     "nome_produto": "Mandioquinha Chips",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 150.0,
     "total_unitario": 0,
@@ -4070,7 +4070,7 @@
   {
     "id": "prod-340",
     "nome_produto": "Cookies de Baunilha",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 46.0,
     "total_unitario": 0,
@@ -4082,7 +4082,7 @@
   {
     "id": "prod-341",
     "nome_produto": "Biscoito Torradinha",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 45.0,
     "total_unitario": 0,
@@ -4094,7 +4094,7 @@
   {
     "id": "prod-342",
     "nome_produto": "Mix de Vegetais Chips",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 159.0,
     "total_unitario": 0,
@@ -4106,7 +4106,7 @@
   {
     "id": "prod-343",
     "nome_produto": "Torrada Tradicional",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 30.0,
     "total_unitario": 0,
@@ -4118,7 +4118,7 @@
   {
     "id": "prod-344",
     "nome_produto": "Grão de Bico 12MM",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 29.0,
     "total_unitario": 0,
@@ -4130,7 +4130,7 @@
   {
     "id": "prod-345",
     "nome_produto": "Biscoito de Polvilho Parmesão",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 81.0,
     "total_unitario": 0,
@@ -4142,7 +4142,7 @@
   {
     "id": "prod-346",
     "nome_produto": "Lentilha Vermelha",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 23.0,
     "total_unitario": 0,
@@ -4154,7 +4154,7 @@
   {
     "id": "prod-347",
     "nome_produto": "Lentilha Canadense",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 32.0,
     "total_unitario": 0,
@@ -4166,7 +4166,7 @@
   {
     "id": "prod-348",
     "nome_produto": "Feijão Branco",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 32.0,
     "total_unitario": 0,
@@ -4178,7 +4178,7 @@
   {
     "id": "prod-349",
     "nome_produto": "Feijão de Corda",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 20.0,
     "total_unitario": 0,
@@ -4190,7 +4190,7 @@
   {
     "id": "prod-350",
     "nome_produto": "Granola Completa",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 44.0,
     "total_unitario": 0,
@@ -4202,7 +4202,7 @@
   {
     "id": "prod-351",
     "nome_produto": "Granola Tradicional",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 32.0,
     "total_unitario": 0,
@@ -4214,7 +4214,7 @@
   {
     "id": "prod-352",
     "nome_produto": "Granola sem Açúcar",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 41.0,
     "total_unitario": 0,
@@ -4226,7 +4226,7 @@
   {
     "id": "prod-353",
     "nome_produto": "Goma do Norte",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 20.0,
     "total_unitario": 0,
@@ -4238,7 +4238,7 @@
   {
     "id": "prod-354",
     "nome_produto": "Polvilho Azedo",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 15.0,
     "total_unitario": 0,
@@ -4250,7 +4250,7 @@
   {
     "id": "prod-355",
     "nome_produto": "Damasco Turco Premium",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 118.0,
     "total_unitario": 0,
@@ -4262,7 +4262,7 @@
   {
     "id": "prod-356",
     "nome_produto": "Polvilho Doce",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 13.0,
     "total_unitario": 0,
@@ -4274,7 +4274,7 @@
   {
     "id": "prod-357",
     "nome_produto": "Fécula de Batata",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 18.0,
     "total_unitario": 0,
@@ -4286,7 +4286,7 @@
   {
     "id": "prod-358",
     "nome_produto": "Aveia Flocos Graudos",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 15.0,
     "total_unitario": 0,
@@ -4298,7 +4298,7 @@
   {
     "id": "prod-359",
     "nome_produto": "Aveia Flocos Finos",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 15.0,
     "total_unitario": 0,
@@ -4310,7 +4310,7 @@
   {
     "id": "prod-360",
     "nome_produto": "Farelo de Aveia",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 15.0,
     "total_unitario": 0,
@@ -4322,7 +4322,7 @@
   {
     "id": "prod-361",
     "nome_produto": "Farinha de Aveia",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 15.0,
     "total_unitario": 0,
@@ -4334,7 +4334,7 @@
   {
     "id": "prod-362",
     "nome_produto": "Semente de Chia",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 45.0,
     "total_unitario": 0,
@@ -4346,7 +4346,7 @@
   {
     "id": "prod-363",
     "nome_produto": "Farinha de Trigo Integral",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 10.0,
     "total_unitario": 0,
@@ -4358,7 +4358,7 @@
   {
     "id": "prod-364",
     "nome_produto": "Bicarbonato de Sódio",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 15.0,
     "total_unitario": 0,
@@ -4370,7 +4370,7 @@
   {
     "id": "prod-365",
     "nome_produto": "Corn Sugar",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 28.0,
     "total_unitario": 0,
@@ -4382,7 +4382,7 @@
   {
     "id": "prod-366",
     "nome_produto": "Corn Sugar Mascavo",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 31.0,
     "total_unitario": 0,
@@ -4394,7 +4394,7 @@
   {
     "id": "prod-367",
     "nome_produto": "Corn Flakes Natural",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 38.0,
     "total_unitario": 0,
@@ -4406,7 +4406,7 @@
   {
     "id": "prod-368",
     "nome_produto": "Chocoboll",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 35.0,
     "total_unitario": 0,
@@ -4418,7 +4418,7 @@
   {
     "id": "prod-369",
     "nome_produto": "Fruit Rings",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 31.0,
     "total_unitario": 0,
@@ -4430,7 +4430,7 @@
   {
     "id": "prod-370",
     "nome_produto": "Oliveira",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 42.0,
     "total_unitario": 0,
@@ -4442,7 +4442,7 @@
   {
     "id": "prod-371",
     "nome_produto": "Chá Verde Nacional",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 22.0,
     "total_unitario": 0,
@@ -4454,7 +4454,7 @@
   {
     "id": "prod-372",
     "nome_produto": "Orégano",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 42.0,
     "total_unitario": 0,
@@ -4466,7 +4466,7 @@
   {
     "id": "prod-373",
     "nome_produto": "Espinheira Santa",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 49.0,
     "total_unitario": 0,
@@ -4478,7 +4478,7 @@
   {
     "id": "prod-374",
     "nome_produto": "Louro Folhas",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 48.0,
     "total_unitario": 0,
@@ -4490,7 +4490,7 @@
   {
     "id": "prod-375",
     "nome_produto": "Mulungu Flocos",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 39.0,
     "total_unitario": 0,
@@ -4502,7 +4502,7 @@
   {
     "id": "prod-376",
     "nome_produto": "Camomila",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 55.0,
     "total_unitario": 0,
@@ -4514,7 +4514,7 @@
   {
     "id": "prod-377",
     "nome_produto": "Capim Cidreira",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 35.0,
     "total_unitario": 0,
@@ -4526,7 +4526,7 @@
   {
     "id": "prod-378",
     "nome_produto": "Hibuscus",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 65.0,
     "total_unitario": 0,
@@ -4538,7 +4538,7 @@
   {
     "id": "prod-379",
     "nome_produto": "Cavalinha",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 45.0,
     "total_unitario": 0,
@@ -4550,7 +4550,7 @@
   {
     "id": "prod-380",
     "nome_produto": "Aroeira em Casca",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 25.0,
     "total_unitario": 0,
@@ -4562,7 +4562,7 @@
   {
     "id": "prod-381",
     "nome_produto": "Sene",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 85.0,
     "total_unitario": 0,
@@ -4574,7 +4574,7 @@
   {
     "id": "prod-382",
     "nome_produto": "Boldo do Chile",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 88.0,
     "total_unitario": 0,
@@ -4586,7 +4586,7 @@
   {
     "id": "prod-383",
     "nome_produto": "Tanchagem",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 72.0,
     "total_unitario": 0,
@@ -4598,7 +4598,7 @@
   {
     "id": "prod-384",
     "nome_produto": "Hortelã",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 38.0,
     "total_unitario": 0,
@@ -4610,7 +4610,7 @@
   {
     "id": "prod-385",
     "nome_produto": "Maçã p/ Chá",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 40.0,
     "total_unitario": 0,
@@ -4622,7 +4622,7 @@
   {
     "id": "prod-386",
     "nome_produto": "Anis Estrelado",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 127.0,
     "total_unitario": 0,
@@ -4634,7 +4634,7 @@
   {
     "id": "prod-387",
     "nome_produto": "Emburana",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 36.0,
     "total_unitario": 0,
@@ -4646,7 +4646,7 @@
   {
     "id": "prod-388",
     "nome_produto": "Órapronobis",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 140.0,
     "total_unitario": 0,
@@ -4658,7 +4658,7 @@
   {
     "id": "prod-389",
     "nome_produto": "Chá Branco",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 60.0,
     "total_unitario": 0,
@@ -4670,7 +4670,7 @@
   {
     "id": "prod-390",
     "nome_produto": "Erva Matte",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 37.0,
     "total_unitario": 0,
@@ -4682,7 +4682,7 @@
   {
     "id": "prod-391",
     "nome_produto": "Buxinha",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 116.0,
     "total_unitario": 0,
@@ -4694,7 +4694,7 @@
   {
     "id": "prod-392",
     "nome_produto": "Tereré Tradicional",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 37.0,
     "total_unitario": 0,
@@ -4706,7 +4706,7 @@
   {
     "id": "prod-393",
     "nome_produto": "Mentruz",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 98.0,
     "total_unitario": 0,
@@ -4718,7 +4718,7 @@
   {
     "id": "prod-394",
     "nome_produto": "Erva Doce",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 40.0,
     "total_unitario": 0,
@@ -4730,7 +4730,7 @@
   {
     "id": "prod-395",
     "nome_produto": "Queijo Parmesão",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 75.0,
     "total_unitario": 0,
@@ -4742,7 +4742,7 @@
   {
     "id": "prod-396",
     "nome_produto": "Sal Marinho",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 30.0,
     "total_unitario": 0,
@@ -6950,7 +6950,7 @@
   {
     "id": "prod-580",
     "nome_produto": "Barra Chocolate Harald",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 33.99,
     "total_unitario": 0,
@@ -6962,7 +6962,7 @@
   {
     "id": "prod-581",
     "nome_produto": "Barra Chocolate Dr.Oetker",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 37.99,
     "total_unitario": 0,
@@ -6998,7 +6998,7 @@
   {
     "id": "prod-584",
     "nome_produto": "Cobertura Para Sorvete",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 18.0,
     "total_unitario": 0,
@@ -7358,7 +7358,7 @@
   {
     "id": "prod-614",
     "nome_produto": "Saco Kraft 80g",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 58.8,
     "total_unitario": 0,
@@ -7370,7 +7370,7 @@
   {
     "id": "prod-615",
     "nome_produto": "Saco Kraft 80g",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 47.7,
     "total_unitario": 0,
@@ -7382,7 +7382,7 @@
   {
     "id": "prod-616",
     "nome_produto": "Saco Kraft Natural",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 39.0,
     "total_unitario": 0,
@@ -7394,7 +7394,7 @@
   {
     "id": "prod-617",
     "nome_produto": "Saco Hamburgão",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 37.0,
     "total_unitario": 0,
@@ -7406,7 +7406,7 @@
   {
     "id": "prod-618",
     "nome_produto": "Saco Kraft 3KG",
-    "peso_produto": "A granel · preço por kg",
+    "peso_produto": "A granel · preço por 100 g",
     "quantidade": 0,
     "valor_unitario": 44.0,
     "total_unitario": 0,

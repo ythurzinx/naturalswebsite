@@ -69,8 +69,17 @@ try {
       "A fresh server-generated nonce is required",
     );
     previousNonce = nonce;
+    const html = await response.text();
+    assert.ok(
+      html.includes("por 100 g"),
+      "Bulk prices must be shown per 100 g",
+    );
+    assert.ok(
+      html.includes("100 em 100 g"),
+      "Bulk weight increments must be clear",
+    );
     const scripts = Array.from(
-      (await response.text()).matchAll(/<script\b[^>]*>/g),
+      html.matchAll(/<script\b[^>]*>/g),
       (match) => match[0],
     );
     assert.ok(scripts.length > 0);

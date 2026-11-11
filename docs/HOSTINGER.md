@@ -85,6 +85,8 @@ O pagamento online desta versão é para **retirada sem frete**. Entregas exigem
 
 Os preços do catálogo foram confirmados pelo responsável pela loja nesta sessão. Para atualizar valores, custos, disponibilidade e fotos, use `/admin`. As alterações ficam no MySQL e são usadas no catálogo e no cálculo do servidor. `lib/catalog.json` é a base inicial; `lib/sales-policy.json` define os limites gerais. Os identificadores de produto devem permanecer estáveis.
 
+Para itens a granel, informe **preço e custo por 100 g no painel**. O comprador escolhe de 100 em 100 g, até 5.000 g por porção. A conversão da base importada por kg é automática; não divida os dados do catálogo ou do banco novamente. Itens embalados usam preço por unidade. Carrinhos antigos com porções incompatíveis, como 250 g, pedem uma nova escolha em vez de mudar o peso silenciosamente.
+
 Os cookies de pedido permitem consultar até cinco pedidos recentes por sete dias no mesmo navegador. Se o cliente trocar de navegador, limpar cookies ou se a loja trocar o token/domínio, o atendimento deverá localizar a compra no Mercado Pago. A rotação do token não remove os registros financeiros do provedor.
 
 Mantenha o repositório, a conta GitHub, a Hostinger e o Mercado Pago com autenticação em duas etapas; proteja a branch principal, revise atualizações do Dependabot e habilite a proteção de tráfego/WAF disponível no plano. Os limites do aplicativo são por processo e complementam a proteção da hospedagem; não substituem proteção contra ataques distribuídos.
