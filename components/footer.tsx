@@ -1,82 +1,76 @@
-import { MapPin, Phone, Mail, Instagram } from "lucide-react"
-import Link from "next/link"
-
+"use client";
+import Link from "next/link";
+import {
+  Leaf,
+  Instagram,
+  MapPin,
+  MessageCircle,
+  ArrowUpRight,
+} from "lucide-react";
+import { store, whatsappUrl } from "@/lib/store";
 export function Footer() {
   return (
-    <footer className="border-t border-border bg-muted/30 mt-20">
-      <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* About */}
-          <div>
-            <h3 className="text-lg font-bold mb-4">Mundo Natural</h3>
-            <p className="text-sm text-muted-foreground leading-relaxed">
-              Sua loja de produtos naturais em Taboão da Serra. Oferecemos suplementos, grãos, especiarias e produtos
-              naturais de qualidade.
-            </p>
-          </div>
-
-          {/* Contact - Updated phone number to (15) 3191-7309 */}
-          <div>
-            <h3 className="text-lg font-semibold mb-4">Contato</h3>
-            <div className="space-y-3">
-              <div className="flex items-start gap-2 text-sm">
-                <MapPin className="h-4 w-4 mt-0.5 text-primary flex-shrink-0" />
-                <span className="text-muted-foreground">
-                  Rua José Duarte Souza, 21
-                  <br />
-                  Jardim das Margaridas
-                  <br />
-                  Taboão da Serra - SP
-                </span>
-              </div>
-              <div className="flex items-center gap-2 text-sm">
-                <Phone className="h-4 w-4 text-primary" />
-                <a href="tel:1531917309" className="text-muted-foreground hover:text-primary transition-colors">
-                  (15) 3191-7309
-                </a>
-              </div>
-              <div className="flex items-center gap-2 text-sm">
-                <Instagram className="h-4 w-4 text-primary" />
-                <a
-                  href="https://instagram.com/_mundonaturalto"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-primary transition-colors"
-                >
-                  @_mundonaturalto
-                </a>
-              </div>
-              <div className="flex items-center gap-2 text-sm">
-                <Mail className="h-4 w-4 text-primary" />
-                <span className="text-muted-foreground">mundonaturaltaboao.com.br</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Links */}
-          <div>
-            <h3 className="text-lg font-semibold mb-4">Links Rápidos</h3>
-            <div className="flex flex-col gap-2">
-              <Link href="/produtos" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                Produtos
-              </Link>
-              <Link href="/sobre" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                Sobre Nós
-              </Link>
-              <Link href="/contato" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                Contato
-              </Link>
-              <Link href="/carrinho" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                Carrinho
-              </Link>
-            </div>
-          </div>
+    <footer className="site-footer">
+      <div className="shell footer-grid">
+        <div className="footer-about">
+          <Link href="/" className="footer-brand">
+            <Leaf size={27} /> Mundo Natural<span>ESCOLHAS QUE FAZEM BEM.</span>
+          </Link>
+          <p>
+            Mais natureza na sua rotina.
+            <br />
+            Mais cuidado em cada escolha.
+          </p>
+          <a
+            href={store.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Instagram da Mundo Natural"
+          >
+            <Instagram size={19} />
+          </a>
         </div>
-
-        <div className="mt-8 pt-8 border-t border-border text-center text-sm text-muted-foreground">
-          <p>&copy; {new Date().getFullYear()} Mundo Natural. Todos os direitos reservados.</p>
+        <div>
+          <h3>Explore nosso mundo</h3>
+          <Link href="/produtos">Todos os produtos</Link>
+          <Link href="/favoritos">Meus favoritos</Link>
+          <Link href="/sobre">Nossa história</Link>
+          <Link href="/blog">Inspiração para viver bem</Link>
+        </div>
+        <div>
+          <h3>Conte com a gente</h3>
+          <Link href="/contato">Atendimento e entregas</Link>
+          <Link href="/privacidade">Política de privacidade</Link>
+          <Link href="/termos">Condições de compra</Link>
+          <button
+            onClick={() =>
+              window.dispatchEvent(new Event("open-cookie-settings"))
+            }
+          >
+            Preferências de cookies
+          </button>
+        </div>
+        <div className="footer-contact">
+          <h3>Da nossa loja para você</h3>
+          <p>
+            <MapPin size={17} />
+            {store.address}
+          </p>
+          <a href={whatsappUrl()} target="_blank" rel="noopener noreferrer">
+            <MessageCircle size={17} /> Fale com a Mundo Natural{" "}
+            <ArrowUpRight size={14} />
+          </a>
         </div>
       </div>
+      <div className="shell footer-bottom">
+        <span>
+          © {new Date().getFullYear()} Mundo Natural. Feito para uma vida mais
+          natural.
+        </span>
+        <span>
+          <Leaf size={13} /> Pequenas escolhas. Um mundo de diferença.
+        </span>
+      </div>
     </footer>
-  )
+  );
 }

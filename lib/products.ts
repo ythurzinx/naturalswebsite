@@ -1,75 +1,83 @@
-import type { Product } from "./types"
-
-const CSV_URL =
-  "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/produtos_mundo_natural-oXa503E35YnbJNXiAjOLNrfB9SkkXM.csv"
-
+import data from "./catalog.json";
+import type { Product } from "./types";
+export const products: Product[] = data;
 export async function fetchProducts(): Promise<Product[]> {
-  try {
-    const response = await fetch(CSV_URL)
-    const csvText = await response.text()
-
-    const lines = csvText.split("\n")
-    const headers = lines[0].split(",")
-
-    const products: Product[] = []
-
-    for (let i = 1; i < lines.length; i++) {
-      const line = lines[i].trim()
-      if (!line) continue
-
-      const values = line.split(",")
-
-      if (values[0] === "Total Geral") continue
-
-      const nome_produto = values[0]?.trim() || ""
-      const peso_produto = values[1]?.trim() || ""
-      const isGranel =
-        peso_produto.toLowerCase().includes("granel") ||
-        peso_produto.toLowerCase().includes("kg") ||
-        nome_produto.toLowerCase().includes("granel")
-
-      const product: Product = {
-        id: `prod-${i}`,
-        nome_produto,
-        peso_produto,
-        quantidade: Number.parseInt(values[2]) || 0,
-        valor_unitario: Number.parseFloat(values[4]?.replace("R$", "").replace(",", ".").trim()) || 0,
-        total_unitario: Number.parseFloat(values[5]?.replace("R$", "").replace(",", ".").trim()) || 0,
-        estoque_minimo: Number.parseFloat(values[6]?.replace("R$", "").replace(",", ".").trim()) || 0,
-        status_estoque: values[7]?.trim() || "OK",
-        categoria: values[8]?.trim() || "Diversos",
-        isGranel,
-      }
-
-      products.push(product)
-    }
-
-    return products
-  } catch (error) {
-    console.error("[v0] Error fetching products:", error)
-    return []
-  }
+  return products;
 }
-
-export function getCategories(products: Product[]): string[] {
-  const categories = new Set(products.map((p) => p.categoria))
-  return Array.from(categories).sort()
+export function getCategories(items: Product[]) {
+  return [...new Set(items.map((p) => p.categoria))].sort();
 }
-
-export function getProductsByCategory(products: Product[], category: string): Product[] {
-  return products.filter((p) => p.categoria === category)
+export function getProductsByCategory(items: Product[], category: string) {
+  return items.filter((p) => p.categoria === category);
 }
-
-export function searchProducts(products: Product[], query: string): Product[] {
-  const lowerQuery = query.toLowerCase()
-  return products.filter(
-    (p) => p.nome_produto.toLowerCase().includes(lowerQuery) || p.categoria.toLowerCase().includes(lowerQuery),
-  )
+export function normalize(value: string) {
+  return value
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase();
 }
-
-export function formatPrice(price: number): string {
+export function searchProducts(items: Product[], query: string) {
+  const terms = normalize(query).trim().split(/\s+/);
+  return items.filter((p) =>
+    terms.every((term) =>
+      normalize(`${p.nome_produto} ${p.categoria}`).includes(term),
+    ),
+  );
+}
+export function formatPrice(price: number) {
   return new Intl.NumberFormat("pt-BR", {
     style: "currency",
     currency: "BRL",
-  }).format(price)
+  }).format(price);
 }
+export const groups = [
+  "Todos",
+  "Castanhas",
+  "Grãos e sementes",
+  "Chás e ervas",
+  "Suplementos",
+  "Temperos",
+  "Mercearia",
+];
+export function inGroup(product: Product, group: string) {
+  const name = normalize(product.nome_produto);
+  if (group === "Castanhas")
+    return /castanha|amendoim|nozes|amendoa|avela|pistache/.test(name);
+  if (group === "Grãos e sementes")
+    return /aveia|semente|chia|quinu|quinoa|linhaca|grao|arroz|feijao|lentilha|granola/.test(
+      name,
+    );
+  if (group === "Chás e ervas")
+    return /cha |hibisco|camomila|erva|cavalinha|espinheira|capim|hortela|boldo|folha|melissa/.test(
+      name,
+    );
+  if (group === "Suplementos")
+    return /Suplementos|Fitoterápicos/.test(product.categoria);
+  if (group === "Temperos")
+    return /tempero|curcuma|acafrao|pimenta|paprica|oregano|cominho|alho|cebola|canela|cravo|sal rosa/.test(
+      name,
+    );
+  if (group === "Mercearia")
+    return /mercearia|alimentícios/.test(product.categoria);
+  return true;
+}
+export function productTile(product: Product) {
+  const name = normalize(product.nome_produto);
+  if (/castanha de caju/.test(name)) return 0;
+  if (/castanha|amendoim|nozes|amendoa|mix de frutas/.test(name)) return 1;
+  if (/hibisco|cha |erva|camomila|folha|cavalinha/.test(name)) return 3;
+  if (/chia|semente|linhaca/.test(name)) return 4;
+  if (inGroup(product, "Temperos")) return 5;
+  return 2;
+}
+const names = [
+  "Castanha de Caju Crua",
+  "Mix de Castanhas Nobres",
+  "Aveia Flocos Finos",
+  "Semente de Chia",
+  "Hibisco Em Pó",
+  "Pasta de Amendoim Tradicional",
+];
+export const featured = names
+  .map((name) => products.find((p) => p.nome_produto === name))
+  .filter((p): p is Product => !!p);

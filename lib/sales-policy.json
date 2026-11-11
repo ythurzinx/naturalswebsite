@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "pricesConfirmedByMerchant": true,
+  "onlinePickupEnabled": true,
+  "maxOrderCents": 1000000,
+  "maxDistinctLines": 20,
+  "maxQuantityPerLine": 20,
+  "disabledProductIds": []
+}

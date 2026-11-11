@@ -1,102 +1,184 @@
-"use client"
-
-import { useState } from "react"
-import { Card, CardContent, CardFooter } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { ShoppingCart, Package } from "lucide-react"
-import { useCart } from "@/lib/cart-context"
-import type { Product } from "@/lib/types"
-import { useToast } from "@/hooks/use-toast"
-
-interface ProductCardProps {
-  product: Product
-}
-
-export function ProductCard({ product }: ProductCardProps) {
-  const { addToCart } = useCart()
-  const { toast } = useToast()
-  const [quantity, setQuantity] = useState(1)
-  const [weight, setWeight] = useState(100)
-
-  const handleAddToCart = () => {
-    if (product.isGranel) {
-      addToCart(product, 1, weight)
-      toast({
-        title: "Produto adicionado!",
-        description: `${weight}g de ${product.nome_produto} adicionado ao carrinho.`,
-      })
-    } else {
-      addToCart(product, quantity)
-      toast({
-        title: "Produto adicionado!",
-        description: `${quantity}x ${product.nome_produto} adicionado ao carrinho.`,
-      })
-    }
-  }
-
-  return (
-    <Card className="group overflow-hidden hover:shadow-xl hover:scale-[1.02] transition-all duration-300 border-2 hover:border-primary/20">
-      <CardContent className="p-6">
-        <div className="aspect-square bg-gradient-to-br from-secondary/50 to-primary/10 rounded-lg mb-4 flex items-center justify-center group-hover:from-primary/20 group-hover:to-secondary/50 transition-all duration-300">
-          <Package className="h-16 w-16 text-muted-foreground group-hover:text-primary transition-colors duration-300" />
-        </div>
-
-        <div className="space-y-2">
-          <h3 className="font-semibold text-lg leading-tight line-clamp-2 group-hover:text-primary transition-colors">
-            {product.nome_produto}
-          </h3>
-          <p className="text-sm text-muted-foreground">{product.peso_produto}</p>
-          <p className="text-xs text-muted-foreground bg-secondary/50 inline-block px-2 py-1 rounded">
-            {product.categoria}
-          </p>
-
-          <div className="pt-2">
-            <p className="text-sm font-medium text-muted-foreground italic">Aguardando atualização de preços</p>
-          </div>
-        </div>
-      </CardContent>
-
-      <CardFooter className="p-6 pt-0 flex flex-col gap-3">
-        {product.isGranel ? (
-          <div className="w-full space-y-2">
-            <Label htmlFor={`weight-${product.id}`} className="text-sm">
-              Quantidade (gramas)
-            </Label>
-            <Input
-              id={`weight-${product.id}`}
-              type="number"
-              min="50"
-              step="50"
-              value={weight}
-              onChange={(e) => setWeight(Number.parseInt(e.target.value) || 100)}
-              className="w-full"
-            />
-          </div>
-        ) : (
-          <div className="w-full space-y-2">
-            <Label htmlFor={`quantity-${product.id}`} className="text-sm">
-              Quantidade
-            </Label>
-            <Input
-              id={`quantity-${product.id}`}
-              type="number"
-              min="1"
-              value={quantity}
-              onChange={(e) => setQuantity(Number.parseInt(e.target.value) || 1)}
-              className="w-full"
-            />
-          </div>
-        )}
-
-        <Button onClick={handleAddToCart} className="w-full group-hover:shadow-lg transition-shadow" size="lg">
-          <ShoppingCart className="h-4 w-4 mr-2" />
-          Adicionar ao Carrinho
-        </Button>
-
-        {product.status_estoque !== "OK" && <p className="text-xs text-destructive text-center">Estoque baixo</p>}
-      </CardFooter>
-    </Card>
+"use client";
+import { useState } from "react";
+import { Heart, Plus, Check, ShoppingBag, Package, Leaf } from "lucide-react";
+import { useCart } from "@/lib/cart-context";
+import { formatPrice, productTile } from "@/lib/products";
+import type { Product } from "@/lib/types";
+import { Modal } from "./modal";
+import { lineTotal } from "@/lib/commerce.mjs";
+export function ProductImage({
+  product,
+  className = "",
+}: {
+  product: Product;
+  className?: string;
+}) {
+  const packaged = /Suplementos|Fitoterápicos/.test(product.categoria);
+  if (
+    product.imagem &&
+    /^\/api\/product-images\/[a-f0-9]{64}$/.test(product.imagem)
   )
+    return (
+      <div className={`product-photo product-custom-photo ${className}`}>
+        <img src={product.imagem} alt={product.nome_produto} loading="lazy" />
+      </div>
+    );
+  return (
+    <div
+      className={`product-photo tile-${productTile(product)} ${packaged ? "packaged-photo" : ""} ${className}`}
+      role="img"
+      aria-label={`Imagem ilustrativa de ${product.nome_produto}`}
+    >
+      {packaged && <Package size={60} strokeWidth={1} />}
+    </div>
+  );
+}
+export function ProductCard({ product }: { product: Product }) {
+  const { addToCart, favorites, toggleFavorite } = useCart();
+  const [open, setOpen] = useState(false),
+    [weight, setWeight] = useState(250),
+    [quantity, setQuantity] = useState(1),
+    [added, setAdded] = useState(false);
+  const favorite = favorites.includes(product.id);
+  function add() {
+    addToCart(product, quantity, weight);
+    setAdded(true);
+  }
+  return (
+    <>
+      <article className="product-card">
+        <div className="product-image-wrap">
+          <button
+            onClick={() => setOpen(true)}
+            className="product-image-button"
+            aria-label={`Ver detalhes de ${product.nome_produto}`}
+          >
+            <ProductImage product={product} />
+          </button>
+          <span className="product-label">
+            {product.isGranel ? "A GRANEL" : "NOSSO CATÁLOGO"}
+          </span>
+          <button
+            className={`favorite-button ${favorite ? "is-favorite" : ""}`}
+            aria-label={`${favorite ? "Remover" : "Salvar"} ${product.nome_produto} ${favorite ? "dos" : "nos"} favoritos`}
+            aria-pressed={favorite}
+            onClick={() => toggleFavorite(product.id)}
+          >
+            <Heart size={18} fill={favorite ? "currentColor" : "none"} />
+          </button>
+        </div>
+        <div className="product-info">
+          <span className="product-category">
+            {product.isGranel
+              ? "NATUREZA NA MEDIDA CERTA"
+              : product.categoria.split(" / ")[0]}
+          </span>
+          <button className="product-name" onClick={() => setOpen(true)}>
+            {product.nome_produto}
+          </button>
+          <div className="product-weight">
+            {product.isGranel ? "Porção de 250 g" : product.peso_produto}
+          </div>
+          <div className="product-price-row">
+            <div>
+              <strong className="product-price">
+                {formatPrice(
+                  product.valor_unitario * (product.isGranel ? 0.25 : 1),
+                )}
+              </strong>
+              <small>{product.isGranel ? "por porção" : "por unidade"}</small>
+            </div>
+            <button
+              className={`add-button ${added ? "added" : ""}`}
+              onClick={() => {
+                addToCart(product, 1, 250);
+                setAdded(true);
+              }}
+              aria-label={`Adicionar ${product.nome_produto} ao carrinho`}
+            >
+              {added ? <Check size={21} /> : <Plus size={22} />}
+            </button>
+          </div>
+          <p className="product-availability">
+            <Leaf size={12} /> Disponibilidade pelo atendimento
+          </p>
+          <span className="sr-only" role="status">
+            {added ? `${product.nome_produto} adicionado ao carrinho` : ""}
+          </span>
+        </div>
+      </article>
+      <Modal
+        open={open}
+        onOpenChange={setOpen}
+        title={product.nome_produto}
+        wide
+      >
+        <div className="product-detail">
+          <ProductImage product={product} />
+          <div>
+            <span className="eyebrow">
+              {product.isGranel ? "A granel, do seu jeito" : product.categoria}
+            </span>
+            <p className="detail-intro">
+              Monte sua seleção e confirme preço, disponibilidade, ingredientes
+              e informações de alergênicos com a nossa equipe.
+            </p>
+            <strong className="detail-price">
+              {formatPrice(
+                lineTotal({ product, quantity, selectedWeight: weight }),
+              )}
+            </strong>
+            <p className="muted">
+              Preço da seleção{" "}
+              {product.isGranel &&
+                `· ${formatPrice(product.valor_unitario)}/kg`}
+            </p>
+            {product.isGranel ? (
+              <label className="field-label">
+                Escolha sua porção
+                <select
+                  value={weight}
+                  onChange={(e) => {
+                    setWeight(Number(e.target.value));
+                    setAdded(false);
+                  }}
+                >
+                  {[100, 250, 500, 1000].map((w) => (
+                    <option key={w} value={w}>
+                      {w === 1000 ? "1 kg" : `${w} g`}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            ) : (
+              <p>{product.peso_produto}</p>
+            )}
+            <label className="field-label">
+              Quantidade
+              <input
+                type="number"
+                min="1"
+                max="99"
+                value={quantity}
+                onChange={(e) => {
+                  setQuantity(
+                    Math.max(1, Math.min(99, Number(e.target.value) || 1)),
+                  );
+                  setAdded(false);
+                }}
+              />
+            </label>
+            <button className="button full-width" onClick={add}>
+              {added ? <Check size={18} /> : <ShoppingBag size={18} />}
+              {added ? "Adicionado ao carrinho" : "Adicionar ao carrinho"}
+            </button>
+            <p className="fine-print">
+              Imagem ilustrativa. A seleção não reserva estoque. Confira
+              ingredientes e alergênicos com a loja antes de pagar.
+            </p>
+          </div>
+        </div>
+      </Modal>
+    </>
+  );
 }

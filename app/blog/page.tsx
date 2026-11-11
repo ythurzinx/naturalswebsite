@@ -1,137 +1,78 @@
-import { Header } from "@/components/header"
-import { Footer } from "@/components/footer"
-import { WhatsAppButton } from "@/components/whatsapp-button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Calendar, User, ArrowRight } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import Link from "next/link"
-
-const blogPosts = [
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+export const metadata = { title: "Viver bem" };
+const articles = [
   {
-    id: 1,
-    title: "Os Benefícios da Spirulina para Sua Saúde",
-    excerpt: "Descubra como este superalimento pode transformar sua energia e imunidade diariamente.",
-    author: "Equipe Mundo Natural",
-    date: "15 de Janeiro, 2025",
-    category: "Suplementos",
-    image: "/spirulina-powder-green-superfood.jpg",
-  },
-  {
-    id: 2,
-    title: "Guia Completo: Como Escolher Grãos Integrais",
-    excerpt: "Aprenda a selecionar os melhores grãos para uma alimentação equilibrada e nutritiva.",
-    author: "Equipe Mundo Natural",
-    date: "10 de Janeiro, 2025",
-    category: "Alimentação Natural",
-    image: "/whole-grains-quinoa-oats-healthy.jpg",
-  },
-  {
-    id: 3,
-    title: "Chás Naturais: Qual é o Ideal Para Você?",
-    excerpt: "Conheça as propriedades de diferentes chás e encontre o perfeito para suas necessidades.",
-    author: "Equipe Mundo Natural",
-    date: "5 de Janeiro, 2025",
-    category: "Bem-Estar",
+    title: "Pequenos rituais, boas pausas.",
+    category: "UM TEMPO PARA VOCÊ",
     image: "/herbal-tea-natural-wellness.jpg",
+    intro:
+      "Preparar uma xícara pode ser um convite para desacelerar e saborear o momento.",
+    content:
+      "Separe sua xícara favorita, escolha uma infusão pelo sabor e siga as instruções de preparo do fabricante. Reserve alguns minutos para aproveitar o aroma. Se houver restrições de saúde, uso de medicamentos, gestação ou dúvida sobre alguma erva, consulte um profissional antes de consumi-la.",
+    link: "/produtos?categoria=Ch%C3%A1s%20e%20ervas",
+    cta: "Explore chás e ervas",
   },
   {
-    id: 4,
-    title: "Alimentação Orgânica: Vale a Pena?",
-    excerpt: "Entenda os benefícios dos alimentos orgânicos e como eles impactam sua saúde.",
-    author: "Equipe Mundo Natural",
-    date: "28 de Dezembro, 2024",
-    category: "Sustentabilidade",
-    image: "/organic-vegetables-fresh-natural.jpg",
+    title: "Sua porção. Seu jeito.",
+    category: "ESCOLHAS A GRANEL",
+    image: "/whole-grains-quinoa-oats-healthy.jpg",
+    intro:
+      "Escolher a quantidade pode facilitar o planejamento e ajudar a evitar sobras.",
+    content:
+      "Comece pensando nas receitas que você pretende preparar e em quantas pessoas vão compartilhar a refeição. Escolha porções menores para experimentar ingredientes novos. Depois da compra, siga as orientações de conservação, validade e alergênicos da embalagem ou fornecidas pela loja.",
+    link: "/produtos?categoria=Gr%C3%A3os%20e%20sementes",
+    cta: "Conheça grãos e sementes",
   },
   {
-    id: 5,
-    title: "Receitas Saudáveis com Produtos Naturais",
-    excerpt: "Inspire-se com receitas deliciosas usando ingredientes naturais e nutritivos.",
-    author: "Equipe Mundo Natural",
-    date: "20 de Dezembro, 2024",
-    category: "Receitas",
+    title: "Mais cor na sua rotina.",
+    category: "INSPIRAÇÃO À MESA",
     image: "/healthy-recipe-natural-ingredients.jpg",
+    intro:
+      "Novas texturas e temperos podem dar outra cara às receitas que você já adora.",
+    content:
+      "Experimente acrescentar um ingrediente de cada vez às preparações do dia a dia. Combine texturas, prove antes de temperar novamente e anote suas combinações favoritas. Planeje as porções e escolha ingredientes adequados às suas preferências e necessidades alimentares.",
+    link: "/produtos?categoria=Temperos",
+    cta: "Descubra novos temperos",
   },
-  {
-    id: 6,
-    title: "Como Fortalecer Sua Imunidade Naturalmente",
-    excerpt: "Dicas práticas e produtos naturais para manter seu sistema imunológico forte.",
-    author: "Equipe Mundo Natural",
-    date: "15 de Dezembro, 2024",
-    category: "Saúde",
-    image: "/immunity-boost-natural-health.jpg",
-  },
-]
-
-export default function BlogPage() {
+];
+export default function JournalPage() {
   return (
-    <div className="min-h-screen flex flex-col">
-      <Header />
-
-      <main className="flex-1">
-        {/* Hero Section */}
-        <section className="bg-gradient-to-b from-secondary/30 to-background py-16">
-          <div className="container mx-auto px-4">
-            <div className="max-w-3xl mx-auto text-center">
-              <h1 className="text-5xl font-bold mb-4 text-balance" style={{ fontFamily: "var(--font-playfair)" }}>
-                Blog Mundo Natural
-              </h1>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                Artigos sobre saúde natural, bem-estar e alimentação consciente
-              </p>
+    <main id="conteudo" className="shell page-main">
+      <div className="breadcrumbs">
+        <Link href="/">Início</Link>
+        <span>/</span>
+        <span>Viver bem</span>
+      </div>
+      <span className="eyebrow">INSPIRAÇÃO PARA O SEU DIA</span>
+      <h1 className="page-title">
+        Viver bem é cultivar
+        <br />
+        <em>pequenas escolhas.</em>
+      </h1>
+      <p className="section-description">
+        Ideias simples para trazer mais sabor, presença e natureza para a
+        rotina.
+      </p>
+      <div className="journal-grid">
+        {articles.map((article) => (
+          <article className="journal-card" key={article.title}>
+            <img src={article.image} alt={article.title} loading="lazy" />
+            <div>
+              <span className="eyebrow">{article.category}</span>
+              <h2>{article.title}</h2>
+              <p>{article.intro}</p>
+              <details>
+                <summary>Continue a leitura</summary>
+                <p>{article.content}</p>
+              </details>
+              <Link href={article.link}>
+                {article.cta} <ArrowRight size={15} />
+              </Link>
             </div>
-          </div>
-        </section>
-
-        {/* Blog Posts Grid */}
-        <section className="py-16">
-          <div className="container mx-auto px-4">
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {blogPosts.map((post) => (
-                <Card key={post.id} className="overflow-hidden hover:shadow-lg transition-shadow group">
-                  <div className="aspect-video overflow-hidden">
-                    <img
-                      src={post.image || "/placeholder.svg"}
-                      alt={post.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                  </div>
-                  <CardHeader>
-                    <div className="flex items-center gap-4 text-sm text-muted-foreground mb-2">
-                      <div className="flex items-center gap-1">
-                        <Calendar className="h-4 w-4" />
-                        <span>{post.date}</span>
-                      </div>
-                      <span className="text-primary">{post.category}</span>
-                    </div>
-                    <CardTitle className="font-serif text-xl group-hover:text-primary transition-colors">
-                      {post.title}
-                    </CardTitle>
-                    <CardDescription>{post.excerpt}</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                        <User className="h-4 w-4" />
-                        <span>{post.author}</span>
-                      </div>
-                      <Button variant="ghost" size="sm" asChild>
-                        <Link href={`/blog/${post.id}`}>
-                          Ler mais
-                          <ArrowRight className="h-4 w-4 ml-1" />
-                        </Link>
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </section>
-      </main>
-
-      <Footer />
-      <WhatsAppButton />
-    </div>
-  )
+          </article>
+        ))}
+      </div>
+    </main>
+  );
 }

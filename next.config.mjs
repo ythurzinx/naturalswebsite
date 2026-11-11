@@ -1,12 +1,16 @@
+import { securityHeaders } from "./security-headers.mjs";
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+export default {
   reactStrictMode: true,
-  experimental: {
-    appDir: true,
+  poweredByHeader: false,
+  images: { unoptimized: true },
+  productionBrowserSourceMaps: false,
+  async headers() {
+    return [
+      {
+        source: "/(.*)",
+        headers: securityHeaders(process.env.NODE_ENV !== "production"),
+      },
+    ];
   },
-  images: {
-    unoptimized: true,
-  },
-}
-
-export default nextConfig
+};
