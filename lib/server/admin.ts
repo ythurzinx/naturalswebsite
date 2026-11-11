@@ -3,6 +3,7 @@ import { repository } from "./shop";
 import { payments } from "./payments";
 import { adminConfiguration } from "./admin-auth.mjs";
 import { createAdminService } from "./admin-service.mjs";
+import { shipping } from "./shipping";
 const config = adminConfiguration({
   APP_URL: process.env.APP_URL,
   NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
@@ -12,4 +13,9 @@ const config = adminConfiguration({
   ADMIN_SESSION_SECRET: process.env.ADMIN_SESSION_SECRET,
   ADMIN_TOTP_SECRET: process.env.ADMIN_TOTP_SECRET,
 });
-export const admin = createAdminService({ config, repository, payments });
+export const admin = createAdminService({
+  config,
+  repository,
+  payments,
+  shipping,
+});

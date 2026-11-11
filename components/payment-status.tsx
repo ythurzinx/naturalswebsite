@@ -18,6 +18,7 @@ type Order = {
   orderId: string;
   state: "paid" | "pending" | "failed" | "refunded" | "canceled";
   totalCents: number;
+  fulfillment?: string;
 };
 const labels = {
   paid: "Pagamento confirmado",
@@ -127,7 +128,9 @@ function Status() {
             </strong>
             <p>
               {paid
-                ? "Seu pagamento foi confirmado. Combine o horário de retirada com a nossa equipe e apresente o número do pedido."
+                ? order?.fulfillment === "delivery"
+                  ? "Seu pagamento foi confirmado. A equipe vai separar e embalar seus produtos. Combine o prazo de entrega com a loja e guarde o número do pedido."
+                  : "Seu pagamento foi confirmado. Combine o horário de retirada com a nossa equipe e apresente o número do pedido."
                 : order.state === "pending"
                   ? "O Pix ou a análise do cartão pode levar um tempo para ser confirmado. Você pode atualizar esta página. Evite iniciar outro pagamento para o mesmo pedido."
                   : "Consulte a equipe para receber ajuda com esta compra."}

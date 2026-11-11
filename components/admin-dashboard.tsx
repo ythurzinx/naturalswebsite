@@ -22,7 +22,12 @@ import {
   ArrowUpRight,
   Activity,
   LockKeyhole,
+  Truck,
 } from "lucide-react";
+import { useOrderAlerts } from "@/hooks/use-order-alerts";
+import { AdminOrderAlerts } from "./admin-order-alerts";
+import { AdminShippingSettings } from "./admin-shipping-settings";
+import { AdminOrderOperations } from "./admin-order-operations";
 import { Modal } from "./modal";
 import { ProductImage } from "./product-card";
 import { formatPrice, normalize } from "@/lib/products";
@@ -34,7 +39,7 @@ type AdminProduct = Product & {
   active: boolean;
   imageSha: string | null;
 };
-type Order = {
+export type Order = {
   id: string;
   total_cents: number;
   paid_cents: number;
@@ -45,8 +50,28 @@ type Order = {
   customer_name: string;
   customer_email: string;
   fulfillment_status: string;
+  fulfillment_mode?: string;
+  shipping_cents?: number;
+  distance_m?: number;
+  customer_phone?: string;
+  customer_note?: string;
+  staff_note?: string;
+  courier_name?: string;
+  delivery_cost_cents?: number | null;
+  address?: {
+    postalCode: string;
+    street: string;
+    number: string;
+    complement: string;
+    neighborhood: string;
+    city: string;
+    state: string;
+  } | null;
   created_at: number;
   items?: {
+    line_key: string;
+    product_id: string;
+    packed: number;
     title: string;
     quantity: number;
     unit_cents: number;
@@ -72,6 +97,8 @@ type Stats = {
   missingCosts: number;
   missingFees: number;
   missingRefunds: number;
+  missingDeliveryCosts: number;
+  deliveryCostsCents: number;
   incompletePayments: number;
   chart: { day: number; cents: number }[];
   catalogHealth: {
@@ -244,9 +271,21 @@ export function AdminDashboard() {
       setError(error instanceof Error ? error.message : "Falha ao atualizar.");
     }
   }, [tab, days, api]);
+  const alerts = useOrderAlerts(auth === true, api);
+  useEffect(() => {
+    if (auth && alerts.revision && (tab === "orders" || tab === "dashboard"))
+      void reload();
+  }, [auth, alerts.revision, tab, reload]);
   useEffect(() => {
     if (auth) void reload();
   }, [auth, reload]);
+  useEffect(() => {
+    if (!auth || tab !== "orders") return;
+    const timer = setInterval(() => {
+      if (!document.hidden && !busy) void reload();
+    }, 30000);
+    return () => clearInterval(timer);
+  }, [auth, tab, busy, reload]);
   async function action(work: () => Promise<void>) {
     if (busy) return;
     setBusy(true);
@@ -478,6 +517,7 @@ export function AdminDashboard() {
     { id: "dashboard", label: "Visão geral", icon: LayoutDashboard },
     { id: "products", label: "Produtos e fotos", icon: Package },
     { id: "orders", label: "Pedidos", icon: ShoppingBag },
+    { id: "shipping", label: "Frete e entregas", icon: Truck },
     { id: "expenses", label: "Despesas", icon: ReceiptText },
     { id: "audit", label: "Atividade", icon: Activity },
   ];
@@ -498,9 +538,16 @@ export function AdminDashboard() {
         `${item.id} ${item.customer_name} ${item.customer_email}`,
       ).includes(normalize(orderSearch)) &&
       (orderFilter === "all" ||
-        (["ready", "completed"].includes(orderFilter)
-          ? item.fulfillment_status === orderFilter
-          : item.state === orderFilter)),
+        (orderFilter === "to_pack"
+          ? item.state === "paid" &&
+            ["new", "packing"].includes(item.fulfillment_status)
+          : ["pickup", "delivery"].includes(orderFilter)
+            ? item.fulfillment_mode === orderFilter
+            : ["packing", "ready", "out_for_delivery", "completed"].includes(
+                  orderFilter,
+                )
+              ? item.fulfillment_status === orderFilter
+              : item.state === orderFilter)),
   );
   return (
     <main id="conteudo" className="shell admin-app">
@@ -565,6 +612,20 @@ export function AdminDashboard() {
             </button>
           </div>
         </header>
+        <AdminOrderAlerts
+          alerts={alerts}
+          onQueue={() => {
+            setTab("orders");
+            setOrderFilter("to_pack");
+            setOrderSearch("");
+          }}
+          onOpen={(id) =>
+            void action(async () => {
+              setTab("orders");
+              setOrder((await api<{ order: Order }>(`orders/${id}`)).order);
+            })
+          }
+        />
         {error && (
           <p className="payment-error" role="alert">
             {error}
@@ -575,6 +636,7 @@ export function AdminDashboard() {
             {notice}
           </p>
         )}
+        {tab === "shipping" && <AdminShippingSettings api={api} />}
         {tab === "dashboard" && (
           <>
             <div className="admin-toolbar">
@@ -692,6 +754,10 @@ export function AdminDashboard() {
                         <dd>{currency(stats.feesCents)}</dd>
                       </div>
                       <div>
+                        <dt>Custo real das entregas</dt>
+                        <dd>{currency(stats.deliveryCostsCents || 0)}</dd>
+                      </div>
+                      <div>
                         <dt>Despesas</dt>
                         <dd>{currency(stats.expensesCents)}</dd>
                       </div>
@@ -705,6 +771,9 @@ export function AdminDashboard() {
                       {stats.missingFees} pedidos com taxas pendentes.
                       <br />
                       {stats.missingRefunds} pedidos com reembolso pendente.
+                      <br />
+                      {stats.missingDeliveryCosts || 0} entregas com custo real
+                      pendente.
                     </p>
                     <button
                       disabled={busy}
@@ -987,8 +1056,8 @@ export function AdminDashboard() {
           <>
             <div className="admin-toolbar">
               <p>
-                Últimos 200 pedidos. A retirada só é liberada após nova
-                conferência do pagamento.
+                Últimos 200 pedidos. Acompanhe o pagamento, confira os produtos
+                e organize a embalagem e a entrega.
               </p>
               <div>
                 <button
@@ -1036,8 +1105,13 @@ export function AdminDashboard() {
                   <option value="all">Todos</option>
                   <option value="pending">Pagamento pendente</option>
                   <option value="paid">Pago</option>
-                  <option value="ready">Pronto para retirada</option>
-                  <option value="completed">Retirado</option>
+                  <option value="to_pack">Pagos para embalar</option>
+                  <option value="packing">Em separação</option>
+                  <option value="ready">Pronto</option>
+                  <option value="out_for_delivery">Saiu para entrega</option>
+                  <option value="completed">Concluído</option>
+                  <option value="pickup">Retirada na loja</option>
+                  <option value="delivery">Entrega no endereço</option>
                   <option value="refunded">Reembolso</option>
                   <option value="failed">Recusado</option>
                   <option value="canceled">Cancelado</option>
@@ -1052,7 +1126,7 @@ export function AdminDashboard() {
                     <th>Pedido / cliente</th>
                     <th>Total</th>
                     <th>Pagamento</th>
-                    <th>Retirada</th>
+                    <th>Preparação / recebimento</th>
                     <th>Data</th>
                     <th />
                   </tr>
@@ -1070,16 +1144,23 @@ export function AdminDashboard() {
                           {stateLabel[item.state] || item.state}
                         </span>
                       </td>
-                      <td data-label="Retirada">
+                      <td data-label="Preparação">
                         {
                           (
                             {
                               new: "Novo",
+                              packing: "Em separação",
                               ready: "Pronto",
-                              completed: "Retirado",
+                              out_for_delivery: "Saiu para entrega",
+                              completed: "Concluído",
                             } as Record<string, string>
                           )[item.fulfillment_status]
                         }
+                        <small>
+                          {item.fulfillment_mode === "delivery"
+                            ? "Entrega"
+                            : "Retirada na loja"}
+                        </small>
                       </td>
                       <td data-label="Data">{date(item.created_at)}</td>
                       <td data-label="Ações">
@@ -1456,8 +1537,25 @@ export function AdminDashboard() {
               Total: <strong>{currency(order.total_cents)}</strong> · Taxas:{" "}
               {currency(order.fee_cents)}
             </p>
+            <AdminOrderOperations
+              key={order.id}
+              order={order}
+              busy={busy}
+              update={(path, body) =>
+                action(async () => {
+                  const result = await api<{ order: Order }>(
+                    `orders/${order.id}/${path}`,
+                    "PUT",
+                    body,
+                  );
+                  setOrder(result.order);
+                  setNotice("Informações do pedido atualizadas.");
+                  await reload();
+                })
+              }
+            />
             <label className="field-label">
-              Situação da retirada
+              Etapa de preparação e recebimento
               <select
                 disabled={busy || order.state !== "paid"}
                 value={order.fulfillment_status}
@@ -1474,8 +1572,14 @@ export function AdminDashboard() {
                 }
               >
                 <option value="new">Novo</option>
-                <option value="ready">Pronto para retirada</option>
-                <option value="completed">Retirado</option>
+                <option value="packing">Em separação</option>
+                <option value="ready">Embalado e pronto</option>
+                {order.fulfillment_mode === "delivery" && (
+                  <option value="out_for_delivery">Saiu para entrega</option>
+                )}
+                <option value="completed">
+                  Concluído · entregue ou retirado
+                </option>
               </select>
             </label>
             <p className="fine-print">

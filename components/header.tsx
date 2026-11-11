@@ -16,7 +16,9 @@ import {
 import { useCart } from "@/lib/cart-context";
 import { groups } from "@/lib/products";
 import { whatsappUrl } from "@/lib/store";
+import { useShipping } from "@/lib/shipping-context";
 export function Header() {
+  const { settings: shipping } = useShipping();
   const pathname = usePathname();
   const { itemCount, favorites } = useCart();
   const [menu, setMenu] = useState(false);
@@ -61,8 +63,11 @@ export function Header() {
           <span>
             <Leaf size={13} /> O seu mundo mais natural começa aqui.
           </span>
-          <Link href="/contato">
-            De Taboão da Serra, com carinho <ArrowUpRight size={12} />
+          <Link href={shipping.enabled ? "/carrinho" : "/contato"}>
+            {shipping.enabled
+              ? "Entrega: calcule o frete pelo CEP"
+              : "De Taboão da Serra, com carinho"}{" "}
+            <ArrowUpRight size={12} />
           </Link>
         </div>
       </div>

@@ -18,13 +18,13 @@ Associe o domínio, habilite o certificado SSL e escolha uma origem principal. S
 
 Em **Environment variables**, configure:
 
-| Nome | Valor |
-| --- | --- |
-| `APP_URL` | Origem HTTPS da loja, por exemplo `https://sualoja.com.br`, sem caminho ou parâmetros. |
-| `MERCADOPAGO_ACCESS_TOKEN` | Access Token privado da aplicação Mercado Pago. Nunca use `NEXT_PUBLIC_` para esse valor. |
-| `MERCADOPAGO_ENV` | `production` no lançamento; `test` para a conta de testes. O padrão é `production`. |
+| Nome                         | Valor                                                                                                                               |
+| ---------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| `APP_URL`                    | Origem HTTPS da loja, por exemplo `https://sualoja.com.br`, sem caminho ou parâmetros.                                              |
+| `MERCADOPAGO_ACCESS_TOKEN`   | Access Token privado da aplicação Mercado Pago. Nunca use `NEXT_PUBLIC_` para esse valor.                                           |
+| `MERCADOPAGO_ENV`            | `production` no lançamento; `test` para a conta de testes. O padrão é `production`.                                                 |
 | `MERCADOPAGO_WEBHOOK_SECRET` | Assinatura secreta gerada na configuração de Webhooks da aplicação Mercado Pago. Necessária para receber notificações autenticadas. |
-| `NEXT_PUBLIC_SITE_URL` | Opcional: a mesma origem de `APP_URL` para os metadados sociais. |
+| `NEXT_PUBLIC_SITE_URL`       | Opcional: a mesma origem de `APP_URL` para os metadados sociais.                                                                    |
 
 O Checkout Pro usa o Access Token no servidor; não precisa de Public Key no navegador. A URL da loja também precisa estar configurada para os retornos e a proteção de origem. O checkout precisa do token, da origem e do banco configurados. Sem a assinatura adicional, o endpoint de Webhooks fica bloqueado. Configure-a para o lançamento.
 
@@ -79,9 +79,9 @@ Nenhuma transação real foi validada durante a implementação, porque as crede
 
 ## 6. Operação da loja
 
-O registro financeiro do provedor fica no Mercado Pago; a loja mantém no MySQL os pedidos, itens, nome/e-mail, custos, taxas conciliadas, fotos, despesas e histórico administrativo. O painel permite acompanhar e confirmar a retirada; antes dessa alteração, consulta novamente o pagamento. Cancelamentos e reembolsos financeiros continuam na conta Mercado Pago, protegida com autenticação em duas etapas.
+O registro financeiro do provedor fica no Mercado Pago; a loja mantém no MySQL os pedidos, itens, nome/e-mail, custos, taxas conciliadas, fotos, despesas e histórico administrativo. O painel permite conferir os produtos e acompanhar a preparação e o recebimento; antes de alterar a etapa, consulta novamente o pagamento. Endereço, telefone e observações da entrega ficam restritos à equipe autenticada. Cancelamentos e reembolsos financeiros continuam na conta Mercado Pago, protegida com autenticação em duas etapas.
 
-O pagamento online desta versão é para **retirada sem frete**. Entregas exigem orçamento pelo atendimento antes do pagamento. Não há integração automática de estoque ou reserva com o PDV; confirme a disponibilidade e atualize o catálogo/indisponíveis para evitar vender um item esgotado.
+O pagamento online aceita **retirada sem frete** e **entrega com frete calculado**. Execute novamente `npm run db:migrate` na atualização e configure CEP de origem e tarifas em `/admin` → **Frete e entregas**. A distância é uma estimativa em linha reta entre CEPs, sem chave de mapas paga; a entrega inicia desativada. Veja [pedidos, avisos sonoros e frete](OPERACAO-PEDIDOS-FRETE.md). Não há integração automática de estoque ou reserva com o PDV; confirme a disponibilidade e atualize o catálogo/indisponíveis para evitar vender um item esgotado.
 
 Os preços do catálogo foram confirmados pelo responsável pela loja nesta sessão. Para atualizar valores, custos, disponibilidade e fotos, use `/admin`. As alterações ficam no MySQL e são usadas no catálogo e no cálculo do servidor. `lib/catalog.json` é a base inicial; `lib/sales-policy.json` define os limites gerais. Os identificadores de produto devem permanecer estáveis.
 

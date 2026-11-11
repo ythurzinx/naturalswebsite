@@ -69,6 +69,11 @@ before(async () => {
 });
 beforeEach(async () => {
   for (const table of [
+    "mn_order_packing",
+    "mn_order_events",
+    "mn_order_details",
+    "mn_checkout_intents",
+    "mn_settings",
     "mn_order_items",
     "mn_orders",
     "mn_products",
@@ -618,4 +623,300 @@ test("authenticated admin HTTP edits and assigns a normalized photo to its own p
   for (let i = 1; i < 15; i++) assert.equal((await sync()).status, 200);
   assert.equal((await sync()).status, 429);
   assert.equal(synced.length, 15);
+});
+
+function deliveryOrderFixture() {
+  const selection = {
+    name: "Cliente entrega",
+    email: "entrega@example.invalid",
+    phone: "11999999999",
+    notes: "Entregar na portaria",
+    fulfillment: "delivery",
+    totalCents: 4400,
+    shippingCents: 800,
+    delivery: {
+      distanceMeters: 1500,
+      address: {
+        postalCode: "06754100",
+        street: "Rua de teste",
+        number: "22",
+        complement: "Apto 2",
+        neighborhood: "Centro",
+        city: "Taboão da Serra",
+        state: "SP",
+      },
+    },
+    items: [
+      {
+        id: "prod-1",
+        key: "prod-1:300",
+        title: "Castanha · 300 g",
+        quantity: 1,
+        unitCents: 3600,
+      },
+      {
+        id: "__shipping__",
+        key: "__shipping__:0",
+        title: "Entrega",
+        quantity: 1,
+        unitCents: 800,
+      },
+    ],
+  };
+  const order = {
+    id: "ORD01MNDELIVERYDBFIXTURE",
+    external_reference: "fixture-delivery-reference",
+    total_amount: "44.00",
+    total_paid_amount: "0.00",
+    status: "created",
+    status_detail: "created",
+    created_date: new Date().toISOString(),
+    last_updated_date: new Date().toISOString(),
+    items: selection.items.map((i) => ({
+      external_code: i.key,
+      title: i.title,
+      quantity: i.quantity,
+      unit_price: (i.unitCents / 100).toFixed(2),
+    })),
+  };
+  return { selection, order };
+}
+test("delivery address survives a lost checkout response and event retries do not duplicate alerts", async () => {
+  await repo.saveProduct(product());
+  const { selection, order } = deliveryOrderFixture();
+  const baseline = await repo.orderAlerts();
+  assert.deepEqual(baseline.events, []);
+  await repo.recordCheckoutIntent(order.external_reference, selection);
+  await repo.recordCheckoutIntent(order.external_reference, selection);
+  await assert.rejects(
+    repo.recordCheckoutIntent(order.external_reference, {
+      ...selection,
+      phone: "11988888888",
+    }),
+    { code: "CHECKOUT_CONFLICT" },
+  );
+  await Promise.all(Array.from({ length: 5 }, () => repo.recordOrder(order)));
+  const created = await repo.order(order.id);
+  assert.equal(created.address.number, "22");
+  assert.equal(created.customer_phone, "11999999999");
+  assert.equal(created.fulfillment_mode, "delivery");
+  assert.equal(
+    created.items.find((i) => i.product_id === "__shipping__").cost_unit_cents,
+    0,
+  );
+  const paid = {
+    ...order,
+    status: "processed",
+    status_detail: "accredited",
+    total_paid_amount: "44.00",
+    last_updated_date: new Date(Date.now() + 1000).toISOString(),
+  };
+  await Promise.all(Array.from({ length: 5 }, () => repo.recordOrder(paid)));
+  const feed = await repo.orderAlerts(baseline.cursor);
+  assert.deepEqual(
+    feed.events.map((e) => e.kind),
+    ["created", "paid"],
+  );
+  assert.equal(Number(feed.counts.toPack), 1);
+  assert.equal((await repo.orderAlerts(feed.cursor)).events.length, 0);
+  assert.deepEqual(
+    (await repo.orderAlerts()).events,
+    [],
+    "login baselines do not replay old alerts",
+  );
+  await repo.saveOrderOperations(order.id, {
+    staffNote: "Conferir embalagem\nBancada 2",
+    courierName: "Entregador teste",
+    deliveryCostCents: 600,
+  });
+  await repo.recordOrder(paid);
+  assert.equal(
+    (await repo.order(order.id)).staff_note,
+    "Conferir embalagem\nBancada 2",
+  );
+  assert.equal((await repo.order(order.id)).delivery_cost_cents, 600);
+  const [audit] = await pool.execute(
+    "SELECT details FROM mn_audit WHERE entity_id=?",
+    [order.id],
+  );
+  assert.equal(JSON.stringify(audit).includes("Bancada"), false);
+  assert.equal(JSON.stringify(audit).includes("Rua de teste"), false);
+});
+test("packing is payment-gated, validates item ownership and requires every product before release", async () => {
+  const { selection, order } = deliveryOrderFixture();
+  await repo.recordOrder(order, selection);
+  await assert.rejects(repo.setPacked(order.id, "prod-1:300", true), {
+    code: "PAYMENT_REQUIRED",
+  });
+  await assert.rejects(repo.setFulfillment(order.id, "packing"), {
+    code: "PAYMENT_REQUIRED",
+  });
+  await repo.recordOrder({
+    ...order,
+    status: "processed",
+    status_detail: "accredited",
+    total_paid_amount: "44.00",
+    last_updated_date: new Date(Date.now() + 1000).toISOString(),
+  });
+  await repo.setFulfillment(order.id, "packing");
+  await assert.rejects(repo.setFulfillment(order.id, "ready"), {
+    code: "PACKING_INCOMPLETE",
+  });
+  await assert.rejects(repo.setPacked(order.id, "prod-9999:300", true), {
+    code: "INVALID_ITEM",
+  });
+  await assert.rejects(repo.setPacked(order.id, "__shipping__:0", true), {
+    code: "INVALID_ITEM",
+  });
+  await repo.setPacked(order.id, "prod-1:300", true);
+  await repo.setFulfillment(order.id, "ready");
+  await repo.setPacked(order.id, "prod-1:300", false);
+  assert.equal((await repo.order(order.id)).fulfillment_status, "packing");
+  await repo.setPacked(order.id, "prod-1:300", true);
+  await repo.setFulfillment(order.id, "out_for_delivery");
+  await assert.rejects(repo.setPacked(order.id, "prod-1:300", false), {
+    code: "ORDER_LOCKED",
+  });
+  await repo.setFulfillment(order.id, "completed");
+  assert.equal((await repo.order(order.id)).fulfillment_status, "completed");
+  const pickup = { ...order, id: "ORD01MNPICKUPDBFIXTURE" };
+  await repo.recordOrder(
+    {
+      ...pickup,
+      status: "processed",
+      status_detail: "accredited",
+      total_paid_amount: "44.00",
+    },
+    { ...selection, fulfillment: "pickup", delivery: undefined },
+  );
+  await assert.rejects(repo.setFulfillment(pickup.id, "out_for_delivery"), {
+    code: "INVALID_STATE",
+  });
+});
+test("delivery costs are required for profit, counted once and shipping is excluded from popular products", async () => {
+  await repo.saveProduct(product());
+  const { selection, order } = deliveryOrderFixture();
+  const paid = {
+    ...order,
+    status: "processed",
+    status_detail: "accredited",
+    total_paid_amount: "44.00",
+  };
+  await repo.recordOrder(paid, selection);
+  await repo.settlement(order.id, {
+    feeCents: 200,
+    refundedCents: 0,
+    providerUpdatedAt: Date.parse(paid.last_updated_date),
+  });
+  let stats = await repo.dashboard();
+  assert.equal(stats.costsCents, 2400);
+  assert.equal(stats.missingDeliveryCosts, 1);
+  assert.equal(stats.profitCents, null);
+  assert.equal(stats.topProducts.length, 1);
+  assert.equal(stats.topProducts[0].id, "prod-1");
+  await repo.saveOrderOperations(order.id, {
+    staffNote: "",
+    courierName: "Teste",
+    deliveryCostCents: 600,
+  });
+  stats = await repo.dashboard();
+  assert.equal(stats.deliveryCostsCents, 600);
+  assert.equal(stats.missingDeliveryCosts, 0);
+  assert.equal(stats.profitCents, 1200);
+  await repo.recordOrder(paid);
+  assert.equal((await repo.dashboard()).profitCents, 1200);
+});
+test("shipping settings use optimistic versions and do not rewrite historical delivery fees", async () => {
+  const { selection, order } = deliveryOrderFixture();
+  await repo.recordOrder(order, selection);
+  await repo.saveShippingSettings({
+    enabled: true,
+    originPostalCode: "06754000",
+    pricePerKmCents: 300,
+    revision: 0,
+  });
+  assert.equal((await repo.shippingSettings()).revision, 1);
+  await assert.rejects(
+    repo.saveShippingSettings({ enabled: false, revision: 0 }),
+    { code: "SETTINGS_CHANGED" },
+  );
+  await repo.saveShippingSettings({
+    enabled: true,
+    originPostalCode: "06754000",
+    pricePerKmCents: 900,
+    revision: 1,
+  });
+  assert.equal((await repo.shippingSettings()).pricePerKmCents, 900);
+  assert.equal((await repo.order(order.id)).shipping_cents, 800);
+});
+test("alerts, freight settings, packing and operations require authentication and CSRF", async () => {
+  const config = {
+    origin: "https://loja.example",
+    secure: true,
+    username: "admin",
+    passwordHash,
+    sessionSecret: "s".repeat(43),
+    totpSecret: "",
+  };
+  const service = createAdminService({
+    config,
+    repository: repo,
+    payments: null,
+  });
+  for (const [method, path] of [
+    ["GET", ["order-alerts"]],
+    ["GET", ["shipping"]],
+    ["PUT", ["shipping"]],
+    ["PUT", ["orders", "ORD01MNDELIVERYDBFIXTURE", "packing"]],
+    ["PUT", ["orders", "ORD01MNDELIVERYDBFIXTURE", "operations"]],
+  ]) {
+    const response = await service.handle(
+      new Request(config.origin + "/api/admin/" + path.join("/"), {
+        method,
+        headers: { Origin: config.origin, "Content-Type": "application/json" },
+        ...(method !== "GET" ? { body: "{}" } : {}),
+      }),
+      path,
+    );
+    assert.equal(response.status, 401);
+  }
+  const login = await service.handle(
+    new Request(config.origin + "/api/admin/login", {
+      method: "POST",
+      headers: { Origin: config.origin, "Content-Type": "application/json" },
+      body: JSON.stringify({
+        username: "admin",
+        password: "correct-fixture-password",
+      }),
+    }),
+    ["login"],
+  );
+  const cookie = login.headers.getSetCookie()[0].split(";")[0];
+  const csrf = (await login.json()).csrfToken;
+  const path = ["orders", "ORD01MNDELIVERYDBFIXTURE", "operations"];
+  for (const headers of [
+    { Origin: config.origin },
+    { Origin: "https://evil.example", "X-CSRF-Token": csrf },
+  ]) {
+    const response = await service.handle(
+      new Request(config.origin + "/api/admin/" + path.join("/"), {
+        method: "PUT",
+        headers: {
+          Cookie: cookie,
+          "Content-Type": "application/json",
+          ...headers,
+        },
+        body: "{}",
+      }),
+      path,
+    );
+    assert.equal(response.status, 403);
+  }
+  const response = await service.handle(
+    new Request(config.origin + "/api/admin/order-alerts?after=-1", {
+      headers: { Cookie: cookie },
+    }),
+    ["order-alerts"],
+  );
+  assert.equal(response.status, 400);
 });

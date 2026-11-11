@@ -35,7 +35,7 @@ Leia [o guia da Hostinger](docs/HOSTINGER.md). Use uma aplicação Node.js/Next.
 
 O checkout hospedado não exige Public Key ou dados de cartão no site. Com o token, a origem e o banco configurados, cria pedidos e consulta o resultado; configure também o segredo de Webhooks para o lançamento. O estado financeiro é verificado no Mercado Pago; os registros da loja e o painel ficam no MySQL. A interface nunca confirma um pagamento apenas porque o comprador retornou ao site.
 
-A versão online recebe pagamentos de compras com retirada sem frete. Entregas exigem orçamento pelo atendimento. O painel `/admin` acompanha pedidos e retiradas, permite editar produtos/fotos/custos, registrar despesas, estimar lucro com dados completos e exportar pedidos. Reembolsos financeiros ficam na conta Mercado Pago. Não há baixa automática de estoque no PDV.
+A versão online recebe pagamentos de compras com retirada sem frete ou entrega com frete calculado entre CEPs. Configure origem e tarifas em `/admin` → **Frete e entregas**; a entrega fica desativada até essa configuração. O painel acompanha pedidos com aviso sonoro opcional, checklist de embalagem, etapas de preparação, impressão de resumo e notas internas. Também permite editar produtos/fotos/custos, registrar despesas, estimar lucro com dados completos e exportar pedidos. Veja o [guia de operação](docs/OPERACAO-PEDIDOS-FRETE.md). Reembolsos financeiros ficam na conta Mercado Pago. Não há baixa automática de estoque no PDV.
 
 ## Administração e persistência
 
