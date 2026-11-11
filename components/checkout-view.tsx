@@ -6,7 +6,6 @@ import {
   ArrowLeft,
   ShieldCheck,
   Check,
-  MapPin,
   CreditCard,
   QrCode,
   LockKeyhole,
@@ -15,17 +14,18 @@ import { useCart } from "@/lib/cart-context";
 import { itemKey, lineTotal } from "@/lib/commerce.mjs";
 import { referencePriceCents } from "@/lib/pricing.mjs";
 import { formatPrice } from "@/lib/products";
-import { store, whatsappUrl } from "@/lib/store";
+import { whatsappUrl } from "@/lib/store";
 import { usePaymentCheckout } from "@/hooks/use-payment-checkout";
+import { useShipping } from "@/lib/shipping-context";
+import { DeliveryEstimator } from "./delivery-estimator";
 export function CheckoutView() {
   const { cart, ready, needsWeightReview } = useCart();
   const payment = usePaymentCheckout();
+  const shipping = useShipping();
+  const { method } = shipping;
   const [name, setName] = useState(""),
     [email, setEmail] = useState(""),
-    [method, setMethod] = useState("pickup"),
     [paymentMethod, setPaymentMethod] = useState("mercadopago"),
-    [cep, setCep] = useState(""),
-    [neighborhood, setNeighborhood] = useState(""),
     [notes, setNotes] = useState(""),
     [handoff, setHandoff] = useState(false);
   useEffect(() => {
@@ -42,7 +42,8 @@ export function CheckoutView() {
     `Nome: ${name.trim()}`,
     method === "pickup"
       ? "Preferência: retirar na loja"
-      : `Preferência: entrega — CEP ${cep}, bairro ${neighborhood.trim()}`,
+      : `Preferência: entrega — CEP ${shipping.cep}${shipping.quote ? `, ${shipping.quote.address.street}, ${shipping.number}, ${shipping.complement} · ${shipping.quote.address.neighborhood} · ${shipping.quote.address.city}/${shipping.quote.address.state} · Frete ${formatPrice(shipping.quote.feeCents / 100)}` : " · frete a confirmar"}`,
+    shipping.phone ? `Telefone: ${shipping.phone}` : "",
     notes.trim() ? `Observações: ${notes.trim()}` : "",
     "Podem confirmar a disponibilidade e as condições de entrega/pagamento?",
   ]
@@ -50,7 +51,21 @@ export function CheckoutView() {
     .join("\n");
   async function submit(event: FormEvent) {
     event.preventDefault();
-    if (online) await payment.pay(cart, name, email, method);
+    if (online)
+      await payment.pay(cart, name, email, method, {
+        totalCents: shipping.totalCents,
+        notes,
+        phone: method === "delivery" ? shipping.phone : "",
+        ...(method === "delivery" && shipping.quote
+          ? {
+              delivery: {
+                quoteToken: shipping.quote.quoteToken,
+                number: shipping.number,
+                complement: shipping.complement,
+              },
+            }
+          : {}),
+      });
     else {
       window.open(whatsappUrl(message), "_blank", "noopener,noreferrer");
       setHandoff(true);
@@ -131,77 +146,7 @@ export function CheckoutView() {
                 <h2>
                   <span>02</span> Como prefere receber?
                 </h2>
-                <div className="delivery-options">
-                  <label className={method === "pickup" ? "selected" : ""}>
-                    <input
-                      type="radio"
-                      name="method"
-                      value="pickup"
-                      checked={method === "pickup"}
-                      onChange={() => setMethod("pickup")}
-                    />
-                    <strong>Retirar na loja</strong>
-                    <span>Sem frete. Combine o horário com a equipe.</span>
-                  </label>
-                  <label className={method === "delivery" ? "selected" : ""}>
-                    <input
-                      type="radio"
-                      name="method"
-                      value="delivery"
-                      checked={method === "delivery"}
-                      onChange={() => {
-                        setMethod("delivery");
-                        setPaymentMethod("whatsapp");
-                      }}
-                    />
-                    <strong>Consultar entrega</strong>
-                    <span>
-                      Confirme área atendida, frete e prazo antes de pagar.
-                    </span>
-                  </label>
-                </div>
-                {method === "delivery" ? (
-                  <>
-                    <div className="form-row">
-                      <label className="field-label">
-                        CEP
-                        <input
-                          name="postal-code"
-                          inputMode="numeric"
-                          autoComplete="postal-code"
-                          pattern="[0-9]{5}-?[0-9]{3}"
-                          required
-                          maxLength={9}
-                          value={cep}
-                          onChange={(e) =>
-                            setCep(e.target.value.replace(/[^\d-]/g, ""))
-                          }
-                          placeholder="00000-000"
-                        />
-                      </label>
-                      <label className="field-label">
-                        Bairro e cidade
-                        <input
-                          name="neighborhood"
-                          required
-                          maxLength={120}
-                          value={neighborhood}
-                          onChange={(e) => setNeighborhood(e.target.value)}
-                          placeholder="Seu bairro e cidade"
-                        />
-                      </label>
-                    </div>
-                    <p className="privacy-note">
-                      Para entregas, nossa equipe confirma o orçamento completo
-                      antes do pagamento.
-                    </p>
-                  </>
-                ) : (
-                  <p className="pickup-address">
-                    <MapPin size={18} />
-                    {store.address}
-                  </p>
-                )}
+                <DeliveryEstimator details />
               </div>
               <div className="form-section">
                 <h2>
@@ -214,14 +159,14 @@ export function CheckoutView() {
                 )}
                 <div className="payment-methods">
                   <label
-                    className={`${online ? "selected" : ""} ${!payment.available || method === "delivery" ? "unavailable" : ""}`}
+                    className={`${online ? "selected" : ""} ${!payment.available || !shipping.canPay ? "unavailable" : ""}`}
                   >
                     <input
                       type="radio"
                       name="payment"
                       value="mercadopago"
                       checked={online}
-                      disabled={!payment.available || method === "delivery"}
+                      disabled={!payment.available || !shipping.canPay}
                       onChange={() => setPaymentMethod("mercadopago")}
                     />
                     <span>
@@ -231,8 +176,8 @@ export function CheckoutView() {
                     <div>
                       <strong>Pix ou cartão</strong>
                       <p>
-                        Pagamento no ambiente protegido do Mercado Pago.
-                        Disponível para retirada.
+                        Pagamento no ambiente protegido do Mercado Pago. Entrega
+                        com frete calculado ou retirada na loja.
                       </p>
                     </div>
                   </label>
@@ -262,29 +207,28 @@ export function CheckoutView() {
                     equipe pode ajudar pelo atendimento.
                   </p>
                 )}
-                {online ? (
+                {online && (
                   <p className="payment-assurance">
                     <LockKeyhole size={17} /> Você escolherá Pix ou cartão na
                     próxima etapa. A loja não recebe nem armazena o número do
                     seu cartão.
                   </p>
-                ) : (
-                  <label className="field-label">
-                    Observações (opcional)
-                    <textarea
-                      maxLength={500}
-                      value={notes}
-                      onChange={(e) => setNotes(e.target.value)}
-                      rows={3}
-                      placeholder="Dúvidas sobre produtos, alergênicos ou entrega…"
-                    />
-                  </label>
                 )}
+                <label className="field-label">
+                  Observações (opcional)
+                  <textarea
+                    maxLength={500}
+                    value={notes}
+                    onChange={(e) => setNotes(e.target.value)}
+                    rows={3}
+                    placeholder="Dúvidas sobre produtos, alergênicos ou entrega…"
+                  />
+                </label>
               </div>
               <p className="privacy-note">
                 <ShieldCheck size={18} />{" "}
                 {online
-                  ? "Seu nome, e-mail e os itens da compra serão enviados ao Mercado Pago para o pagamento. Cookies essenciais protegem sua sessão e o acesso ao pedido."
+                  ? "Seu nome, e-mail e os itens da compra serão enviados ao Mercado Pago para o pagamento. Para entrega, a loja recebe seu endereço e telefone. Cookies essenciais protegem sua sessão e o acesso ao pedido."
                   : "Ao continuar, você abre o WhatsApp e pode revisar a mensagem antes de enviá-la."}{" "}
                 <Link href="/privacidade">Saiba mais</Link>.
               </p>
@@ -301,7 +245,7 @@ export function CheckoutView() {
                   (online &&
                     (payment.checking ||
                       !payment.available ||
-                      method !== "pickup"))
+                      !shipping.canPay))
                 }
               >
                 {online ? (
@@ -309,7 +253,7 @@ export function CheckoutView() {
                     <LockKeyhole size={18} />
                     {payment.busy
                       ? "Preparando pagamento…"
-                      : `Pagar ${formatPrice(cart.total)} com Mercado Pago`}
+                      : `Pagar ${formatPrice(shipping.totalCents / 100)} com Mercado Pago`}
                   </>
                 ) : (
                   <>
@@ -358,18 +302,18 @@ export function CheckoutView() {
               <span>
                 {method === "pickup"
                   ? "Retirada na loja · sem frete"
-                  : "Entrega · orçamento no atendimento"}
+                  : shipping.quote
+                    ? `Entrega · ${formatPrice(shipping.quote.feeCents / 100)}`
+                    : "Entrega · calcule o frete"}
               </span>
             </div>
             <div className="summary-total">
-              <span>
-                {method === "pickup" ? "Total" : "Subtotal sem frete"}
-              </span>
-              <strong>{formatPrice(cart.total)}</strong>
+              <span>{shipping.canPay ? "Total" : "Subtotal sem frete"}</span>
+              <strong>{formatPrice(shipping.totalCents / 100)}</strong>
             </div>
             <p>
               {online
-                ? "O pagamento só é confirmado após consulta ao Mercado Pago. Combine a retirada com a equipe após a aprovação."
+                ? "O pagamento só é confirmado após consulta ao Mercado Pago. A equipe prepara o pedido após a aprovação; combine o prazo de entrega ou retirada."
                 : "Envie a seleção e confirme disponibilidade, frete e pagamento com a equipe."}
             </p>
             <span className="summary-assurance">
@@ -379,7 +323,7 @@ export function CheckoutView() {
           <div className="mobile-purchase-bar">
             <div>
               <small>{online ? "Total a pagar" : "Sua seleção"}</small>
-              <strong>{formatPrice(cart.total)}</strong>
+              <strong>{formatPrice(shipping.totalCents / 100)}</strong>
             </div>
             <button
               form="checkout-form"
@@ -388,9 +332,7 @@ export function CheckoutView() {
               disabled={
                 payment.busy ||
                 (online &&
-                  (payment.checking ||
-                    !payment.available ||
-                    method !== "pickup"))
+                  (payment.checking || !payment.available || !shipping.canPay))
               }
             >
               {payment.busy

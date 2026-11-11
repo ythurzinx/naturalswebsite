@@ -39,6 +39,12 @@ export function usePaymentCheckout() {
     name: string,
     email: string,
     fulfillment: string,
+    options: {
+      totalCents?: number;
+      notes?: string;
+      phone?: string;
+      delivery?: { quoteToken: string; number: string; complement: string };
+    } = {},
   ) {
     if (submitting.current) return;
     submitting.current = true;
@@ -66,7 +72,11 @@ export function usePaymentCheckout() {
           name,
           email,
           fulfillment,
-          expectedTotalCents: Math.round(cart.total * 100),
+          expectedTotalCents:
+            options.totalCents ?? Math.round(cart.total * 100),
+          ...(options.notes ? { notes: options.notes } : {}),
+          ...(options.phone ? { phone: options.phone } : {}),
+          ...(options.delivery ? { delivery: options.delivery } : {}),
         }),
       });
       const result = await response.json();

@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 import { GeistSans } from "geist/font/sans";
 import { CartProvider } from "@/lib/cart-context";
+import { ShippingProvider } from "@/lib/shipping-context";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { CookieConsent } from "@/components/cookie-consent";
@@ -56,14 +57,16 @@ export default async function RootLayout({
     <html lang="pt-BR">
       <body className={GeistSans.className}>
         <CartProvider initialCatalog={initialCatalog}>
-          <a href="#conteudo" className="skip-link">
-            Pular para o conteúdo
-          </a>
-          <Header />
-          {children}
-          <Footer />
-          <MobileNavigation />
-          <CookieConsent />
+          <ShippingProvider>
+            <a href="#conteudo" className="skip-link">
+              Pular para o conteúdo
+            </a>
+            <Header />
+            {children}
+            <Footer />
+            <MobileNavigation />
+            <CookieConsent />
+          </ShippingProvider>
         </CartProvider>
       </body>
     </html>

@@ -131,6 +131,22 @@ try {
   });
   assert.equal(checkout.status, 503);
   assert.equal((await checkout.json()).code, "PAYMENT_NOT_CONFIGURED");
+  const shipping = await fetch(origin + "/api/shipping/settings");
+  assert.equal(shipping.status, 200);
+  assert.equal((await shipping.json()).enabled, false);
+  assert.ok(shipping.headers.get("cache-control").includes("no-store"));
+  assert.equal((await fetch(origin + "/api/shipping/session")).status, 503);
+  assert.equal(
+    (
+      await fetch(origin + "/api/shipping/quote", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: "{}",
+      })
+    ).status,
+    503,
+  );
+  assert.equal((await fetch(origin + "/api/admin/order-alerts")).status, 503);
   assert.equal(
     (await fetch(origin + "/api/mercadopago/webhook", { method: "POST" }))
       .status,

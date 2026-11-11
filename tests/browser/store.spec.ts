@@ -246,6 +246,13 @@ test("admin product batches and order filters work with isolated UI fixtures", a
         },
         topProducts: [],
       };
+    else if (path === "order-alerts")
+      json = {
+        cursor: 0,
+        events: [],
+        counts: { toPack: 0, ready: 1, pending: 1 },
+        hasMore: false,
+      };
     else if (path === "products") json = { products };
     else if (path === "products/availability") {
       expect(route.request().method()).toBe("PATCH");

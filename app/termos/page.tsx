@@ -33,27 +33,31 @@ export default function TermsPage() {
         <p>
           Se tiver dúvidas, converse com a equipe antes de pagar. Confirme a
           disponibilidade, os ingredientes, os alergênicos, a validade e as
-          condições de retirada. Para entrega, solicite o orçamento pelo
-          atendimento. Suplementos e fitoterápicos exigem atenção às informações
-          do fabricante e às orientações de um profissional habilitado quando
-          aplicável.
+          condições de recebimento. Para entrega, calcule o frete pelo CEP ou
+          consulte o atendimento. Suplementos e fitoterápicos exigem atenção às
+          informações do fabricante e às orientações de um profissional
+          habilitado quando aplicável.
         </p>
         <h2>4. Combine o recebimento</h2>
         <p>
-          O frete, a área atendida e o prazo são combinados no atendimento. Para
-          retirada, confirme o endereço e o horário antes de se deslocar. O site
-          não estima distâncias ou prazos de entrega.
+          Quando habilitado, o frete considera uma estimativa em linha reta
+          entre os CEPs, com tarifas e limite de distância definidos pela loja.
+          Não é uma rota de carro. Confira a rua retornada, o número, o
+          complemento e o valor antes de pagar. Cotações valem por 10 minutos e
+          precisam ser refeitas se o carrinho ou as tarifas mudarem. CEPs sem
+          dados suficientes exigem atendimento. Combine o prazo com a equipe.
+          Para retirada, confirme o endereço e o horário antes de se deslocar.
         </p>
         <h2>5. Pagamento e acompanhamento</h2>
         <p>
-          Para compras com retirada, quando disponível, o site permite pagar com
-          Pix ou cartão no ambiente do Mercado Pago. A loja não recebe nem
-          armazena o número do cartão. A confirmação depende da aprovação do
-          pagamento; retornar à loja não significa que a compra foi paga.
-          Acompanhe o status na página de retorno ou no atendimento. As
-          condições de parcelamento e eventuais custos são exibidos pelo Mercado
-          Pago antes da confirmação. Guarde o número do pedido e combine a
-          retirada.
+          Para compras com retirada ou entrega com frete calculado, quando
+          disponível, o site permite pagar com Pix ou cartão no ambiente do
+          Mercado Pago. A loja não recebe nem armazena o número do cartão. A
+          confirmação depende da aprovação do pagamento; retornar à loja não
+          significa que a compra foi paga. Acompanhe o status na página de
+          retorno ou no atendimento. As condições de parcelamento e eventuais
+          custos são exibidos pelo Mercado Pago antes da confirmação. Guarde o
+          número do pedido e combine a retirada.
         </p>
         <h2>Trocas, cancelamentos e devoluções</h2>
         <p>

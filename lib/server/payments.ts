@@ -2,6 +2,7 @@ import "server-only";
 import catalog from "@/lib/catalog.json";
 import policy from "@/lib/sales-policy.json";
 import { repository, publicCatalog } from "./shop";
+import { shipping } from "./shipping";
 import {
   createPaymentService,
   paymentConfiguration,
@@ -23,4 +24,5 @@ export const payments = createPaymentService({
   config: repository ? configuration : null,
   repository,
   catalogProvider: publicCatalog,
+  shipping,
 });

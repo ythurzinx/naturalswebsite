@@ -81,10 +81,24 @@ export default function PrivacyPage() {
           Os registros de pedido e pagamento ficam no Mercado Pago e podem ser
           acessados pela loja para atendimento, conciliação, reembolso e
           cumprimento das obrigações aplicáveis. A loja mantém no seu banco os
-          pedidos, itens, nome e e-mail para atendimento e conciliação. Números
-          de cartão não são armazenados pela loja. A hospedagem pode registrar
-          dados técnicos e identificadores de pedido para segurança e
-          diagnóstico.
+          pedidos, itens, nome e e-mail para atendimento e conciliação. Para
+          entrega, também mantém telefone, endereço e observações do pedido,
+          acessíveis à equipe autenticada. Números de cartão não são armazenados
+          pela loja. A hospedagem pode registrar dados técnicos e
+          identificadores de pedido para segurança e diagnóstico.
+        </p>
+        <h2>Cálculo de frete pelo CEP</h2>
+        <p>
+          Ao calcular o frete, o servidor consulta o CEP na BrasilAPI para obter
+          o endereço público e as coordenadas aproximadas. Não envia nome,
+          telefone, número do imóvel, e-mail ou itens da compra a esse serviço.
+          Um cookie essencial de até 1 hora protege a consulta; a cotação
+          assinada vale por 10 minutos. Os campos do endereço ficam em memória
+          no navegador e são registrados pela loja quando você inicia o
+          pagamento. As intenções de checkout permitem recuperar pedidos quando
+          há falha de conexão. Registros de tentativa com mais de 7 dias são
+          removidos nas próximas criações de checkout; pedidos efetivos seguem
+          as obrigações aplicáveis à compra.
         </p>
         <h2>Quando você usa o WhatsApp</h2>
         <p>

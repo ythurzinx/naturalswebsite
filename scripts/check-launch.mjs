@@ -77,6 +77,14 @@ if (!codeOnly) {
     await pool.execute("SELECT 1 FROM mn_products LIMIT 0");
     await pool.execute("SELECT 1 FROM mn_orders LIMIT 0");
     await pool.execute("SELECT 1 FROM mn_admin_sessions LIMIT 0");
+    for (const table of [
+      "mn_settings",
+      "mn_checkout_intents",
+      "mn_order_details",
+      "mn_order_packing",
+      "mn_order_events",
+    ])
+      await pool.execute(`SELECT 1 FROM ${table} LIMIT 0`);
     check("MySQL acessível e migração aplicada", true);
   } catch {
     check("MySQL acessível e migração aplicada", false);

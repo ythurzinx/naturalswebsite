@@ -17,7 +17,10 @@ import { itemKey, lineTotal } from "@/lib/commerce.mjs";
 import { referencePriceCents } from "@/lib/pricing.mjs";
 import { WeightSelector } from "./weight-selector";
 import { ProductImage } from "./product-card";
+import { useShipping } from "@/lib/shipping-context";
+import { DeliveryEstimator } from "./delivery-estimator";
 export function CartView() {
+  const shipping = useShipping();
   const {
     cart,
     ready,
@@ -149,17 +152,24 @@ export function CartView() {
               <span>Subtotal</span>
               <strong>{formatPrice(cart.total)}</strong>
             </div>
+            <DeliveryEstimator />
             <div>
-              <span>Entrega</span>
-              <span>A combinar com a loja</span>
+              <span>Frete</span>
+              <span>
+                {shipping.method === "pickup"
+                  ? "Retirada grátis"
+                  : shipping.quote
+                    ? formatPrice(shipping.quote.feeCents / 100)
+                    : "Calcule pelo CEP"}
+              </span>
             </div>
             <div className="summary-total">
-              <span>Total</span>
-              <strong>{formatPrice(cart.total)}</strong>
+              <span>{shipping.canPay ? "Total" : "Subtotal sem frete"}</span>
+              <strong>{formatPrice(shipping.totalCents / 100)}</strong>
             </div>
             <p>
-              Escolha Pix ou cartão pelo Mercado Pago para retirada na loja.
-              Para entregas, confirme o frete pelo atendimento antes de pagar.
+              Pague com Pix ou cartão pelo Mercado Pago. Confira o endereço e o
+              frete antes de finalizar a entrega.
             </p>
             <Link href="/checkout" className="button full-width">
               Continuar com minha seleção <ArrowRight size={17} />
@@ -179,7 +189,7 @@ export function CartView() {
           <div className="mobile-purchase-bar">
             <div>
               <small>Total da seleção</small>
-              <strong>{formatPrice(cart.total)}</strong>
+              <strong>{formatPrice(shipping.totalCents / 100)}</strong>
             </div>
             <Link href="/checkout" className="button">
               Continuar <ArrowRight size={17} />
