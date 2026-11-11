@@ -151,6 +151,7 @@ export function Storefront({
     return list;
   }, [query, group, catalog, selection, sort, favoritesOnly, favorites]);
   const current = slides[slide];
+  const CatalogHeading = catalog || favoritesOnly ? "h1" : "h2";
   return (
     <main id="conteudo">
       <Suspense>
@@ -322,7 +323,7 @@ export function Storefront({
                   ? `${products.length} PRODUTOS PARA EXPLORAR`
                   : "SELECIONADOS COM CARINHO"}
             </span>
-            <h2>
+            <CatalogHeading>
               {favoritesOnly
                 ? "Seus favoritos naturais"
                 : catalog
@@ -330,7 +331,7 @@ export function Storefront({
                     ? "Escolhas naturais"
                     : "Um mundo de coisas boas"
                   : "Seu próximo cuidado começa aqui"}
-            </h2>
+            </CatalogHeading>
             {(catalog || favoritesOnly) && (
               <p className="section-description">
                 {favoritesOnly

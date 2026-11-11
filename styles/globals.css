@@ -590,7 +590,7 @@ svg {
   align-items: center;
   margin-bottom: 25px;
 }
-.section-heading h2 {
+.section-heading :is(h1, h2) {
   font-family: Georgia, "Times New Roman", serif;
   font-size: 30px;
   font-weight: 400;
@@ -958,7 +958,7 @@ svg {
   min-height: 65vh;
   padding-bottom: 55px;
 }
-.full-catalog .section-heading h2 {
+.full-catalog .section-heading :is(h1, h2) {
   font-size: 43px;
 }
 .full-catalog .product-grid {
@@ -2366,7 +2366,7 @@ svg {
   .section {
     padding-top: 35px;
   }
-  .section-heading h2 {
+  .section-heading :is(h1, h2) {
     font-size: 27px;
   }
   .section-heading {
@@ -2571,7 +2571,7 @@ svg {
     width: 32px;
     height: 32px;
   }
-  .full-catalog .section-heading h2 {
+  .full-catalog .section-heading :is(h1, h2) {
     font-size: 35px;
   }
   .catalog-search-row {
@@ -2639,7 +2639,7 @@ svg {
     padding-top: 7px;
   }
   .header-nav {
-    gap: 20px;
+    gap: 18px;
   }
   .category-menu-button {
     padding-right: 15px;
@@ -2648,8 +2648,8 @@ svg {
     display: none;
   }
   .header-nav .nav-help {
-    font-size: 9px;
-    gap: 5px;
+    font-size: 0;
+    gap: 0;
   }
   .hero-inner {
     display: flex;
@@ -2746,7 +2746,7 @@ svg {
   .benefit p {
     font-size: 8px;
   }
-  .section-heading h2 {
+  .section-heading :is(h1, h2) {
     font-size: 25px;
     line-height: 1.2;
     max-width: 250px;
@@ -3073,7 +3073,7 @@ svg {
   .product-detail .field-label {
     margin: 14px 0;
   }
-  .full-catalog .section-heading h2 {
+  .full-catalog .section-heading :is(h1, h2) {
     font-size: 32px;
   }
   .section-description {
