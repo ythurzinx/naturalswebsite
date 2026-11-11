@@ -17,7 +17,7 @@ Não há banco de cartões, formulário de cartão, operação de reembolso púb
 | Ameaça | Controle e evidência |
 | --- | --- |
 | Alteração de preço no navegador | O servidor combina o catálogo inicial com os preços e a disponibilidade atuais no MySQL. Campos extras, pesos inválidos, produtos desativados, quantidades indevidas e divergência de total são rejeitados em `checkout-core.mjs`. |
-| Erros de arredondamento | Cálculo em centavos; arredondamento da porção antes de multiplicar a quantidade, igual no carrinho e no servidor. |
+| Erros de arredondamento | Cálculo em centavos; a unidade a granel de 100 g é arredondada uma vez antes de multiplicar pelos blocos e pela quantidade de porções. Uma função compartilhada mantém o valor anunciado, o carrinho e o servidor iguais. Pesos fora dos múltiplos de 100 g são recusados. |
 | Repetição de uma tentativa | Chave de idempotência gerada no servidor a partir de sessão autenticada e seleção canônica, enviada à Orders API. Repetir a mesma tentativa não gera uma nova intenção independente. |
 | Falsificação de sessão/pedido | Estado autenticado com HMAC e chaves derivadas com HKDF, separado por propósito e origem, com expiração. Cookies `HttpOnly`, `Secure` em HTTPS, `SameSite=Lax`, prefixo `__Host-` e limite de pedidos. |
 | CSRF | Origem exata, metadados de mesma origem, JSON e token CSRF ligado à sessão. A origem nunca é inferida de um header Host enviado pelo comprador. |

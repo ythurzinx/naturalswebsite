@@ -1579,6 +1579,30 @@ svg {
   font-size: 9px;
   color: #95a088;
 }
+.cart-weight-field {
+  width: 150px;
+  max-width: 100%;
+  margin-top: 12px;
+  font-size: 11px;
+}
+.cart-weight-field select {
+  padding: 8px 10px;
+  min-height: 38px;
+}
+.detail-selection-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  border-top: 1px solid var(--line);
+  padding-top: 16px;
+  font-size: 13px;
+}
+.detail-selection-total strong {
+  font-size: 20px;
+  color: var(--green);
+}
 .quantity-control {
   display: flex;
   align-items: center;

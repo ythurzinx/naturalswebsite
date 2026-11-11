@@ -13,11 +13,12 @@ import {
 } from "lucide-react";
 import { useCart } from "@/lib/cart-context";
 import { itemKey, lineTotal } from "@/lib/commerce.mjs";
+import { referencePriceCents } from "@/lib/pricing.mjs";
 import { formatPrice } from "@/lib/products";
 import { store, whatsappUrl } from "@/lib/store";
 import { usePaymentCheckout } from "@/hooks/use-payment-checkout";
 export function CheckoutView() {
-  const { cart, ready } = useCart();
+  const { cart, ready, needsWeightReview } = useCart();
   const payment = usePaymentCheckout();
   const [name, setName] = useState(""),
     [email, setEmail] = useState(""),
@@ -67,6 +68,13 @@ export function CheckoutView() {
       <p className="section-description">
         Pague com Pix ou cartão pelo Mercado Pago, ou converse com nossa equipe.
       </p>
+      {needsWeightReview && (
+        <p className="admin-notice" role="status">
+          As porções antigas fora dos múltiplos de 100 g foram retiradas.
+          <Link href="/carrinho"> Revise os pesos no carrinho</Link> antes de
+          pagar.
+        </p>
+      )}
       {payment.testMode && (
         <p className="payment-error">
           Ambiente de testes: esta compra não é uma venda de produção.
@@ -338,7 +346,7 @@ export function CheckoutView() {
                   {item.quantity}× {item.product.nome_produto}
                   <small>
                     {item.product.isGranel
-                      ? `${item.selectedWeight} g`
+                      ? `${item.selectedWeight} g por porção · ${formatPrice(referencePriceCents(item.product) / 100)} por 100 g`
                       : item.product.peso_produto}
                   </small>
                 </span>

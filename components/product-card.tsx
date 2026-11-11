@@ -5,7 +5,12 @@ import { useCart } from "@/lib/cart-context";
 import { formatPrice, productTile } from "@/lib/products";
 import type { Product } from "@/lib/types";
 import { Modal } from "./modal";
-import { lineTotal } from "@/lib/commerce.mjs";
+import { lineTotal, normalizeQuantity } from "@/lib/commerce.mjs";
+import {
+  BULK_STEP_GRAMS,
+  BULK_WEIGHTS,
+  referencePriceCents,
+} from "@/lib/pricing.mjs";
 export function ProductImage({
   product,
   className = "",
@@ -36,7 +41,7 @@ export function ProductImage({
 export function ProductCard({ product }: { product: Product }) {
   const { addToCart, favorites, toggleFavorite } = useCart();
   const [open, setOpen] = useState(false),
-    [weight, setWeight] = useState(250),
+    [weight, setWeight] = useState(BULK_STEP_GRAMS),
     [quantity, setQuantity] = useState(1),
     [added, setAdded] = useState(false);
   const favorite = favorites.includes(product.id);
@@ -77,24 +82,24 @@ export function ProductCard({ product }: { product: Product }) {
             {product.nome_produto}
           </button>
           <div className="product-weight">
-            {product.isGranel ? "Porção de 250 g" : product.peso_produto}
+            {product.isGranel
+              ? "Escolha de 100 em 100 g"
+              : product.peso_produto}
           </div>
           <div className="product-price-row">
             <div>
               <strong className="product-price">
-                {formatPrice(
-                  product.valor_unitario * (product.isGranel ? 0.25 : 1),
-                )}
+                {formatPrice(referencePriceCents(product) / 100)}
               </strong>
-              <small>{product.isGranel ? "por porção" : "por unidade"}</small>
+              <small>{product.isGranel ? "por 100 g" : "por unidade"}</small>
             </div>
             <button
               className={`add-button ${added ? "added" : ""}`}
               onClick={() => {
-                addToCart(product, 1, 250);
+                addToCart(product, 1, BULK_STEP_GRAMS);
                 setAdded(true);
               }}
-              aria-label={`Adicionar ${product.nome_produto} ao carrinho`}
+              aria-label={`Adicionar ${product.isGranel ? "100 g de " : ""}${product.nome_produto} ao carrinho`}
             >
               {added ? <Check size={21} /> : <Plus size={22} />}
             </button>
@@ -124,18 +129,14 @@ export function ProductCard({ product }: { product: Product }) {
               e informações de alergênicos com a nossa equipe.
             </p>
             <strong className="detail-price">
-              {formatPrice(
-                lineTotal({ product, quantity, selectedWeight: weight }),
-              )}
+              {formatPrice(referencePriceCents(product) / 100)}
             </strong>
             <p className="muted">
-              Preço da seleção{" "}
-              {product.isGranel &&
-                `· ${formatPrice(product.valor_unitario)}/kg`}
+              {product.isGranel ? "Preço por 100 g" : "Preço por unidade"}
             </p>
             {product.isGranel ? (
               <label className="field-label">
-                Escolha sua porção
+                Escolha o peso (de 100 em 100 g)
                 <select
                   value={weight}
                   onChange={(e) => {
@@ -143,9 +144,9 @@ export function ProductCard({ product }: { product: Product }) {
                     setAdded(false);
                   }}
                 >
-                  {[100, 250, 500, 1000].map((w) => (
+                  {BULK_WEIGHTS.map((w) => (
                     <option key={w} value={w}>
-                      {w === 1000 ? "1 kg" : `${w} g`}
+                      {w.toLocaleString("pt-BR")} g
                     </option>
                   ))}
                 </select>
@@ -154,20 +155,30 @@ export function ProductCard({ product }: { product: Product }) {
               <p>{product.peso_produto}</p>
             )}
             <label className="field-label">
-              Quantidade
+              {product.isGranel ? "Quantidade de porções" : "Quantidade"}
               <input
                 type="number"
                 min="1"
                 max="99"
                 value={quantity}
                 onChange={(e) => {
-                  setQuantity(
-                    Math.max(1, Math.min(99, Number(e.target.value) || 1)),
-                  );
+                  setQuantity(normalizeQuantity(Number(e.target.value)));
                   setAdded(false);
                 }}
               />
             </label>
+            <p className="detail-selection-total">
+              <span>
+                Total da seleção
+                {product.isGranel &&
+                  ` · ${(weight * quantity).toLocaleString("pt-BR")} g`}
+              </span>
+              <strong>
+                {formatPrice(
+                  lineTotal({ product, quantity, selectedWeight: weight }),
+                )}
+              </strong>
+            </p>
             <button className="button full-width" onClick={add}>
               {added ? <Check size={18} /> : <ShoppingBag size={18} />}
               {added ? "Adicionado ao carrinho" : "Adicionar ao carrinho"}

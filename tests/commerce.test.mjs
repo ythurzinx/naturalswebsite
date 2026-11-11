@@ -2,6 +2,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import {
   hydrateCart,
+  restoreCart,
   serializeCart,
   cartTotal,
   lineTotal,
@@ -12,9 +13,9 @@ const product = { id: "oats", valor_unitario: 15, isGranel: true };
 const packaged = { id: "peanut", valor_unitario: 19.99, isGranel: false };
 const now = 1800000000000;
 test("bulk totals multiply the chosen weight by the quantity", () => {
-  const item = { product, quantity: 3, selectedWeight: 250 };
-  assert.equal(lineTotal(item), 11.25);
-  assert.equal(cartTotal([item, { product: packaged, quantity: 2 }]), 51.23);
+  const item = { product, quantity: 3, selectedWeight: 300 };
+  assert.equal(lineTotal(item), 13.5);
+  assert.equal(cartTotal([item, { product: packaged, quantity: 2 }]), 53.48);
 });
 test("different weights of one product have different cart keys", () => {
   assert.notEqual(
@@ -78,8 +79,8 @@ test("round trip keeps only ids, quantities and supported weights", () => {
   const restored = hydrateCart(serialized, [product, packaged], now);
   assert.equal(cartTotal(restored), 62.97);
 });
-test("duplicate rows are merged, capped, and unsupported weights normalized", () => {
-  const items = hydrateCart(
+test("duplicate rows are merged while unsupported legacy weights require a new choice", () => {
+  const restored = restoreCart(
     JSON.stringify({
       version: 2,
       savedAt: now,
@@ -87,12 +88,16 @@ test("duplicate rows are merged, capped, and unsupported weights normalized", ()
         { id: "oats", quantity: 90, weight: 500 },
         { id: "oats", quantity: 90, weight: 500 },
         { id: "oats", quantity: 1, weight: -500 },
+        { id: "oats", quantity: 1, weight: 250 },
+        { id: "peanut", quantity: 2 },
       ],
     }),
-    [product],
+    [product, packaged],
     now,
   );
-  assert.equal(items.length, 2);
-  assert.equal(items[0].quantity, 99);
-  assert.equal(items[1].selectedWeight, 250);
+  assert.equal(restored.items.length, 2);
+  assert.equal(restored.items[0].quantity, 99);
+  assert.equal(restored.items[0].selectedWeight, 500);
+  assert.equal(restored.items[1].product.id, packaged.id);
+  assert.equal(restored.needsWeightReview, true);
 });

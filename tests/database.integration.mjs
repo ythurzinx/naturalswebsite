@@ -11,6 +11,7 @@ import {
 } from "../lib/server/admin-auth.mjs";
 import { createAdminService } from "../lib/server/admin-service.mjs";
 import { createPaymentService } from "../lib/server/payment-service.mjs";
+import { referencePriceCents } from "../lib/pricing.mjs";
 const target = process.env.INTEGRATION_DATABASE_URL;
 if (!target)
   throw Error(
@@ -183,13 +184,13 @@ test("orders, costs and fees persist; retries and sync do not duplicate revenue"
     csrf = (await session.json()).csrfToken;
   const body = {
     items: [
-      { id: "prod-1", quantity: 3, weight: 250 },
+      { id: "prod-1", quantity: 3, weight: 300 },
       { id: "prod-2", quantity: 2 },
     ],
     name: "Maria Fixture",
     email: "maria@example.com",
     fulfillment: "pickup",
-    expectedTotalCents: 12998,
+    expectedTotalCents: 14798,
   };
   const request = () =>
     new Request("https://loja.example/api/checkout", {
@@ -202,6 +203,16 @@ test("orders, costs and fees persist; retries and sync do not duplicate revenue"
       },
       body: JSON.stringify(body),
     });
+  await repo.saveProduct({ ...product("prod-1"), priceCents: 15999 });
+  const stale = await f.service.checkout(request());
+  assert.equal(stale.status, 409);
+  assert.equal((await stale.json()).code, "PRICE_CHANGED");
+  assert.equal(
+    f.calls.length,
+    0,
+    "stale prices must be rejected before contacting the payment provider",
+  );
+  await repo.saveProduct(product("prod-1"));
   const response = await f.service.checkout(request());
   assert.equal(response.status, 200, await response.clone().text());
   let stats = await repo.dashboard();
@@ -218,20 +229,20 @@ test("orders, costs and fees persist; retries and sync do not duplicate revenue"
   await f.service.reconcile(order.id);
   stats = await repo.dashboard();
   assert.equal(stats.orders, 1);
-  assert.equal(stats.grossCents, 12998);
-  assert.equal(stats.costsCents, 8000);
+  assert.equal(stats.grossCents, 14798);
+  assert.equal(stats.costsCents, 9200);
   assert.equal(stats.feesCents, 399);
-  assert.equal(stats.profitCents, 4599);
+  assert.equal(stats.profitCents, 5199);
   await repo.saveExpense({
     description: "Embalagens",
     amountCents: 500,
     incurredAt: Date.now(),
   });
-  assert.equal((await repo.dashboard()).profitCents, 4099);
+  assert.equal((await repo.dashboard()).profitCents, 4699);
   await repo.saveProduct({ ...product("prod-1"), costCents: 50000 });
   assert.equal(
     (await repo.order(order.id)).cost_total_cents,
-    8000,
+    9200,
     "original cost snapshot must not change",
   );
   assert.ok(!JSON.stringify(await repo.order(order.id)).includes("APP_USR"));
@@ -248,8 +259,8 @@ test("orders, costs and fees persist; retries and sync do not duplicate revenue"
   await f.service.reconcile(order.id);
   const latest = await repo.order(order.id);
   assert.equal(latest.state, "refunded");
-  assert.equal(latest.paid_cents, 12998);
-  assert.equal(latest.refunded_cents, 12998);
+  assert.equal(latest.paid_cents, 14798);
+  assert.equal(latest.refunded_cents, 14798);
 });
 test("missing costs keep estimated profit unavailable until explicitly filled", async () => {
   const f = paymentFixture(),
@@ -493,4 +504,25 @@ test("authenticated admin HTTP edits and assigns a normalized photo to its own p
     (await sharp((await repo.image(image)).data).metadata()).format,
     "webp",
   );
+  const updated = await service.handle(
+    new Request(config.origin + `/api/admin/products/${id}`, {
+      method: "PUT",
+      headers: { ...headers, "Content-Type": "application/json" },
+      body: JSON.stringify({
+        ...payload,
+        isBulk: true,
+        priceUnit: "100g",
+        priceCents: 1200,
+        costCents: 800,
+      }),
+    }),
+    ["products", id],
+  );
+  assert.equal(updated.status, 200, await updated.clone().text());
+  const edited = (await repo.catalog(true)).find((p) => p.id === id);
+  assert.equal(edited.priceCents, 12000);
+  assert.equal(edited.costCents, 8000);
+  assert.equal(edited.peso_produto, "A granel · preço por 100 g");
+  assert.equal(referencePriceCents(edited), 1200);
+  assert.equal(edited.imagem, `/api/product-images/${image}`);
 });

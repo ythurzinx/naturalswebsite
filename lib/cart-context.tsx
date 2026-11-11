@@ -12,12 +12,14 @@ import { products as baseProducts } from "./products";
 import {
   CART_KEY,
   hydrateCart,
+  restoreCart,
   serializeCart,
   cartTotal,
   itemKey,
   normalizeQuantity,
   normalizeWeight,
 } from "./commerce.mjs";
+import { isBulkWeight } from "./pricing.mjs";
 import {
   CONSENT_EVENT,
   CONSENT_KEY,
@@ -28,11 +30,13 @@ interface StoreContext {
   catalog: Product[];
   cart: Cart;
   ready: boolean;
+  needsWeightReview: boolean;
   itemCount: number;
   favorites: string[];
   addToCart: (product: Product, quantity: number, weight?: number) => void;
   removeFromCart: (key: string) => void;
   updateQuantity: (key: string, quantity: number) => void;
+  updateWeight: (key: string, weight: number) => void;
   clearCart: () => void;
   toggleFavorite: (id: string) => void;
 }
@@ -50,12 +54,15 @@ export function CartProvider({
   const catalogRef = useRef(products);
   const [items, setItems] = useState<CartItem[]>([]),
     [ready, setReady] = useState(false);
+  const [needsWeightReview, setNeedsWeightReview] = useState(false);
   const [favorites, setFavorites] = useState<string[]>([]),
     [remember, setRemember] = useState(false);
   const skipNextWrite = useRef(false);
   useEffect(() => {
     try {
-      setItems(hydrateCart(localStorage.getItem(CART_KEY), products));
+      const restored = restoreCart(localStorage.getItem(CART_KEY), products);
+      setItems(restored.items);
+      setNeedsWeightReview(restored.needsWeightReview);
       const consent = readConsent();
       setRemember(!!consent?.preferences);
       if (consent?.preferences) {
@@ -85,7 +92,9 @@ export function CartProvider({
     const sync = (event: StorageEvent) => {
       if (event.key === CART_KEY) {
         skipNextWrite.current = true;
-        setItems(hydrateCart(event.newValue, catalogRef.current));
+        const restored = restoreCart(event.newValue, catalogRef.current);
+        setItems(restored.items);
+        if (restored.needsWeightReview) setNeedsWeightReview(true);
       }
       if (event.key === CONSENT_KEY) onConsent();
     };
@@ -185,6 +194,7 @@ export function CartProvider({
         catalog: products,
         cart: { items, total: cartTotal(items) },
         ready,
+        needsWeightReview,
         itemCount: items.reduce((sum, item) => sum + item.quantity, 0),
         favorites,
         addToCart,
@@ -198,6 +208,21 @@ export function CartProvider({
                 : item,
             ),
           ),
+        updateWeight: (key, weight) => {
+          if (!isBulkWeight(weight)) return;
+          setItems((current) =>
+            hydrateCart(
+              serializeCart(
+                current.map((item) =>
+                  itemKey(item) === key && item.product.isGranel
+                    ? { ...item, selectedWeight: weight }
+                    : item,
+                ),
+              ),
+              products,
+            ),
+          );
+        },
         clearCart: () => setItems([]),
         toggleFavorite: (id) =>
           setFavorites((ids) =>

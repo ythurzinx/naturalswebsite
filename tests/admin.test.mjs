@@ -61,6 +61,29 @@ test("product editor rejects arbitrary image URLs, invalid money and unknown fie
     assert.throws(() => validateProduct(value, "prod-1"));
   assert.throws(() => validateProduct(product, "../../escape"));
 });
+test("admin edits in 100 g preserve the existing per-kg storage contract", () => {
+  const saved = validateProduct(
+    {
+      ...product,
+      priceUnit: "100g",
+      priceCents: 1200,
+      costCents: 800,
+    },
+    "prod-1",
+  );
+  assert.equal(saved.priceCents, 12000);
+  assert.equal(saved.costCents, 8000);
+  assert.equal(saved.weightLabel, "A granel · preço por 100 g");
+  assert.equal(saved.priceUnit, undefined);
+  for (const value of [
+    { ...product, priceUnit: "unit" },
+    { ...product, priceUnit: "100g", priceCents: 100000001 },
+    { ...product, priceUnit: "100g", priceCents: 10000001 },
+    { ...product, priceUnit: "100g", costCents: 10000001 },
+    { ...product, isBulk: false, priceUnit: "100g" },
+  ])
+    assert.throws(() => validateProduct(value, "prod-1"));
+});
 test("uploaded photos are reencoded and metadata is removed", async () => {
   const original = await sharp({
     create: { width: 20, height: 20, channels: 3, background: "#abcdef" },

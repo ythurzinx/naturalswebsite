@@ -57,13 +57,13 @@ const policy = {
 };
 const input = () => ({
   items: [
-    { id: "bulk", quantity: 3, weight: 250 },
+    { id: "bulk", quantity: 3, weight: 300 },
     { id: "unit", quantity: 2 },
   ],
   name: "Maria Silva",
   email: "maria@example.com",
   fulfillment: "pickup",
-  expectedTotalCents: 12998,
+  expectedTotalCents: 14798,
 });
 const key = deriveKey(config.accessToken);
 function setup(customFetcher) {
@@ -140,13 +140,13 @@ function setup(customFetcher) {
 }
 test("canonical catalog prices use integer cents and round the unit before multiplying", () => {
   const result = buildCheckout(input(), catalog, policy);
-  assert.equal(result.totalCents, 12998);
-  assert.equal(result.items[0].unitCents, 3000);
+  assert.equal(result.totalCents, 14798);
+  assert.equal(result.items[0].unitCents, 3600);
   assert.equal(result.items[0].quantity, 3);
   assert.equal(cents("119.99"), 11999);
   assert.equal(cents("1e3"), null);
   assert.equal(cents("1.001"), null);
-  assert.equal(money(12998), "129.98");
+  assert.equal(money(14798), "147.98");
 });
 test("tampered prices, unknown fields, invalid weights and quantities are rejected before provider calls", async () => {
   const cases = [
@@ -154,7 +154,7 @@ test("tampered prices, unknown fields, invalid weights and quantities are reject
     { ...input(), total: 1 },
     {
       ...input(),
-      items: [{ id: "bulk", quantity: 1, weight: 250, price: 0.01 }],
+      items: [{ id: "bulk", quantity: 1, weight: 300, price: 0.01 }],
     },
     { ...input(), items: [{ id: "bulk", quantity: 1, weight: -100 }] },
     { ...input(), items: [{ id: "missing", quantity: 1 }] },
@@ -212,7 +212,7 @@ test("secure checkout creates an Orders API request and an authenticated order c
     response = await f.checkout(),
     body = await response.json();
   assert.equal(response.status, 200);
-  assert.equal(body.totalCents, 12998);
+  assert.equal(body.totalCents, 14798);
   assert.ok(
     body.checkoutUrl.startsWith("https://www.mercadopago.com.br/checkout/"),
   );
@@ -221,13 +221,13 @@ test("secure checkout creates an Orders API request and an authenticated order c
   assert.equal(call.url, "https://api.mercadopago.com/v1/orders");
   assert.equal(payload.type, "online");
   assert.equal(payload.processing_mode, "manual");
-  assert.equal(payload.total_amount, "129.98");
+  assert.equal(payload.total_amount, "147.98");
   assert.equal(
     payload.config.online.success_url,
     "https://loja.example/pagamento/retorno",
   );
   assert.equal(payload.payer.email, "maria@example.com");
-  assert.equal(payload.items[0].unit_price, "30.00");
+  assert.equal(payload.items[0].unit_price, "36.00");
   assert.ok(response.headers.get("set-cookie").includes("HttpOnly"));
   assert.ok(response.headers.get("set-cookie").includes("Secure"));
   assert.ok(response.headers.get("set-cookie").includes("SameSite=Lax"));
@@ -270,6 +270,36 @@ test("Origin, same-site metadata and CSRF checks prevent cross-site checkout", a
   }
   assert.equal(f.calls.length, 0);
 });
+test("duplicate authenticated cookies cannot bypass checkout or order ownership", async () => {
+  const f = setup(),
+    session = await f.session();
+  const [sessionName, sessionValue] = [...f.jar][0];
+  const rejected = await f.service.checkout(
+    f.request("/api/checkout", "POST", input(), {
+      "X-CSRF-Token": session.csrfToken,
+      Cookie: `${sessionName}=${sessionValue}; ${sessionName}=forged`,
+    }),
+  );
+  assert.equal(rejected.status, 403);
+  assert.equal(f.calls.length, 0);
+
+  const accepted = await f.checkout(input(), session.csrfToken);
+  assert.equal(accepted.status, 200);
+  const id = (await accepted.json()).orderId;
+  const [orderName, orderValue] = [...f.jar].find(([name]) =>
+    name.endsWith("mn-orders"),
+  );
+  const calls = f.calls.length;
+  const status = await f.service.status(
+    f.request(`/api/orders/${id}`, "GET", undefined, {
+      Cookie: `${orderName}=${orderValue}; ${orderName}=forged`,
+    }),
+    id,
+  );
+  assert.equal(status.status, 404);
+  assert.equal(f.calls.length, calls);
+});
+
 test("payment status needs ownership and never trusts redirect query parameters", async () => {
   const f = setup(),
     response = await f.checkout(),
