@@ -5,11 +5,11 @@ export const metadata = { title: "Fale com a gente" };
 const faqs = [
   [
     "Como faço uma compra?",
-    "Explore o catálogo, escolha as porções e adicione os produtos ao carrinho. Na finalização, escolha Pix ou cartão pelo Mercado Pago para retirada na loja, ou continue no WhatsApp para combinar os detalhes. Para entrega, consulte o orçamento antes de pagar.",
+    "Explore o catálogo, escolha as porções e adicione os produtos ao carrinho. Na finalização, escolha retirada ou calcule o frete pelo CEP, quando a entrega online estiver habilitada. Pague com Pix ou cartão pelo Mercado Pago, ou continue no WhatsApp para combinar os detalhes.",
   ],
   [
     "Vocês fazem entregas?",
-    "Consulte nossa equipe pelo WhatsApp informando seu CEP, bairro e cidade. A área de atendimento, o valor do frete e o prazo são confirmados individualmente. Você também pode combinar a retirada na loja.",
+    "Quando a entrega online estiver habilitada, calcule o frete pelo CEP no carrinho ou na finalização. A distância é estimada em linha reta entre CEPs. Fora da área ou sem dados suficientes, consulte a equipe pelo WhatsApp. Combine o prazo com a loja; a retirada continua disponível sem frete.",
   ],
   [
     "Os preços do catálogo estão atualizados?",

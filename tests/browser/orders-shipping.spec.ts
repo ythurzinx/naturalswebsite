@@ -319,9 +319,12 @@ test("admin sound activation, live paid alerts, packing and shipping settings wo
       () => document.documentElement.scrollWidth <= innerWidth + 1,
     ),
   ).toBe(true);
-  if (info.project.name === "mobile-390")
+  if (info.project.name === "mobile-390") {
+    await page.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" }));
+    await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(0);
     await page.screenshot({
       path: info.outputPath("frete-admin-celular.png"),
       fullPage: true,
     });
+  }
 });
