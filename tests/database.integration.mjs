@@ -30,6 +30,7 @@ const catalog = [
   {
     id: "prod-1",
     nome_produto: "Castanha",
+    categoria: "Naturais",
     peso_produto: "kg",
     isGranel: true,
     valor_unitario: 119.99,
@@ -37,6 +38,7 @@ const catalog = [
   {
     id: "prod-2",
     nome_produto: "Pasta",
+    categoria: "Naturais",
     peso_produto: "500 g",
     isGranel: false,
     valor_unitario: 19.99,
@@ -44,6 +46,7 @@ const catalog = [
   {
     id: "prod-3",
     nome_produto: "Outro",
+    categoria: "Naturais",
     peso_produto: "100 g",
     isGranel: false,
     valor_unitario: 14.99,
@@ -120,6 +123,31 @@ test("images are content addressed and survive another repository instance", asy
   assert.equal(await repo.saveImage(bytes), id);
   const second = new ShopRepository(pool, catalog, policy);
   assert.deepEqual((await second.image(id)).data, bytes);
+});
+test("availability batches are atomic and preserve prices, costs and photos", async () => {
+  const sha = await repo.saveImage(Buffer.from("fixture-photo"));
+  await repo.saveProduct({ ...product("prod-1"), imageSha: sha });
+  await repo.setAvailability(["prod-1", "prod-2"], false);
+  assert.deepEqual(
+    (await repo.catalog(false)).map((p) => p.id),
+    ["prod-3"],
+  );
+  await assert.rejects(repo.setAvailability(["prod-1", "prod-99999"], true), {
+    code: "PRODUCT_NOT_FOUND",
+  });
+  let saved = (await repo.catalog(true)).find((p) => p.id === "prod-1");
+  assert.equal(saved.active, false);
+  assert.equal(saved.priceCents, 11999);
+  assert.equal(saved.costCents, 8000);
+  assert.equal(saved.imageSha, sha);
+  await repo.setAvailability(["prod-1", "prod-2"], true);
+  saved = (await repo.catalog(true)).find((p) => p.id === "prod-1");
+  assert.equal(saved.active, true);
+  assert.equal((await repo.catalog(false)).length, 3);
+  const [events] = await pool.execute(
+    "SELECT * FROM mn_audit WHERE event='products.availability'",
+  );
+  assert.equal(events.length, 2);
 });
 function paymentFixture() {
   const config = {
@@ -233,6 +261,11 @@ test("orders, costs and fees persist; retries and sync do not duplicate revenue"
   assert.equal(stats.costsCents, 9200);
   assert.equal(stats.feesCents, 399);
   assert.equal(stats.profitCents, 5199);
+  assert.equal(stats.catalogHealth.active, 3);
+  assert.equal(stats.catalogHealth.missingCosts, 1);
+  assert.equal(stats.topProducts[0].id, "prod-1");
+  assert.equal(stats.topProducts[0].grams, 900);
+  assert.equal(stats.topProducts[0].grossCents, 10800);
   await repo.saveExpense({
     description: "Embalagens",
     amountCents: 500,
@@ -403,7 +436,7 @@ test("admin HTTP routing rejects anonymous reads and writes even when the databa
     repository: repo,
     payments: null,
   });
-  for (const method of ["GET", "POST"]) {
+  for (const method of ["GET", "POST", "PATCH"]) {
     const response = await service.handle(
       new Request(config.origin + "/api/admin/products", {
         method,
@@ -437,10 +470,15 @@ test("authenticated admin HTTP edits and assigns a normalized photo to its own p
     sessionSecret: "s".repeat(43),
     totpSecret: "",
   };
+  const synced = [];
   const service = createAdminService({
     config,
     repository: repo,
-    payments: {},
+    payments: {
+      reconcile: async (id) => {
+        synced.push(id);
+      },
+    },
   });
   const response = await service.handle(
     new Request(config.origin + "/api/admin/login", {
@@ -525,4 +563,59 @@ test("authenticated admin HTTP edits and assigns a normalized photo to its own p
   assert.equal(edited.peso_produto, "A granel · preço por 100 g");
   assert.equal(referencePriceCents(edited), 1200);
   assert.equal(edited.imagem, `/api/product-images/${image}`);
+  const availability = (extra = {}, active = false) =>
+    service.handle(
+      new Request(config.origin + "/api/admin/products/availability", {
+        method: "PATCH",
+        headers: { ...headers, "Content-Type": "application/json", ...extra },
+        body: JSON.stringify({ ids: [id], active }),
+      }),
+      ["products", "availability"],
+    );
+  assert.equal((await availability({ "X-CSRF-Token": "forged" })).status, 403);
+  assert.equal(
+    (await availability({ Origin: "https://attacker.example" })).status,
+    403,
+  );
+  assert.ok((await repo.catalog(false)).some((p) => p.id === id));
+  assert.equal((await availability()).status, 200);
+  assert.equal(
+    (await repo.catalog(false)).some((p) => p.id === id),
+    false,
+  );
+  assert.equal((await availability({}, true)).status, 200);
+
+  const orderId = "ORD01ADMINFIXTUREABCDEFG";
+  await repo.recordOrder({
+    id: orderId,
+    external_reference: "fixture-reference",
+    total_amount: "36.00",
+    total_paid_amount: "36.00",
+    status: "processed",
+    status_detail: "accredited",
+    created_date: new Date().toISOString(),
+    items: [
+      {
+        external_code: `${id}:300`,
+        title: "Produto fotografado 300 g",
+        quantity: 1,
+        unit_price: "36.00",
+      },
+    ],
+  });
+  const sync = (extra = {}) =>
+    service.handle(
+      new Request(config.origin + `/api/admin/orders/${orderId}/sync`, {
+        method: "POST",
+        headers: { ...headers, ...extra },
+      }),
+      ["orders", orderId, "sync"],
+    );
+  assert.equal((await sync({ "X-CSRF-Token": "forged" })).status, 403);
+  assert.equal(synced.length, 0);
+  assert.equal((await sync()).status, 200);
+  assert.deepEqual(synced, [orderId]);
+  for (let i = 1; i < 15; i++) assert.equal((await sync()).status, 200);
+  assert.equal((await sync()).status, 429);
+  assert.equal(synced.length, 15);
 });

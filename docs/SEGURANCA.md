@@ -36,7 +36,7 @@ Não há banco de cartões, formulário de cartão, operação de reembolso púb
 
 Os testes exercitam o serviço com objetos HTTP Request/Response e uma API Mercado Pago simulada. Cobrem preços adulterados, CSRF, pesos/quantidades, idempotência, cookies, expiração, IDOR, moedas/valores divergentes, redirects, Webhooks, limites e falhas de provedor. Os testes HTTP de produção executam o Next.js compilado, conferem rotas, bloqueio administrativo e nonces aplicados aos scripts reais.
 
-As credenciais de produção não foram fornecidas. Não foi criada cobrança real, não houve teste do certificado/domínio da Hostinger e a disponibilização efetiva de Pix/cartão depende da conta da loja. A ferramenta de navegador do ambiente não foi disponibilizada; a revisão visual/interativa em computador e celular continua necessária na hospedagem final.
+As credenciais de produção não foram fornecidas. Não foi criada cobrança real, não houve teste do certificado/domínio da Hostinger e a disponibilização efetiva de Pix/cartão depende da conta da loja. Testes no Chromium exercitam navegação, peso, carrinho e checkout em telas de 360, 390 e 1280 pixels. A administração e a falha de pagamento usam fixtures isoladas no navegador; autorização e persistência são testadas separadamente com banco real. Confira também um celular real na hospedagem final.
 
 O aplicativo não reserva estoque no PDV, não executa expedição automática e mantém os registros operacionais em MySQL. O estado financeiro é verificado no Mercado Pago. Não há alegação de proteção absoluta ou de certificação de conformidade.
 
@@ -58,3 +58,5 @@ As consultas usam parâmetros preparados e multipleStatements desabilitado. MySQ
 Uploads são autenticados, limitados a 5 MB e 20 megapixels e reencodificados por Sharp como WebP, sem EXIF. SVG, animações e URLs externas arbitrárias não são aceitos. Os ativos são endereçados por SHA-256 no banco e servidos com MIME fixo, nosniff e CSP restritiva. CSV de pedidos neutraliza prefixos de fórmula em dados de clientes. Alterações de preço, fotos, despesas e retiradas são auditadas; segredos e senhas não são registrados.
 
 Os testes de integração executam o esquema e as operações em um MariaDB descartável, incluindo limites concorrentes, snapshots de custo, autenticação, TOTP/CSRF e registros financeiros. O banco da Hostinger e as credenciais reais não foram acessados nesta implementação.
+
+As ações de disponibilidade em lote aceitam até 50 IDs únicos, exigem sessão administrativa e CSRF e gravam todas as alterações e a auditoria na mesma transação. A operação altera somente a disponibilidade e preserva preço, custo e foto existentes. Seleção com produto inexistente falha sem alteração parcial. Consultas manuais de pagamento exigem autorização, existência do pedido e limite compartilhado de 15 consultas/rodadas por minuto no banco. Elas não fazem cobranças ou reembolsos.

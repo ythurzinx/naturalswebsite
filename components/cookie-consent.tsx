@@ -1,10 +1,12 @@
 "use client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Cookie, ShieldCheck } from "lucide-react";
 import { Modal } from "./modal";
 import { readConsent, saveConsent } from "@/lib/privacy.mjs";
 export function CookieConsent() {
+  const pathname = usePathname();
   const [visible, setVisible] = useState(false),
     [open, setOpen] = useState(false),
     [preferences, setPreferences] = useState(false);
@@ -25,6 +27,7 @@ export function CookieConsent() {
     setVisible(false);
     setOpen(false);
   }
+  if (pathname.startsWith("/admin")) return null;
   return (
     <>
       {visible && (

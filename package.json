@@ -12,7 +12,10 @@
     "test:production": "node scripts/smoke-production.mjs",
     "db:migrate": "node scripts/migrate.mjs",
     "admin:setup": "node scripts/admin-setup.mjs",
-    "test:database": "node --test tests/database.integration.mjs"
+    "test:database": "node --test tests/database.integration.mjs",
+    "test:browser": "playwright test",
+    "assets:optimize": "node scripts/optimize-assets.mjs",
+    "verify": "npm test && npm run typecheck && npm run check:launch -- --code-only && npm audit --omit=dev --audit-level=high && npm run build && npm run test:production"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.4",
@@ -26,6 +29,7 @@
     "sharp": "^0.35.5"
   },
   "devDependencies": {
+    "@playwright/test": "1.65.0",
     "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",

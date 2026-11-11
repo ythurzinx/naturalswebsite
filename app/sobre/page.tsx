@@ -32,7 +32,7 @@ export default function AboutPage() {
           </Link>
         </div>
         <img
-          src="/images/loja-mundo-natural.jpg"
+          src="/images/loja-mundo-natural.webp"
           alt="Loja Mundo Natural em Taboão da Serra"
         />
       </section>
