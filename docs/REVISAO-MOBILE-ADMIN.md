@@ -5,6 +5,7 @@ Esta atualização parte da versão `4dd0c542272149c2c1b53ce462cf77b8a19e391b`. 
 ## Comportamento conferido
 
 - Navegação inferior e resumo de compra em telas pequenas; controles de peso de 100 em 100 g com alvos de toque de pelo menos 44 pixels.
+- Versões WebP dos arquivos principais e ícone reduzido, mantendo os originais. A soma dos três arquivos principais passou de aproximadamente 7,10 MB para 0,72 MB; isso não representa uma medição de todo o tráfego da página.
 - Seleção de peso/porções, edição no carrinho e preservação do carrinho após falha de pagamento. Uma tentativa com clique duplo produz somente uma solicitação de checkout.
 - Administração em cartões no celular, filtros de produtos/pedidos, disponibilidade em lote e consulta de pagamento por pedido.
 - Saúde do catálogo e produtos mais vendidos derivados de registros reais. Lucro continua indisponível quando faltam custos, taxas ou dados de reembolso.

@@ -521,7 +521,7 @@ export function Storefront({
           <section className="section shell store-story">
             <div className="store-story-photo">
               <img
-                src="/images/loja-mundo-natural.jpg"
+                src="/images/loja-mundo-natural.webp"
                 alt="Fachada e interior da loja Mundo Natural em Taboão da Serra"
                 loading="lazy"
               />

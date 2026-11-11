@@ -60,6 +60,8 @@ O painel exibe e recebe preço/custo a granel por 100 g. O catálogo importado e
 
 As fotos existentes são mantidas como ilustrações de categoria até que o administrador envie uma foto específica de cada produto. Não foram geradas centenas de novas imagens.
 
+As imagens principais são servidas em versões WebP mais leves: aproximadamente 90% menos bytes nos três arquivos principais, preservando os originais no repositório. `npm run assets:optimize` recria essas versões e o ícone pequeno a partir dos arquivos existentes, sem geração por IA.
+
 A imagem transparente da logo foi preparada da referência visual; o arquivo original de marca oferece máxima fidelidade. As fotos de ingredientes são ilustrativas.
 
 ## Validação

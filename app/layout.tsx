@@ -24,8 +24,8 @@ export const metadata: Metadata = {
   description:
     "Castanhas, grãos, chás, temperos e suplementos. Conheça a Mundo Natural de Taboão da Serra e monte sua seleção com atendimento pelo WhatsApp.",
   icons: {
-    icon: "/images/mundo-natural-logo.png",
-    apple: "/images/mundo-natural-logo.png",
+    icon: "/images/mundo-natural-icon.png",
+    apple: "/images/mundo-natural-icon.png",
   },
   openGraph: {
     title: "Mundo Natural — escolhas que fazem bem",

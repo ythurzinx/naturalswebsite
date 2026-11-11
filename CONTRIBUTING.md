@@ -7,6 +7,7 @@ Use Node.js 22 (`.nvmrc`) e `npm ci`, com o lockfile deste repositório. Segredo
 - `npm run test:database`: operações e controles de acesso em MySQL/MariaDB local descartável. Exige `INTEGRATION_DATABASE_URL` apontando para `127.0.0.1`/`localhost` e banco `mn_test`.
 - `npx playwright install chromium` e `npm run test:browser`: fluxos em Chromium com telas de 360, 390 e 1280 pixels. Use `PLAYWRIGHT_CHROMIUM_EXECUTABLE` somente para um Chromium já instalado em seu ambiente. O teste inicia e encerra um servidor local exclusivo, com credenciais privadas desabilitadas.
 - `npm run check:launch`: verificação da configuração real de implantação, sem cobrança.
+- `npm run assets:optimize`: recria as versões otimizadas das imagens existentes e o ícone. Os arquivos derivados são versionados; o build não precisa gerar imagens.
 
 Os testes de navegador usam fixtures isoladas para a administração e para simular falha do provedor; a proteção das APIs, os dados persistidos e as regras de pagamento são exercitados separadamente nas suítes de servidor e banco. Capturas e traces ficam em `test-results/`, ignorado pelo Git. Um teste de navegador aprovado não substitui a homologação com a conta Mercado Pago e o domínio da loja.
 

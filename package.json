@@ -14,6 +14,7 @@
     "admin:setup": "node scripts/admin-setup.mjs",
     "test:database": "node --test tests/database.integration.mjs",
     "test:browser": "playwright test",
+    "assets:optimize": "node scripts/optimize-assets.mjs",
     "verify": "npm test && npm run typecheck && npm run check:launch -- --code-only && npm audit --omit=dev --audit-level=high && npm run build && npm run test:production"
   },
   "dependencies": {

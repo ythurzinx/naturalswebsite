@@ -45,7 +45,7 @@ export function Header() {
       <header className="admin-brand-bar">
         <Link href="/" aria-label="Voltar à loja Mundo Natural">
           <img
-            src="/images/mundo-natural-logo.png"
+            src="/images/mundo-natural-logo.webp"
             alt="Mundo Natural"
             width="50"
             height="46"
@@ -70,7 +70,7 @@ export function Header() {
         <div className="shell header-main">
           <Link href="/" className="brand" aria-label="Mundo Natural — início">
             <img
-              src="/images/mundo-natural-logo.png"
+              src="/images/mundo-natural-logo.webp"
               alt="Mundo Natural · Produtos naturais · Taboão da Serra"
               width="96"
               height="88"
