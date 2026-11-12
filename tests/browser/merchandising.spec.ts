@@ -1,5 +1,124 @@
 import { test, expect } from "@playwright/test";
 
+test("private Mercado Pago homologation returns to the admin and never calls the storefront checkout", async ({
+  page,
+}) => {
+  let created = 0,
+    storeCalls = 0,
+    state = "none";
+  await page.route("**/api/checkout", (route) => {
+    storeCalls++;
+    return route.fulfill({
+      status: 500,
+      json: { error: "Store checkout must not be used" },
+    });
+  });
+  await page.route("**/api/admin/**", async (route) => {
+    const path = new URL(route.request().url()).pathname.replace(
+      "/api/admin/",
+      "",
+    );
+    if (path === "session")
+      return route.fulfill({
+        json: {
+          available: true,
+          authenticated: true,
+          username: "admin",
+          csrfToken: "admin-fixture",
+          mfa: true,
+        },
+      });
+    if (path === "order-alerts")
+      return route.fulfill({
+        json: {
+          cursor: 0,
+          events: [],
+          counts: { toPack: 0, ready: 0, pending: 0 },
+        },
+      });
+    if (path === "payments/test/session")
+      return route.fulfill({
+        json: { available: true, testMode: true, csrfToken: "sandbox-initial" },
+      });
+    if (path === "payments/test/reset") {
+      expect(route.request().headers()["x-csrf-token"]).toBe("admin-fixture");
+      expect(route.request().postDataJSON()).toEqual({
+        csrfToken: "sandbox-initial",
+      });
+      return route.fulfill({
+        json: { available: true, testMode: true, csrfToken: "sandbox-fresh" },
+      });
+    }
+    if (path === "payments/test/checkout") {
+      expect(route.request().headers()["x-csrf-token"]).toBe("admin-fixture");
+      expect(route.request().postDataJSON()).toMatchObject({
+        csrfToken: "sandbox-fresh",
+        input: {
+          email: "teste@example.invalid",
+          items: [{ id: "sandbox-checkout", quantity: 1 }],
+          expectedTotalCents: 100,
+        },
+      });
+      created++;
+      state = "paid";
+      return route.fulfill({
+        json: {
+          checkoutUrl:
+            "https://www.mercadopago.com.br/checkout/v1/redirect?order_id=ORDTST01BROWSERTEST",
+        },
+      });
+    }
+    if (path === "payments/test/status")
+      return route.fulfill({
+        json: {
+          state,
+          testMode: true,
+          ...(state !== "none" ? { orderId: "ORDTST01BROWSERTEST" } : {}),
+        },
+      });
+    if (path === "payments/diagnostics")
+      return route.fulfill({
+        json: {
+          configured: true,
+          environment: "production",
+          webhookConfigured: true,
+          origin: "https://loja.example",
+          lastAttempt: null,
+        },
+      });
+    return route.fulfill({ json: {} });
+  });
+  await page.route(
+    "https://www.mercadopago.com.br/checkout/v1/redirect?**",
+    (route) =>
+      route.fulfill({
+        contentType: "text/html",
+        body: '<a href="http://127.0.0.1:3217/admin?pagamento_teste=1">Voltar ao painel de teste</a>',
+      }),
+  );
+  await page.goto("/admin?pagamento_teste=1");
+  await page
+    .getByLabel("E-mail para homologação", { exact: true })
+    .fill("teste@example.invalid");
+  await page
+    .getByRole("button", { name: "Abrir checkout de teste", exact: true })
+    .click();
+  await page
+    .getByRole("link", { name: "Voltar ao painel de teste", exact: true })
+    .click();
+  await expect(page.locator(".sandbox-result")).toContainText(
+    "Teste aprovado pelo Mercado Pago",
+  );
+  await expect(page.locator(".sandbox-result")).toContainText(
+    "não confirma uma venda real",
+  );
+  expect(created).toBe(1);
+  expect(storeCalls).toBe(0);
+  expect(await page.evaluate(() => innerWidth)).toBeLessThanOrEqual(
+    page.viewportSize()!.width + 1,
+  );
+});
+
 test("bulk-only catalog and combo ingredients keep the displayed total on a mobile cart", async ({
   page,
 }, info) => {

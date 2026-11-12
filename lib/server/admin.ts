@@ -4,6 +4,7 @@ import { payments } from "./payments";
 import { adminConfiguration } from "./admin-auth.mjs";
 import { createAdminService } from "./admin-service.mjs";
 import { shipping } from "./shipping";
+import { paymentTesting } from "./payment-testing";
 const config = adminConfiguration({
   APP_URL: process.env.APP_URL,
   NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
@@ -18,4 +19,5 @@ export const admin = createAdminService({
   repository,
   payments,
   shipping,
+  paymentTesting,
 });

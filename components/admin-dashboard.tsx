@@ -31,6 +31,7 @@ import { AdminOrderAlerts } from "./admin-order-alerts";
 import { AdminShippingSettings } from "./admin-shipping-settings";
 import { AdminMerchandising } from "./admin-merchandising";
 import { AdminPaymentDiagnostics } from "./admin-payment-diagnostics";
+import { AdminPaymentTest } from "./admin-payment-test";
 import { AdminOrderOperations } from "./admin-order-operations";
 import { Modal } from "./modal";
 import { ProductImage } from "./product-card";
@@ -202,6 +203,12 @@ export function AdminDashboard() {
       new Date().toLocaleDateString("en-CA", { timeZone: "America/Sao_Paulo" }),
     );
   const csrf = useRef("");
+  useEffect(() => {
+    if (
+      new URLSearchParams(window.location.search).get("pagamento_teste") === "1"
+    )
+      setTab("payments");
+  }, []);
   const api = useCallback(
     async <T,>(
       path: string,
@@ -653,7 +660,12 @@ export function AdminDashboard() {
         )}
         {tab === "shipping" && <AdminShippingSettings api={api} />}
         {tab === "merchandising" && <AdminMerchandising api={api} />}
-        {tab === "payments" && <AdminPaymentDiagnostics api={api} />}
+        {tab === "payments" && (
+          <>
+            <AdminPaymentTest api={api} />
+            <AdminPaymentDiagnostics api={api} />
+          </>
+        )}
         {tab === "dashboard" && (
           <>
             <div className="admin-toolbar">

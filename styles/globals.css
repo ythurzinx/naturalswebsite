@@ -5495,3 +5495,70 @@ svg {
     height: 75px;
   }
 }
+.sandbox-payment {
+  margin-bottom: 24px;
+}
+.sandbox-payment .eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.sandbox-payment h2 {
+  margin: 12px 0;
+}
+.sandbox-payment > p,
+.sandbox-setup {
+  font-size: 13px;
+  line-height: 1.8;
+}
+.sandbox-payment code {
+  overflow-wrap: anywhere;
+  font-size: 12px;
+}
+.sandbox-payment form {
+  margin: 22px 0;
+}
+.sandbox-result {
+  padding: 18px;
+  border: 1px solid #b6c79b;
+  border-radius: 10px;
+  background: #f0f5e7;
+  margin: 20px 0;
+}
+.sandbox-result > p {
+  overflow-wrap: anywhere;
+  font-size: 12px;
+}
+.sandbox-result > small {
+  display: block;
+  line-height: 1.7;
+  margin-bottom: 12px;
+}
+.sandbox-setup {
+  padding: 18px;
+  background: #f4f5ee;
+  border-radius: 10px;
+  margin: 18px 0;
+}
+.sandbox-setup ol {
+  padding-left: 20px;
+}
+.sandbox-payment .field-label {
+  min-width: 0;
+}
+.sandbox-payment input {
+  width: 100%;
+  min-width: 0;
+}
+@media (max-width: 500px) {
+  .sandbox-payment h2 {
+    font-size: 23px;
+  }
+  .sandbox-payment form .button {
+    width: 100%;
+  }
+  .sandbox-payment input {
+    font-size: 16px;
+    min-height: 44px;
+  }
+}
