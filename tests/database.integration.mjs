@@ -11,6 +11,7 @@ import {
 } from "../lib/server/admin-auth.mjs";
 import { createAdminService } from "../lib/server/admin-service.mjs";
 import { createPaymentService } from "../lib/server/payment-service.mjs";
+import { createPaymentTesting } from "../lib/server/payment-testing.mjs";
 import { referencePriceCents } from "../lib/pricing.mjs";
 import { validateMerchandising } from "../lib/server/merchandising-validation.mjs";
 import { buildCheckout, money } from "../lib/server/checkout-core.mjs";
@@ -90,6 +91,115 @@ beforeEach(async () => {
 });
 after(async () => {
   await pool.end();
+});
+test("authenticated sandbox checkout forwards both CSRF layers and never creates financial or packing records", async () => {
+  const config = {
+    origin: "https://loja.example",
+    secure: true,
+    username: "admin",
+    passwordHash,
+    sessionSecret: "s".repeat(43),
+    totpSecret: "",
+  };
+  let order;
+  const testing = createPaymentTesting(
+    {
+      APP_URL: config.origin,
+      MERCADOPAGO_TEST_ACCESS_TOKEN: "APP_USR-" + "fixture".repeat(8),
+    },
+    {
+      fetcher: async (_url, options) => {
+        if (options.method === "POST") {
+          const body = JSON.parse(options.body);
+          assert.equal(body.total_amount, "1.00");
+          order = {
+            ...body,
+            id: "ORDTST01ADMININTEGRATION",
+            currency: "BRL",
+            country_code: "BRA",
+            status: "created",
+            status_detail: "created",
+            total_paid_amount: "0.00",
+            checkout_url:
+              "https://www.mercadopago.com.br/checkout/v1/redirect?order_id=ORDTST01ADMININTEGRATION",
+          };
+        }
+        return Response.json(order);
+      },
+    },
+  );
+  const admin = createAdminService({
+    config,
+    repository: repo,
+    payments: null,
+    paymentTesting: testing,
+  });
+  const jar = new Map();
+  let adminCsrf = "";
+  async function call(path, method = "GET", body) {
+    const response = await admin.handle(
+      new Request(config.origin + "/api/admin/" + path, {
+        method,
+        headers: {
+          Origin: config.origin,
+          "Content-Type": "application/json",
+          Cookie: [...jar].map(([k, v]) => `${k}=${v}`).join("; "),
+          ...(adminCsrf ? { "X-CSRF-Token": adminCsrf } : {}),
+        },
+        ...(body ? { body: JSON.stringify(body) } : {}),
+      }),
+      path.split("/"),
+    );
+    for (const cookie of response.headers.getSetCookie()) {
+      const [key, value] = cookie.split(";")[0].split("=");
+      jar.set(key, value);
+    }
+    return response;
+  }
+  let response = await call("login", "POST", {
+    username: "admin",
+    password: "correct-fixture-password",
+  });
+  assert.equal(response.status, 200);
+  adminCsrf = (await response.json()).csrfToken;
+  response = await call("payments/test/session");
+  assert.equal(response.status, 200);
+  const first = await response.json();
+  assert.equal(first.testMode, true);
+  response = await call("payments/test/reset", "POST", {
+    csrfToken: first.csrfToken,
+  });
+  assert.equal(response.status, 200);
+  const next = await response.json();
+  response = await call("payments/test/checkout", "POST", {
+    csrfToken: next.csrfToken,
+    input: {
+      name: "Teste Loja",
+      email: "teste@example.invalid",
+      fulfillment: "pickup",
+      items: [{ id: "sandbox-checkout", quantity: 1 }],
+      expectedTotalCents: 100,
+    },
+  });
+  assert.equal(response.status, 200, await response.clone().text());
+  assert.ok(jar.has("__Host-mn-sandbox-orders"));
+  assert.ok(!jar.has("__Host-mn-orders"));
+  order.status = "processed";
+  order.status_detail = "accredited";
+  order.total_paid_amount = "1.00";
+  response = await call("payments/test/status");
+  assert.equal((await response.json()).state, "paid");
+  for (const table of [
+    "mn_orders",
+    "mn_order_items",
+    "mn_order_events",
+    "mn_order_packing",
+    "mn_checkout_intents",
+  ]) {
+    const [rows] = await pool.execute(`SELECT COUNT(*) n FROM ${table}`);
+    assert.equal(rows[0].n, 0);
+  }
+  assert.equal((await repo.dashboard()).orders, 0);
 });
 const product = (id = "prod-1") => ({
   id,
@@ -963,6 +1073,9 @@ test("alerts, freight settings, packing and operations require authentication an
     ["GET", ["merchandising"]],
     ["PUT", ["merchandising"]],
     ["GET", ["payments", "diagnostics"]],
+    ["GET", ["payments", "test", "session"]],
+    ["POST", ["payments", "test", "checkout"]],
+    ["GET", ["payments", "test", "status"]],
     ["POST", ["shipping", "estimate"]],
     ["PUT", ["orders", "ORD01MNDELIVERYDBFIXTURE", "packing"]],
     ["PUT", ["orders", "ORD01MNDELIVERYDBFIXTURE", "operations"]],

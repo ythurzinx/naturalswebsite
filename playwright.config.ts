@@ -48,6 +48,7 @@ export default defineConfig({
       APP_URL: "https://loja.example",
       DATABASE_URL: "",
       MERCADOPAGO_ACCESS_TOKEN: "",
+      MERCADOPAGO_TEST_ACCESS_TOKEN: "",
       MERCADOPAGO_WEBHOOK_SECRET: "",
       ADMIN_PASSWORD_HASH: "",
       ADMIN_SESSION_SECRET: "",

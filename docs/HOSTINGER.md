@@ -109,3 +109,7 @@ A loja não recebe um lucro fictício ou calculado por margem presumida. Os núm
 - [Mercado Pago: criar uma order do Checkout Pro](https://www.mercadopago.com.br/developers/pt/docs/checkout-pro-orders/create-order)
 - [Mercado Pago: notificações autenticadas](https://www.mercadopago.com.br/developers/pt/docs/checkout-pro-orders/notifications)
 - [Mercado Pago: estados da order](https://www.mercadopago.com.br/developers/pt/docs/checkout-pro-orders/payment-management/status/order-status)
+
+## Testar o Mercado Pago sem alterar a vitrine
+
+Cadastre a variável privada opcional `MERCADOPAGO_TEST_ACCESS_TOKEN` usando **Credenciais → Teste** no Mercado Pago Developers e reimplante. Em **Admin → Pagamentos**, abra o checkout de homologação. Ele usa uma compra fictícia de R$ 1,00 e não registra pedidos, alertas de embalagem ou receitas. Mantenha o token real em `MERCADOPAGO_ACCESS_TOKEN` e `MERCADOPAGO_ENV=production`. Veja [o passo a passo](DIAGNOSTICO-CHECKOUT.md#homologação-privada-pelo-painel).

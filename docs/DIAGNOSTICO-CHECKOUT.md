@@ -35,3 +35,13 @@ Uma order `ORDTST…` é bloqueada quando `MERCADOPAGO_ENV=production`. O prefix
 Sem acesso às variáveis da Hostinger, essa substituição precisa ser feita pelo titular da conta. Não diminua as verificações de ambiente para contornar o erro.
 
 Fontes: [Credenciais da Orders API](https://www.mercadopago.com.br/developers/pt/docs/checkout-api-orders/resources/credentials) e [Ativar produção](https://www.mercadopago.com.br/developers/pt/docs/checkout-pro-orders/go-to-production).
+
+## Homologação privada pelo painel
+
+Use **Admin → Pagamentos → Testar o checkout** para testar cartões sem colocar a vitrine em modo de teste. Acrescente `MERCADOPAGO_TEST_ACCESS_TOKEN` nas variáveis privadas da Hostinger, com o Access Token de **Credenciais → Teste** da mesma aplicação, e reimplante. O token de produção e `MERCADOPAGO_ENV=production` permanecem na configuração da loja.
+
+O botão cria uma compra fictícia de R$ 1,00, com produto e limites fixos, usando a API real em ambiente de teste. Abra uma janela anônima, entre no admin, informe nome/e-mail e use exclusivamente os dados de cartão da [documentação oficial de teste do Checkout Pro Orders](https://www.mercadopago.com.br/developers/pt/docs/checkout-pro-orders/integration-test/test-purchase-with-card). O guia atual permite qualquer e-mail válido quando solicitado pelo checkout; não exige login de comprador de teste para esse fluxo. Dados de cartão são preenchidos somente no Mercado Pago.
+
+Após o retorno, o painel consulta a order na API e mostra o resultado real da homologação. Faça um cenário aprovado e outro rejeitado. A navegação de retorno e seus parâmetros não aprovam pagamentos. Cada nova tentativa recebe uma sessão distinta. Pedidos de homologação não entram no banco de pedidos, não disparam a fila de embalagem e não afetam lucro ou faturamento. Cookies e assinaturas são exclusivos desse fluxo; a API exige autenticação administrativa e CSRF.
+
+A ausência do token mantém o teste desabilitado. Se uma credencial de produção for colocada por engano no campo de teste e a API criar uma order real, a validação bloqueia o redirecionamento antes do pagamento. O fluxo não altera automaticamente as credenciais de produção nem o ambiente da vitrine. A aprovação de cartão de teste não comprova recebimento real de Pix ou cartão; a conferência final em produção continua necessária.

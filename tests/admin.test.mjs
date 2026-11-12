@@ -135,6 +135,8 @@ test("unconfigured admin routes never expose catalog costs or permit writes", as
     [["merchandising"], "GET"],
     [["merchandising"], "PUT"],
     [["payments", "diagnostics"], "GET"],
+    [["payments", "test", "session"], "GET"],
+    [["payments", "test", "checkout"], "POST"],
     [["shipping", "estimate"], "POST"],
     [["images"], "POST"],
     [["products", "availability"], "PATCH"],
