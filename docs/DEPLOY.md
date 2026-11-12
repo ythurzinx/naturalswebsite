@@ -27,6 +27,8 @@ Crie um MySQL dedicado. Configure as variáveis no painel da aplicação, usando
 
 No terminal com as variáveis do banco disponíveis, execute `npm run db:migrate`. A migração cria as tabelas sem apagar dados existentes. Mantenha backup do banco e valide a restauração; fotos de produtos e registros administrativos também ficam nele.
 
+**Sem terminal na Hostinger:** importe [database/mundo-natural-schema.sql](../database/mundo-natural-schema.sql) pelo phpMyAdmin, no mesmo banco da `DATABASE_URL`. O [passo a passo sem terminal](BANCO-SEM-TERMINAL.md) mostra onde clicar; essa alternativa cria as mesmas tabelas e preserva os dados existentes.
+
 Execute `npm run admin:setup` no seu terminal. O comando pede uma senha forte, gera os três segredos administrativos e a chave TOTP. Salve os valores no painel da Hostinger e registre a chave no autenticador. Não compartilhe os valores por chat ou faça commit deles. Reinicie/republique a aplicação depois de mudar variáveis.
 
 ## 3. Pagamento e Webhooks
