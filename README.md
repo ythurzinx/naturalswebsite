@@ -43,6 +43,8 @@ No celular, a loja oferece navegação inferior, controles de peso com passos de
 
 Crie um MySQL dedicado na Hostinger, configure `DATABASE_URL` e execute `npm run db:migrate`. O catálogo inicial é combinado com as alterações persistentes do painel. Fotos são normalizadas e armazenadas no banco, sem depender de arquivos locais que poderiam se perder no redeploy.
 
+**Hostinger sem terminal:** use o [guia para importar as tabelas pelo phpMyAdmin](docs/BANCO-SEM-TERMINAL.md) com [database/mundo-natural-schema.sql](database/mundo-natural-schema.sql). O arquivo é gerado da mesma estrutura do servidor e acrescenta tabelas ausentes mantendo os dados existentes.
+
 Execute `npm run admin:setup` no seu terminal para gerar o hash da senha, o segredo de sessão e a chave do autenticador. Configure `ADMIN_USERNAME`, `ADMIN_PASSWORD_HASH`, `ADMIN_SESSION_SECRET` e `ADMIN_TOTP_SECRET` no painel da Hostinger. Nunca faça commit de valores reais. O acesso usa sessão protegida no servidor, limite de tentativas, CSRF e, com a chave configurada, TOTP com bloqueio de reutilização.
 
 O lucro estimado exige custos e taxas conhecidos. Custos ficam registrados por pedido; preencher custos históricos ausentes exige uma ação explícita do administrador. Nenhuma margem é inventada.

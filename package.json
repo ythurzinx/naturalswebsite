@@ -11,6 +11,7 @@
     "check:launch": "node scripts/check-launch.mjs",
     "test:production": "node scripts/smoke-production.mjs",
     "db:migrate": "node scripts/migrate.mjs",
+    "db:export": "node scripts/export-schema.mjs",
     "admin:setup": "node scripts/admin-setup.mjs",
     "test:database": "node --test tests/database.integration.mjs",
     "test:browser": "playwright test",

@@ -36,6 +36,8 @@ No hPanel, crie um banco MySQL dedicado e um usuário com acesso apenas a esse b
 
 No terminal da aplicação, execute `npm run db:migrate`. O comando cria as tabelas `mn_` sem apagar dados anteriores. Faça backup do banco no painel e confira a restauração antes da operação. Em produção, mantenha as permissões do usuário limitadas ao banco da loja.
 
+Se não tiver terminal, siga [Preparar o banco pelo phpMyAdmin](BANCO-SEM-TERMINAL.md) e importe [mundo-natural-schema.sql](../database/mundo-natural-schema.sql) no mesmo banco usado pela aplicação. O SQL cria as mesmas tabelas do comando de migração e pode ser aplicado mantendo os registros existentes.
+
 No seu terminal, execute `npm run admin:setup`. Digite uma senha forte de pelo menos 14 caracteres; ela não é exibida nem salva em texto puro. O script gera `ADMIN_PASSWORD_HASH`, `ADMIN_SESSION_SECRET` e `ADMIN_TOTP_SECRET`. Copie os valores para o painel de variáveis da Hostinger e cadastre a chave TOTP no autenticador (6 dígitos, 30 segundos). Guarde uma cópia de recuperação em local seguro. Não envie os valores por chat.
 
 Depois de fazer redeploy, acesse `/admin`. O usuário padrão é `admin`. O painel permite editar produtos e custos, disponibilizar/indisponibilizar itens, associar fotos, acompanhar pedidos, registrar despesas, exportar os últimos pedidos e conferir o histórico de alterações. As fotos JPEG/PNG/WebP são normalizadas para WebP, com metadados removidos, e guardadas no banco. Não são geradas novas imagens por IA.
