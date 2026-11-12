@@ -91,7 +91,7 @@ test("delivery quote and full address reach checkout with the displayed total", 
     .getByLabel("Complemento (opcional)", { exact: true })
     .fill("Apto 2");
   await page
-    .getByLabel("Telefone para a entrega", { exact: true })
+    .getByLabel("Telefone para contato", { exact: true })
     .fill("11999999999");
   await page
     .getByLabel("Observações (opcional)", { exact: true })
@@ -126,6 +126,9 @@ test("admin sound activation, live paid alerts, packing and shipping settings wo
     id: "ORD01MNADMINOPSFIXTURE",
     customer_name: "Cliente Teste",
     customer_email: "cliente@example.invalid",
+    customer_phone: "11999999999",
+    whatsapp_opt_in: true,
+    estimated_minutes: null as number | null,
     state: "paid",
     fulfillment_mode: "delivery",
     fulfillment_status: "new",
@@ -171,6 +174,8 @@ test("admin sound activation, live paid alerts, packing and shipping settings wo
       path = url.pathname.slice("/api/admin/".length),
       method = route.request().method();
     let json: unknown = {};
+    if (path === "notifications/drain")
+      return route.fulfill({ json: { processed: 0 } });
     if (path === "session")
       json = {
         available: true,
@@ -244,11 +249,13 @@ test("admin sound activation, live paid alerts, packing and shipping settings wo
         staffNote: "Bancada 2",
         courierName: "Entregador teste",
         deliveryCostCents: 600,
+        estimatedMinutes: 30,
       });
       Object.assign(order, {
         staff_note: body.staffNote,
         courier_name: body.courierName,
         delivery_cost_cents: body.deliveryCostCents,
+        estimated_minutes: body.estimatedMinutes,
       });
       json = { order };
     } else throw Error("Unexpected fixture API path " + path);
@@ -280,6 +287,15 @@ test("admin sound activation, live paid alerts, packing and shipping settings wo
   await page.locator(".order-toast").click();
   const dialog = page.getByRole("dialog");
   await expect(dialog).toContainText("Rua de teste");
+  await expect(
+    dialog.getByRole("heading", { name: "Dados do cliente" }),
+  ).toBeVisible();
+  await expect(
+    dialog.getByRole("link", { name: "cliente@example.invalid" }),
+  ).toBeVisible();
+  await expect(
+    dialog.getByText("Autorizado pelo cliente neste pedido"),
+  ).toBeVisible();
   await dialog.getByRole("checkbox").click();
   await expect(dialog.getByRole("checkbox")).toBeChecked();
   await expect.poll(() => packingWrites).toBe(1);
@@ -292,6 +308,7 @@ test("admin sound activation, live paid alerts, packing and shipping settings wo
   await dialog
     .getByLabel("Entregador ou serviço", { exact: true })
     .fill("Entregador teste");
+  await dialog.getByLabel(/^Previsão de chegada/).fill("30");
   await dialog
     .getByLabel("Custo real da entrega (R$)", { exact: true })
     .fill("6,00");

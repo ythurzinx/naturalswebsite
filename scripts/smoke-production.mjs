@@ -30,6 +30,9 @@ const server = spawn(
       ADMIN_PASSWORD_HASH: "",
       ADMIN_SESSION_SECRET: "",
       ADMIN_TOTP_SECRET: "",
+      BREVO_API_KEY: "",
+      BREVO_SENDER_EMAIL: "",
+      NOTIFICATION_WORKER_SECRET: "worker-fixture-" + "a".repeat(32),
     },
     stdio: ["ignore", "pipe", "pipe"],
   },
@@ -138,6 +141,30 @@ try {
   const admin = await fetch(origin + "/api/admin/products");
   assert.equal(admin.status, 503);
   assert.equal((await admin.json()).code, "ADMIN_UNAVAILABLE");
+  assert.equal((await fetch(origin + "/api/admin/notifications")).status, 503);
+  assert.equal(
+    (await fetch(origin + "/api/notifications/worker", { method: "POST" }))
+      .status,
+    401,
+  );
+  assert.equal(
+    (
+      await fetch(origin + "/api/notifications/worker", {
+        method: "POST",
+        headers: { Authorization: "Bearer invalid-secret" },
+      })
+    ).status,
+    401,
+  );
+  assert.equal(
+    (
+      await fetch(origin + "/api/notifications/worker", {
+        method: "POST",
+        headers: { Authorization: "Bearer worker-fixture-" + "a".repeat(32) },
+      })
+    ).status,
+    503,
+  );
   const session = await fetch(origin + "/api/checkout/session");
   assert.equal((await session.json()).available, false);
   assert.ok(session.headers.get("cache-control").includes("no-store"));

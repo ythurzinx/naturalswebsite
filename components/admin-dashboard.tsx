@@ -31,6 +31,7 @@ import { AdminOrderAlerts } from "./admin-order-alerts";
 import { AdminShippingSettings } from "./admin-shipping-settings";
 import { AdminMerchandising } from "./admin-merchandising";
 import { AdminPaymentDiagnostics } from "./admin-payment-diagnostics";
+import { AdminNotificationSettings } from "./admin-notification-settings";
 import { AdminPaymentTest } from "./admin-payment-test";
 import { AdminOrderOperations } from "./admin-order-operations";
 import { Modal } from "./modal";
@@ -59,6 +60,16 @@ export type Order = {
   shipping_cents?: number;
   distance_m?: number;
   customer_phone?: string;
+  whatsapp_opt_in?: boolean;
+  estimated_minutes?: number | null;
+  notifications?: {
+    event: string;
+    channel: string;
+    status: string;
+    attempts: number;
+    code: string | null;
+    createdAt: number;
+  }[];
   customer_note?: string;
   staff_note?: string;
   courier_name?: string;
@@ -539,6 +550,7 @@ export function AdminDashboard() {
     { id: "merchandising", label: "Ofertas e combos", icon: Tags },
     { id: "orders", label: "Pedidos", icon: ShoppingBag },
     { id: "shipping", label: "Frete e entregas", icon: Truck },
+    { id: "notifications", label: "Mensagens aos clientes", icon: ShoppingBag },
     { id: "payments", label: "Pagamentos", icon: CreditCard },
     { id: "expenses", label: "Despesas", icon: ReceiptText },
     { id: "audit", label: "Atividade", icon: Activity },
@@ -658,6 +670,7 @@ export function AdminDashboard() {
             {notice}
           </p>
         )}
+        {tab === "notifications" && <AdminNotificationSettings api={api} />}
         {tab === "shipping" && <AdminShippingSettings api={api} />}
         {tab === "merchandising" && <AdminMerchandising api={api} />}
         {tab === "payments" && (

@@ -14,6 +14,7 @@ import { createPaymentService } from "../lib/server/payment-service.mjs";
 import { createPaymentTesting } from "../lib/server/payment-testing.mjs";
 import { referencePriceCents } from "../lib/pricing.mjs";
 import { validateMerchandising } from "../lib/server/merchandising-validation.mjs";
+import { createCustomerNotifications } from "../lib/server/customer-notifications.mjs";
 import { buildCheckout, money } from "../lib/server/checkout-core.mjs";
 const target = process.env.INTEGRATION_DATABASE_URL;
 if (!target)
@@ -976,6 +977,15 @@ test("packing is payment-gated, validates item ownership and requires every prod
   await repo.setPacked(order.id, "prod-1:300", false);
   assert.equal((await repo.order(order.id)).fulfillment_status, "packing");
   await repo.setPacked(order.id, "prod-1:300", true);
+  await assert.rejects(repo.setFulfillment(order.id, "out_for_delivery"), {
+    code: "ETA_REQUIRED",
+  });
+  await repo.saveOrderOperations(order.id, {
+    staffNote: "",
+    courierName: "Teste",
+    deliveryCostCents: null,
+    estimatedMinutes: 30,
+  });
   await repo.setFulfillment(order.id, "out_for_delivery");
   await assert.rejects(repo.setPacked(order.id, "prod-1:300", false), {
     code: "ORDER_LOCKED",
@@ -1079,6 +1089,9 @@ test("alerts, freight settings, packing and operations require authentication an
     ["POST", ["shipping", "estimate"]],
     ["PUT", ["orders", "ORD01MNDELIVERYDBFIXTURE", "packing"]],
     ["PUT", ["orders", "ORD01MNDELIVERYDBFIXTURE", "operations"]],
+    ["GET", ["notifications"]],
+    ["PUT", ["notifications"]],
+    ["POST", ["notifications", "drain"]],
   ]) {
     const response = await service.handle(
       new Request(config.origin + "/api/admin/" + path.join("/"), {
@@ -1105,6 +1118,8 @@ test("alerts, freight settings, packing and operations require authentication an
   const csrf = (await login.json()).csrfToken;
   for (const [method, path] of [
     ["PUT", ["orders", "ORD01MNDELIVERYDBFIXTURE", "operations"]],
+    ["PUT", ["notifications"]],
+    ["POST", ["notifications", "drain"]],
     ["PUT", ["merchandising"]],
     ["POST", ["shipping", "estimate"]],
   ])
@@ -1133,4 +1148,124 @@ test("alerts, freight settings, packing and operations require authentication an
     ["order-alerts"],
   );
   assert.equal(response.status, 400);
+});
+
+test("customer contact, consent, ETA and durable notification outbox survive duplicate provider events", async () => {
+  const calls = [];
+  const notifications = createCustomerNotifications({
+    repository: repo,
+    env: {
+      BREVO_API_KEY: "xkeysib-local-integration-fixture",
+      BREVO_SENDER_EMAIL: "loja@example.invalid",
+      BREVO_WHATSAPP_SENDER: "551151993525",
+    },
+    fetcher: async (url, options) => {
+      calls.push({ url, body: JSON.parse(options.body) });
+      return new Response("{}", { status: 201 });
+    },
+  });
+  await notifications.saveSettings({
+    revision: 0,
+    emailEnabled: true,
+    whatsappEnabled: true,
+    whatsappTemplates: { paid: 1, ready: 2, out_for_delivery: 3 },
+  });
+  const { order, selection } = deliveryOrderFixture();
+  selection.whatsappOptIn = true;
+  await repo.recordOrder(order, selection);
+  assert.equal((await repo.order(order.id)).whatsapp_opt_in, true);
+  assert.equal((await repo.order(order.id)).notifications.length, 0);
+  const paid = {
+    ...order,
+    status: "processed",
+    status_detail: "accredited",
+    total_paid_amount: "44.00",
+    last_updated_date: new Date(Date.now() + 1000).toISOString(),
+  };
+  await repo.recordOrder(paid);
+  await repo.recordOrder(paid, { ...selection, whatsappOptIn: false });
+  const detail = await repo.order(order.id);
+  assert.equal(detail.customer_phone, "11999999999");
+  assert.equal(detail.customer_email, "entrega@example.invalid");
+  assert.equal(detail.whatsapp_opt_in, true);
+  assert.equal(detail.notifications.length, 2);
+  await Promise.all([notifications.drain(), notifications.drain()]);
+  assert.equal(calls.length, 2);
+  assert.equal(
+    (await repo.order(order.id)).notifications.filter(
+      (n) => n.status === "accepted",
+    ).length,
+    2,
+  );
+  await repo.setPacked(order.id, "prod-1:300", true);
+  await repo.setFulfillment(order.id, "ready");
+  await repo.setFulfillment(order.id, "ready");
+  await notifications.drain();
+  assert.equal(calls.length, 4);
+  await assert.rejects(repo.setFulfillment(order.id, "out_for_delivery"), {
+    code: "ETA_REQUIRED",
+  });
+  await repo.saveOrderOperations(order.id, {
+    staffNote: "Privado",
+    courierName: "Teste",
+    deliveryCostCents: 100,
+    estimatedMinutes: 25,
+  });
+  assert.equal((await repo.order(order.id)).estimated_minutes, 25);
+  await repo.setFulfillment(order.id, "out_for_delivery");
+  await notifications.drain();
+  assert.equal(calls.length, 6);
+  const whatsapp = calls.filter((call) =>
+    call.url.endsWith("whatsapp/sendMessage"),
+  );
+  assert.equal(whatsapp.at(-1).body.params.previsao_minutos, 25);
+  assert.equal(whatsapp.at(-1).body.senderNumber, "551151993525");
+  assert.doesNotMatch(JSON.stringify(calls), /Privado|Rua de teste|Apto 2/);
+  await repo.recordOrder(paid);
+  await notifications.drain();
+  assert.equal(calls.length, 6);
+});
+
+test("enabling messages never replays old purchases or invents WhatsApp consent", async () => {
+  const { order, selection } = deliveryOrderFixture();
+  const paid = {
+    ...order,
+    status: "processed",
+    status_detail: "accredited",
+    total_paid_amount: "44.00",
+  };
+  await repo.recordOrder(paid, selection);
+  const notifications = createCustomerNotifications({
+    repository: repo,
+    env: {
+      BREVO_API_KEY: "xkeysib-local-integration-fixture",
+      BREVO_SENDER_EMAIL: "loja@example.invalid",
+      BREVO_WHATSAPP_SENDER: "551151993525",
+    },
+    fetcher: async () => new Response("{}", { status: 201 }),
+  });
+  await notifications.saveSettings({
+    revision: 0,
+    emailEnabled: true,
+    whatsappEnabled: true,
+    whatsappTemplates: { paid: 1, ready: 2, out_for_delivery: 3 },
+  });
+  await repo.recordOrder(paid);
+  assert.equal((await repo.order(order.id)).notifications.length, 0);
+  await repo.setPacked(order.id, "prod-1:300", true);
+  await repo.setFulfillment(order.id, "ready");
+  const detail = await repo.order(order.id);
+  assert.equal(detail.whatsapp_opt_in, false);
+  assert.equal(detail.notifications.length, 1);
+  assert.equal(detail.notifications[0].channel, "email");
+  await assert.rejects(
+    repo.saveOrderOperations(order.id, {
+      staffNote: "",
+      courierName: "",
+      deliveryCostCents: null,
+      estimatedMinutes: 241,
+    }),
+    { code: "INVALID_ETA" },
+  );
+  assert.equal((await repo.order(order.id)).estimated_minutes, null);
 });

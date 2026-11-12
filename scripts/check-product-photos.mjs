@@ -17,10 +17,18 @@ for (const [slug, photo] of Object.entries(sources)) {
     photo.path !== `/images/products/${slug}.webp` ||
     !/^[a-f0-9]{64}$/.test(photo.sha256) ||
     !photo.author ||
-    !/^(CC0|CC BY(?:-SA)? [1-4]\.[05]|Public domain|PDM|PD)/i.test(
-      photo.license,
-    ) ||
-    new URL(photo.source).hostname !== "commons.wikimedia.org"
+    !(photo.kind === "ai-generated"
+      ? photo.generator === "OpenAI image generation" &&
+        photo.styleVersion === "mundo-natural-studio-v1" &&
+        /^\d{4}-\d{2}-\d{2}$/.test(photo.createdAt) &&
+        /^[a-f0-9]{64}$/.test(photo.sheetSha256) &&
+        Array.isArray(photo.ids) &&
+        photo.ids.length === 1 &&
+        photo.caption.includes("gerada por IA") &&
+        new URL(photo.source).hostname === "openai.com"
+      : /^(CC0|CC BY(?:-SA)? [1-4]\.[05]|Public domain|PDM|PD)/i.test(
+          photo.license,
+        ) && new URL(photo.source).hostname === "commons.wikimedia.org")
   )
     throw Error(`Invalid photo source: ${slug}`);
   const bytes = await readFile(
@@ -42,8 +50,13 @@ for (const [slug, photo] of Object.entries(sources)) {
 }
 const visible = catalog.filter((p) => defaultProductVisible(p, policy));
 for (const p of visible)
-  if (!photos.has(p.imagem) || !p.imagemLegenda)
-    throw Error(`Missing licensed photo or caption: ${p.id}`);
+  if (
+    !photos.has(p.imagem) ||
+    !p.imagemLegenda ||
+    (photos.get(p.imagem).kind === "ai-generated" &&
+      !photos.get(p.imagem).ids.includes(p.id))
+  )
+    throw Error(`Missing traceable photo or caption: ${p.id}`);
 console.log(
-  `${visible.length} produtos com foto local e crédito; ${photos.size} arquivos WebP; ${(size / 1024 / 1024).toFixed(1)} MB no total.`,
+  `${visible.length} produtos com imagem local e origem registrada; ${photos.size} arquivos WebP; ${(size / 1024 / 1024).toFixed(1)} MB no total.`,
 );

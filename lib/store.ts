@@ -3,8 +3,8 @@ export const store = {
   city: "Taboão da Serra, SP",
   address:
     "Rua José Duarte Souza, 21 · Jardim das Margaridas · Taboão da Serra, SP",
-  phone: "551531917309",
-  phoneLabel: "(15) 3191-7309",
+  phone: "551151993525",
+  phoneLabel: "(11) 5199-3525",
   instagram: "https://instagram.com/_mundonaturalto",
 };
 export function whatsappUrl(

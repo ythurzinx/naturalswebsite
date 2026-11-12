@@ -27,6 +27,7 @@ export function CheckoutView() {
     [email, setEmail] = useState(""),
     [paymentMethod, setPaymentMethod] = useState("mercadopago"),
     [notes, setNotes] = useState(""),
+    [whatsappOptIn, setWhatsappOptIn] = useState(false),
     [handoff, setHandoff] = useState(false);
   useEffect(() => {
     if (!payment.checking && !payment.available) setPaymentMethod("whatsapp");
@@ -55,7 +56,8 @@ export function CheckoutView() {
       await payment.pay(cart, name, email, method, {
         totalCents: shipping.totalCents,
         notes,
-        phone: method === "delivery" ? shipping.phone : "",
+        phone: shipping.phone,
+        whatsappOptIn,
         ...(method === "delivery" && shipping.quote
           ? {
               delivery: {
@@ -139,6 +141,42 @@ export function CheckoutView() {
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="voce@exemplo.com.br"
                     />
+                  </label>
+                )}
+                <label className="field-label">
+                  Telefone para contato
+                  <input
+                    name="phone"
+                    type="tel"
+                    inputMode="tel"
+                    autoComplete="tel"
+                    required
+                    minLength={10}
+                    maxLength={20}
+                    value={shipping.phone}
+                    onChange={(e) => shipping.setPhone(e.target.value)}
+                    placeholder="(11) 99999-9999"
+                    aria-describedby="checkout-phone-help"
+                  />
+                </label>
+                <p id="checkout-phone-help" className="fine-print">
+                  Inclua o DDD. A loja usa este contato para cuidar do seu
+                  pedido, inclusive na retirada.
+                </p>
+                {online && (
+                  <label className="checkout-contact-consent">
+                    <input
+                      type="checkbox"
+                      checked={whatsappOptIn}
+                      onChange={(e) => setWhatsappOptIn(e.target.checked)}
+                    />
+                    <span>
+                      Quero receber atualizações deste pedido pelo WhatsApp.
+                      <small>
+                        Opcional. Aprovação, separação e saída para entrega, sem
+                        mensagens promocionais.
+                      </small>
+                    </span>
                   </label>
                 )}
               </div>
@@ -228,7 +266,7 @@ export function CheckoutView() {
               <p className="privacy-note">
                 <ShieldCheck size={18} />{" "}
                 {online
-                  ? "Seu nome, e-mail e os itens da compra serão enviados ao Mercado Pago para o pagamento. Para entrega, a loja recebe seu endereço e telefone. Cookies essenciais protegem sua sessão e o acesso ao pedido."
+                  ? "Seu nome, e-mail e os itens da compra serão enviados ao Mercado Pago para o pagamento. A loja recebe seu telefone para cuidar do pedido e, na entrega, seu endereço. Atualizações pelo WhatsApp dependem da sua escolha acima. Cookies essenciais protegem sua sessão e o acesso ao pedido."
                   : "Ao continuar, você abre o WhatsApp e pode revisar a mensagem antes de enviá-la."}{" "}
                 <Link href="/privacidade">Saiba mais</Link>.
               </p>

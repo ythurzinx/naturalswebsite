@@ -57,6 +57,9 @@ export function AdminOrderOperations({ order, busy, update }: Props) {
         ? ""
         : (order.delivery_cost_cents / 100).toFixed(2),
     ),
+    [estimatedMinutes, setEstimatedMinutes] = useState(
+      order.estimated_minutes?.toString() || "",
+    ),
     [error, setError] = useState("");
   const productItems = (order.items || []).filter(
       (i) => i.product_id !== "__shipping__",
@@ -71,14 +74,71 @@ export function AdminOrderOperations({ order, busy, update }: Props) {
       setError("Use um custo em reais com até duas casas decimais.");
       return;
     }
+    const eta = estimatedMinutes.trim();
+    if (
+      eta &&
+      (!/^\d{1,3}$/.test(eta) || Number(eta) < 1 || Number(eta) > 240)
+    ) {
+      setError("Informe uma previsão de 1 a 240 minutos.");
+      return;
+    }
     await update("operations", {
       staffNote,
       courierName,
+      estimatedMinutes: eta ? Number(eta) : null,
       deliveryCostCents: raw ? Math.round(Number(raw) * 100) : null,
     });
   }
   return (
     <section className="admin-order-operations">
+      <div className="order-customer-card">
+        <h3>Dados do cliente</h3>
+        <dl>
+          <div>
+            <dt>Nome</dt>
+            <dd>{order.customer_name || "Não informado"}</dd>
+          </div>
+          <div>
+            <dt>E-mail</dt>
+            <dd>
+              {order.customer_email ? (
+                <a href={`mailto:${encodeURIComponent(order.customer_email)}`}>
+                  {order.customer_email}
+                </a>
+              ) : (
+                "Não informado"
+              )}
+            </dd>
+          </div>
+          <div>
+            <dt>Telefone</dt>
+            <dd>
+              {order.customer_phone &&
+              /^\+?[0-9 ()-]{10,22}$/.test(order.customer_phone) ? (
+                <a
+                  href={`tel:+${order.customer_phone.replace(/\D/g, "").length <= 11 ? "55" : ""}${order.customer_phone.replace(/\D/g, "")}`}
+                >
+                  {order.customer_phone}
+                </a>
+              ) : (
+                "Não informado neste pedido"
+              )}
+            </dd>
+          </div>
+          <div>
+            <dt>WhatsApp automático</dt>
+            <dd>
+              {order.whatsapp_opt_in
+                ? "Autorizado pelo cliente neste pedido"
+                : "Sem autorização neste pedido"}
+            </dd>
+          </div>
+        </dl>
+        <p className="fine-print">
+          Contatos disponíveis apenas para a equipe autenticada. Use para
+          atender esta compra.
+        </p>
+      </div>
       <div className="order-delivery-card">
         <h3>
           {order.fulfillment_mode === "delivery" ? (
@@ -121,6 +181,49 @@ export function AdminOrderOperations({ order, busy, update }: Props) {
             {order.customer_note}
           </p>
         )}
+      </div>
+      <div className="order-customer-card">
+        <h3>Avisos ao cliente</h3>
+        {order.notifications?.length ? (
+          <ul className="notification-order-history">
+            {order.notifications.map((item) => (
+              <li key={`${item.event}:${item.channel}`}>
+                <strong>
+                  {(
+                    {
+                      paid: "Pagamento aprovado",
+                      ready: "Pedido separado",
+                      out_for_delivery: "Saiu para entrega",
+                    } as Record<string, string>
+                  )[item.event] || item.event}
+                </strong>
+                <span>
+                  {item.channel === "email" ? "E-mail" : "WhatsApp"} ·{" "}
+                  {(
+                    {
+                      pending: "Na fila",
+                      sending: "Enviando",
+                      accepted: "Aceito pelo serviço",
+                      cancelled: "Cancelado ou expirado",
+                      failed: "Falha: confira a configuração",
+                      unknown: "Envio incerto: confira na Brevo",
+                    } as Record<string, string>
+                  )[item.status] || item.status}
+                </span>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>
+            Nenhum aviso automático registrado. Ative os canais em “Mensagens
+            aos clientes” para os próximos eventos.
+          </p>
+        )}
+        <p className="fine-print">
+          “Aceito pelo serviço” confirma o recebimento da solicitação pela
+          Brevo. A entrega ou leitura pode ser consultada no relatório do
+          provedor.
+        </p>
       </div>
       <div className="packing-heading">
         <h3>
@@ -200,6 +303,23 @@ export function AdminOrderOperations({ order, busy, update }: Props) {
                 onChange={(e) => setCourierName(e.target.value)}
                 placeholder="Nome do entregador"
               />
+            </label>
+            <label className="field-label">
+              Previsão de chegada (minutos)
+              <input
+                type="number"
+                min={1}
+                max={240}
+                step={1}
+                inputMode="numeric"
+                value={estimatedMinutes}
+                onChange={(e) => setEstimatedMinutes(e.target.value)}
+                placeholder="Ex.: 30"
+              />
+              <small>
+                Salve antes de marcar “Saiu para entrega”. A mensagem usa esta
+                previsão.
+              </small>
             </label>
             <label className="field-label">
               Custo real da entrega (R$)

@@ -135,18 +135,6 @@ export function DeliveryEstimator({ details = false }: { details?: boolean }) {
                   />
                 </label>
               </div>
-              <label className="field-label">
-                Telefone para a entrega
-                <input
-                  type="tel"
-                  autoComplete="tel"
-                  required
-                  maxLength={20}
-                  value={shipping.phone}
-                  onChange={(e) => shipping.setPhone(e.target.value)}
-                  placeholder="(11) 99999-9999"
-                />
-              </label>
               <p className="privacy-note">
                 Confira se a rua retornada corresponde ao seu endereço. Se não
                 corresponder, fale com a equipe antes de pagar.

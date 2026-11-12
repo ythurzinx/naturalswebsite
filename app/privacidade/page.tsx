@@ -82,7 +82,7 @@ export default function PrivacyPage() {
           acessados pela loja para atendimento, conciliação, reembolso e
           cumprimento das obrigações aplicáveis. A loja mantém no seu banco os
           pedidos, itens, nome e e-mail para atendimento e conciliação. Para
-          entrega, também mantém telefone, endereço e observações do pedido,
+          contato, também mantém telefone e observações; na entrega, o endereço,
           acessíveis à equipe autenticada. Números de cartão não são armazenados
           pela loja. A hospedagem pode registrar dados técnicos e
           identificadores de pedido para segurança e diagnóstico.
@@ -99,6 +99,23 @@ export default function PrivacyPage() {
           há falha de conexão. Registros de tentativa com mais de 7 dias são
           removidos nas próximas criações de checkout; pedidos efetivos seguem
           as obrigações aplicáveis à compra.
+        </p>
+        <h2>Atualizações do pedido por e-mail e WhatsApp</h2>
+        <p>
+          A loja pode usar a Brevo como operadora para enviar avisos
+          transacionais de pagamento confirmado, pedido separado e saída para
+          entrega. O e-mail recebe somente dados necessários a esses avisos. O
+          WhatsApp exige sua autorização opcional no checkout, registrada por
+          pedido; recusar não impede a compra. Não usamos essa escolha para
+          publicidade.
+        </p>
+        <p>
+          Quando o canal está ativo, o serviço recebe nome, contato,
+          identificador e etapa do pedido e, na saída, a previsão em minutos
+          informada pela equipe. Não enviamos dados de cartão, custos internos
+          ou endereço completo nesses avisos. A Brevo e o WhatsApp/Meta
+          processam os dados conforme seus termos. Para interromper avisos ou
+          exercer seus direitos, fale com a loja pelo contato abaixo.
         </p>
         <h2>Quando você usa o WhatsApp</h2>
         <p>

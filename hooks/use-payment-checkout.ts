@@ -43,6 +43,7 @@ export function usePaymentCheckout() {
       totalCents?: number;
       notes?: string;
       phone?: string;
+      whatsappOptIn?: boolean;
       delivery?: { quoteToken: string; number: string; complement: string };
     } = {},
   ) {
@@ -74,6 +75,7 @@ export function usePaymentCheckout() {
           fulfillment,
           expectedTotalCents:
             options.totalCents ?? Math.round(cart.total * 100),
+          whatsappOptIn: options.whatsappOptIn === true,
           ...(options.notes ? { notes: options.notes } : {}),
           ...(options.phone ? { phone: options.phone } : {}),
           ...(options.delivery ? { delivery: options.delivery } : {}),

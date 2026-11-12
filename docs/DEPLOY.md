@@ -47,7 +47,7 @@ No servidor configurado, rode `npm run check:launch`. Esse comando valida HTTPS 
 
 ## 5. Conferência da loja
 
-- Confira o WhatsApp em `lib/store.ts`: o número herdado do projeto é `(15) 3191-7309` e a foto antiga da fachada apresenta outro número. Confirme o contato antes da divulgação.
+- Contato oficial em `lib/store.ts`: **(11) 5199-3525**. O número também é usado nas mensagens transacionais.
 - Confira preços e disponibilidade no `/admin`. A granel usa **preço e custo por 100 g**; embalados usam unidade. O cálculo do servidor confere o catálogo atual antes de abrir o Mercado Pago.
 - Cadastre custos para obter lucro estimado. A análise fica pendente quando faltam custos, taxas ou informação de reembolso.
 - Reexecute `npm run db:migrate` ao instalar esta atualização, antes de iniciar o novo servidor. Ela acrescenta configurações de frete, intenções de checkout, detalhes de entrega, checklist e eventos de pedidos sem apagar as tabelas existentes.

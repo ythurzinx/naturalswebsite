@@ -129,6 +129,12 @@ test("100 g selection, cart editing and checkout preserve totals on a payment fa
   await page
     .getByLabel("E-mail para o pagamento", { exact: true })
     .fill("ana@example.com");
+  await page
+    .getByLabel("Telefone para contato", { exact: true })
+    .fill("11999999999");
+  await expect(
+    page.getByRole("checkbox", { name: /Quero receber atualizações/ }),
+  ).not.toBeChecked();
   const pay = info.project.name.startsWith("mobile")
     ? page.getByRole("button", { name: "Pagar agora", exact: true })
     : page.getByRole("button", { name: /Pagar .* com Mercado Pago/ });
@@ -225,6 +231,8 @@ test("admin product batches and order filters work with isolated UI fixtures", a
       "/api/admin/".length,
     );
     let json: unknown = {};
+    if (path === "notifications/drain")
+      return route.fulfill({ json: { processed: 0 } });
     if (path === "session")
       json = {
         available: true,

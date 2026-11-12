@@ -1,4 +1,4 @@
-import { readFile, access } from "node:fs/promises";
+import { readFile, access, readdir } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import { paymentConfiguration } from "../lib/server/payment-service.mjs";
 import { adminConfiguration } from "../lib/server/admin-auth.mjs";
@@ -19,6 +19,14 @@ function check(label, condition) {
   checks.push({ label, ok: !!condition });
   console.log(`${condition ? "OK" : "PENDENTE"}: ${label}`);
 }
+const serverFiles = await readdir(new URL("../lib/server/", import.meta.url));
+check(
+  "Módulos do servidor sem nomes ambíguos entre TypeScript e JavaScript",
+  !serverFiles.some(
+    (file) =>
+      file.endsWith(".ts") && serverFiles.includes(file.slice(0, -3) + ".mjs"),
+  ),
+);
 check(
   "Catálogo com IDs únicos e preços positivos",
   catalog.length > 0 &&

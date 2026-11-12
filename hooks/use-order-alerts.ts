@@ -15,7 +15,11 @@ type Feed = {
   counts: { toPack: number; ready: number; pending: number };
   hasMore: boolean;
 };
-type Api = <T>(path: string) => Promise<T>;
+type Api = <T>(
+  path: string,
+  method?: string,
+  body?: Record<string, unknown>,
+) => Promise<T>;
 export function useOrderAlerts(active: boolean, api: Api) {
   const [sound, setSound] = useState(false),
     [allOrders, setAllOrders] = useState(false),
@@ -112,6 +116,8 @@ export function useOrderAlerts(active: boolean, api: Api) {
         setCounts(result.counts);
         setConnected(true);
         failures = 0;
+        // Authenticated POST includes the admin CSRF token; polling GET never sends messages.
+        void api("notifications/drain", "POST", {}).catch(() => {});
         if (!baseline && result.events.length) {
           setRevision((value) => value + 1);
           const incoming = result.events.filter(

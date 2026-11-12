@@ -13,20 +13,22 @@ export default function CreditsPage() {
       <div className="prose">
         <span className="eyebrow">IMAGENS COM ORIGEM</span>
         <h1 className="page-title">
-          Créditos das fotografias<span>.</span>
+          Origem das imagens<span>.</span>
         </h1>
         <p>
-          Usamos fotos ilustrativas dos produtos, de seus ingredientes de origem
-          ou de sugestões de apresentação. As imagens não comprovam marca,
-          embalagem, composição ou lote da loja. A apresentação pode variar;
-          consulte os ingredientes e alergênicos de cada produto.
+          O catálogo a granel usa imagens ilustrativas geradas com inteligência
+          artificial, com fundo claro, tigela branca e iluminação uniforme. As
+          imagens não comprovam marca, embalagem, composição ou lote da loja. A
+          apresentação pode variar; consulte os ingredientes e alergênicos de
+          cada produto.
         </p>
         <p>
-          As fotografias abaixo foram disponibilizadas por seus autores no
-          Wikimedia Commons, sob as licenças indicadas. Foram redimensionadas e
-          convertidas para WebP. As versões convertidas preservam as licenças
-          originais. A utilização não implica apoio dos autores à loja. Fotos
-          enviadas pela loja substituem essas referências.
+          As ilustrações foram criadas para a Mundo Natural com a ferramenta de
+          geração de imagens da OpenAI. Cada arquivo está associado ao seu
+          produto e possui origem e integridade registradas no projeto. As
+          imagens foram extraídas dos quadros gerados e convertidas para WebP
+          para carregar com agilidade. Não são fotografias do lote real. Fotos
+          enviadas pela loja no painel substituem as ilustrações.
         </p>
       </div>
       <div className="photo-credits-grid">
@@ -60,7 +62,7 @@ export default function CreditsPage() {
               >
                 {photo.license}
               </a>
-              <small>Redimensionamento e conversão para WebP.</small>
+              <small>Ilustração gerada por IA · conversão para WebP.</small>
             </div>
           </article>
         ))}
