@@ -140,9 +140,13 @@ export function CartProvider({
       } catch {}
     }
     void refresh();
+    const timer = setInterval(() => {
+      if (!document.hidden) void refresh();
+    }, 60000);
     window.addEventListener("focus", refresh);
     return () => {
       controller.abort();
+      clearInterval(timer);
       window.removeEventListener("focus", refresh);
     };
   }, []);

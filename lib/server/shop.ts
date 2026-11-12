@@ -1,6 +1,9 @@
 import "server-only";
 import catalog from "@/lib/catalog.json";
 import policy from "@/lib/sales-policy.json";
+import defaults from "@/lib/merchandising-defaults.json";
+import { applyMerchandising } from "@/lib/merchandising.mjs";
+import { defaultProductVisible } from "@/lib/catalog-visibility.mjs";
 import { createDatabase } from "./database.mjs";
 import { ShopRepository } from "./shop-repository.mjs";
 const pool = createDatabase({
@@ -21,7 +24,8 @@ export async function publicCatalog(fallback = false) {
       );
     }
   }
-  return catalog.filter(
-    (product) => !(policy.disabledProductIds as string[]).includes(product.id),
+  return applyMerchandising(
+    catalog.filter((product) => defaultProductVisible(product, policy)),
+    defaults,
   );
 }

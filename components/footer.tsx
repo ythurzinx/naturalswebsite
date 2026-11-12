@@ -45,6 +45,7 @@ export function Footer() {
           <Link href="/contato">Atendimento e entregas</Link>
           <Link href="/privacidade">Política de privacidade</Link>
           <Link href="/termos">Condições de compra</Link>
+          <Link href="/creditos">Créditos das imagens</Link>
           <button
             onClick={() =>
               window.dispatchEvent(new Event("open-cookie-settings"))

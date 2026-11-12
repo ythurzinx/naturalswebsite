@@ -1,0 +1,43 @@
+{
+  "revision": 0,
+  "offers": [],
+  "combos": [
+    {
+      "id": "combo-temperos",
+      "name": "Combo temperos do dia a dia",
+      "description": "Páprica doce, cominho, orégano e cúrcuma. Quatro porções embaladas separadamente para sua cozinha.",
+      "active": true,
+      "discountPercent": 0,
+      "components": [
+        { "productId": "prod-197", "weight": 100 },
+        { "productId": "prod-225", "weight": 100 },
+        { "productId": "prod-372", "weight": 100 },
+        { "productId": "prod-200", "weight": 100 }
+      ]
+    },
+    {
+      "id": "combo-castanhas",
+      "name": "Combo castanhas para compartilhar",
+      "description": "Castanha de caju crua, castanha-do-pará quebrada e nozes. Cada ingrediente em sua própria embalagem.",
+      "active": true,
+      "discountPercent": 0,
+      "components": [
+        { "productId": "prod-270", "weight": 100 },
+        { "productId": "prod-258", "weight": 100 },
+        { "productId": "prod-266", "weight": 100 }
+      ]
+    },
+    {
+      "id": "combo-mix-natural",
+      "name": "Combo energia natural",
+      "description": "Farinha de uva, farinha de beterraba e maca peruana pura, em porções separadas. Monte sua mistura do seu jeito; o combo não vem misturado.",
+      "active": true,
+      "discountPercent": 0,
+      "components": [
+        { "productId": "prod-275", "weight": 100 },
+        { "productId": "prod-276", "weight": 100 },
+        { "productId": "prod-209", "weight": 100 }
+      ]
+    }
+  ]
+}

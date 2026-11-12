@@ -63,6 +63,7 @@ function useShippingState() {
       i.quantity,
       i.selectedWeight,
       i.product.valor_unitario,
+      i.product.combo,
     ]),
   );
   const current = useRef({ fingerprint, cep });

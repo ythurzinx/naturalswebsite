@@ -16,7 +16,8 @@
     "test:database": "node --test tests/database.integration.mjs",
     "test:browser": "playwright test",
     "assets:optimize": "node scripts/optimize-assets.mjs",
-    "verify": "npm test && npm run typecheck && npm run check:launch -- --code-only && npm audit --omit=dev --audit-level=high && npm run build && npm run test:production"
+    "assets:check": "node scripts/check-product-photos.mjs",
+    "verify": "npm test && npm run assets:check && npm run typecheck && npm run check:launch -- --code-only && npm audit --omit=dev --audit-level=high && npm run build && npm run test:production"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.4",

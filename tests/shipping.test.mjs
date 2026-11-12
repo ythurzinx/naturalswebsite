@@ -42,6 +42,24 @@ const origin = {
   latitude: -23.62611,
   longitude: -46.79167,
 };
+test("admin CEP estimate returns an address and distance without a checkout or client-supplied fee", async () => {
+  const f = fixture();
+  const result = await f.service.estimate({
+    postalCode: "06754-100",
+    subtotalCents: 10000,
+  });
+  assert.equal(result.address.street, "Rua de destino");
+  assert.ok(result.distanceMeters > 1000 && result.distanceMeters < 2000);
+  assert.equal(result.feeCents, 800);
+  assert.equal(result.withinArea, true);
+  assert.equal("latitude" in result.address, false);
+  for (const body of [
+    { postalCode: "https://evil.example", subtotalCents: 10000 },
+    { postalCode: "06754100", subtotalCents: 10000, feeCents: 0 },
+    { postalCode: "06754100", subtotalCents: -1 },
+  ])
+    await assert.rejects(f.service.estimate(body));
+});
 function fixture(customFetcher) {
   let now = 1800000000,
     value = {

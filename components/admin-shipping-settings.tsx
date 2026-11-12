@@ -24,10 +24,47 @@ export function AdminShippingSettings({ api }: { api: Api }) {
   });
   const [sampleKm, setSampleKm] = useState("3"),
     [sampleTotal, setSampleTotal] = useState("100");
+  const [destination, setDestination] = useState(""),
+    [testingCep, setTestingCep] = useState(false),
+    [cepError, setCepError] = useState("");
+  const [cepResult, setCepResult] = useState<{
+    address: {
+      street: string;
+      neighborhood: string;
+      city: string;
+      state: string;
+    };
+    distanceMeters: number;
+    withinArea: boolean;
+    enabled: boolean;
+    feeCents: number | null;
+    revision: number;
+  } | null>(null);
+  async function testDestination() {
+    if (testingCep) return;
+    setTestingCep(true);
+    setCepResult(null);
+    setCepError("");
+    try {
+      setCepResult(
+        await api("shipping/estimate", "POST", {
+          postalCode: destination,
+          subtotalCents: parse(sampleTotal),
+        }),
+      );
+    } catch (e) {
+      setCepError(
+        e instanceof Error ? e.message : "Não foi possível consultar esse CEP.",
+      );
+    } finally {
+      setTestingCep(false);
+    }
+  }
   const load = useCallback(async () => {
     try {
       const result = await api<ShippingSettings>("shipping");
       setValue(result);
+      setCepResult(null);
       setDraft({
         originPostalCode: result.originPostalCode,
         rate: (result.pricePerKmCents / 100).toFixed(2),
@@ -76,6 +113,7 @@ export function AdminShippingSettings({ api }: { api: Api }) {
         revision: value.revision,
       });
       setValue(result);
+      setCepResult(null);
       setNotice(
         "Frete salvo. Carrinho e checkout passam a usar a nova regra; pedidos já criados mantêm o valor original.",
       );
@@ -235,6 +273,63 @@ export function AdminShippingSettings({ api }: { api: Api }) {
           CEPs genéricos ou sem coordenadas exigem atendimento. A loja deve
           conferir a área atendida e combinar o prazo com o cliente.
         </p>
+        <div className="shipping-live-test">
+          <h3>Testar um CEP de entrega</h3>
+          <p className="fine-print">
+            Consulta o endereço na BrasilAPI e usa o CEP de origem e a regra já
+            salva. A distância é uma estimativa em linha reta entre CEPs.
+          </p>
+          <label className="field-label">
+            CEP de destino para teste
+            <input
+              inputMode="numeric"
+              maxLength={9}
+              value={destination}
+              placeholder="00000-000"
+              onChange={(e) => {
+                setDestination(e.target.value.replace(/[^\d-]/g, ""));
+                setCepResult(null);
+              }}
+            />
+          </label>
+          <button
+            type="button"
+            className="button button-outline"
+            disabled={testingCep || !/^\d{5}-?\d{3}$/.test(destination)}
+            onClick={() => void testDestination()}
+          >
+            <Calculator size={16} />
+            {testingCep ? "Consultando…" : "Consultar endereço e distância"}
+          </button>
+          {cepError && (
+            <p className="payment-error" role="alert">
+              {cepError}
+            </p>
+          )}
+          {cepResult && (
+            <div className="combo-price-preview" role="status">
+              <p>
+                {cepResult.address.street} · {cepResult.address.neighborhood}
+                <br />
+                {cepResult.address.city} / {cepResult.address.state}
+              </p>
+              <strong>
+                {(cepResult.distanceMeters / 1000).toLocaleString("pt-BR", {
+                  maximumFractionDigits: 2,
+                })}{" "}
+                km estimados
+              </strong>
+              <p>
+                {!cepResult.withinArea
+                  ? "Fora do limite de entrega configurado."
+                  : !cepResult.enabled
+                    ? "Destino dentro da área; entrega ainda desativada."
+                    : `Frete para a compra simulada: ${formatPrice(cepResult.feeCents! / 100)}`}
+              </p>
+              <small>Regra salva · revisão {cepResult.revision}</small>
+            </div>
+          )}
+        </div>
       </aside>
     </div>
   );

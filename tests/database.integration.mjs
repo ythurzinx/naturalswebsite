@@ -12,6 +12,8 @@ import {
 import { createAdminService } from "../lib/server/admin-service.mjs";
 import { createPaymentService } from "../lib/server/payment-service.mjs";
 import { referencePriceCents } from "../lib/pricing.mjs";
+import { validateMerchandising } from "../lib/server/merchandising-validation.mjs";
+import { buildCheckout, money } from "../lib/server/checkout-core.mjs";
 const target = process.env.INTEGRATION_DATABASE_URL;
 if (!target)
   throw Error(
@@ -99,6 +101,97 @@ const product = (id = "prod-1") => ({
   costCents: id === "prod-1" ? 8000 : 1000,
   active: true,
   imageSha: null,
+});
+test("versioned offers survive reloads and combos retain ingredient weights, costs and immutable order prices", async () => {
+  await repo.saveProduct(product());
+  await repo.saveProduct({
+    ...product("prod-2"),
+    isBulk: true,
+    priceCents: 19990,
+    costCents: 10000,
+  });
+  const settings = {
+    revision: 0,
+    offers: [],
+    combos: [
+      {
+        id: "combo-integration",
+        name: "Combo castanhas",
+        description: "Porções separadas",
+        active: true,
+        discountPercent: 10,
+        components: [
+          { productId: "prod-1", weight: 100 },
+          { productId: "prod-2", weight: 300 },
+        ],
+      },
+    ],
+  };
+  await repo.saveMerchandising(
+    validateMerchandising(settings, await repo.catalog(true)),
+  );
+  const second = new ShopRepository(pool, catalog, policy);
+  assert.equal((await second.merchandisingSettings()).revision, 1);
+  await assert.rejects(repo.saveMerchandising(settings), {
+    code: "SETTINGS_CHANGED",
+  });
+  const products = await second.catalog(false),
+    combo = products.find((p) => p.combo);
+  assert.ok(
+    !/costCents|cost_cents|imageSha|priceCents|active/.test(
+      JSON.stringify(products),
+    ),
+  );
+  const total = referencePriceCents(combo) * 2;
+  const selection = buildCheckout(
+    {
+      name: "Cliente Teste",
+      email: "cliente@example.invalid",
+      fulfillment: "pickup",
+      items: [{ id: combo.id, quantity: 2 }],
+      expectedTotalCents: total,
+    },
+    products,
+    policy,
+  );
+  const order = {
+    id: "ORD01COMBOSDBFIXTURE",
+    external_reference: "fixture-combo-reference",
+    total_amount: money(total),
+    total_paid_amount: money(total),
+    status: "processed",
+    status_detail: "accredited",
+    created_date: new Date().toISOString(),
+  };
+  await repo.recordOrder(order, selection);
+  let saved = await repo.order(order.id);
+  assert.deepEqual(
+    saved.items.map((i) => i.product_id),
+    ["prod-1", "prod-2"],
+  );
+  assert.deepEqual(
+    saved.items.map((i) => i.weight_grams),
+    [100, 300],
+  );
+  assert.equal(saved.cost_total_cents, 7600);
+  assert.ok(
+    saved.items.every((i) => i.line_key.startsWith("combo-integration|")),
+  );
+  const prices = saved.items.map((i) => i.unit_cents);
+  await repo.saveProduct({ ...product(), priceCents: 15000, costCents: 10000 });
+  await repo.recordOrder(order);
+  saved = await repo.order(order.id);
+  assert.deepEqual(
+    saved.items.map((i) => i.unit_cents),
+    prices,
+  );
+  assert.equal(saved.cost_total_cents, 7600);
+  assert.notEqual(
+    referencePriceCents((await repo.catalog(false)).find((p) => p.combo)) * 2,
+    total,
+  );
+  await repo.saveProduct({ ...product(), active: false });
+  assert.ok(!(await repo.catalog(false)).some((p) => p.combo));
 });
 test("MySQL persists product edits without leaking costs in the public catalog", async () => {
   await repo.saveProduct(product());
@@ -867,6 +960,10 @@ test("alerts, freight settings, packing and operations require authentication an
     ["GET", ["order-alerts"]],
     ["GET", ["shipping"]],
     ["PUT", ["shipping"]],
+    ["GET", ["merchandising"]],
+    ["PUT", ["merchandising"]],
+    ["GET", ["payments", "diagnostics"]],
+    ["POST", ["shipping", "estimate"]],
     ["PUT", ["orders", "ORD01MNDELIVERYDBFIXTURE", "packing"]],
     ["PUT", ["orders", "ORD01MNDELIVERYDBFIXTURE", "operations"]],
   ]) {
@@ -893,25 +990,29 @@ test("alerts, freight settings, packing and operations require authentication an
   );
   const cookie = login.headers.getSetCookie()[0].split(";")[0];
   const csrf = (await login.json()).csrfToken;
-  const path = ["orders", "ORD01MNDELIVERYDBFIXTURE", "operations"];
-  for (const headers of [
-    { Origin: config.origin },
-    { Origin: "https://evil.example", "X-CSRF-Token": csrf },
-  ]) {
-    const response = await service.handle(
-      new Request(config.origin + "/api/admin/" + path.join("/"), {
-        method: "PUT",
-        headers: {
-          Cookie: cookie,
-          "Content-Type": "application/json",
-          ...headers,
-        },
-        body: "{}",
-      }),
-      path,
-    );
-    assert.equal(response.status, 403);
-  }
+  for (const [method, path] of [
+    ["PUT", ["orders", "ORD01MNDELIVERYDBFIXTURE", "operations"]],
+    ["PUT", ["merchandising"]],
+    ["POST", ["shipping", "estimate"]],
+  ])
+    for (const headers of [
+      { Origin: config.origin },
+      { Origin: "https://evil.example", "X-CSRF-Token": csrf },
+    ]) {
+      const response = await service.handle(
+        new Request(config.origin + "/api/admin/" + path.join("/"), {
+          method,
+          headers: {
+            Cookie: cookie,
+            "Content-Type": "application/json",
+            ...headers,
+          },
+          body: "{}",
+        }),
+        path,
+      );
+      assert.equal(response.status, 403);
+    }
   const response = await service.handle(
     new Request(config.origin + "/api/admin/order-alerts?after=-1", {
       headers: { Cookie: cookie },

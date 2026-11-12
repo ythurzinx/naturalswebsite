@@ -16,13 +16,50 @@ export function ProductImage({
   className?: string;
 }) {
   const packaged = /Suplementos|Fitoterápicos/.test(product.categoria);
+  if (product.combo)
+    return (
+      <div
+        className={`product-photo combo-photo ${className}`}
+        role="img"
+        aria-label={`Ingredientes de ${product.nome_produto}`}
+      >
+        {product.combo.slice(0, 4).map((component) => (
+          <div key={component.productId}>
+            {component.imagem &&
+            /^\/(?:images\/products\/[a-z0-9-]+\.webp|api\/product-images\/[a-f0-9]{64})$/.test(
+              component.imagem,
+            ) ? (
+              <img
+                src={component.imagem}
+                alt=""
+                loading="lazy"
+                width={320}
+                height={320}
+              />
+            ) : (
+              <Leaf size={30} />
+            )}
+            <span>{component.weight} g</span>
+          </div>
+        ))}
+      </div>
+    );
   if (
     product.imagem &&
-    /^\/api\/product-images\/[a-f0-9]{64}$/.test(product.imagem)
+    /^\/(?:images\/products\/[a-z0-9-]+\.webp|api\/product-images\/[a-f0-9]{64})$/.test(
+      product.imagem,
+    )
   )
     return (
       <div className={`product-photo product-custom-photo ${className}`}>
-        <img src={product.imagem} alt={product.nome_produto} loading="lazy" />
+        <img
+          src={product.imagem}
+          alt={`${product.imagemLegenda || "Imagem ilustrativa"} — ${product.nome_produto}`}
+          loading="lazy"
+          decoding="async"
+          width={640}
+          height={640}
+        />
       </div>
     );
   return (
@@ -42,6 +79,10 @@ export function ProductCard({ product }: { product: Product }) {
     [quantity, setQuantity] = useState(1),
     [added, setAdded] = useState(false);
   const favorite = favorites.includes(product.id);
+  const price = referencePriceCents(product);
+  const saving = product.originalPriceCents
+    ? product.originalPriceCents - price
+    : 0;
   function add() {
     addToCart(product, quantity, weight);
     setAdded(true);
@@ -58,8 +99,13 @@ export function ProductCard({ product }: { product: Product }) {
             <ProductImage product={product} />
           </button>
           <span className="product-label">
-            {product.isGranel ? "A GRANEL" : "NOSSO CATÁLOGO"}
+            {product.combo
+              ? "COMBO"
+              : product.isGranel
+                ? "A GRANEL"
+                : "NOSSO CATÁLOGO"}
           </span>
+          {saving > 0 && <span className="offer-badge">OFERTA</span>}
           <button
             className={`favorite-button ${favorite ? "is-favorite" : ""}`}
             aria-label={`${favorite ? "Remover" : "Salvar"} ${product.nome_produto} ${favorite ? "dos" : "nos"} favoritos`}
@@ -85,10 +131,21 @@ export function ProductCard({ product }: { product: Product }) {
           </div>
           <div className="product-price-row">
             <div>
+              {saving > 0 && (
+                <del className="product-old-price" aria-label="Preço anterior">
+                  {formatPrice(product.originalPriceCents! / 100)}
+                </del>
+              )}
               <strong className="product-price">
                 {formatPrice(referencePriceCents(product) / 100)}
               </strong>
-              <small>{product.isGranel ? "por 100 g" : "por unidade"}</small>
+              <small>
+                {product.combo
+                  ? "por combo"
+                  : product.isGranel
+                    ? "por 100 g"
+                    : "por unidade"}
+              </small>
             </div>
             <button
               className={`add-button ${added ? "added" : ""}`}
@@ -102,7 +159,10 @@ export function ProductCard({ product }: { product: Product }) {
             </button>
           </div>
           <p className="product-availability">
-            <Leaf size={12} /> Disponibilidade pelo atendimento
+            <Leaf size={12} />{" "}
+            {product.combo
+              ? "Porções em embalagens separadas"
+              : "Selecionado e embalado na loja"}
           </p>
           <span className="sr-only" role="status">
             {added ? `${product.nome_produto} adicionado ao carrinho` : ""}
@@ -122,15 +182,42 @@ export function ProductCard({ product }: { product: Product }) {
               {product.isGranel ? "A granel, do seu jeito" : product.categoria}
             </span>
             <p className="detail-intro">
-              Monte sua seleção e confirme preço, disponibilidade, ingredientes
-              e informações de alergênicos com a nossa equipe.
+              {product.description ||
+                "Escolha a quantidade ideal para suas receitas. Consulte ingredientes e informações de alergênicos com a nossa equipe."}
             </p>
+            {saving > 0 && (
+              <p className="detail-saving">
+                <del>{formatPrice(product.originalPriceCents! / 100)}</del>{" "}
+                Economize {formatPrice(saving / 100)}
+              </p>
+            )}
             <strong className="detail-price">
               {formatPrice(referencePriceCents(product) / 100)}
             </strong>
             <p className="muted">
-              {product.isGranel ? "Preço por 100 g" : "Preço por unidade"}
+              {product.combo
+                ? "Preço do combo completo"
+                : product.isGranel
+                  ? "Preço por 100 g"
+                  : "Preço por unidade"}
             </p>
+            {product.combo && (
+              <div className="combo-ingredients">
+                <h3>O que vem no combo</h3>
+                <ul>
+                  {product.combo.map((component) => (
+                    <li key={component.productId}>
+                      <span>{component.name}</span>
+                      <strong>{component.weight} g</strong>
+                    </li>
+                  ))}
+                </ul>
+                <p className="fine-print">
+                  Cada ingrediente é embalado separadamente. As imagens são
+                  ilustrativas; confira ingredientes e alergênicos.
+                </p>
+              </div>
+            )}
             {product.isGranel ? (
               <div className="field-label">
                 Escolha o peso (de 100 em 100 g)
@@ -176,8 +263,10 @@ export function ProductCard({ product }: { product: Product }) {
               {added ? "Adicionado ao carrinho" : "Adicionar ao carrinho"}
             </button>
             <p className="fine-print">
-              Imagem ilustrativa. A seleção não reserva estoque. Confira
-              ingredientes e alergênicos com a loja antes de pagar.
+              {product.imagemLegenda ||
+                "Fotos ilustrativas do produto ou de seus ingredientes."}{" "}
+              A seleção não reserva estoque. Confira ingredientes e alergênicos
+              com a loja antes de pagar.
             </p>
           </div>
         </div>
