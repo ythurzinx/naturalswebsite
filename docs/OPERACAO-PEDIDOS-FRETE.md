@@ -26,7 +26,7 @@ O aviso funciona com o painel aberto. Navegadores podem suspender páginas em se
 2. Confira pagamento, modo de recebimento, endereço/telefone e observações do cliente.
 3. Selecione **Em separação** e marque cada produto depois de conferir peso, porções, integridade e embalagem. O frete não entra no checklist.
 4. Marque **Embalado e pronto** após conferir todos os itens. A alteração consulta novamente o pagamento no Mercado Pago. Pedidos pendentes ou reembolsados não são liberados.
-5. Para entrega, registre o entregador e selecione **Saiu para entrega**. Para retirada, entregue à pessoa responsável. Marque **Concluído** ao finalizar.
+5. Para entrega, registre o entregador, informe e salve a **previsão de chegada (1–240 minutos)** nos detalhes e selecione **Saiu para entrega**. Para retirada, entregue à pessoa responsável. Marque **Concluído** ao finalizar.
 
 Se desmarcar um item pronto, o pedido volta para separação. Pedidos que já saíram ou foram concluídos exigem voltar à etapa de separação antes de alterar o checklist. Notas internas são privadas da equipe. O botão de impressão gera um resumo de embalagem, sem valor de documento fiscal, e só fica habilitado para pedidos pagos.
 
@@ -37,3 +37,7 @@ O frete cobrado do cliente faz parte da receita. O valor pago ao entregador é u
 O painel separa custo de produtos e custo de entregas, exclui a linha de frete dos produtos mais vendidos e mantém os valores históricos. Alterações de checklist, etapas, operações e tarifas são auditadas sem copiar endereços, telefones ou observações para o histórico de auditoria.
 
 As credenciais reais de Mercado Pago e a hospedagem precisam ser homologadas antes de vender. Configure e confira o recebimento do Webhook de Orders: o aviso depende do registro confirmado no servidor, não do comprovante do cliente.
+
+## Contato e avisos do cliente
+
+Nos detalhes do pedido, a equipe vê nome, e-mail, telefone e autorização de WhatsApp. O checkout solicita telefone também para retirada; pedidos antigos só exibem os contatos que já haviam sido registrados. O histórico de avisos distingue fila, aceite pelo provedor, falha e envio incerto. Configure **Mensagens aos clientes** conforme [NOTIFICACOES.md](NOTIFICACOES.md). O número oficial da loja é **(11) 5199-3525**.

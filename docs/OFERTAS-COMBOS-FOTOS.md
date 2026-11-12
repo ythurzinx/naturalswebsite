@@ -6,7 +6,7 @@ O catálogo importado permanece com 619 registros no painel. A vitrine inicial m
 
 Produtos antigos embalados ficam inativos na vitrine. Edições anteriores ao corte de 12/11/2026, 21:09:07 UTC não os republicam. Para vender um deles, abra **Produtos e fotos**, revise preço e apresentação, adicione a foto e marque como ativo. Novos produtos também podem ser cadastrados por unidade. Nada apaga os registros nem altera pedidos existentes.
 
-Fotos ilustrativas têm o mesmo enquadramento de cartão, são WebP locais e não carregam rastreadores de bancos de imagens. Algumas mostram o ingrediente de origem ou uma sugestão de apresentação; não comprovam marca, lote, corte ou composição. Os créditos e as licenças individuais estão em `/creditos`. O envio de foto própria pelo painel substitui a referência. JPEG/PNG/WebP de até 5 MB são reencodados, com remoção dos metadados e limites de pixels.
+Fotos ilustrativas têm o mesmo enquadramento de cartão, são WebP locais e não carregam rastreadores de bancos de imagens. Os 308 itens a granel usam ilustrações próprias geradas por IA no mesmo padrão de fundo claro e tigela branca; não comprovam marca, lote, corte ou composição. A origem está em `/creditos` e o processo em [Imagens de IA](IMAGENS-IA.md). O envio de foto própria pelo painel substitui a referência. JPEG/PNG/WebP de até 5 MB são reencodados, com remoção dos metadados e limites de pixels.
 
 ## Ofertas e combos
 

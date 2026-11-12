@@ -2,7 +2,7 @@
 
 **Deploy:** siga [Colocar a loja no ar](docs/DEPLOY.md). O repositório está preparado para **Hostinger Node.js 22 + MySQL** pela branch `main`.
 
-Loja Next.js com **308 produtos a granel na vitrine**, fotos ilustrativas locais, carrosséis de ofertas e três combos editáveis, busca, categorias, favoritos e **Mercado Pago Checkout Pro via Orders API para Pix e cartão**. Os 619 registros importados permanecem no painel; produtos embalados e embalagens de uso interno ficam fora da vitrine até uma edição e ativação explícita pelo administrador.
+Loja Next.js com **308 produtos a granel na vitrine**, 308 imagens ilustrativas de IA padronizadas, carrosséis de ofertas e três combos editáveis, busca, categorias, favoritos e **Mercado Pago Checkout Pro via Orders API para Pix e cartão**. Os 619 registros importados permanecem no painel; produtos embalados e embalagens de uso interno ficam fora da vitrine até uma edição e ativação explícita pelo administrador.
 
 Os produtos a granel exibem preço por **100 g**. A seleção começa em 100 g e avança de 100 em 100 g, até 5.000 g por porção. Os preços de origem por kg foram preservados. Sete registros com pesos em kg foram corrigidos para granel, incluindo a maca peruana. Produtos embalados adicionados ou reativados pelo administrador continuam por unidade. O valor de 100 g é arredondado em centavos antes de multiplicar pelos blocos e pelas porções, com a mesma regra no catálogo, carrinho e pagamento.
 
@@ -39,6 +39,8 @@ O checkout hospedado não exige Public Key ou dados de cartão no site. Com o to
 
 A versão online recebe pagamentos de compras com retirada sem frete ou entrega com frete calculado entre CEPs. Configure origem e tarifas em `/admin` → **Frete e entregas**; a entrega fica desativada até essa configuração. O painel acompanha pedidos com aviso sonoro opcional, checklist de embalagem, etapas de preparação, impressão de resumo e notas internas. Também permite editar produtos/fotos/custos, registrar despesas, estimar lucro com dados completos e exportar pedidos. Veja o [guia de operação](docs/OPERACAO-PEDIDOS-FRETE.md). Reembolsos financeiros ficam na conta Mercado Pago. Não há baixa automática de estoque no PDV.
 
+O pedido exibe nome, e-mail, telefone e histórico de avisos do cliente. A previsão de chegada (1–240 minutos), informada pela equipe, é obrigatória antes da saída para entrega. Em **Mensagens aos clientes**, configure a integração transacional da Brevo para pagamento aprovado, pedido separado e saída com previsão. WhatsApp exige consentimento opcional por pedido; os canais começam desligados. Veja [ativação dos avisos](docs/NOTIFICACOES.md), incluindo credenciais, remetentes, modelos aprovados e agendador.
+
 ## Administração e persistência
 
 No celular, a loja oferece navegação inferior, controles de peso com passos de 100 g e ação fixa com o total no carrinho e checkout. O painel tem filtros de produtos e pedidos, seleção de até 50 produtos para alterar disponibilidade, consulta individual de pagamento, saúde do catálogo e produtos mais vendidos com base em pedidos pagos.
@@ -55,14 +57,14 @@ O painel exibe e recebe preço/custo a granel por 100 g. O catálogo importado e
 
 ## Dados e operação
 
-- `lib/store.ts`: contatos e endereço. O WhatsApp atual do código é `(15) 3191-7309`; a foto antiga da fachada apresenta outro número. Confirme o contato antes da divulgação.
+- `lib/store.ts`: contatos e endereço. Contato oficial: **(11) 5199-3525** (`551151993525`).
 - `lib/catalog.json`: produtos e preços em reais, extraídos do CSV referenciado pela loja. O responsável confirmou nesta sessão que os preços estão corretos para venda.
 - `lib/sales-policy.json`: confirmação de preços, habilitação de retirada, produtos indisponíveis e limites de venda. Os campos antigos de quantidade/validade do catálogo não são usados como controle de estoque atual.
 - `lib/server/`: validações, cookies/sessões, cliente Mercado Pago, idempotência e verificações de pagamento/Webhooks.
 - `proxy.ts` e `security-headers.mjs`: CSP por resposta e cabeçalhos de segurança.
 - `docs/SEGURANCA.md`: revisão manual, controles, evidências e limites da validação.
 
-As fotos existentes são mantidas como ilustrações de categoria até que o administrador envie uma foto específica de cada produto. Não foram geradas centenas de novas imagens.
+Os 308 produtos a granel têm ilustrações próprias geradas por IA, com fundo claro, tigela branca e iluminação uniforme. A origem e a integridade de cada arquivo estão registradas no projeto. Veja [imagens de IA](docs/IMAGENS-IA.md). O administrador pode substituir cada ilustração por uma foto real no painel.
 
 As imagens principais são servidas em versões WebP mais leves: aproximadamente 90% menos bytes nos três arquivos principais, preservando os originais no repositório. `npm run assets:optimize` recria essas versões e o ícone pequeno a partir dos arquivos existentes, sem geração por IA.
 
