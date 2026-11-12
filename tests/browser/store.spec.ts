@@ -64,7 +64,7 @@ test("100 g selection, cart editing and checkout preserve totals on a payment fa
     await new Promise((resolve) => setTimeout(resolve, 500));
     await route.fulfill({
       status: 502,
-      json: { error: "Pagamento de teste indisponível." },
+      json: { error: "Pagamento de teste indisponível.", supportCode: "MPV08" },
     });
   });
   await page.goto("/produtos?q=Castanha%20de%20Caju%20Crua");
@@ -132,6 +132,9 @@ test("100 g selection, cart editing and checkout preserve totals on a payment fa
   await pay.dblclick();
   await expect(page.locator(".payment-error[role=alert]")).toContainText(
     "Pagamento de teste indisponível.",
+  );
+  await expect(page.locator(".payment-error[role=alert]")).toContainText(
+    "Código de suporte: MPV08",
   );
   expect(checkoutCalls).toBe(1);
   await fitsScreen(page);

@@ -53,6 +53,26 @@ try {
     await new Promise((resolve) => setTimeout(resolve, 150));
   }
   assert.ok(ready, "Production HTTP server did not become ready");
+  const canonical = await fetch(origin + "/checkout?source=menu", {
+    redirect: "manual",
+    headers: { "x-forwarded-host": "www.loja.example" },
+  });
+  assert.equal(canonical.status, 308);
+  assert.equal(
+    canonical.headers.get("location"),
+    "https://loja.example/checkout?source=menu",
+  );
+  assert.ok(canonical.headers.get("cache-control").includes("no-store"));
+  const aliasApi = await fetch(origin + "/api/checkout/session", {
+    redirect: "manual",
+    headers: { "x-forwarded-host": "www.loja.example" },
+  });
+  assert.equal(
+    aliasApi.status,
+    200,
+    "API requests keep their own security validation",
+  );
+  assert.equal(aliasApi.headers.get("location"), null);
   let previousNonce = "";
   for (let i = 0; i < 2; i++) {
     const response = await fetch(origin + "/", {

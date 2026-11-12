@@ -20,7 +20,11 @@ import {
   externalReference,
   verifyReference,
 } from "../lib/server/crypto-state.mjs";
-import { RateLimiter, readJson } from "../lib/server/http-security.mjs";
+import {
+  RateLimiter,
+  readJson,
+  safeFailure,
+} from "../lib/server/http-security.mjs";
 import { verifyWebhookSignature } from "../lib/server/webhook.mjs";
 import { createMercadoPagoClient } from "../lib/server/mercado-pago.mjs";
 const now = 1800000000;
@@ -377,6 +381,128 @@ test("another order, currency, amount or signed reference cannot be substituted"
     }),
     "pending",
   );
+});
+test("order validation identifies the failing contract check without exposing provider data", async () => {
+  const ref = externalReference(key, "a".repeat(22), 1000);
+  const order = {
+    id: "ORD01VALIDATIONFIXTURE",
+    external_reference: ref,
+    total_amount: "10.00",
+    type: "online",
+    processing_mode: "manual",
+    currency: "BRL",
+    country_code: "BRA",
+    payer: { email: "private-customer@example.invalid" },
+    client_token: "private-client-token",
+  };
+  const expected = { id: order.id, ref, totalCents: 1000 };
+  const cases = [
+    [{ id: "invalid" }, "MPV01"],
+    [{ type: "other" }, "MPV02"],
+    [{ processing_mode: "automatic" }, "MPV03"],
+    [{ currency: "USD" }, "MPV04"],
+    [{ country_code: "USA" }, "MPV05"],
+    [{ external_reference: "other" }, "MPV06"],
+    [{ total_amount: "1.00" }, "MPV07"],
+    [{ id: "ORDTST01VALIDATIONFIXTURE" }, "MPV08"],
+  ];
+  for (const [change, code] of cases) {
+    let failure;
+    try {
+      verifyOrder({ ...order, ...change }, key, expected, "production");
+    } catch (error) {
+      failure = error;
+    }
+    assert.equal(failure?.supportCode, code);
+    const response = safeFailure(failure),
+      body = await response.json();
+    assert.equal(response.status, 502);
+    assert.equal(body.code, "ORDER_VERIFICATION_FAILED");
+    assert.equal(body.supportCode, code);
+    assert.deepEqual(Object.keys(body).sort(), [
+      "code",
+      "error",
+      "supportCode",
+    ]);
+    const output = JSON.stringify(body);
+    for (const sensitive of [
+      order.id,
+      ref,
+      order.payer.email,
+      order.client_token,
+    ])
+      assert.equal(output.includes(sensitive), false);
+  }
+  assert.throws(
+    () =>
+      verifyOrder(
+        order,
+        key,
+        { ...expected, id: "ORD01OTHERFIXTURE" },
+        "production",
+      ),
+    (error) => error.supportCode === "MPV09",
+  );
+  let unsafeFailure;
+  try {
+    verifyOrder(
+      {
+        ...order,
+        currency: "private-currency-value",
+        country_code: "private-country-value",
+      },
+      key,
+      expected,
+      "production",
+    );
+  } catch (error) {
+    unsafeFailure = error;
+  }
+  assert.equal(unsafeFailure.validationContext.currency, "unexpected");
+  assert.equal(unsafeFailure.validationContext.country, "unexpected");
+  assert.equal(
+    JSON.stringify(unsafeFailure.validationContext).includes("private-"),
+    false,
+  );
+});
+test("a test order in production stays blocked with a safe support code and sanitized server log", async (t) => {
+  const logs = [];
+  t.mock.method(console, "warn", (...args) => logs.push(args));
+  const f = setup(async (url, options) => {
+    const body = JSON.parse(options.body),
+      id = "ORDTST01DIAGNOSTICFIXTURE";
+    return Response.json({
+      ...body,
+      id,
+      currency: "BRL",
+      country_code: "BRA",
+      status: "created",
+      client_token: "private-client-token",
+      checkout_url: `https://www.mercadopago.com.br/checkout/v1/redirect?order_id=${id}`,
+    });
+  });
+  const response = await f.checkout(),
+    body = await response.json();
+  assert.equal(response.status, 502);
+  assert.equal(body.supportCode, "MPV08");
+  assert.deepEqual(logs, [
+    [
+      "[mercadopago.validation]",
+      {
+        supportCode: "MPV08",
+        failedChecks: ["environment"],
+        received: { environment: "test", currency: "BRL", country: "BRA" },
+      },
+    ],
+  ]);
+  const output = JSON.stringify({ body, logs });
+  for (const privateValue of [
+    "private-client-token",
+    input().email,
+    input().name,
+    config.accessToken,
+  ])
+    assert.equal(output.includes(privateValue), false);
 });
 test("signed state is purpose-bound, expires and rejects tampering", () => {
   const token = seal(key, "session", { jti: "test" }, now, 3600);
