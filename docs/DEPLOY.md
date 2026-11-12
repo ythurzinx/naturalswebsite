@@ -8,6 +8,8 @@ Crie uma aplicação **Node.js / Next.js** na Hostinger, conectada a este GitHub
 
 Associe o domínio, ative HTTPS e redirecione `www`/sem `www` para uma única origem principal.
 
+O código redireciona as páginas da variante com/sem `www` para a origem HTTPS definida em `APP_URL`, preservando o caminho e os parâmetros. As APIs continuam exigindo a origem correta. Se o checkout mostrar um código `MPV`, consulte o [diagnóstico de checkout](DIAGNOSTICO-CHECKOUT.md).
+
 ## 2. Banco e variáveis privadas
 
 Crie um MySQL dedicado. Configure as variáveis no painel da aplicação, usando [.env.example](../.env.example) como referência:

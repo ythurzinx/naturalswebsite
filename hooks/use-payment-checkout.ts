@@ -80,12 +80,18 @@ export function usePaymentCheckout() {
         }),
       });
       const result = await response.json();
-      if (!response.ok)
+      if (!response.ok) {
+        const support =
+          typeof result.supportCode === "string" &&
+          /^MPV0[1-9]$/.test(result.supportCode)
+            ? ` Código de suporte: ${result.supportCode}.`
+            : "";
         throw Error(
-          typeof result.error === "string"
+          (typeof result.error === "string"
             ? result.error
-            : "Não foi possível iniciar o pagamento.",
+            : "Não foi possível iniciar o pagamento.") + support,
         );
+      }
       const url = new URL(result.checkoutUrl);
       if (
         url.protocol !== "https:" ||
