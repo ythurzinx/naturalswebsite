@@ -11,6 +11,7 @@
   ],
   "pricesConfirmedByMerchant": true,
   "onlinePickupEnabled": true,
+  "requireCustomerPhone": true,
   "maxOrderCents": 1000000,
   "maxDistinctLines": 20,
   "maxQuantityPerLine": 20,

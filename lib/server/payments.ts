@@ -8,6 +8,8 @@ import {
   paymentConfiguration,
 } from "./payment-service.mjs";
 
+import { customerNotifications } from "./customer-notification-server";
+
 // Only this server boundary reads credentials. Never re-export this module
 // from a client component or use NEXT_PUBLIC_ for a secret.
 const configuration = paymentConfiguration({
@@ -25,4 +27,5 @@ export const payments = createPaymentService({
   repository,
   catalogProvider: publicCatalog,
   shipping,
+  notifications: customerNotifications,
 });

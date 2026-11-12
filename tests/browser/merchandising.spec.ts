@@ -18,6 +18,8 @@ test("private Mercado Pago homologation returns to the admin and never calls the
       "/api/admin/",
       "",
     );
+    if (path === "notifications/drain")
+      return route.fulfill({ json: { processed: 0 } });
     if (path === "session")
       return route.fulfill({
         json: {
@@ -207,6 +209,8 @@ test("admin publishes chosen discounts, shows MPV08 diagnosis and estimates a de
       "/api/admin/",
       "",
     );
+    if (path === "notifications/drain")
+      return route.fulfill({ json: { processed: 0 } });
     if (path === "session")
       return route.fulfill({
         json: {

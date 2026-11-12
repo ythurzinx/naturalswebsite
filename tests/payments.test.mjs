@@ -782,3 +782,30 @@ test("without credentials the public shop can run and payment APIs fail closed",
     404,
   );
 });
+
+test("customer phone is required by store policy and WhatsApp consent is explicit and typed", () => {
+  const contactPolicy = { ...policy, requireCustomerPhone: true };
+  assert.throws(() => buildCheckout(input(), catalog, contactPolicy), {
+    code: "INVALID_CONTACT",
+  });
+  const contact = { ...input(), phone: "(11) 99999-9999" };
+  assert.equal(
+    buildCheckout(contact, catalog, contactPolicy).whatsappOptIn,
+    false,
+  );
+  assert.equal(
+    buildCheckout({ ...contact, whatsappOptIn: true }, catalog, contactPolicy)
+      .whatsappOptIn,
+    true,
+  );
+  for (const whatsappOptIn of ["true", 1, {}, null])
+    assert.throws(
+      () =>
+        buildCheckout({ ...contact, whatsappOptIn }, catalog, contactPolicy),
+      { code: "INVALID_CONTACT" },
+    );
+  assert.throws(
+    () => buildCheckout({ ...input(), whatsappOptIn: true }, catalog, policy),
+    { code: "INVALID_CONTACT" },
+  );
+});
