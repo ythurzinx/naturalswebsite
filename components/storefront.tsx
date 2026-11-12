@@ -28,12 +28,18 @@ import {
 import { useCart } from "@/lib/cart-context";
 import { whatsappUrl } from "@/lib/store";
 import { ProductCard } from "./product-card";
+import { ProductCarousel } from "./product-carousel";
 import { referencePriceCents } from "@/lib/pricing.mjs";
 
 function QuerySync({
   onQuery,
 }: {
-  onQuery: (q: string, category: string, selection: boolean) => void;
+  onQuery: (
+    q: string,
+    category: string,
+    selection: boolean,
+    offers: boolean,
+  ) => void;
 }) {
   const params = useSearchParams();
   useEffect(() => {
@@ -41,6 +47,7 @@ function QuerySync({
       (params.get("q") || "").slice(0, 120),
       params.get("categoria") || "Todos",
       params.get("selecao") === "1",
+      params.get("ofertas") === "1",
     );
   }, [params, onQuery]);
   return null;
@@ -89,7 +96,7 @@ const categories = [
   { name: "Castanhas", tile: 0, sub: "& oleaginosas" },
   { name: "Grãos e sementes", tile: 4, sub: "para sua rotina" },
   { name: "Chás e ervas", tile: 3, sub: "sua pausa natural" },
-  { name: "Suplementos", tile: -1, sub: "cuidado diário" },
+  { name: "Farinhas e pós", tile: 2, sub: "para suas receitas" },
   { name: "Temperos", tile: 5, sub: "mais sabor à mesa" },
   { name: "Mercearia", tile: 2, sub: "escolhas do dia a dia" },
 ];
@@ -103,29 +110,35 @@ export function Storefront({
   const [query, setQuery] = useState(""),
     [group, setGroup] = useState("Todos"),
     [selection, setSelection] = useState(false),
+    [offersOnly, setOffersOnly] = useState(false),
     [sort, setSort] = useState("recommended"),
     [limit, setLimit] = useState(24),
     [slide, setSlide] = useState(0),
     [filters, setFilters] = useState(false);
   const { favorites, ready, catalog: products } = useCart();
+  const combos = products.filter((p) => p.combo);
+  const offers = products.filter((p) => p.originalPriceCents && !p.combo);
   const currentFeatured = featured
     .map((original) => products.find((p) => p.id === original.id))
     .filter((p): p is NonNullable<typeof p> => !!p);
   const onQuery = useCallback(
-    (q: string, category: string, curated: boolean) => {
+    (q: string, category: string, curated: boolean, discounted: boolean) => {
       setQuery(q);
       setGroup(groups.includes(category) ? category : "Todos");
       setSelection(curated);
+      setOffersOnly(discounted);
       setLimit(24);
     },
     [],
   );
   const shown = useMemo(() => {
-    let list = favoritesOnly
-      ? products.filter((p) => favorites.includes(p.id))
-      : selection || (!catalog && group === "Todos" && !query)
-        ? currentFeatured
-        : products;
+    let list = offersOnly
+      ? offers
+      : favoritesOnly
+        ? products.filter((p) => favorites.includes(p.id))
+        : selection || (!catalog && group === "Todos" && !query)
+          ? currentFeatured
+          : products;
     list = searchProducts(list, query).filter((p) => inGroup(p, group));
     if (sort === "recommended" && catalog)
       list = [...list].sort((a, b) => {
@@ -154,6 +167,7 @@ export function Storefront({
     group,
     catalog,
     selection,
+    offersOnly,
     sort,
     favoritesOnly,
     favorites,
@@ -312,6 +326,24 @@ export function Storefront({
           </section>
         </>
       )}
+      {!favoritesOnly && !offersOnly && !query && group === "Todos" && (
+        <>
+          <ProductCarousel
+            title="Boas escolhas, melhores preços"
+            eyebrow="OFERTAS DA LOJA"
+            description="Descontos nos produtos que você gosta. Valores a granel sempre por 100 g."
+            products={offers}
+            href="/produtos?ofertas=1"
+          />
+          <ProductCarousel
+            title="Combinações que facilitam sua rotina"
+            eyebrow="COMBOS MUNDO NATURAL"
+            description="Ingredientes selecionados e embalados separadamente. Confira o que vem em cada combo."
+            products={combos}
+            href="/produtos?categoria=Combos"
+          />
+        </>
+      )}
       <section
         id="catalogo"
         className={`section shell catalog-section ${catalog || favoritesOnly ? "full-catalog" : ""}`}
@@ -336,9 +368,11 @@ export function Storefront({
               {favoritesOnly
                 ? "Seus favoritos naturais"
                 : catalog
-                  ? selection
-                    ? "Escolhas naturais"
-                    : "Um mundo de coisas boas"
+                  ? offersOnly
+                    ? "Ofertas da Mundo Natural"
+                    : selection
+                      ? "Escolhas naturais"
+                      : "Um mundo de coisas boas"
                   : "Seu próximo cuidado começa aqui"}
             </CatalogHeading>
             {(catalog || favoritesOnly) && (

@@ -86,7 +86,11 @@ export function CartView() {
                     </p>
                     <span>
                       {formatPrice(referencePriceCents(item.product) / 100)}
-                      {item.product.isGranel ? " por 100 g" : " por unidade"}
+                      {item.product.combo
+                        ? " por combo"
+                        : item.product.isGranel
+                          ? " por 100 g"
+                          : " por unidade"}
                     </span>
                     {item.product.isGranel && (
                       <div className="field-label cart-weight-field">

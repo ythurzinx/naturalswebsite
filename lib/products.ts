@@ -1,6 +1,13 @@
 import data from "./catalog.json";
 import type { Product } from "./types";
-export const products: Product[] = data;
+import policy from "./sales-policy.json";
+import defaults from "./merchandising-defaults.json";
+import { defaultProductVisible } from "./catalog-visibility.mjs";
+import { applyMerchandising } from "./merchandising.mjs";
+export const products: Product[] = applyMerchandising(
+  data.filter((p) => defaultProductVisible(p, policy)),
+  defaults,
+);
 export async function fetchProducts(): Promise<Product[]> {
   return products;
 }
@@ -35,12 +42,18 @@ export const groups = [
   "Castanhas",
   "Grãos e sementes",
   "Chás e ervas",
-  "Suplementos",
+  "Farinhas e pós",
   "Temperos",
   "Mercearia",
+  "Combos",
 ];
 export function inGroup(product: Product, group: string) {
   const name = normalize(product.nome_produto);
+  if (group === "Combos") return !!product.combo;
+  if (group === "Farinhas e pós")
+    return /farinha| em po|maca peruana|psyllium|colageno|glutamina|creatina/.test(
+      name,
+    );
   if (group === "Castanhas")
     return /castanha|amendoim|nozes|amendoa|avela|pistache/.test(name);
   if (group === "Grãos e sementes")

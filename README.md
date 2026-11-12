@@ -2,9 +2,11 @@
 
 **Deploy:** siga [Colocar a loja no ar](docs/DEPLOY.md). O repositório está preparado para **Hostinger Node.js 22 + MySQL** pela branch `main`.
 
-Loja Next.js com 619 produtos, busca, categorias, favoritos, carrinho por peso e **Mercado Pago Checkout Pro via Orders API para Pix e cartão**, com alternativa de atendimento pelo WhatsApp.
+Loja Next.js com **308 produtos a granel na vitrine**, fotos ilustrativas locais, carrosséis de ofertas e três combos editáveis, busca, categorias, favoritos e **Mercado Pago Checkout Pro via Orders API para Pix e cartão**. Os 619 registros importados permanecem no painel; produtos embalados e embalagens de uso interno ficam fora da vitrine até uma edição e ativação explícita pelo administrador.
 
-Os 306 produtos a granel exibem preço por **100 g**. A seleção começa em 100 g e avança de 100 em 100 g, até 5.000 g por porção, com peso editável no carrinho. Produtos embalados continuam por unidade. O valor de 100 g é arredondado em centavos antes de multiplicar pelos blocos e pelas porções, usando a mesma regra no catálogo, carrinho e pagamento.
+Os produtos a granel exibem preço por **100 g**. A seleção começa em 100 g e avança de 100 em 100 g, até 5.000 g por porção. Os preços de origem por kg foram preservados. Sete registros com pesos em kg foram corrigidos para granel, incluindo a maca peruana. Produtos embalados adicionados ou reativados pelo administrador continuam por unidade. O valor de 100 g é arredondado em centavos antes de multiplicar pelos blocos e pelas porções, com a mesma regra no catálogo, carrinho e pagamento.
+
+Veja [Ofertas, combos e fotos](docs/OFERTAS-COMBOS-FOTOS.md) e [Resolver MPV08](docs/DIAGNOSTICO-CHECKOUT.md). Os combos começam **sem desconto automático**; a loja define os percentuais. A entrega usa BrasilAPI e distância estimada entre CEPs, configurável em **Admin → Frete e entregas**. As novas opções usam `mn_settings` e não exigem outra importação SQL.
 
 ## Rodar e verificar
 

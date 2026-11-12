@@ -23,10 +23,14 @@ import {
   Activity,
   LockKeyhole,
   Truck,
+  Tags,
+  CreditCard,
 } from "lucide-react";
 import { useOrderAlerts } from "@/hooks/use-order-alerts";
 import { AdminOrderAlerts } from "./admin-order-alerts";
 import { AdminShippingSettings } from "./admin-shipping-settings";
+import { AdminMerchandising } from "./admin-merchandising";
+import { AdminPaymentDiagnostics } from "./admin-payment-diagnostics";
 import { AdminOrderOperations } from "./admin-order-operations";
 import { Modal } from "./modal";
 import { ProductImage } from "./product-card";
@@ -125,6 +129,7 @@ type ProductDraft = {
   cost: string;
   active: boolean;
   imageSha: string | null;
+  defaultImage?: string;
 };
 const freshProduct = (): ProductDraft => ({
   name: "",
@@ -226,7 +231,14 @@ export function AdminDashboard() {
       const data = await response.json();
       if (!response.ok) {
         if (response.status === 401) setAuth(false);
-        throw Error(data.error || "Não foi possível concluir esta ação.");
+        const support =
+          typeof data.supportCode === "string" &&
+          /^MPV0[1-9]$/.test(data.supportCode)
+            ? ` Código de suporte: ${data.supportCode}.`
+            : "";
+        throw Error(
+          (data.error || "Não foi possível concluir esta ação.") + support,
+        );
       }
       return data;
     },
@@ -322,7 +334,7 @@ export function AdminDashboard() {
     event.preventDefault();
     if (!draft) return;
     await action(async () => {
-      const { id, price, cost, ...fields } = draft;
+      const { id, price, cost, defaultImage, ...fields } = draft;
       await api(id ? `products/${id}` : "products", id ? "PUT" : "POST", {
         ...fields,
         priceCents: amount(price),
@@ -367,6 +379,7 @@ export function AdminDashboard() {
             ).toFixed(2),
       active: product.active,
       imageSha: product.imageSha,
+      defaultImage: product.imagem,
     });
   }
   async function saveExpense(event: FormEvent) {
@@ -516,8 +529,10 @@ export function AdminDashboard() {
   const tabs = [
     { id: "dashboard", label: "Visão geral", icon: LayoutDashboard },
     { id: "products", label: "Produtos e fotos", icon: Package },
+    { id: "merchandising", label: "Ofertas e combos", icon: Tags },
     { id: "orders", label: "Pedidos", icon: ShoppingBag },
     { id: "shipping", label: "Frete e entregas", icon: Truck },
+    { id: "payments", label: "Pagamentos", icon: CreditCard },
     { id: "expenses", label: "Despesas", icon: ReceiptText },
     { id: "audit", label: "Atividade", icon: Activity },
   ];
@@ -529,7 +544,7 @@ export function AdminDashboard() {
       (productFilter === "all" ||
         (productFilter === "active" && p.active) ||
         (productFilter === "inactive" && !p.active) ||
-        (productFilter === "photos" && !p.imageSha) ||
+        (productFilter === "photos" && !p.imagem) ||
         (productFilter === "costs" && p.costCents === null)),
   );
   const filteredOrders = orders.filter(
@@ -637,6 +652,8 @@ export function AdminDashboard() {
           </p>
         )}
         {tab === "shipping" && <AdminShippingSettings api={api} />}
+        {tab === "merchandising" && <AdminMerchandising api={api} />}
+        {tab === "payments" && <AdminPaymentDiagnostics api={api} />}
         {tab === "dashboard" && (
           <>
             <div className="admin-toolbar">
@@ -899,7 +916,7 @@ export function AdminDashboard() {
                   <option value="all">Todos</option>
                   <option value="active">Disponíveis</option>
                   <option value="inactive">Indisponíveis</option>
-                  <option value="photos">Sem foto própria</option>
+                  <option value="photos">Sem imagem</option>
                   <option value="costs">Sem custo</option>
                 </select>
               </label>
@@ -1345,10 +1362,18 @@ export function AdminDashboard() {
                       src={`/api/product-images/${draft.imageSha}`}
                       alt="Foto do produto"
                     />
+                  ) : draft.defaultImage &&
+                    /^\/images\/products\/[a-z0-9-]+\.webp$/.test(
+                      draft.defaultImage,
+                    ) ? (
+                    <img
+                      src={draft.defaultImage}
+                      alt="Imagem ilustrativa de referência"
+                    />
                   ) : (
                     <div className="admin-photo-placeholder">
                       <ImagePlus size={42} />
-                      <span>Foto ilustrativa da categoria será usada</span>
+                      <span>Adicione uma foto do produto</span>
                     </div>
                   )}
                   <label className="button button-outline button-small">
@@ -1367,7 +1392,7 @@ export function AdminDashboard() {
                       className="text-button"
                       onClick={() => setDraft({ ...draft, imageSha: null })}
                     >
-                      Usar imagem da categoria
+                      Restaurar imagem de referência
                     </button>
                   )}
                   <p className="fine-print">

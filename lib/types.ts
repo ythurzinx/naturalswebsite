@@ -10,6 +10,18 @@ export interface Product {
   categoria: string;
   isGranel: boolean;
   imagem?: string;
+  imagemLegenda?: string;
+  originalPriceCents?: number;
+  promotionEndsAt?: number | null;
+  description?: string;
+  combo?: {
+    productId: string;
+    name: string;
+    weight: number;
+    regularCents: number;
+    unitCents: number;
+    imagem?: string;
+  }[];
   validade?: string;
   isFeatured?: boolean;
 }

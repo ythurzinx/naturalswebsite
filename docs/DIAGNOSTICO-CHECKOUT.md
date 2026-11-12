@@ -21,3 +21,17 @@ As regras de moeda, país, assinatura, total e ambiente permanecem obrigatórias
 Depois de publicar a correção, atualize o checkout para carregar o código novo. O código de suporte só aparece em uma nova tentativa que falhe na conferência. Criações reais de pedidos e testes de Pix/cartão devem usar dados e contas apropriados à homologação; os testes do repositório usam respostas simuladas e não criam cobranças reais.
 
 Contrato de referência: [Criar e configurar uma order do Checkout Pro](https://www.mercadopago.com.br/developers/pt/docs/checkout-pro-orders/create-order?scope=prod).
+
+## MPV08 com credenciais aparentemente de produção
+
+Uma order `ORDTST…` é bloqueada quando `MERCADOPAGO_ENV=production`. O prefixo `APP_USR` do token, sozinho, **não comprova produção**: a documentação atual informa que os tokens de teste da Orders API também usam esse prefixo.
+
+1. Mercado Pago Developers → Suas integrações → aplicação da loja → Credenciais → selecione **Produção**. Ative o ambiente, se necessário, preenchendo os dados do negócio.
+2. Copie o **Access Token** da aba Produção, usando a conta real vendedora, e substitua `MERCADOPAGO_ACCESS_TOKEN` nas variáveis privadas da aplicação Node.js da Hostinger. Não use Public Key, Client Secret ou token da conta de teste.
+3. Mantenha `MERCADOPAGO_ENV=production`, `APP_URL=https://mundonaturaltaboao.com.br` e a assinatura de Webhooks da mesma aplicação. Salve e reimplante; apenas salvar a variável pode não reiniciar o processo.
+4. Reabra o checkout. Depois confira **Admin → Pagamentos**. O diagnóstico registra somente o ambiente e o resultado da última criação para a credencial atual; ele não exibe tokens, pedidos nem dados pessoais e não efetua cobrança. Uma troca de token invalida a indicação anterior.
+5. Confira Pix e cartão com uma conta compradora diferente da conta vendedora. A criação válida de checkout não comprova crédito; a separação só começa após confirmação autoritativa do pagamento.
+
+Sem acesso às variáveis da Hostinger, essa substituição precisa ser feita pelo titular da conta. Não diminua as verificações de ambiente para contornar o erro.
+
+Fontes: [Credenciais da Orders API](https://www.mercadopago.com.br/developers/pt/docs/checkout-api-orders/resources/credentials) e [Ativar produção](https://www.mercadopago.com.br/developers/pt/docs/checkout-pro-orders/go-to-production).

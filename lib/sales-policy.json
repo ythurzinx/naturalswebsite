@@ -1,5 +1,14 @@
 {
-  "version": 1,
+  "version": 2,
+  "bulkCatalogOnly": true,
+  "legacyActivationAfter": 1794517747000,
+  "hiddenBaseProductIds": [
+    "prod-614",
+    "prod-615",
+    "prod-616",
+    "prod-617",
+    "prod-618"
+  ],
   "pricesConfirmedByMerchant": true,
   "onlinePickupEnabled": true,
   "maxOrderCents": 1000000,

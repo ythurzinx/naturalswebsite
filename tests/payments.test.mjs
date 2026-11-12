@@ -70,7 +70,7 @@ const input = () => ({
   expectedTotalCents: 14798,
 });
 const key = deriveKey(config.accessToken);
-function setup(customFetcher) {
+function setup(customFetcher, repository = null) {
   const calls = [],
     orders = new Map(),
     jar = new Map();
@@ -105,6 +105,7 @@ function setup(customFetcher) {
     catalog,
     policy,
     config,
+    repository,
     fetcher,
     now: () => now,
   });
@@ -151,6 +152,49 @@ test("canonical catalog prices use integer cents and round the unit before multi
   assert.equal(cents("1e3"), null);
   assert.equal(cents("1.001"), null);
   assert.equal(money(14798), "147.98");
+});
+test("MPV08 fails closed, records a private environment diagnosis and forgets it after token rotation", async () => {
+  let health = null,
+    sandbox = true;
+  const repository = {
+    paymentHealth: async () => health,
+    savePaymentHealth: async (value) => {
+      health = value;
+    },
+    recordOrder: async () => {},
+  };
+  const f = setup(async (_url, options) => {
+    const body = JSON.parse(options.body),
+      id = sandbox ? "ORDTST01HEALTHFIXTURE" : "ORD01HEALTHFIXTURE";
+    return Response.json({
+      ...body,
+      id,
+      currency: "BRL",
+      country_code: "BRA",
+      checkout_url: `https://www.mercadopago.com.br/checkout/v1/redirect?order_id=${id}`,
+    });
+  }, repository);
+  let response = await f.checkout();
+  assert.equal(response.status, 502);
+  assert.equal((await response.json()).supportCode, "MPV08");
+  assert.ok(!f.jar.has("__Host-mn-orders"));
+  let diagnostic = await f.service.diagnostics();
+  assert.equal(diagnostic.environment, "production");
+  assert.equal(diagnostic.lastAttempt.receivedEnvironment, "test");
+  assert.equal(diagnostic.lastAttempt.state, "failed");
+  assert.ok(!JSON.stringify(diagnostic).includes(config.accessToken));
+  assert.ok(!JSON.stringify(diagnostic).includes("configurationId"));
+  const rotated = createPaymentService({
+    catalog,
+    policy,
+    repository,
+    config: { ...config, accessToken: "APP_USR-" + "rotated".repeat(8) },
+  });
+  assert.equal((await rotated.diagnostics()).lastAttempt, null);
+  sandbox = false;
+  response = await f.checkout();
+  assert.equal(response.status, 200);
+  assert.equal((await f.service.diagnostics()).lastAttempt.state, "validated");
 });
 test("tampered prices, unknown fields, invalid weights and quantities are rejected before provider calls", async () => {
   const cases = [

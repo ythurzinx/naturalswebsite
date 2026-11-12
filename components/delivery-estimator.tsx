@@ -91,6 +91,10 @@ export function DeliveryEstimator({ details = false }: { details?: boolean }) {
                     : `Frete: ${formatPrice(shipping.quote.feeCents / 100)}`}
                 </strong>
                 <p>
+                  <span className="fine-print">
+                    Endereço encontrado pelo CEP
+                  </span>
+                  <br />
                   {shipping.quote.address.street} ·{" "}
                   {shipping.quote.address.neighborhood}
                   <br />

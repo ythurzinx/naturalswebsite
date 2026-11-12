@@ -9,6 +9,9 @@ async function essentials(page: Page) {
   await button.click();
 }
 async function fitsScreen(page: Page) {
+  expect(await page.evaluate(() => innerWidth)).toBeLessThanOrEqual(
+    page.viewportSize()!.width + 1,
+  );
   expect(
     await page.evaluate(
       () => document.documentElement.scrollWidth <= window.innerWidth + 1,
@@ -188,6 +191,7 @@ test("admin product batches and order filters work with isolated UI fixtures", a
       costCents: null,
       active: true,
       imageSha: "a".repeat(64),
+      imagem: `/api/product-images/${"a".repeat(64)}`,
     },
   ];
   const orders = [

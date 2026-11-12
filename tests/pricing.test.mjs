@@ -81,12 +81,12 @@ test("each 100 g increment survives storage and matches the authoritative checko
   }
 });
 
-test("all 306 bulk catalog products use the 100 g label and positive sale prices", async () => {
+test("all 308 bulk catalog products use the 100 g label and positive sale prices", async () => {
   const catalog = JSON.parse(
     await readFile(new URL("../lib/catalog.json", import.meta.url), "utf8"),
   );
   const items = catalog.filter((product) => product.isGranel);
-  assert.equal(items.length, 306);
+  assert.equal(items.length, 308);
   for (const product of items) {
     assert.equal(product.peso_produto, "A granel · preço por 100 g");
     assert.ok(referencePriceCents(product) > 0);

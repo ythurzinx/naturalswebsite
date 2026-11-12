@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     template: "%s | Mundo Natural",
   },
   description:
-    "Castanhas, grãos, chás, temperos e suplementos. Conheça a Mundo Natural de Taboão da Serra e monte sua seleção com atendimento pelo WhatsApp.",
+    "Castanhas, grãos, chás, temperos e farinhas a granel. Compre de 100 em 100 g, descubra nossos combos e conheça a Mundo Natural de Taboão da Serra.",
   icons: {
     icon: "/images/mundo-natural-icon.png",
     apple: "/images/mundo-natural-icon.png",
