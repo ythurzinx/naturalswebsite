@@ -1,7 +1,13 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, Search, Heart, ShoppingBag } from "lucide-react";
+import {
+  Home,
+  Search,
+  Heart,
+  ShoppingBag,
+  MessageSquareText,
+} from "lucide-react";
 import { useCart } from "@/lib/cart-context";
 
 export function MobileNavigation() {
@@ -12,6 +18,7 @@ export function MobileNavigation() {
     { href: "/", label: "Início", Icon: Home },
     { href: "/produtos", label: "Buscar", Icon: Search },
     { href: "/favoritos", label: "Favoritos", Icon: Heart },
+    { href: "/avaliacoes", label: "Avaliações", Icon: MessageSquareText },
     { href: "/carrinho", label: "Carrinho", Icon: ShoppingBag },
   ];
   return (

@@ -15,6 +15,10 @@ import { createPaymentTesting } from "../lib/server/payment-testing.mjs";
 import { referencePriceCents } from "../lib/pricing.mjs";
 import { validateMerchandising } from "../lib/server/merchandising-validation.mjs";
 import { createCustomerNotifications } from "../lib/server/customer-notifications.mjs";
+import { createProductContentService } from "../lib/server/product-content.mjs";
+import { createReviewService } from "../lib/server/review-service.mjs";
+import { deriveKey, seal, mac } from "../lib/server/crypto-state.mjs";
+import contentDefaults from "../lib/product-content.json" with { type: "json" };
 import { buildCheckout, money } from "../lib/server/checkout-core.mjs";
 const target = process.env.INTEGRATION_DATABASE_URL;
 if (!target)
@@ -1090,6 +1094,11 @@ test("alerts, freight settings, packing and operations require authentication an
     ["PUT", ["orders", "ORD01MNDELIVERYDBFIXTURE", "packing"]],
     ["PUT", ["orders", "ORD01MNDELIVERYDBFIXTURE", "operations"]],
     ["GET", ["notifications"]],
+    ["GET", ["content-products"]],
+    ["GET", ["product-content", "prod-1"]],
+    ["PUT", ["product-content", "prod-1"]],
+    ["GET", ["reviews"]],
+    ["PUT", ["reviews", "a".repeat(64)]],
     ["PUT", ["notifications"]],
     ["POST", ["notifications", "drain"]],
   ]) {
@@ -1119,6 +1128,8 @@ test("alerts, freight settings, packing and operations require authentication an
   for (const [method, path] of [
     ["PUT", ["orders", "ORD01MNDELIVERYDBFIXTURE", "operations"]],
     ["PUT", ["notifications"]],
+    ["PUT", ["product-content", "prod-1"]],
+    ["PUT", ["reviews", "a".repeat(64)]],
     ["POST", ["notifications", "drain"]],
     ["PUT", ["merchandising"]],
     ["POST", ["shipping", "estimate"]],
@@ -1268,4 +1279,168 @@ test("enabling messages never replays old purchases or invents WhatsApp consent"
     { code: "INVALID_ETA" },
   );
   assert.equal((await repo.order(order.id)).estimated_minutes, null);
+});
+
+test("product guides persist separately from prices, reject stale edits and stay outside the catalog payload", async () => {
+  const content = createProductContentService({ repository: repo }),
+    p = (await repo.catalog(true)).find((p) => p.id === "prod-1");
+  assert.equal((await content.get(p)).revision, 0);
+  const value = { revision: 0, content: contentDefaults["prod-270"] };
+  const saved = await content.save(p.id, value);
+  assert.equal(saved.revision, 1);
+  const another = createProductContentService({
+    repository: new ShopRepository(pool, catalog, policy),
+  });
+  assert.equal(
+    (await another.get(p)).content.recipe.title,
+    saved.content.recipe.title,
+  );
+  await assert.rejects(content.save(p.id, value), { code: "CONTENT_CHANGED" });
+  await assert.rejects(
+    content.save(p.id, {
+      revision: 1,
+      content: { ...value.content, description: "<script>alert(1)</script>" },
+    }),
+    { code: "INVALID_CONTENT" },
+  );
+  const publicProduct = (await repo.catalog(false)).find((v) => v.id === p.id);
+  assert.equal("recipe" in publicProduct, false);
+  assert.equal("content" in publicProduct, false);
+  assert.equal(
+    (await repo.catalog(true)).find((v) => v.id === p.id).valor_unitario,
+    119.99,
+  );
+});
+
+test("reviews bind completed purchases, deduplicate retries, moderate without changing opinions and hide customer contacts", async () => {
+  const { order, selection } = deliveryOrderFixture();
+  const paid = {
+    ...order,
+    status: "processed",
+    status_detail: "accredited",
+    total_paid_amount: "44.00",
+  };
+  await repo.recordOrder(paid, selection);
+  const config = {
+    origin: "https://loja.example",
+    secure: true,
+    accessToken: "APP_USR-" + "fixture".repeat(8),
+    environment: "production",
+  };
+  const now = Math.floor(Date.now() / 1000),
+    key = deriveKey(config.accessToken, config.origin),
+    jti = "real-review-session";
+  const proof = {
+    id: order.id,
+    ref: order.external_reference,
+    totalCents: 4400,
+    expires: now + 3600,
+  };
+  const cookies = `__Host-mn-orders=${seal(key, "orders", { orders: [proof] }, now, 3600)}; __Host-mn-checkout=${seal(key, "session", { jti }, now, 3600)}`;
+  const payments = createPaymentService({
+    catalog,
+    policy,
+    config,
+    repository: repo,
+  });
+  const service = createReviewService({
+    repository: repo,
+    payments,
+    catalogProvider: () => repo.catalog(false),
+  });
+  const body = {
+    orderId: order.id,
+    productId: "prod-1",
+    rating: 4,
+    text: "Produto bem embalado e textura agradável.",
+    publishConsent: true,
+  };
+  const request = (payload, headers = {}) =>
+    new Request(config.origin + "/api/reviews", {
+      method: payload ? "POST" : "GET",
+      headers: {
+        Origin: config.origin,
+        Cookie: cookies,
+        "Content-Type": "application/json",
+        "X-CSRF-Token": mac(key, "csrf", jti),
+        ...headers,
+      },
+      ...(payload ? { body: JSON.stringify(payload) } : {}),
+    });
+  assert.equal((await service.submit(request(body))).status, 403);
+  assert.deepEqual(
+    (await (await service.eligibility(request())).json()).products,
+    [],
+  );
+  await repo.setPacked(order.id, "prod-1:300", true);
+  await repo.setFulfillment(order.id, "completed");
+  assert.equal(
+    (await service.submit(request(body, { "X-CSRF-Token": "wrong" }))).status,
+    403,
+  );
+  assert.equal(
+    (await service.submit(request(body, { Origin: "https://evil.example" })))
+      .status,
+    403,
+  );
+  assert.equal(
+    (await service.submit(request(body, { Cookie: "" }))).status,
+    403,
+  );
+  const eligible = await (await service.eligibility(request())).json();
+  assert.equal(eligible.products.length, 1);
+  assert.equal(eligible.products[0].reviewed, false);
+  const attempts = await Promise.all([
+    service.submit(request(body)),
+    service.submit(request(body)),
+  ]);
+  assert.deepEqual(
+    attempts.map((r) => r.status),
+    [200, 200],
+  );
+  assert.equal((await service.list("prod-1")).count, 0);
+  assert.equal(
+    (await service.submit(request({ ...body, rating: 1 }))).status,
+    409,
+  );
+  assert.equal(
+    (await service.submit(request({ ...body, productId: "prod-2" }))).status,
+    403,
+  );
+  const all = await service.adminList();
+  assert.equal(all.reviews.length, 1);
+  const review = all.reviews[0];
+  assert.equal(review.author, "Cliente");
+  assert.equal(review.published, false);
+  await assert.rejects(
+    service.moderate(review.id, {
+      published: true,
+      reply: "Obrigado!",
+      rating: 5,
+    }),
+    { code: "INVALID_MODERATION" },
+  );
+  await service.moderate(review.id, {
+    published: true,
+    reply: "Obrigado por compartilhar sua experiência!",
+  });
+  const visible = await service.list("prod-1");
+  assert.equal(visible.count, 1);
+  assert.equal(visible.average, 4);
+  assert.equal(visible.reviews[0].verified, true);
+  assert.match(visible.reviews[0].reply, /Obrigado/);
+  assert.doesNotMatch(
+    JSON.stringify(visible),
+    /entrega@example|11999999999|Rua de teste|ORD01MNDELIVERY|Cliente entrega/,
+  );
+  await service.moderate(review.id, { published: false, reply: "" });
+  const hidden = await service.list("prod-1");
+  assert.equal(hidden.count, 0);
+  assert.equal(hidden.average, null);
+  assert.equal((await service.adminList()).reviews[0].rating, 4);
+  assert.equal((await service.adminList()).reviews[0].text, body.text);
+  assert.equal(
+    (await pool.execute("SELECT COUNT(*) n FROM mn_orders"))[0][0].n,
+    1,
+  );
 });

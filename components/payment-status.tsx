@@ -174,6 +174,11 @@ function Status() {
           <ShieldCheck size={16} /> Seu carrinho é preservado. O acesso ao
           pedido fica protegido neste navegador por um cookie essencial.
         </p>
+        {paid && (
+          <Link href="/avaliacoes" className="text-button">
+            Avaliar produtos após a conclusão do pedido
+          </Link>
+        )}
         <Link href="/carrinho" className="back-link">
           Voltar ao meu carrinho
         </Link>

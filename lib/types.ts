@@ -26,6 +26,24 @@ export interface Product {
   isFeatured?: boolean;
 }
 
+export interface ProductContent {
+  kind: "food" | "herbal" | "supplement" | "external";
+  description: string;
+  highlights: string[];
+  usage: string;
+  storage: string;
+  allergens: string;
+  notes: string[];
+  recipe: {
+    title: string;
+    minutes: number;
+    servings: string;
+    ingredients: string[];
+    steps: string[];
+  } | null;
+  sources: { title: string; url: string }[];
+}
+
 export interface CartItem {
   product: Product;
   quantity: number;

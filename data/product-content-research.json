@@ -1,0 +1,3370 @@
+{
+  "method": "Revisão por ingrediente e apresentação. Fontes institucionais para características gerais; receitas editoriais adaptadas. Composição do lote depende da identificação do fornecedor.",
+  "sources": {
+    "guide": {
+      "title": "Ministério da Saúde — Guia Alimentar para a População Brasileira",
+      "url": "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+    },
+    "taco": {
+      "title": "NEPA/Unicamp — Tabela Brasileira de Composição de Alimentos",
+      "url": "https://www.nepa.unicamp.br/publicacoes/tabela-taco-excel/"
+    },
+    "tbca": {
+      "title": "USP/FoRC — Tabela Brasileira de Composição de Alimentos",
+      "url": "https://www.tbca.net.br/"
+    },
+    "soy": {
+      "title": "Embrapa — Receitas práticas com soja",
+      "url": "https://www.embrapa.br/busca-de-publicacoes/-/publicacao/457079/receitas-praticas-com-soja"
+    },
+    "nuts": {
+      "title": "Embrapa — Alimentos à base de castanha-do-brasil",
+      "url": "https://www.infoteca.cnptia.embrapa.br/infoteca/bitstream/doc/504925/1/alimentoscastanhabrasil.pdf"
+    },
+    "banana": {
+      "title": "Embrapa — Uso da farinha de banana-verde na alimentação",
+      "url": "https://www.infoteca.cnptia.embrapa.br/infoteca/handle/doc/1069029"
+    },
+    "herbs": {
+      "title": "Anvisa — Espécies vegetais para chás e especiarias (IN 159/2022)",
+      "url": "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022"
+    },
+    "plant": {
+      "title": "Ministério da Saúde — Plantas medicinais e fitoterápicos",
+      "url": "https://www.gov.br/saude/pt-br/composicao/sectics/plantas-medicinais-e-fitoterapicos"
+    },
+    "supplement": {
+      "title": "Anvisa — Perguntas frequentes sobre suplementos alimentares",
+      "url": "https://www.gov.br/anvisa/pt-br/assuntos/alimentos/suplementos-alimentares/perguntas-frequentes"
+    },
+    "psyllium": {
+      "title": "Ministério da Saúde — Formulário Terapêutico Nacional: psyllium e líquidos",
+      "url": "https://bvsms.saude.gov.br/bvs/publicacoes/formulario_terapeutico_nacional_2010.pdf"
+    },
+    "ora": {
+      "title": "Embrapa — Hortaliças tradicionais: ora-pro-nóbis",
+      "url": "https://www.infoteca.cnptia.embrapa.br/infoteca/handle/doc/1071168"
+    },
+    "corn": {
+      "title": "Alca Foods — Corn Sugar: flocos de milho com açúcar",
+      "url": "https://alcafoods.com/corn-sugar-flocos-de-milho-com-acucar"
+    },
+    "cornBrown": {
+      "title": "Alca Foods — Especificação técnica Corn Sugar Mascavo",
+      "url": "https://vidaemgraos.com.br/www/wp-content/uploads/Corn-Flakes-Acucar-Mascavo-Alcafoods.pdf"
+    }
+  },
+  "products": [
+    {
+      "id": "prod-92",
+      "name": "Biscoito Goiabinha",
+      "family": "biscuit",
+      "kind": "food",
+      "recipe": "Copinho de banana com biscoito goiabinha",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-93",
+      "name": "Soja em Grãos",
+      "family": "soyGrain",
+      "kind": "food",
+      "recipe": "Salada com soja em grãos",
+      "sourceUrls": [
+        "https://www.embrapa.br/busca-de-publicacoes/-/publicacao/457079/receitas-praticas-com-soja",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-94",
+      "name": "Soja em Grãos",
+      "family": "soyGrain",
+      "kind": "food",
+      "recipe": "Salada com soja em grãos",
+      "sourceUrls": [
+        "https://www.embrapa.br/busca-de-publicacoes/-/publicacao/457079/receitas-praticas-com-soja",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-95",
+      "name": "Mix de Quinua Preta",
+      "family": "smallGrain",
+      "kind": "food",
+      "recipe": "Salada com mix de quinua preta",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-96",
+      "name": "Quinua Branca",
+      "family": "smallGrain",
+      "kind": "food",
+      "recipe": "Quinua branca com legumes",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-97",
+      "name": "Coco Chips",
+      "family": "coconut",
+      "kind": "food",
+      "recipe": "Tigela de iogurte com coco chips",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-98",
+      "name": "Coco Chips Skin",
+      "family": "coconut",
+      "kind": "food",
+      "recipe": "Tigela de iogurte com coco chips skin",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-99",
+      "name": "Uva Passa Branca",
+      "family": "driedFruit",
+      "kind": "food",
+      "recipe": "Tigela de iogurte com uva passa branca",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-100",
+      "name": "Colageno Hidrolisado",
+      "family": "supplement",
+      "kind": "supplement",
+      "recipe": null,
+      "sourceUrls": [
+        "https://www.gov.br/anvisa/pt-br/assuntos/alimentos/suplementos-alimentares/perguntas-frequentes"
+      ]
+    },
+    {
+      "id": "prod-101",
+      "name": "Creatina em pó",
+      "family": "supplement",
+      "kind": "supplement",
+      "recipe": null,
+      "sourceUrls": [
+        "https://www.gov.br/anvisa/pt-br/assuntos/alimentos/suplementos-alimentares/perguntas-frequentes"
+      ]
+    },
+    {
+      "id": "prod-102",
+      "name": "Palito de Chocolate",
+      "family": "chocolate",
+      "kind": "food",
+      "recipe": "Copinho de banana com palito de chocolate",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-103",
+      "name": "Uva Passa c/ Chocolate",
+      "family": "chocolate",
+      "kind": "food",
+      "recipe": "Copinho de banana com uva passa c/ chocolate",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-104",
+      "name": "Amarula c/ Chocolate",
+      "family": "chocolate",
+      "kind": "food",
+      "recipe": "Copinho de banana com amarula c/ chocolate",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-105",
+      "name": "Cocada Leite Condensado",
+      "family": "sweet",
+      "kind": "food",
+      "recipe": "Copinho de banana com cocada leite condensado",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-106",
+      "name": "Biscoito Margarida",
+      "family": "biscuit",
+      "kind": "food",
+      "recipe": "Copinho de banana com biscoito margarida",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-107",
+      "name": "Doce de Leite",
+      "family": "sweet",
+      "kind": "food",
+      "recipe": "Copinho de banana com doce de leite",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-108",
+      "name": "Gotas de Chocolate",
+      "family": "chocolate",
+      "kind": "food",
+      "recipe": "Copinho de banana com gotas de chocolate",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-109",
+      "name": "Chocolate Branco em Gotas",
+      "family": "chocolate",
+      "kind": "food",
+      "recipe": "Copinho de banana com chocolate branco em gotas",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-110",
+      "name": "Gotas de Chocolatea Harnd",
+      "family": "chocolate",
+      "kind": "food",
+      "recipe": "Copinho de banana com gotas de chocolatea harnd",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-111",
+      "name": "Choco Power Ball",
+      "family": "chocolate",
+      "kind": "food",
+      "recipe": "Copinho de banana com choco power ball",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-112",
+      "name": "Amendoa c/ Chocolate",
+      "family": "chocolate",
+      "kind": "food",
+      "recipe": "Copinho de banana com amendoa c/ chocolate",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-113",
+      "name": "Cereja c/ Chocolate",
+      "family": "chocolate",
+      "kind": "food",
+      "recipe": "Copinho de banana com cereja c/ chocolate",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-114",
+      "name": "Castanha de Caju ao Leite",
+      "family": "chocolate",
+      "kind": "food",
+      "recipe": "Copinho de banana com castanha de caju ao leite",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-115",
+      "name": "Castanha do Pará ao leite",
+      "family": "chocolate",
+      "kind": "food",
+      "recipe": "Copinho de banana com castanha do pará ao leite",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-116",
+      "name": "Banana Passa ao leite 70%",
+      "family": "chocolate",
+      "kind": "food",
+      "recipe": "Copinho de banana com banana passa ao leite 70%",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-117",
+      "name": "Canela em pó Pura",
+      "family": "cinnamonPowder",
+      "kind": "food",
+      "recipe": "Banana assada com canela",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-118",
+      "name": "Semente de Linhaça Dourada",
+      "family": "seed",
+      "kind": "food",
+      "recipe": "Molho com semente de linhaça dourada",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-119",
+      "name": "Semente de Linhaça Marrom",
+      "family": "seed",
+      "kind": "food",
+      "recipe": "Molho com semente de linhaça marrom",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-120",
+      "name": "Semente de abóbora s/ Casca",
+      "family": "seed",
+      "kind": "food",
+      "recipe": "Molho com semente de abóbora s/ casca",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-121",
+      "name": "Mix de Sementes",
+      "family": "seed",
+      "kind": "food",
+      "recipe": "Molho com mix de sementes",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-122",
+      "name": "Amaranto em Grão",
+      "family": "smallGrain",
+      "kind": "food",
+      "recipe": "Salada com amaranto em grão",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-123",
+      "name": "Granulado Chocolate",
+      "family": "chocolate",
+      "kind": "food",
+      "recipe": "Copinho de banana com granulado chocolate",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-124",
+      "name": "Chocolate 50% Cacau",
+      "family": "cocoa",
+      "kind": "food",
+      "recipe": "Bebida quente com chocolate 50% cacau",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-125",
+      "name": "Psyllium Extrato 99%",
+      "family": "psyllium",
+      "kind": "food",
+      "recipe": "Pão de frigideira com psyllium",
+      "sourceUrls": [
+        "https://bvsms.saude.gov.br/bvs/publicacoes/formulario_terapeutico_nacional_2010.pdf",
+        "https://www.gov.br/anvisa/pt-br/assuntos/alimentos/suplementos-alimentares/perguntas-frequentes"
+      ]
+    },
+    {
+      "id": "prod-126",
+      "name": "Farinha De Maracujá",
+      "family": "specialFlour",
+      "kind": "food",
+      "recipe": "Panqueca de banana com farinha de maracujá",
+      "sourceUrls": [
+        "https://www.tbca.net.br/",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-127",
+      "name": "Farinha de Amendoa",
+      "family": "nutFlour",
+      "kind": "food",
+      "recipe": "Panqueca de banana com farinha de amendoa",
+      "sourceUrls": [
+        "https://www.tbca.net.br/",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-128",
+      "name": "Canela em Pó",
+      "family": "cinnamonPowder",
+      "kind": "food",
+      "recipe": "Banana assada com canela",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-129",
+      "name": "Cacau Alcalino",
+      "family": "cocoa",
+      "kind": "food",
+      "recipe": "Bebida quente com cacau alcalino",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-130",
+      "name": "Granulado em Flocos",
+      "family": "chocolate",
+      "kind": "food",
+      "recipe": "Copinho de banana com granulado em flocos",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-131",
+      "name": "Amendoim Confeitado",
+      "family": "nut",
+      "kind": "food",
+      "recipe": "Farofa com amendoim confeitado",
+      "sourceUrls": [
+        "https://www.tbca.net.br/",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-132",
+      "name": "Amendoim Crocante com Chocolate",
+      "family": "chocolate",
+      "kind": "food",
+      "recipe": "Copinho de banana com amendoim crocante com chocolate",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-133",
+      "name": "Amendoim Confeitado",
+      "family": "nut",
+      "kind": "food",
+      "recipe": "Farofa com amendoim confeitado",
+      "sourceUrls": [
+        "https://www.tbca.net.br/",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-134",
+      "name": "Gergelim Preto",
+      "family": "seed",
+      "kind": "food",
+      "recipe": "Molho com gergelim preto",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-135",
+      "name": "Gergelim c/ Casca",
+      "family": "seed",
+      "kind": "food",
+      "recipe": "Molho com gergelim c/ casca",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-136",
+      "name": "Gergelim s/ Casca",
+      "family": "seed",
+      "kind": "food",
+      "recipe": "Molho com gergelim s/ casca",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-137",
+      "name": "Farinha de Arroz integral",
+      "family": "specialFlour",
+      "kind": "food",
+      "recipe": "Panqueca de banana com farinha de arroz integral",
+      "sourceUrls": [
+        "https://www.tbca.net.br/",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-138",
+      "name": "Semolina de Trigo Fina",
+      "family": "semolina",
+      "kind": "food",
+      "recipe": "Mingau com semolina de trigo fina",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-139",
+      "name": "Pistache Cru Inteiro",
+      "family": "nut",
+      "kind": "food",
+      "recipe": "Farofa com pistache cru inteiro",
+      "sourceUrls": [
+        "https://www.tbca.net.br/",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-140",
+      "name": "Farinha de Arroz Branca",
+      "family": "specialFlour",
+      "kind": "food",
+      "recipe": "Panqueca de banana com farinha de arroz branca",
+      "sourceUrls": [
+        "https://www.tbca.net.br/",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-141",
+      "name": "Pistache Torrado e Salgado",
+      "family": "nut",
+      "kind": "food",
+      "recipe": "Farofa com pistache torrado e salgado",
+      "sourceUrls": [
+        "https://www.tbca.net.br/",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-142",
+      "name": "Choco Color",
+      "family": "chocolate",
+      "kind": "food",
+      "recipe": "Copinho de banana com choco color",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-143",
+      "name": "Deliket",
+      "family": "chocolate",
+      "kind": "food",
+      "recipe": "Copinho de banana com deliket",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-144",
+      "name": "Cranberry Desidratado",
+      "family": "driedFruit",
+      "kind": "food",
+      "recipe": "Tigela de iogurte com cranberry desidratado",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-145",
+      "name": "Mix de Frutas Vermelhas",
+      "family": "driedFruit",
+      "kind": "food",
+      "recipe": "Tigela de iogurte com mix de frutas vermelhas",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-146",
+      "name": "Blueberry",
+      "family": "driedFruit",
+      "kind": "food",
+      "recipe": "Tigela de iogurte com blueberry",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-147",
+      "name": "Bala de Coco",
+      "family": "sweet",
+      "kind": "food",
+      "recipe": "Copinho de banana com bala de coco",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-148",
+      "name": "Bala de Algas Marinhas",
+      "family": "sweet",
+      "kind": "food",
+      "recipe": "Copinho de banana com bala de algas marinhas",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-149",
+      "name": "Bala de Banana c/Açucar",
+      "family": "sweet",
+      "kind": "food",
+      "recipe": "Copinho de banana com bala de banana c/açucar",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-150",
+      "name": "Bala de Banana s/Açúcar",
+      "family": "sweet",
+      "kind": "food",
+      "recipe": "Copinho de banana com bala de banana s/açúcar",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-151",
+      "name": "Bala Fini Banana",
+      "family": "sweet",
+      "kind": "food",
+      "recipe": "Copinho de banana com bala fini banana",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-152",
+      "name": "Mistura CAPCAKE",
+      "family": "cakeMix",
+      "kind": "food",
+      "recipe": "Bolinhos individuais com frutas",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-153",
+      "name": "Hibisco Em Pó",
+      "family": "hibiscusPowder",
+      "kind": "food",
+      "recipe": "Iogurte colorido com hibisco",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022"
+      ]
+    },
+    {
+      "id": "prod-154",
+      "name": "Gengibre Cristalizado",
+      "family": "candiedGinger",
+      "kind": "food",
+      "recipe": "Copinho de banana com gengibre cristalizado",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-155",
+      "name": "Macadamia S/Sal",
+      "family": "nut",
+      "kind": "food",
+      "recipe": "Farofa com macadamia s/sal",
+      "sourceUrls": [
+        "https://www.tbca.net.br/",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-156",
+      "name": "Chocolate Cacau 50%",
+      "family": "cocoa",
+      "kind": "food",
+      "recipe": "Bebida quente com chocolate cacau 50%",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-157",
+      "name": "Farinha Especial sem Glúten",
+      "family": "specialFlour",
+      "kind": "food",
+      "recipe": "Panqueca de banana com farinha especial sem glúten",
+      "sourceUrls": [
+        "https://www.tbca.net.br/",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-158",
+      "name": "Dolomita",
+      "family": "external",
+      "kind": "external",
+      "recipe": null,
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/composicao/sectics/plantas-medicinais-e-fitoterapicos"
+      ]
+    },
+    {
+      "id": "prod-159",
+      "name": "Argila Branca",
+      "family": "external",
+      "kind": "external",
+      "recipe": null,
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/composicao/sectics/plantas-medicinais-e-fitoterapicos"
+      ]
+    },
+    {
+      "id": "prod-160",
+      "name": "Argila Verde",
+      "family": "external",
+      "kind": "external",
+      "recipe": null,
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/composicao/sectics/plantas-medicinais-e-fitoterapicos"
+      ]
+    },
+    {
+      "id": "prod-161",
+      "name": "Doce de Abóbora",
+      "family": "sweet",
+      "kind": "food",
+      "recipe": "Copinho de banana com doce de abóbora",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-162",
+      "name": "Agnus c/Creme de Avelã",
+      "family": "chocolate",
+      "kind": "food",
+      "recipe": "Copinho de banana com agnus c/creme de avelã",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-163",
+      "name": "Lentilha Vegetariana",
+      "family": "legume",
+      "kind": "food",
+      "recipe": "Salada com lentilha vegetariana",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-164",
+      "name": "Mix de Legumes Desitradato",
+      "family": "dryVegetables",
+      "kind": "food",
+      "recipe": "Sopa com legumes desidratados",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-165",
+      "name": "Mix de Pimentas",
+      "family": "spice",
+      "kind": "food",
+      "recipe": "Legumes assados com mix de pimentas",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-166",
+      "name": "Pimenta Calabresa Flocos",
+      "family": "spice",
+      "kind": "food",
+      "recipe": "Legumes assados com pimenta calabresa flocos",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-167",
+      "name": "Pimenta Preta em Grão",
+      "family": "spice",
+      "kind": "food",
+      "recipe": "Legumes assados com pimenta preta em grão moída na hora",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-168",
+      "name": "Pimenta Rosa",
+      "family": "spice",
+      "kind": "food",
+      "recipe": "Legumes assados com pimenta rosa moída na hora",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-169",
+      "name": "Pimenta Branca Moida",
+      "family": "spice",
+      "kind": "food",
+      "recipe": "Legumes assados com pimenta branca moida",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-170",
+      "name": "Fumaça em Pó",
+      "family": "spice",
+      "kind": "food",
+      "recipe": "Legumes assados com fumaça em pó",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-171",
+      "name": "Pimenta Jamaica - Siria",
+      "family": "spice",
+      "kind": "food",
+      "recipe": "Legumes assados com pimenta jamaica - siria moída na hora",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-172",
+      "name": "Pimenta Caiena",
+      "family": "spice",
+      "kind": "food",
+      "recipe": "Legumes assados com pimenta caiena",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-173",
+      "name": "Cebola em Flocos",
+      "family": "spice",
+      "kind": "food",
+      "recipe": "Legumes assados com cebola em flocos",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-174",
+      "name": "Cebola Desidratada",
+      "family": "spice",
+      "kind": "food",
+      "recipe": "Legumes assados com cebola desidratada",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-175",
+      "name": "Glutamina",
+      "family": "supplement",
+      "kind": "supplement",
+      "recipe": null,
+      "sourceUrls": [
+        "https://www.gov.br/anvisa/pt-br/assuntos/alimentos/suplementos-alimentares/perguntas-frequentes"
+      ]
+    },
+    {
+      "id": "prod-176",
+      "name": "Leite de Coco em Pó",
+      "family": "coconutMilk",
+      "kind": "food",
+      "recipe": "Creme de banana com leite de coco",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-177",
+      "name": "Chantinho Mix em Pó",
+      "family": "creamMix",
+      "kind": "food",
+      "recipe": "Copinhos de fruta com creme preparado",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-178",
+      "name": "Stevia em Pó",
+      "family": "sweetener",
+      "kind": "food",
+      "recipe": "Iogurte com fruta e stevia em pó",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-179",
+      "name": "Gelatina Pura",
+      "family": "gelatin",
+      "kind": "food",
+      "recipe": "Gelatina de suco de uva",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-180",
+      "name": "Açúcar de Coco",
+      "family": "sugar",
+      "kind": "food",
+      "recipe": "Maçã na frigideira com açúcar de coco",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-181",
+      "name": "Xylitol Adoçante Natural",
+      "family": "sweetener",
+      "kind": "food",
+      "recipe": "Iogurte com fruta e xylitol adoçante natural",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-182",
+      "name": "Fubá Mimoso",
+      "family": "cornmeal",
+      "kind": "food",
+      "recipe": "Mingau de fubá",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-183",
+      "name": "Farinha de Milho Amarela",
+      "family": "crumb",
+      "kind": "food",
+      "recipe": "Legumes de forno empanados com farinha de milho amarela",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-184",
+      "name": "Pega Marido",
+      "family": "spice",
+      "kind": "food",
+      "recipe": "Legumes assados com pega marido",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-185",
+      "name": "Zathar",
+      "family": "spice",
+      "kind": "food",
+      "recipe": "Legumes assados com zathar",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-186",
+      "name": "Edu Guedes",
+      "family": "spice",
+      "kind": "food",
+      "recipe": "Legumes assados com edu guedes",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-187",
+      "name": "Mix Aromas",
+      "family": "spice",
+      "kind": "food",
+      "recipe": "Legumes assados com mix aromas",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-188",
+      "name": "Cebola, Salsa Alho",
+      "family": "spice",
+      "kind": "food",
+      "recipe": "Legumes assados com cebola, salsa alho",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-189",
+      "name": "Ana Maria",
+      "family": "spice",
+      "kind": "food",
+      "recipe": "Legumes assados com ana maria",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-190",
+      "name": "Chimi Churri Tradicional",
+      "family": "spice",
+      "kind": "food",
+      "recipe": "Legumes assados com chimi churri tradicional",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-191",
+      "name": "Chimi Churri Defumado",
+      "family": "spice",
+      "kind": "food",
+      "recipe": "Legumes assados com chimi churri defumado",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-192",
+      "name": "Mineirinho",
+      "family": "spice",
+      "kind": "food",
+      "recipe": "Legumes assados com mineirinho",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-193",
+      "name": "Chimi Churri c/ Pimenta",
+      "family": "spice",
+      "kind": "food",
+      "recipe": "Legumes assados com chimi churri c/ pimenta",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-194",
+      "name": "Páprica Picante",
+      "family": "spice",
+      "kind": "food",
+      "recipe": "Legumes assados com páprica picante",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-195",
+      "name": "Lemon Pepper",
+      "family": "spice",
+      "kind": "food",
+      "recipe": "Legumes assados com lemon pepper",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-196",
+      "name": "Pápricaa Doce Defumada",
+      "family": "spice",
+      "kind": "food",
+      "recipe": "Legumes assados com pápricaa doce defumada",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-197",
+      "name": "Páprica Doce",
+      "family": "spice",
+      "kind": "food",
+      "recipe": "Legumes assados com páprica doce",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-198",
+      "name": "Bahiano sem Pimenta",
+      "family": "spice",
+      "kind": "food",
+      "recipe": "Legumes assados com bahiano sem pimenta",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-199",
+      "name": "Bahiano Fino",
+      "family": "spice",
+      "kind": "food",
+      "recipe": "Legumes assados com bahiano fino",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-200",
+      "name": "Açafrão - Cúrcumã",
+      "family": "spice",
+      "kind": "food",
+      "recipe": "Legumes assados com açafrão - cúrcumã",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-201",
+      "name": "Açafrão Puro",
+      "family": "spice",
+      "kind": "food",
+      "recipe": "Legumes assados com açafrão puro",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-202",
+      "name": "Alho Granulado",
+      "family": "spice",
+      "kind": "food",
+      "recipe": "Legumes assados com alho granulado",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-203",
+      "name": "Alho Frito",
+      "family": "spice",
+      "kind": "food",
+      "recipe": "Legumes assados com alho frito",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-204",
+      "name": "Alho em Pó",
+      "family": "spice",
+      "kind": "food",
+      "recipe": "Legumes assados com alho em pó",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-205",
+      "name": "Creme de Cebola",
+      "family": "spice",
+      "kind": "food",
+      "recipe": "Legumes assados com creme de cebola",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-206",
+      "name": "Café de Milho",
+      "family": "cornCoffee",
+      "kind": "food",
+      "recipe": "Bebida de milho com canela",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-207",
+      "name": "Tomilho",
+      "family": "spice",
+      "kind": "food",
+      "recipe": "Legumes assados com tomilho",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-208",
+      "name": "Cravo da India em Grão",
+      "family": "spice",
+      "kind": "food",
+      "recipe": "Compota rápida de pera com cravo",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-209",
+      "name": "Maca Peruana Pura",
+      "family": "maca",
+      "kind": "food",
+      "recipe": "Panqueca de banana com maca peruana pura",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.gov.br/anvisa/pt-br/assuntos/alimentos/suplementos-alimentares/perguntas-frequentes"
+      ]
+    },
+    {
+      "id": "prod-210",
+      "name": "Canela em Pau",
+      "family": "cinnamonStick",
+      "kind": "food",
+      "recipe": "Maçã cozida com canela em pau",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-211",
+      "name": "Limão Desidratado",
+      "family": "spice",
+      "kind": "food",
+      "recipe": "Legumes assados com limão desidratado",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-212",
+      "name": "Fibra de Maçã",
+      "family": "appleFiber",
+      "kind": "food",
+      "recipe": "Panqueca de banana com fibra de maçã",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-213",
+      "name": "Feno Grego",
+      "family": "fenugreek",
+      "kind": "food",
+      "recipe": "Legumes assados com feno-grego moído",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022"
+      ]
+    },
+    {
+      "id": "prod-214",
+      "name": "Catuaba em Pó",
+      "family": "herbal",
+      "kind": "herbal",
+      "recipe": null,
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/composicao/sectics/plantas-medicinais-e-fitoterapicos",
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022"
+      ]
+    },
+    {
+      "id": "prod-215",
+      "name": "Marapuama em Pó",
+      "family": "herbal",
+      "kind": "herbal",
+      "recipe": null,
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/composicao/sectics/plantas-medicinais-e-fitoterapicos",
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022"
+      ]
+    },
+    {
+      "id": "prod-216",
+      "name": "Alho Poró",
+      "family": "spice",
+      "kind": "food",
+      "recipe": "Legumes assados com alho poró",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-217",
+      "name": "Cevada",
+      "family": "grain",
+      "kind": "food",
+      "recipe": "Salada com cevada",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-218",
+      "name": "Berinjela em Pó",
+      "family": "specialFlour",
+      "kind": "food",
+      "recipe": "Panqueca de banana com berinjela em pó",
+      "sourceUrls": [
+        "https://www.tbca.net.br/",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-219",
+      "name": "Raiz de Curcúmã",
+      "family": "spice",
+      "kind": "food",
+      "recipe": "Legumes assados com raiz de curcúmã",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-220",
+      "name": "Alecrim",
+      "family": "spice",
+      "kind": "food",
+      "recipe": "Legumes assados com alecrim",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-221",
+      "name": "Manjericão Desidratado",
+      "family": "spice",
+      "kind": "food",
+      "recipe": "Legumes assados com manjericão desidratado",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-222",
+      "name": "Ervas Finas",
+      "family": "spice",
+      "kind": "food",
+      "recipe": "Legumes assados com ervas finas",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-223",
+      "name": "Vinagrate Desitratado",
+      "family": "spice",
+      "kind": "food",
+      "recipe": "Legumes assados com vinagrate desitratado",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-224",
+      "name": "Salsa Desitradado",
+      "family": "spice",
+      "kind": "food",
+      "recipe": "Legumes assados com salsa desitradado",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-225",
+      "name": "Cominho Moido",
+      "family": "spice",
+      "kind": "food",
+      "recipe": "Legumes assados com cominho moido",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-226",
+      "name": "Caldo de Carne",
+      "family": "spice",
+      "kind": "food",
+      "recipe": "Legumes assados com caldo de carne",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-227",
+      "name": "Caldo de Galinha",
+      "family": "spice",
+      "kind": "food",
+      "recipe": "Legumes assados com caldo de galinha",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-228",
+      "name": "Colorau Paraiba Extra",
+      "family": "spice",
+      "kind": "food",
+      "recipe": "Legumes assados com colorau paraiba extra",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-229",
+      "name": "Coentro em Flocos",
+      "family": "spice",
+      "kind": "food",
+      "recipe": "Legumes assados com coentro em flocos",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-230",
+      "name": "Limão e Ervas Finas",
+      "family": "spice",
+      "kind": "food",
+      "recipe": "Legumes assados com limão e ervas finas",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-231",
+      "name": "Extrato de Soja Natural",
+      "family": "soyPowder",
+      "kind": "food",
+      "recipe": "Vitamina de banana com bebida de soja",
+      "sourceUrls": [
+        "https://www.embrapa.br/busca-de-publicacoes/-/publicacao/457079/receitas-praticas-com-soja",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-232",
+      "name": "Coentro em Pó",
+      "family": "spice",
+      "kind": "food",
+      "recipe": "Legumes assados com coentro em pó",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-233",
+      "name": "Mostarda em Pó",
+      "family": "spice",
+      "kind": "food",
+      "recipe": "Legumes assados com mostarda em pó",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-234",
+      "name": "Curry",
+      "family": "spice",
+      "kind": "food",
+      "recipe": "Legumes assados com curry",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-235",
+      "name": "Caldo de Bacon",
+      "family": "spice",
+      "kind": "food",
+      "recipe": "Legumes assados com caldo de bacon",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-236",
+      "name": "Farinha de Banana Verde",
+      "family": "specialFlour",
+      "kind": "food",
+      "recipe": "Panqueca de banana com farinha de banana verde",
+      "sourceUrls": [
+        "https://www.infoteca.cnptia.embrapa.br/infoteca/handle/doc/1069029",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-237",
+      "name": "Germe de Trigo Tostado",
+      "family": "grain",
+      "kind": "food",
+      "recipe": "Salada com germe de trigo tostado",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-238",
+      "name": "Noz Moscada Moida",
+      "family": "spice",
+      "kind": "food",
+      "recipe": "Legumes assados com noz moscada moida",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-239",
+      "name": "Flor de Sal",
+      "family": "spice",
+      "kind": "food",
+      "recipe": "Legumes assados com flor de sal",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-240",
+      "name": "Levedo de Cerveja em Pó",
+      "family": "yeast",
+      "kind": "food",
+      "recipe": "Legumes assados com levedo de cerveja em pó",
+      "sourceUrls": [
+        "https://www.gov.br/anvisa/pt-br/assuntos/alimentos/suplementos-alimentares/perguntas-frequentes",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-241",
+      "name": "Ajinomoto Glutamato",
+      "family": "msg",
+      "kind": "food",
+      "recipe": "Legumes assados com ajinomoto glutamato",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-242",
+      "name": "Coco Chips Branco",
+      "family": "coconut",
+      "kind": "food",
+      "recipe": "Tigela de iogurte com coco chips branco",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-243",
+      "name": "Semente de Girasol s/ Casca",
+      "family": "seed",
+      "kind": "food",
+      "recipe": "Molho com semente de girasol s/ casca",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-244",
+      "name": "Tâmara C/ Caroço",
+      "family": "driedFruit",
+      "kind": "food",
+      "recipe": "Tigela de iogurte com tâmara c/ caroço",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-245",
+      "name": "Tâmara S/ Caroço",
+      "family": "driedFruit",
+      "kind": "food",
+      "recipe": "Tigela de iogurte com tâmara s/ caroço",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-246",
+      "name": "Sal do Himalaia Fino",
+      "family": "spice",
+      "kind": "food",
+      "recipe": "Legumes assados com sal do himalaia fino",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-247",
+      "name": "Açúcar Demerara",
+      "family": "sugar",
+      "kind": "food",
+      "recipe": "Maçã na frigideira com açúcar demerara",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-248",
+      "name": "Açúcar Mascavo",
+      "family": "sugar",
+      "kind": "food",
+      "recipe": "Maçã na frigideira com açúcar mascavo",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-249",
+      "name": "Sal Marinho",
+      "family": "spice",
+      "kind": "food",
+      "recipe": "Legumes assados com sal marinho",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-250",
+      "name": "Coco Ralado em Flocos",
+      "family": "coconut",
+      "kind": "food",
+      "recipe": "Tigela de iogurte com coco ralado em flocos",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-251",
+      "name": "Coco Ralado Fino",
+      "family": "coconut",
+      "kind": "food",
+      "recipe": "Tigela de iogurte com coco ralado fino",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-252",
+      "name": "Amendoim Salsa e Cebola",
+      "family": "nut",
+      "kind": "food",
+      "recipe": "Farofa com amendoim salsa e cebola",
+      "sourceUrls": [
+        "https://www.tbca.net.br/",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-253",
+      "name": "Amendoim Natural",
+      "family": "nut",
+      "kind": "food",
+      "recipe": "Farofa com amendoim natural",
+      "sourceUrls": [
+        "https://www.tbca.net.br/",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-254",
+      "name": "Castanha de Caju S/Sal",
+      "family": "nut",
+      "kind": "food",
+      "recipe": "Farofa com castanha de caju s/sal",
+      "sourceUrls": [
+        "https://www.tbca.net.br/",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-255",
+      "name": "Amendoim Picante",
+      "family": "nut",
+      "kind": "food",
+      "recipe": "Farofa com amendoim picante",
+      "sourceUrls": [
+        "https://www.tbca.net.br/",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-256",
+      "name": "Castanha de Caju C/ Sal",
+      "family": "nut",
+      "kind": "food",
+      "recipe": "Farofa com castanha de caju c/ sal",
+      "sourceUrls": [
+        "https://www.tbca.net.br/",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-257",
+      "name": "Amendoim Mendorato",
+      "family": "nut",
+      "kind": "food",
+      "recipe": "Farofa com amendoim mendorato",
+      "sourceUrls": [
+        "https://www.tbca.net.br/",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-258",
+      "name": "Castanha do Pará Quebrada",
+      "family": "nut",
+      "kind": "food",
+      "recipe": "Farofa com castanha do pará quebrada",
+      "sourceUrls": [
+        "https://www.infoteca.cnptia.embrapa.br/infoteca/bitstream/doc/504925/1/alimentoscastanhabrasil.pdf",
+        "https://www.tbca.net.br/",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-259",
+      "name": "Amendoim Ovinho",
+      "family": "nut",
+      "kind": "food",
+      "recipe": "Farofa com amendoim ovinho",
+      "sourceUrls": [
+        "https://www.tbca.net.br/",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-260",
+      "name": "Amendoim Doce Vermelho",
+      "family": "nut",
+      "kind": "food",
+      "recipe": "Copinho de banana com amendoim doce vermelho",
+      "sourceUrls": [
+        "https://www.tbca.net.br/",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-261",
+      "name": "Amendoim Sem Pele e Sem sal",
+      "family": "nut",
+      "kind": "food",
+      "recipe": "Farofa com amendoim sem pele e sem sal",
+      "sourceUrls": [
+        "https://www.tbca.net.br/",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-262",
+      "name": "Amendoim Sem Pele com Sal",
+      "family": "nut",
+      "kind": "food",
+      "recipe": "Farofa com amendoim sem pele com sal",
+      "sourceUrls": [
+        "https://www.tbca.net.br/",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-263",
+      "name": "Amendoim s/ Pele c/ Alho",
+      "family": "nut",
+      "kind": "food",
+      "recipe": "Farofa com amendoim s/ pele c/ alho",
+      "sourceUrls": [
+        "https://www.tbca.net.br/",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-264",
+      "name": "Amendoim Hanner Frito",
+      "family": "nut",
+      "kind": "food",
+      "recipe": "Farofa com amendoim hanner frito",
+      "sourceUrls": [
+        "https://www.tbca.net.br/",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-265",
+      "name": "Macarrão Tricolor",
+      "family": "pasta",
+      "kind": "food",
+      "recipe": "Salada de macarrão tricolor",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-266",
+      "name": "Nozes Mariposa",
+      "family": "nut",
+      "kind": "food",
+      "recipe": "Farofa de nozes com maçã",
+      "sourceUrls": [
+        "https://www.tbca.net.br/",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-267",
+      "name": "Castanha de Caju c/ Leite condensado",
+      "family": "chocolate",
+      "kind": "food",
+      "recipe": "Copinho de banana com castanha de caju c/ leite condensado",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-268",
+      "name": "MarshMallow Torcido",
+      "family": "sweet",
+      "kind": "food",
+      "recipe": "Copinho de banana com marshmallow torcido",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-269",
+      "name": "Fini Amoras",
+      "family": "sweet",
+      "kind": "food",
+      "recipe": "Copinho de banana com fini amoras",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-270",
+      "name": "Castanha de Caju Crua",
+      "family": "nut",
+      "kind": "food",
+      "recipe": "Creme de castanha de caju",
+      "sourceUrls": [
+        "https://www.tbca.net.br/",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-271",
+      "name": "Cookies de Amendoim",
+      "family": "biscuit",
+      "kind": "food",
+      "recipe": "Copinho de banana com cookies de amendoim",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-272",
+      "name": "Gomets",
+      "family": "sweet",
+      "kind": "food",
+      "recipe": "Copinho de banana com gomets",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-273",
+      "name": "Gengibre em Pó",
+      "family": "gingerPowder",
+      "kind": "food",
+      "recipe": "Panqueca de banana com gengibre",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-274",
+      "name": "Guaraná em Pó",
+      "family": "guarana",
+      "kind": "supplement",
+      "recipe": null,
+      "sourceUrls": [
+        "https://www.gov.br/anvisa/pt-br/assuntos/alimentos/suplementos-alimentares/perguntas-frequentes"
+      ]
+    },
+    {
+      "id": "prod-275",
+      "name": "Farinha de Uva",
+      "family": "specialFlour",
+      "kind": "food",
+      "recipe": "Panqueca de banana com farinha de uva",
+      "sourceUrls": [
+        "https://www.tbca.net.br/",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-276",
+      "name": "Farinha de Beterraba",
+      "family": "specialFlour",
+      "kind": "food",
+      "recipe": "Panqueca de banana com farinha de beterraba",
+      "sourceUrls": [
+        "https://www.tbca.net.br/",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-277",
+      "name": "Mix de Castanhas Nobres",
+      "family": "nut",
+      "kind": "food",
+      "recipe": "Farofa com mix de castanhas nobres",
+      "sourceUrls": [
+        "https://www.tbca.net.br/",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-278",
+      "name": "Frutas Cristalizadas",
+      "family": "driedFruit",
+      "kind": "food",
+      "recipe": "Tigela de iogurte com frutas cristalizadas",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-279",
+      "name": "Uva Passa Branca",
+      "family": "driedFruit",
+      "kind": "food",
+      "recipe": "Tigela de iogurte com uva passa branca",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-280",
+      "name": "Ameixa s/ Caroço",
+      "family": "driedFruit",
+      "kind": "food",
+      "recipe": "Tigela de iogurte com ameixa s/ caroço",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-281",
+      "name": "Uva Passa Preta",
+      "family": "driedFruit",
+      "kind": "food",
+      "recipe": "Tigela de iogurte com uva passa preta",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-282",
+      "name": "Milho Mostarde e Mel",
+      "family": "snack",
+      "kind": "food",
+      "recipe": "Salada crocante com milho mostarde e mel",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-283",
+      "name": "Amendoim Vermelho Cru",
+      "family": "nut",
+      "kind": "food",
+      "recipe": "Farofa com amendoim vermelho cru",
+      "sourceUrls": [
+        "https://www.tbca.net.br/",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-284",
+      "name": "Xerém de Amendoim",
+      "family": "nut",
+      "kind": "food",
+      "recipe": "Farofa com xerém de amendoim",
+      "sourceUrls": [
+        "https://www.tbca.net.br/",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-285",
+      "name": "Farinha de Amendoim",
+      "family": "nutFlour",
+      "kind": "food",
+      "recipe": "Panqueca de banana com farinha de amendoim",
+      "sourceUrls": [
+        "https://www.tbca.net.br/",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-286",
+      "name": "Xerém de Castanha de Caju",
+      "family": "nut",
+      "kind": "food",
+      "recipe": "Farofa com xerém de castanha de caju",
+      "sourceUrls": [
+        "https://www.tbca.net.br/",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-287",
+      "name": "Amendoa Torrada s/ Sal",
+      "family": "nut",
+      "kind": "food",
+      "recipe": "Farofa com amendoa torrada s/ sal",
+      "sourceUrls": [
+        "https://www.tbca.net.br/",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-288",
+      "name": "Amendoa Defumada",
+      "family": "nut",
+      "kind": "food",
+      "recipe": "Farofa com amendoa defumada",
+      "sourceUrls": [
+        "https://www.tbca.net.br/",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-289",
+      "name": "Proteina de Soja Miuda",
+      "family": "soyProtein",
+      "kind": "food",
+      "recipe": "Molho de tomate com proteína de soja",
+      "sourceUrls": [
+        "https://www.embrapa.br/busca-de-publicacoes/-/publicacao/457079/receitas-praticas-com-soja"
+      ]
+    },
+    {
+      "id": "prod-290",
+      "name": "Amendoa Laminada",
+      "family": "nut",
+      "kind": "food",
+      "recipe": "Farofa com amendoa laminada",
+      "sourceUrls": [
+        "https://www.tbca.net.br/",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-291",
+      "name": "Suspiro Novais",
+      "family": "sweet",
+      "kind": "food",
+      "recipe": "Copinho de banana com suspiro novais",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-292",
+      "name": "Proteina de Soja Miuda",
+      "family": "soyProtein",
+      "kind": "food",
+      "recipe": "Molho de tomate com proteína de soja",
+      "sourceUrls": [
+        "https://www.embrapa.br/busca-de-publicacoes/-/publicacao/457079/receitas-praticas-com-soja"
+      ]
+    },
+    {
+      "id": "prod-293",
+      "name": "Arroz Preto",
+      "family": "grain",
+      "kind": "food",
+      "recipe": "Salada com arroz preto",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-294",
+      "name": "Arroz Cateto",
+      "family": "grain",
+      "kind": "food",
+      "recipe": "Salada com arroz cateto",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-295",
+      "name": "Arroz Vermelho Integral",
+      "family": "grain",
+      "kind": "food",
+      "recipe": "Salada com arroz vermelho integral",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-296",
+      "name": "Arroz Agulha Integral",
+      "family": "grain",
+      "kind": "food",
+      "recipe": "Salada com arroz agulha integral",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-297",
+      "name": "Arroz 7 Grãos",
+      "family": "grain",
+      "kind": "food",
+      "recipe": "Salada com arroz 7 grãos",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-298",
+      "name": "Trigo em Grão",
+      "family": "grain",
+      "kind": "food",
+      "recipe": "Salada com trigo em grão",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-299",
+      "name": "Arroz á Grega",
+      "family": "grain",
+      "kind": "food",
+      "recipe": "Salada com arroz á grega",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-300",
+      "name": "Mix de Frutas Completas",
+      "family": "driedFruit",
+      "kind": "food",
+      "recipe": "Tigela de iogurte com mix de frutas completas",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-301",
+      "name": "Amêndoa Crua",
+      "family": "nut",
+      "kind": "food",
+      "recipe": "Farofa com amêndoa crua",
+      "sourceUrls": [
+        "https://www.tbca.net.br/",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-302",
+      "name": "Banana Chips Salgada",
+      "family": "snack",
+      "kind": "food",
+      "recipe": "Salada crocante com banana chips salgada",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-303",
+      "name": "Banana Chips Canela",
+      "family": "snack",
+      "kind": "food",
+      "recipe": "Copinho de banana com banana chips canela",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-304",
+      "name": "Aros Cebola",
+      "family": "snack",
+      "kind": "food",
+      "recipe": "Salada crocante com aros cebola",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-305",
+      "name": "Floco de Arroz Crocante",
+      "family": "snack",
+      "kind": "food",
+      "recipe": "Salada crocante com floco de arroz crocante",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-306",
+      "name": "Biscoito de Linhaça c/ Azeite",
+      "family": "biscuit",
+      "kind": "food",
+      "recipe": "Copinho de banana com biscoito de linhaça c/ azeite",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-307",
+      "name": "Tapioca Granulada Fina",
+      "family": "granulatedTapioca",
+      "kind": "food",
+      "recipe": "Tapioca granulada cremosa",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-308",
+      "name": "Flocão de Milho",
+      "family": "cornFlakeCooking",
+      "kind": "food",
+      "recipe": "Cuscuz de milho simples",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-309",
+      "name": "Biscoito de Arroz com Barbecure",
+      "family": "snack",
+      "kind": "food",
+      "recipe": "Salada crocante com biscoito de arroz com barbecure",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-310",
+      "name": "Farinha de Madioca Grosso",
+      "family": "crumb",
+      "kind": "food",
+      "recipe": "Legumes de forno empanados com farinha de madioca grosso",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-311",
+      "name": "Biscoito de Polvilho c/ Chia",
+      "family": "snack",
+      "kind": "food",
+      "recipe": "Salada crocante com biscoito de polvilho c/ chia",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-312",
+      "name": "Farinha Panko",
+      "family": "crumb",
+      "kind": "food",
+      "recipe": "Legumes de forno empanados com farinha panko",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-313",
+      "name": "Farinha de Mandioca Fina",
+      "family": "crumb",
+      "kind": "food",
+      "recipe": "Legumes de forno empanados com farinha de mandioca fina",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-314",
+      "name": "Trigo P/ Kibe",
+      "family": "bulgur",
+      "kind": "food",
+      "recipe": "Tabule com trigo para quibe",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-315",
+      "name": "Farinha de Rosca",
+      "family": "crumb",
+      "kind": "food",
+      "recipe": "Legumes de forno empanados com farinha de rosca",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-316",
+      "name": "Macarrão de Arroz Penne",
+      "family": "pasta",
+      "kind": "food",
+      "recipe": "Salada de macarrão de arroz penne",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-317",
+      "name": "Macarrão integral Parafuso",
+      "family": "pasta",
+      "kind": "food",
+      "recipe": "Salada de macarrão integral parafuso",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-318",
+      "name": "Macarrão de Arroz Parafuso",
+      "family": "pasta",
+      "kind": "food",
+      "recipe": "Salada de macarrão de arroz parafuso",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-319",
+      "name": "Macarrão Integral Penne",
+      "family": "pasta",
+      "kind": "food",
+      "recipe": "Salada de macarrão integral penne",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-320",
+      "name": "Milho para Pipoca",
+      "family": "popcorn",
+      "kind": "food",
+      "recipe": "Pipoca com ervas",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-321",
+      "name": "Canjica Branca",
+      "family": "hominy",
+      "kind": "food",
+      "recipe": "Caldo salgado com canjica branca",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-322",
+      "name": "Quirela de Milho",
+      "family": "hominy",
+      "kind": "food",
+      "recipe": "Caldo salgado com quirela de milho",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-323",
+      "name": "Canjica Amarela",
+      "family": "hominy",
+      "kind": "food",
+      "recipe": "Caldo salgado com canjica amarela",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-324",
+      "name": "Sembei ao Leite",
+      "family": "snack",
+      "kind": "food",
+      "recipe": "Copinho de banana com sembei ao leite",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-325",
+      "name": "Sembei Amendoim",
+      "family": "snack",
+      "kind": "food",
+      "recipe": "Copinho de banana com sembei amendoim",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-326",
+      "name": "Feijão Roxão",
+      "family": "legume",
+      "kind": "food",
+      "recipe": "Salada com feijão roxão",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-327",
+      "name": "Feijão Preto",
+      "family": "legume",
+      "kind": "food",
+      "recipe": "Salada com feijão preto",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-328",
+      "name": "Fava Branca Grauda",
+      "family": "legume",
+      "kind": "food",
+      "recipe": "Salada com fava branca grauda",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-329",
+      "name": "Biscoito Beijo de Moça",
+      "family": "biscuit",
+      "kind": "food",
+      "recipe": "Copinho de banana com biscoito beijo de moça",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-330",
+      "name": "Purê de Batata em Flocos",
+      "family": "potatoFlakes",
+      "kind": "food",
+      "recipe": "Purê com ervas",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-331",
+      "name": "Ervilha Partida",
+      "family": "legume",
+      "kind": "food",
+      "recipe": "Salada com ervilha partida",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-332",
+      "name": "Biscoito Rosquinha Salgada",
+      "family": "biscuit",
+      "kind": "food",
+      "recipe": "Copinho de banana com biscoito rosquinha salgada",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-333",
+      "name": "Roscas de Milho e Erva Doce",
+      "family": "biscuit",
+      "kind": "food",
+      "recipe": "Copinho de banana com roscas de milho e erva doce",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-334",
+      "name": "Cookies de Café",
+      "family": "biscuit",
+      "kind": "food",
+      "recipe": "Copinho de banana com cookies de café",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-335",
+      "name": "Ebicen",
+      "family": "snack",
+      "kind": "food",
+      "recipe": "Salada crocante com ebicen",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-336",
+      "name": "Batata Mexicana c/ Cebola",
+      "family": "snack",
+      "kind": "food",
+      "recipe": "Salada crocante com batata mexicana c/ cebola",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-337",
+      "name": "Cookies de Amendoas",
+      "family": "biscuit",
+      "kind": "food",
+      "recipe": "Copinho de banana com cookies de amendoas",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-338",
+      "name": "Batata Mexicana Tradicional",
+      "family": "snack",
+      "kind": "food",
+      "recipe": "Salada crocante com batata mexicana tradicional",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-339",
+      "name": "Mandioquinha Chips",
+      "family": "snack",
+      "kind": "food",
+      "recipe": "Salada crocante com mandioquinha chips",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-340",
+      "name": "Cookies de Baunilha",
+      "family": "biscuit",
+      "kind": "food",
+      "recipe": "Copinho de banana com cookies de baunilha",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-341",
+      "name": "Biscoito Torradinha",
+      "family": "snack",
+      "kind": "food",
+      "recipe": "Salada crocante com biscoito torradinha",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-342",
+      "name": "Mix de Vegetais Chips",
+      "family": "snack",
+      "kind": "food",
+      "recipe": "Salada crocante com mix de vegetais chips",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-343",
+      "name": "Torrada Tradicional",
+      "family": "snack",
+      "kind": "food",
+      "recipe": "Salada crocante com torrada tradicional",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-344",
+      "name": "Grão de Bico 12MM",
+      "family": "legume",
+      "kind": "food",
+      "recipe": "Salada com grão de bico 12mm",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-345",
+      "name": "Biscoito de Polvilho Parmesão",
+      "family": "snack",
+      "kind": "food",
+      "recipe": "Salada crocante com biscoito de polvilho parmesão",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-346",
+      "name": "Lentilha Vermelha",
+      "family": "legume",
+      "kind": "food",
+      "recipe": "Salada com lentilha vermelha",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-347",
+      "name": "Lentilha Canadense",
+      "family": "legume",
+      "kind": "food",
+      "recipe": "Salada com lentilha canadense",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-348",
+      "name": "Feijão Branco",
+      "family": "legume",
+      "kind": "food",
+      "recipe": "Salada com feijão branco",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-349",
+      "name": "Feijão de Corda",
+      "family": "legume",
+      "kind": "food",
+      "recipe": "Salada com feijão de corda",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-350",
+      "name": "Granola Completa",
+      "family": "cereal",
+      "kind": "food",
+      "recipe": "Tigela de iogurte com granola completa",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-351",
+      "name": "Granola Tradicional",
+      "family": "cereal",
+      "kind": "food",
+      "recipe": "Tigela de iogurte com granola tradicional",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-352",
+      "name": "Granola sem Açúcar",
+      "family": "cereal",
+      "kind": "food",
+      "recipe": "Tigela de iogurte com granola sem açúcar",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-353",
+      "name": "Goma do Norte",
+      "family": "tapiocaGum",
+      "kind": "food",
+      "recipe": "Tapioca de banana com goma hidratada",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-354",
+      "name": "Polvilho Azedo",
+      "family": "starch",
+      "kind": "food",
+      "recipe": "Biscoitinhos de frigideira com polvilho azedo",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-355",
+      "name": "Damasco Turco Premium",
+      "family": "driedFruit",
+      "kind": "food",
+      "recipe": "Tigela de iogurte com damasco turco premium",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-356",
+      "name": "Polvilho Doce",
+      "family": "starch",
+      "kind": "food",
+      "recipe": "Biscoitinhos de frigideira com polvilho doce",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-357",
+      "name": "Fécula de Batata",
+      "family": "starch",
+      "kind": "food",
+      "recipe": "Creme de legumes com fécula de batata",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-358",
+      "name": "Aveia Flocos Graudos",
+      "family": "oatWheat",
+      "kind": "food",
+      "recipe": "Mingau com aveia flocos graudos",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-359",
+      "name": "Aveia Flocos Finos",
+      "family": "oatWheat",
+      "kind": "food",
+      "recipe": "Mingau com aveia flocos finos",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-360",
+      "name": "Farelo de Aveia",
+      "family": "oatWheat",
+      "kind": "food",
+      "recipe": "Mingau com farelo de aveia",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-361",
+      "name": "Farinha de Aveia",
+      "family": "oatWheat",
+      "kind": "food",
+      "recipe": "Mingau com farinha de aveia",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-362",
+      "name": "Semente de Chia",
+      "family": "seed",
+      "kind": "food",
+      "recipe": "Pudim de chia com banana",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-363",
+      "name": "Farinha de Trigo Integral",
+      "family": "oatWheat",
+      "kind": "food",
+      "recipe": "Panqueca de banana com farinha de trigo integral",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-364",
+      "name": "Bicarbonato de Sódio",
+      "family": "bakingSoda",
+      "kind": "food",
+      "recipe": "Panquecas com iogurte e bicarbonato",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-365",
+      "name": "Corn Sugar",
+      "family": "cereal",
+      "kind": "food",
+      "recipe": "Tigela de iogurte com corn sugar",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://alcafoods.com/corn-sugar-flocos-de-milho-com-acucar"
+      ]
+    },
+    {
+      "id": "prod-366",
+      "name": "Corn Sugar Mascavo",
+      "family": "cereal",
+      "kind": "food",
+      "recipe": "Tigela de iogurte com corn sugar mascavo",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://vidaemgraos.com.br/www/wp-content/uploads/Corn-Flakes-Acucar-Mascavo-Alcafoods.pdf"
+      ]
+    },
+    {
+      "id": "prod-367",
+      "name": "Corn Flakes Natural",
+      "family": "cereal",
+      "kind": "food",
+      "recipe": "Tigela de iogurte com corn flakes natural",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-368",
+      "name": "Chocoboll",
+      "family": "cereal",
+      "kind": "food",
+      "recipe": "Tigela de iogurte com chocoboll",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-369",
+      "name": "Fruit Rings",
+      "family": "cereal",
+      "kind": "food",
+      "recipe": "Tigela de iogurte com fruit rings",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-370",
+      "name": "Oliveira",
+      "family": "herbal",
+      "kind": "herbal",
+      "recipe": null,
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/composicao/sectics/plantas-medicinais-e-fitoterapicos",
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022"
+      ]
+    },
+    {
+      "id": "prod-371",
+      "name": "Chá Verde Nacional",
+      "family": "tea",
+      "kind": "food",
+      "recipe": "Bebida com chá verde nacional",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022",
+        "https://www.gov.br/saude/pt-br/composicao/sectics/plantas-medicinais-e-fitoterapicos"
+      ]
+    },
+    {
+      "id": "prod-372",
+      "name": "Orégano",
+      "family": "spice",
+      "kind": "food",
+      "recipe": "Legumes assados com orégano",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-373",
+      "name": "Espinheira Santa",
+      "family": "herbal",
+      "kind": "herbal",
+      "recipe": null,
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/composicao/sectics/plantas-medicinais-e-fitoterapicos",
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022"
+      ]
+    },
+    {
+      "id": "prod-374",
+      "name": "Louro Folhas",
+      "family": "spice",
+      "kind": "food",
+      "recipe": "Feijão aromatizado com louro",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-375",
+      "name": "Mulungu Flocos",
+      "family": "herbal",
+      "kind": "herbal",
+      "recipe": null,
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/composicao/sectics/plantas-medicinais-e-fitoterapicos",
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022"
+      ]
+    },
+    {
+      "id": "prod-376",
+      "name": "Camomila",
+      "family": "tea",
+      "kind": "food",
+      "recipe": "Bebida com camomila",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022",
+        "https://www.gov.br/saude/pt-br/composicao/sectics/plantas-medicinais-e-fitoterapicos"
+      ]
+    },
+    {
+      "id": "prod-377",
+      "name": "Capim Cidreira",
+      "family": "tea",
+      "kind": "food",
+      "recipe": "Bebida com capim cidreira",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022",
+        "https://www.gov.br/saude/pt-br/composicao/sectics/plantas-medicinais-e-fitoterapicos"
+      ]
+    },
+    {
+      "id": "prod-378",
+      "name": "Hibuscus",
+      "family": "tea",
+      "kind": "food",
+      "recipe": "Bebida com hibuscus",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022",
+        "https://www.gov.br/saude/pt-br/composicao/sectics/plantas-medicinais-e-fitoterapicos"
+      ]
+    },
+    {
+      "id": "prod-379",
+      "name": "Cavalinha",
+      "family": "herbal",
+      "kind": "herbal",
+      "recipe": null,
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/composicao/sectics/plantas-medicinais-e-fitoterapicos",
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022"
+      ]
+    },
+    {
+      "id": "prod-380",
+      "name": "Aroeira em Casca",
+      "family": "herbal",
+      "kind": "herbal",
+      "recipe": null,
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/composicao/sectics/plantas-medicinais-e-fitoterapicos",
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022"
+      ]
+    },
+    {
+      "id": "prod-381",
+      "name": "Sene",
+      "family": "herbal",
+      "kind": "herbal",
+      "recipe": null,
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/composicao/sectics/plantas-medicinais-e-fitoterapicos",
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022"
+      ]
+    },
+    {
+      "id": "prod-382",
+      "name": "Boldo do Chile",
+      "family": "herbal",
+      "kind": "herbal",
+      "recipe": null,
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/composicao/sectics/plantas-medicinais-e-fitoterapicos",
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022"
+      ]
+    },
+    {
+      "id": "prod-383",
+      "name": "Tanchagem",
+      "family": "herbal",
+      "kind": "herbal",
+      "recipe": null,
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/composicao/sectics/plantas-medicinais-e-fitoterapicos",
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022"
+      ]
+    },
+    {
+      "id": "prod-384",
+      "name": "Hortelã",
+      "family": "tea",
+      "kind": "food",
+      "recipe": "Bebida com hortelã",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022",
+        "https://www.gov.br/saude/pt-br/composicao/sectics/plantas-medicinais-e-fitoterapicos"
+      ]
+    },
+    {
+      "id": "prod-385",
+      "name": "Maçã p/ Chá",
+      "family": "driedFruit",
+      "kind": "food",
+      "recipe": "Tigela de iogurte com maçã p/ chá",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-386",
+      "name": "Anis Estrelado",
+      "family": "tea",
+      "kind": "food",
+      "recipe": "Bebida com anis estrelado",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022",
+        "https://www.gov.br/saude/pt-br/composicao/sectics/plantas-medicinais-e-fitoterapicos"
+      ]
+    },
+    {
+      "id": "prod-387",
+      "name": "Emburana",
+      "family": "herbal",
+      "kind": "herbal",
+      "recipe": null,
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/composicao/sectics/plantas-medicinais-e-fitoterapicos",
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022"
+      ]
+    },
+    {
+      "id": "prod-388",
+      "name": "Órapronobis",
+      "family": "ora",
+      "kind": "food",
+      "recipe": "Omelete com ora-pro-nóbis",
+      "sourceUrls": [
+        "https://www.infoteca.cnptia.embrapa.br/infoteca/handle/doc/1071168",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-389",
+      "name": "Chá Branco",
+      "family": "tea",
+      "kind": "food",
+      "recipe": "Bebida com chá branco",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022",
+        "https://www.gov.br/saude/pt-br/composicao/sectics/plantas-medicinais-e-fitoterapicos"
+      ]
+    },
+    {
+      "id": "prod-390",
+      "name": "Erva Matte",
+      "family": "tea",
+      "kind": "food",
+      "recipe": "Bebida com erva matte",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022",
+        "https://www.gov.br/saude/pt-br/composicao/sectics/plantas-medicinais-e-fitoterapicos"
+      ]
+    },
+    {
+      "id": "prod-391",
+      "name": "Buxinha",
+      "family": "external",
+      "kind": "external",
+      "recipe": null,
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/composicao/sectics/plantas-medicinais-e-fitoterapicos"
+      ]
+    },
+    {
+      "id": "prod-392",
+      "name": "Tereré Tradicional",
+      "family": "tea",
+      "kind": "food",
+      "recipe": "Bebida com tereré tradicional",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022",
+        "https://www.gov.br/saude/pt-br/composicao/sectics/plantas-medicinais-e-fitoterapicos"
+      ]
+    },
+    {
+      "id": "prod-393",
+      "name": "Mentruz",
+      "family": "herbal",
+      "kind": "herbal",
+      "recipe": null,
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/composicao/sectics/plantas-medicinais-e-fitoterapicos",
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022"
+      ]
+    },
+    {
+      "id": "prod-394",
+      "name": "Erva Doce",
+      "family": "tea",
+      "kind": "food",
+      "recipe": "Bebida com erva doce",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022",
+        "https://www.gov.br/saude/pt-br/composicao/sectics/plantas-medicinais-e-fitoterapicos"
+      ]
+    },
+    {
+      "id": "prod-395",
+      "name": "Queijo Parmesão",
+      "family": "cheese",
+      "kind": "food",
+      "recipe": "Legumes gratinados com parmesão",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view",
+        "https://www.tbca.net.br/"
+      ]
+    },
+    {
+      "id": "prod-396",
+      "name": "Sal Marinho",
+      "family": "spice",
+      "kind": "food",
+      "recipe": "Legumes assados com sal marinho",
+      "sourceUrls": [
+        "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=1686&cod_modulo=135&link=S&numeroAto=00000159&orgao=ANVISA%2FMS&seqAto=000&tipo=INM&valorAno=2022",
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-580",
+      "name": "Barra Chocolate Harald",
+      "family": "chocolate",
+      "kind": "food",
+      "recipe": "Copinho de banana com barra chocolate harald",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-581",
+      "name": "Barra Chocolate Dr.Oetker",
+      "family": "chocolate",
+      "kind": "food",
+      "recipe": "Copinho de banana com barra chocolate dr.oetker",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    },
+    {
+      "id": "prod-584",
+      "name": "Cobertura Para Sorvete",
+      "family": "chocolate",
+      "kind": "food",
+      "recipe": "Copinho de banana com cobertura para sorvete",
+      "sourceUrls": [
+        "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/publicacoes-para-promocao-a-saude/guia_alimentar_populacao_brasileira_2ed.pdf/view"
+      ]
+    }
+  ]
+}

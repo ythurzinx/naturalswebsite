@@ -9,6 +9,7 @@ export function Modal({
   description,
   children,
   wide = false,
+  className = "",
 }: {
   open: boolean;
   onOpenChange: (open: boolean) => void;
@@ -16,6 +17,7 @@ export function Modal({
   description?: string;
   children: ReactNode;
   wide?: boolean;
+  className?: string;
 }) {
   const returnFocus = useRef<HTMLElement | null>(null);
   return (
@@ -30,7 +32,7 @@ export function Modal({
             event.preventDefault();
             returnFocus.current?.focus();
           }}
-          className={`modal-content ${wide ? "modal-wide" : ""}`}
+          className={`modal-content ${wide ? "modal-wide" : ""} ${className}`}
         >
           <Dialog.Title className="modal-title">{title}</Dialog.Title>
           <Dialog.Description

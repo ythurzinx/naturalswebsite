@@ -38,6 +38,7 @@ export function Footer() {
           <Link href="/produtos">Todos os produtos</Link>
           <Link href="/favoritos">Meus favoritos</Link>
           <Link href="/sobre">Nossa história</Link>
+          <Link href="/avaliacoes">Avaliações de clientes</Link>
           <Link href="/blog">Inspiração para viver bem</Link>
         </div>
         <div>

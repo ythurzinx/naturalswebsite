@@ -514,5 +514,17 @@
         "prod-584"
       ]
     }
+  ],
+  "visualReassignments": [
+    {
+      "productId": "prod-365",
+      "referenceProductId": "prod-367",
+      "reason": "Corn Sugar e Corn Sugar Mascavo são cereais em flocos de milho; a referência anterior mostrava açúcar puro."
+    },
+    {
+      "productId": "prod-366",
+      "referenceProductId": "prod-367",
+      "reason": "Corn Sugar e Corn Sugar Mascavo são cereais em flocos de milho; a referência anterior mostrava açúcar puro."
+    }
   ]
 }

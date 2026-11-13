@@ -6016,16 +6016,17 @@
     "licenseUrl": "https://openai.com/policies/terms-of-use/",
     "source": "https://openai.com/policies/terms-of-use/",
     "path": "/images/products/studio-prod-365.webp",
-    "sha256": "04b1379c58dc5364ecd5bb6efacc16f1ecd44a5a0ab4f8df016f7b9228f1c55d",
+    "sha256": "1cf5fe7efd2885d547bf7105333e81607f51b47b1a1a0098f5f210ce7e6beea5",
     "sheetSha256": "a6dff3d6a8da96bcdca088cf3e30e251ba2dc53745de4989f9c5ca16fb6bca5f",
     "cell": {
       "row": 1,
-      "column": 2
+      "column": 4
     },
     "ids": [
       "prod-365"
     ],
-    "caption": "Imagem ilustrativa de Corn Sugar, gerada por IA. Aparência e apresentação podem variar."
+    "caption": "Imagem ilustrativa de Corn Sugar, gerada por IA. Aparência e apresentação podem variar.",
+    "visualReferenceProductId": "prod-367"
   },
   "studio-prod-366": {
     "kind": "ai-generated",
@@ -6038,16 +6039,17 @@
     "licenseUrl": "https://openai.com/policies/terms-of-use/",
     "source": "https://openai.com/policies/terms-of-use/",
     "path": "/images/products/studio-prod-366.webp",
-    "sha256": "4f00edc1a1728f521358d9efba3895f95ea298a0700a96479850e34cf9a81295",
+    "sha256": "1cf5fe7efd2885d547bf7105333e81607f51b47b1a1a0098f5f210ce7e6beea5",
     "sheetSha256": "a6dff3d6a8da96bcdca088cf3e30e251ba2dc53745de4989f9c5ca16fb6bca5f",
     "cell": {
       "row": 1,
-      "column": 3
+      "column": 4
     },
     "ids": [
       "prod-366"
     ],
-    "caption": "Imagem ilustrativa de Corn Sugar Mascavo, gerada por IA. Aparência e apresentação podem variar."
+    "caption": "Imagem ilustrativa de Corn Sugar Mascavo, gerada por IA. Aparência e apresentação podem variar.",
+    "visualReferenceProductId": "prod-367"
   },
   "studio-prod-367": {
     "kind": "ai-generated",

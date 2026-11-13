@@ -6,6 +6,8 @@ import { createAdminService } from "./admin-service.mjs";
 import { shipping } from "./shipping";
 import { paymentTesting } from "./payment-testing-server";
 import { customerNotifications } from "./customer-notification-server";
+import { productContent } from "./product-content-server";
+import { reviews } from "./review-server";
 const config = adminConfiguration({
   APP_URL: process.env.APP_URL,
   NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
@@ -22,4 +24,6 @@ export const admin = createAdminService({
   shipping,
   paymentTesting,
   notifications: customerNotifications,
+  productContent,
+  reviews,
 });

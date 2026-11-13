@@ -132,6 +132,7 @@ try {
     "/sobre",
     "/blog",
     "/favoritos",
+    "/avaliacoes",
   ]) {
     const r = await fetch(origin + path);
     assert.equal(r.status, 200, path);
@@ -165,6 +166,35 @@ try {
     ).status,
     503,
   );
+  const guide = await fetch(origin + "/api/products/prod-125/content");
+  assert.equal(guide.status, 200);
+  const guideValue = await guide.json();
+  assert.equal(
+    guideValue.content.recipe.title,
+    "Pão de frigideira com psyllium",
+  );
+  assert.equal(
+    (await fetch(origin + "/api/products/prod-0/content")).status,
+    404,
+  );
+  const reviews = await fetch(origin + "/api/reviews");
+  assert.equal(reviews.status, 200);
+  assert.equal((await reviews.json()).count, 0);
+  assert.equal(
+    (
+      await fetch(origin + "/api/reviews", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: "{}",
+      })
+    ).status,
+    503,
+  );
+  assert.equal(
+    (await fetch(origin + "/api/admin/content-products")).status,
+    503,
+  );
+  assert.equal((await fetch(origin + "/api/admin/reviews")).status, 503);
   const session = await fetch(origin + "/api/checkout/session");
   assert.equal((await session.json()).available, false);
   assert.ok(session.headers.get("cache-control").includes("no-store"));

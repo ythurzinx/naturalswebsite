@@ -100,7 +100,7 @@ function fixture(customFetcher) {
   const service = createShippingService({
     repository,
     catalogProvider: async () => catalog,
-    policy,
+    policy: { ...policy, requireCustomerPhone: true },
     config,
     fetcher,
     now: () => now,
@@ -477,4 +477,59 @@ test("shipping lookup quotas and duplicate session cookies cannot be bypassed", 
   const blocked = await f.service.quote(base);
   assert.equal(blocked.status, 429);
   assert.equal(f.lookups.length, 0);
+});
+
+test("public freight preview accepts an empty basket, checks canonical selection totals and never issues checkout proof", async () => {
+  const f = fixture(),
+    csrf = await f.session();
+  const response = await f.service.preview(
+    f.request("/api/shipping/preview", f.body(), { "X-CSRF-Token": csrf }),
+  );
+  assert.equal(response.status, 200, await response.clone().text());
+  const value = await response.json();
+  assert.equal(value.feeCents, 800);
+  assert.equal("quoteToken" in value, false);
+  assert.equal("latitude" in value.address, false);
+  const empty = await f.service.preview(
+    f.request(
+      "/api/shipping/preview",
+      { items: [], expectedSubtotalCents: 0, postalCode: "06754100" },
+      { "X-CSRF-Token": csrf },
+    ),
+  );
+  assert.equal(empty.status, 200);
+  const forged = await f.service.preview(
+    f.request(
+      "/api/shipping/preview",
+      { ...f.body(), expectedSubtotalCents: 0 },
+      { "X-CSRF-Token": csrf },
+    ),
+  );
+  assert.ok(forged.status >= 400);
+  const unknown = await f.service.preview(
+    f.request(
+      "/api/shipping/preview",
+      { ...f.body(), feeCents: 0 },
+      { "X-CSRF-Token": csrf },
+    ),
+  );
+  assert.equal(unknown.status, 400);
+  const noCsrf = await f.service.preview(
+    f.request("/api/shipping/preview", f.body()),
+  );
+  assert.equal(noCsrf.status, 403);
+  const foreign = await f.service.preview(
+    f.request("/api/shipping/preview", f.body(), {
+      "X-CSRF-Token": csrf,
+      Origin: "https://evil.example",
+    }),
+  );
+  assert.equal(foreign.status, 403);
+  await assert.rejects(
+    f.service.resolveDelivery({
+      quoteToken: JSON.stringify(value),
+      number: "1",
+      complement: "",
+    }),
+  );
 });
