@@ -1,8 +1,10 @@
 import data from "./catalog.json";
+import catalogGroups from "./catalog-groups.json";
 import type { Product } from "./types";
 import policy from "./sales-policy.json";
 import defaults from "./merchandising-defaults.json";
 import { defaultProductVisible } from "./catalog-visibility.mjs";
+import { findProducts } from "./search.mjs";
 import { applyMerchandising } from "./merchandising.mjs";
 export const products: Product[] = applyMerchandising(
   data.filter((p) => defaultProductVisible(p, policy)),
@@ -24,12 +26,7 @@ export function normalize(value: string) {
     .toLowerCase();
 }
 export function searchProducts(items: Product[], query: string) {
-  const terms = normalize(query).trim().split(/\s+/);
-  return items.filter((p) =>
-    terms.every((term) =>
-      normalize(`${p.nome_produto} ${p.categoria}`).includes(term),
-    ),
-  );
+  return findProducts(items, query) as Product[];
 }
 export function formatPrice(price: number) {
   return new Intl.NumberFormat("pt-BR", {
@@ -46,10 +43,16 @@ export const groups = [
   "Temperos",
   "Mercearia",
   "Combos",
+  "Cuidados e suplementos",
 ];
 export function inGroup(product: Product, group: string) {
   const name = normalize(product.nome_produto);
+  if (group === "Todos") return true;
   if (group === "Combos") return !!product.combo;
+  if (product.combo) return false;
+  if (groups.includes(product.categoria)) return product.categoria === group;
+  const known = (catalogGroups as Record<string, string>)[product.id];
+  if (known) return known === group;
   if (group === "Farinhas e pós")
     return /farinha| em po|maca peruana|psyllium|colageno|glutamina|creatina/.test(
       name,
@@ -64,7 +67,7 @@ export function inGroup(product: Product, group: string) {
     return /cha |hibisco|camomila|erva|cavalinha|espinheira|capim|hortela|boldo|folha|melissa/.test(
       name,
     );
-  if (group === "Suplementos")
+  if (group === "Suplementos" || group === "Cuidados e suplementos")
     return /Suplementos|Fitoterápicos/.test(product.categoria);
   if (group === "Temperos")
     return /tempero|curcuma|acafrao|pimenta|paprica|oregano|cominho|alho|cebola|canela|cravo|sal rosa/.test(

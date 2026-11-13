@@ -31,6 +31,9 @@ import { ProductCard } from "./product-card";
 import { ProductCarousel } from "./product-carousel";
 import { referencePriceCents } from "@/lib/pricing.mjs";
 
+import { ProductDeepLink } from "./product-deep-link";
+import { StoreHelp } from "./store-help";
+import { SearchAutocomplete } from "./search-autocomplete";
 function QuerySync({
   onQuery,
 }: {
@@ -57,13 +60,13 @@ const slides = [
     label: "ESCOLHAS QUE FAZEM BEM",
     title: (
       <>
-        Uma vida mais leve.
+        Seu natural.
         <br />
-        Um mundo mais <em>natural.</em>
+        Na sua <em>medida.</em>
       </>
     ),
     description:
-      "Da castanha do seu lanche ao chá do fim do dia. Encontre pequenos cuidados para uma rotina cheia de vida.",
+      "Castanhas, temperos e ingredientes para sua cozinha. Escolha de 100 em 100 g.",
     image: "hero-nuts",
   },
   {
@@ -179,6 +182,7 @@ export function Storefront({
     <main id="conteudo">
       <Suspense>
         <QuerySync onQuery={onQuery} />
+        <ProductDeepLink />
       </Suspense>
       {!catalog && !favoritesOnly && (
         <>
@@ -415,27 +419,14 @@ export function Storefront({
         </div>
         {(catalog || favoritesOnly || filters) && (
           <div className="catalog-search-row">
-            <div className="catalog-search">
-              <Search size={18} />
-              <label htmlFor="catalog-search" className="sr-only">
-                Buscar neste catálogo
-              </label>
-              <input
-                id="catalog-search"
-                placeholder="Busque um produto ou ingrediente"
-                value={query}
-                maxLength={120}
-                onChange={(e) => {
-                  setQuery(e.target.value);
-                  setLimit(24);
-                }}
-              />
-              {query && (
-                <button onClick={() => setQuery("")} aria-label="Limpar busca">
-                  <X size={17} />
-                </button>
-              )}
-            </div>
+            <SearchAutocomplete
+              compact
+              value={query}
+              onChange={(next) => {
+                setQuery(next);
+                setLimit(24);
+              }}
+            />
             <label className="sort-label">
               Ordenar por
               <select value={sort} onChange={(e) => setSort(e.target.value)}>
@@ -608,6 +599,7 @@ export function Storefront({
           </section>
         </>
       )}
+      <StoreHelp />
     </main>
   );
 }

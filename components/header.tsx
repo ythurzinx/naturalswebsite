@@ -17,11 +17,15 @@ import { useCart } from "@/lib/cart-context";
 import { groups } from "@/lib/products";
 import { whatsappUrl } from "@/lib/store";
 import { useShipping } from "@/lib/shipping-context";
+import { Modal } from "./modal";
+import { ShippingPreview } from "./shipping-preview";
+import { SearchAutocomplete } from "./search-autocomplete";
 export function Header() {
   const { settings: shipping } = useShipping();
   const pathname = usePathname();
   const { itemCount, favorites } = useCart();
-  const [menu, setMenu] = useState(false);
+  const [menu, setMenu] = useState(false),
+    [deliveryOpen, setDeliveryOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const menuButton = useRef<HTMLButtonElement>(null);
   useEffect(() => {
@@ -81,22 +85,11 @@ export function Header() {
               height="88"
             />
           </Link>
-          <form action="/produtos" className="search-form" role="search">
-            <label htmlFor="site-search" className="sr-only">
-              Buscar produtos
-            </label>
-            <input
-              id="site-search"
-              name="q"
-              type="search"
-              placeholder="O que faz bem para você hoje?"
-              maxLength={120}
-              autoComplete="off"
-            />
-            <button type="submit" aria-label="Buscar">
-              <Search size={21} />
-            </button>
-          </form>
+          <div className="header-brand-caption">
+            <strong>Mundo Natural</strong>
+            <span>Taboão da Serra · A granel</span>
+          </div>
+          <SearchAutocomplete />
           <div className="header-actions">
             <Link
               href="/favoritos"
@@ -155,6 +148,7 @@ export function Header() {
             </Link>
             <Link href="/sobre">Nossa história</Link>
             <Link href="/blog">Viver bem</Link>
+            <Link href="/avaliacoes">Avaliações</Link>
             <a
               href={whatsappUrl()}
               target="_blank"
@@ -165,13 +159,22 @@ export function Header() {
             </a>
           </nav>
         </div>
-        <div className="mobile-location">
-          <MapPin size={13} /> Sua loja natural em Taboão da Serra{" "}
-          <Link href="/contato">
-            Conheça <ChevronDown size={12} />
-          </Link>
-        </div>
+        <button
+          className="mobile-location mobile-delivery-trigger"
+          onClick={() => setDeliveryOpen(true)}
+        >
+          <MapPin size={15} />
+          <span>
+            Entrega ou retirada? <strong>Consulte seu CEP</strong>
+          </span>
+          <ChevronDown size={14} />
+        </button>
       </header>
+      {deliveryOpen && (
+        <Modal open onOpenChange={setDeliveryOpen} title="Entrega e retirada">
+          <ShippingPreview />
+        </Modal>
+      )}
     </>
   );
 }

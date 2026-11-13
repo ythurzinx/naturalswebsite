@@ -8,6 +8,8 @@ Os produtos a granel exibem preço por **100 g**. A seleção começa em 100 g e
 
 Veja [Ofertas, combos e fotos](docs/OFERTAS-COMBOS-FOTOS.md) e [Resolver MPV08](docs/DIAGNOSTICO-CHECKOUT.md). Os combos começam **sem desconto automático**; a loja define os percentuais. A entrega usa BrasilAPI e distância estimada entre CEPs, configurável em **Admin → Frete e entregas**. As novas opções usam `mn_settings` e não exigem outra importação SQL.
 
+A experiência no celular oferece busca com sugestões enquanto a pessoa digita, ficha com informações e receitas, prévia de frete por CEP e avaliações de compras concluídas. As 308 fichas a granel incluem 288 sugestões culinárias e 20 orientações específicas; tudo pode ser ajustado em **Conteúdo e receitas**. A equipe modera opiniões e responde em **Avaliações**, sem fabricar notas. Veja [o guia da experiência mobile](docs/EXPERIENCIA-MOBILE-PRODUTOS.md).
+
 ## Rodar e verificar
 
 Node.js 22 e npm:

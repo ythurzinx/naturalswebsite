@@ -130,6 +130,19 @@ export default function PrivacyPage() {
           para atendimento e acompanhamento da compra. Evite enviar senhas,
           documentos desnecessários ou dados completos de cartão.
         </p>
+        <h2>Avaliações de compras</h2>
+        <p>
+          Após concluir um pedido, você pode enviar uma avaliação de seus
+          produtos pelo mesmo navegador da compra, enquanto o cookie de acesso
+          ao pedido estiver válido. A avaliação fica vinculada à compra para
+          impedir opiniões sem pedido verificado e duplicações. A publicação
+          exige sua escolha explícita e mostra apenas primeiro nome, nota,
+          comentário e data, depois da análise da loja. O número do pedido,
+          e-mail, telefone e endereço não aparecem na avaliação pública. A loja
+          pode responder e ocultar dados pessoais, spam ou conteúdo inadequado,
+          mantendo o texto e a nota originais. Evite incluir dados pessoais no
+          comentário e fale com a loja para solicitar remoção.
+        </p>
         <h2>Links externos</h2>
         <p>
           O mapa, o Instagram e o WhatsApp são serviços externos, abertos

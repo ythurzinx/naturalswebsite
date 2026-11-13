@@ -24,3 +24,5 @@ Os JPGs foram exportados dos quadros PNG originais da geração, em resolução 
 No Portal/App do Parceiro iFood, abra o catálogo ou cardápio, edite o produto e envie o JPG correspondente no campo de foto. Confira a prévia e salve. Os menus, o recorte e os requisitos podem variar conforme a modalidade da loja; a aceitação final depende do painel do iFood. São ilustrações de IA: confira a correspondência com o produto real antes da publicação.
 
 O ZIP registra as 308 ilustrações desta versão do catálogo. Fotos enviadas depois pelo painel não alteram esse pacote automaticamente.
+
+Na revisão das fichas, Corn Sugar e Corn Sugar Mascavo foram identificados como cereais em flocos de milho. As imagens desses dois itens passaram a usar o quadro já gerado do cereal de milho; a reatribuição está registrada em `data/ai-photo-generation.json`. Os dois JPGs do pacote de download foram atualizados.

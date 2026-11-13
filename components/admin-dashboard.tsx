@@ -31,6 +31,8 @@ import { AdminOrderAlerts } from "./admin-order-alerts";
 import { AdminShippingSettings } from "./admin-shipping-settings";
 import { AdminMerchandising } from "./admin-merchandising";
 import { AdminPaymentDiagnostics } from "./admin-payment-diagnostics";
+import { AdminReviews } from "./admin-reviews";
+import { AdminProductContent } from "./admin-product-content";
 import { AdminNotificationSettings } from "./admin-notification-settings";
 import { AdminPaymentTest } from "./admin-payment-test";
 import { AdminOrderOperations } from "./admin-order-operations";
@@ -547,6 +549,8 @@ export function AdminDashboard() {
   const tabs = [
     { id: "dashboard", label: "Visão geral", icon: LayoutDashboard },
     { id: "products", label: "Produtos e fotos", icon: Package },
+    { id: "reviews", label: "Avaliações", icon: Activity },
+    { id: "content", label: "Conteúdo e receitas", icon: Package },
     { id: "merchandising", label: "Ofertas e combos", icon: Tags },
     { id: "orders", label: "Pedidos", icon: ShoppingBag },
     { id: "shipping", label: "Frete e entregas", icon: Truck },
@@ -670,6 +674,8 @@ export function AdminDashboard() {
             {notice}
           </p>
         )}
+        {tab === "reviews" && <AdminReviews api={api} />}
+        {tab === "content" && <AdminProductContent api={api} />}
         {tab === "notifications" && <AdminNotificationSettings api={api} />}
         {tab === "shipping" && <AdminShippingSettings api={api} />}
         {tab === "merchandising" && <AdminMerchandising api={api} />}
