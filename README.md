@@ -60,7 +60,7 @@ O painel exibe e recebe preço/custo a granel por 100 g. O catálogo importado e
 ## Dados e operação
 
 - `lib/store.ts`: contatos e endereço. Contato oficial: **(11) 5199-3525** (`551151993525`).
-- `lib/catalog.json`: produtos e preços em reais, extraídos do CSV referenciado pela loja. O responsável confirmou nesta sessão que os preços estão corretos para venda.
+- `lib/catalog.json`: produtos e preços em reais, extraídos do CSV referenciado pela loja. Os preços de venda foram atualizados pelo relatório do PDV de 06/11/2026; veja [atualização de preços](docs/ATUALIZACAO-PRECOS.md), inclusive o SQL para os produtos já editados no painel.
 - `lib/sales-policy.json`: confirmação de preços, habilitação de retirada, produtos indisponíveis e limites de venda. Os campos antigos de quantidade/validade do catálogo não são usados como controle de estoque atual.
 - `lib/server/`: validações, cookies/sessões, cliente Mercado Pago, idempotência e verificações de pagamento/Webhooks.
 - `proxy.ts` e `security-headers.mjs`: CSP por resposta e cabeçalhos de segurança.
