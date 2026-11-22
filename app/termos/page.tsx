@@ -59,6 +59,14 @@ export default function TermsPage() {
           custos são exibidos pelo Mercado Pago antes da confirmação. Guarde o
           número do pedido e combine a retirada.
         </p>
+        <h2>Cupons de desconto</h2>
+        <p>
+          Cupons valem para o pagamento online, dentro da validade e das
+          condições informadas pela loja, como valor mínimo e limite de usos. O
+          desconto se aplica aos produtos e combos, não ao frete, e não se soma
+          a ofertas com desconto maior: nesses itens prevalece o menor preço. O
+          valor final é conferido pelo servidor antes do pagamento.
+        </p>
         <h2>Trocas, cancelamentos e devoluções</h2>
         <p>
           Entre em contato com a equipe com as informações da compra para

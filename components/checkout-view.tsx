@@ -9,15 +9,22 @@ import {
   CreditCard,
   QrCode,
   LockKeyhole,
+  TicketPercent,
+  X,
 } from "lucide-react";
 import { useCart } from "@/lib/cart-context";
 import { itemKey, lineTotal } from "@/lib/commerce.mjs";
 import { referencePriceCents } from "@/lib/pricing.mjs";
 import { formatPrice } from "@/lib/products";
 import { whatsappUrl } from "@/lib/store";
-import { usePaymentCheckout } from "@/hooks/use-payment-checkout";
+import {
+  usePaymentCheckout,
+  type CheckoutCoupon,
+} from "@/hooks/use-payment-checkout";
+import { cartCouponDiscountCents } from "@/lib/coupons.mjs";
 import { useShipping } from "@/lib/shipping-context";
 import { DeliveryEstimator } from "./delivery-estimator";
+const COUPON_KEY = "mundo-natural.coupon";
 export function CheckoutView() {
   const { cart, ready, needsWeightReview } = useCart();
   const payment = usePaymentCheckout();
@@ -29,10 +36,71 @@ export function CheckoutView() {
     [notes, setNotes] = useState(""),
     [whatsappOptIn, setWhatsappOptIn] = useState(false),
     [handoff, setHandoff] = useState(false);
+  const [couponInput, setCouponInput] = useState(""),
+    [coupon, setCoupon] = useState<CheckoutCoupon | null>(null),
+    [couponBusy, setCouponBusy] = useState(false),
+    [couponError, setCouponError] = useState("");
   useEffect(() => {
     if (!payment.checking && !payment.available) setPaymentMethod("whatsapp");
   }, [payment.checking, payment.available]);
   const online = paymentMethod === "mercadopago";
+  const subtotalCents = Math.round(cart.total * 100);
+  const couponEligible =
+    online && !!coupon && subtotalCents >= coupon.minSubtotalCents;
+  let couponDiscountCents = 0;
+  try {
+    couponDiscountCents =
+      couponEligible && coupon
+        ? cartCouponDiscountCents(cart.items, coupon.percent)
+        : 0;
+  } catch {
+    couponDiscountCents = 0;
+  }
+  const payableCents = shipping.totalCents - couponDiscountCents;
+  async function applyCoupon(code: string, quiet = false) {
+    const value = code.trim();
+    if (!value) return;
+    setCouponBusy(true);
+    setCouponError("");
+    try {
+      const result = await payment.previewCoupon(value);
+      setCoupon(result);
+      setCouponInput("");
+      try {
+        sessionStorage.setItem(COUPON_KEY, result.code);
+      } catch {}
+    } catch (error) {
+      setCoupon(null);
+      try {
+        sessionStorage.removeItem(COUPON_KEY);
+      } catch {}
+      if (!quiet)
+        setCouponError(
+          error instanceof Error
+            ? error.message
+            : "Não foi possível conferir o cupom.",
+        );
+    } finally {
+      setCouponBusy(false);
+    }
+  }
+  function removeCoupon() {
+    setCoupon(null);
+    setCouponError("");
+    try {
+      sessionStorage.removeItem(COUPON_KEY);
+    } catch {}
+  }
+  useEffect(() => {
+    if (!payment.available) return;
+    let saved = "";
+    try {
+      saved = sessionStorage.getItem(COUPON_KEY) || "";
+    } catch {}
+    if (saved) void applyCoupon(saved, true);
+    // Only re-check a coupon kept from this visit once payment is available.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [payment.available]);
   const message = [
     "Olá, Mundo Natural! Gostaria de consultar esta seleção:",
     ...cart.items.map(
@@ -40,6 +108,7 @@ export function CheckoutView() {
         `• ${item.quantity}x ${item.product.nome_produto} (${item.product.isGranel ? `${item.selectedWeight} g` : item.product.peso_produto}) — ${formatPrice(lineTotal(item))}`,
     ),
     `Subtotal: ${formatPrice(cart.total)}`,
+    coupon ? `Cupom informado: ${coupon.code}` : "",
     `Nome: ${name.trim()}`,
     method === "pickup"
       ? "Preferência: retirar na loja"
@@ -54,7 +123,10 @@ export function CheckoutView() {
     event.preventDefault();
     if (online)
       await payment.pay(cart, name, email, method, {
-        totalCents: shipping.totalCents,
+        totalCents: payableCents,
+        ...(couponDiscountCents > 0 && coupon
+          ? { couponCode: coupon.code }
+          : {}),
         notes,
         phone: shipping.phone,
         whatsappOptIn,
@@ -252,6 +324,91 @@ export function CheckoutView() {
                     seu cartão.
                   </p>
                 )}
+                {online && (
+                  <div className="coupon-box">
+                    {coupon ? (
+                      <div className="coupon-applied">
+                        <span>
+                          <TicketPercent size={18} /> Cupom{" "}
+                          <strong>{coupon.code}</strong> · {coupon.percent}% de
+                          desconto
+                        </span>
+                        <button
+                          type="button"
+                          className="text-button"
+                          onClick={removeCoupon}
+                          aria-label={`Remover cupom ${coupon.code}`}
+                        >
+                          <X size={15} /> Remover
+                        </button>
+                      </div>
+                    ) : (
+                      <div className="coupon-entry">
+                        <label className="field-label">
+                          Cupom de desconto (opcional)
+                          <input
+                            name="coupon"
+                            autoComplete="off"
+                            autoCapitalize="characters"
+                            maxLength={24}
+                            value={couponInput}
+                            onChange={(e) =>
+                              setCouponInput(e.target.value.toUpperCase())
+                            }
+                            onKeyDown={(e) => {
+                              if (e.key === "Enter") {
+                                e.preventDefault();
+                                void applyCoupon(couponInput);
+                              }
+                            }}
+                            placeholder="Digite o código"
+                          />
+                        </label>
+                        <button
+                          type="button"
+                          className="button button-outline"
+                          disabled={
+                            couponBusy ||
+                            !couponInput.trim() ||
+                            payment.checking ||
+                            !payment.available
+                          }
+                          onClick={() => void applyCoupon(couponInput)}
+                        >
+                          {couponBusy ? "Conferindo…" : "Aplicar"}
+                        </button>
+                      </div>
+                    )}
+                    {couponError && (
+                      <p className="payment-error" role="alert">
+                        {couponError}
+                      </p>
+                    )}
+                    {coupon && !couponEligible && (
+                      <p className="fine-print" role="status">
+                        Este cupom vale a partir de{" "}
+                        {formatPrice(coupon.minSubtotalCents / 100)} em
+                        produtos. Faltam{" "}
+                        {formatPrice(
+                          (coupon.minSubtotalCents - subtotalCents) / 100,
+                        )}
+                        .
+                      </p>
+                    )}
+                    {coupon && couponEligible && couponDiscountCents < 1 && (
+                      <p className="fine-print" role="status">
+                        Os itens já têm um desconto maior que o do cupom.
+                      </p>
+                    )}
+                    {couponDiscountCents > 0 && (
+                      <p className="coupon-savings" role="status">
+                        Você economiza{" "}
+                        {formatPrice(couponDiscountCents / 100)} nos produtos.
+                        O cupom não vale para o frete.
+                      </p>
+                    )}
+                  </div>
+                )}
                 <label className="field-label">
                   Observações (opcional)
                   <textarea
@@ -291,7 +448,7 @@ export function CheckoutView() {
                     <LockKeyhole size={18} />
                     {payment.busy
                       ? "Preparando pagamento…"
-                      : `Pagar ${formatPrice(shipping.totalCents / 100)} com Mercado Pago`}
+                      : `Pagar ${formatPrice(payableCents / 100)} com Mercado Pago`}
                   </>
                 ) : (
                   <>
@@ -345,9 +502,15 @@ export function CheckoutView() {
                     : "Entrega · calcule o frete"}
               </span>
             </div>
+            {couponDiscountCents > 0 && coupon && (
+              <div className="summary-discount">
+                <span>Cupom {coupon.code}</span>
+                <span>− {formatPrice(couponDiscountCents / 100)}</span>
+              </div>
+            )}
             <div className="summary-total">
               <span>{shipping.canPay ? "Total" : "Subtotal sem frete"}</span>
-              <strong>{formatPrice(shipping.totalCents / 100)}</strong>
+              <strong>{formatPrice(payableCents / 100)}</strong>
             </div>
             <p>
               {online
@@ -361,7 +524,7 @@ export function CheckoutView() {
           <div className="mobile-purchase-bar">
             <div>
               <small>{online ? "Total a pagar" : "Sua seleção"}</small>
-              <strong>{formatPrice(shipping.totalCents / 100)}</strong>
+              <strong>{formatPrice(payableCents / 100)}</strong>
             </div>
             <button
               form="checkout-form"

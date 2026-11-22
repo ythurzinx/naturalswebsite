@@ -28,6 +28,12 @@ export default function PrivacyPage() {
             não são salvos junto ao carrinho.
           </li>
           <li>
+            <strong>Cupom informado (essencial):</strong> o código do cupom
+            aplicado fica guardado apenas durante a visita, para manter o
+            desconto ao voltar à finalização da compra. Ele é apagado ao fechar
+            a aba ou remover o cupom.
+          </li>
+          <li>
             <strong>Escolha de privacidade (essencial):</strong> registra sua
             decisão por até 180 dias. Depois desse período, o site pergunta
             novamente.

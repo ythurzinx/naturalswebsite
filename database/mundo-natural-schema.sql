@@ -30,3 +30,5 @@ CREATE TABLE IF NOT EXISTS mn_order_details (order_id VARCHAR(80) PRIMARY KEY, f
 CREATE TABLE IF NOT EXISTS mn_order_packing (order_id VARCHAR(80) NOT NULL, line_key VARCHAR(100) NOT NULL, packed TINYINT NOT NULL DEFAULT 0, updated_at BIGINT NOT NULL, PRIMARY KEY(order_id,line_key), CONSTRAINT mn_packing_item FOREIGN KEY(order_id,line_key) REFERENCES mn_order_items(order_id,line_key)) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS mn_order_events (id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY, order_id VARCHAR(80) NOT NULL, kind VARCHAR(20) NOT NULL, state VARCHAR(20) NOT NULL, created_at BIGINT NOT NULL, INDEX mn_events_order (order_id), CONSTRAINT mn_event_order FOREIGN KEY(order_id) REFERENCES mn_orders(id)) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS mn_coupon_redemptions (reference VARCHAR(80) PRIMARY KEY, code VARCHAR(24) NOT NULL, email VARCHAR(180) NOT NULL, percent TINYINT UNSIGNED NOT NULL, discount_cents INT UNSIGNED NOT NULL, created_at BIGINT NOT NULL, INDEX mn_coupon_code (code, created_at)) ENGINE=InnoDB;

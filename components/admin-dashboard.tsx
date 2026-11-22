@@ -25,11 +25,13 @@ import {
   Truck,
   Tags,
   CreditCard,
+  TicketPercent,
 } from "lucide-react";
 import { useOrderAlerts } from "@/hooks/use-order-alerts";
 import { AdminOrderAlerts } from "./admin-order-alerts";
 import { AdminShippingSettings } from "./admin-shipping-settings";
 import { AdminMerchandising } from "./admin-merchandising";
+import { AdminCoupons } from "./admin-coupons";
 import { AdminPaymentDiagnostics } from "./admin-payment-diagnostics";
 import { AdminReviews } from "./admin-reviews";
 import { AdminProductContent } from "./admin-product-content";
@@ -76,6 +78,9 @@ export type Order = {
   staff_note?: string;
   courier_name?: string;
   delivery_cost_cents?: number | null;
+  coupon_code?: string | null;
+  coupon_percent?: number | null;
+  coupon_discount_cents?: number | null;
   address?: {
     postalCode: string;
     street: string;
@@ -441,6 +446,8 @@ export function AdminDashboard() {
         "Total",
         "Recebido",
         "Taxas",
+        "Cupom",
+        "Desconto do cupom",
         "Data",
       ],
       ...filteredOrders.map((row) => [
@@ -451,6 +458,10 @@ export function AdminDashboard() {
         (row.total_cents / 100).toFixed(2),
         (row.paid_cents / 100).toFixed(2),
         row.fee_cents == null ? "" : (row.fee_cents / 100).toFixed(2),
+        row.coupon_code || "",
+        row.coupon_discount_cents == null
+          ? ""
+          : (row.coupon_discount_cents / 100).toFixed(2),
         date(row.created_at),
       ]),
     ];
@@ -552,6 +563,7 @@ export function AdminDashboard() {
     { id: "reviews", label: "Avaliações", icon: Activity },
     { id: "content", label: "Conteúdo e receitas", icon: Package },
     { id: "merchandising", label: "Ofertas e combos", icon: Tags },
+    { id: "coupons", label: "Cupons", icon: TicketPercent },
     { id: "orders", label: "Pedidos", icon: ShoppingBag },
     { id: "shipping", label: "Frete e entregas", icon: Truck },
     { id: "notifications", label: "Mensagens aos clientes", icon: ShoppingBag },
@@ -679,6 +691,7 @@ export function AdminDashboard() {
         {tab === "notifications" && <AdminNotificationSettings api={api} />}
         {tab === "shipping" && <AdminShippingSettings api={api} />}
         {tab === "merchandising" && <AdminMerchandising api={api} />}
+        {tab === "coupons" && <AdminCoupons api={api} />}
         {tab === "payments" && (
           <>
             <AdminPaymentTest api={api} />
@@ -1589,6 +1602,14 @@ export function AdminDashboard() {
                 </tbody>
               </table>
             </div>
+            {order.coupon_code && (
+              <p className="order-coupon">
+                Cupom <strong>{order.coupon_code}</strong> (
+                {order.coupon_percent}%): desconto de{" "}
+                {currency(order.coupon_discount_cents ?? 0)}, já aplicado nos
+                valores unitários.
+              </p>
+            )}
             <p>
               Total: <strong>{currency(order.total_cents)}</strong> · Taxas:{" "}
               {currency(order.fee_cents)}

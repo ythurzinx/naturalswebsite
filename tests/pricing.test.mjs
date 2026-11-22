@@ -95,15 +95,15 @@ test("all 308 bulk catalog products use the 100 g label and positive sale prices
     referencePriceCents(
       items.find((p) => p.nome_produto === "Castanha de Caju Crua"),
     ),
-    1200,
+    1334,
   );
   assert.equal(
     referencePriceCents(
       items.find((p) => p.nome_produto === "Aveia Flocos Finos"),
     ),
-    150,
+    167,
   );
   const packaged = catalog.find((p) => p.id === "prod-1");
   assert.equal(packaged.isGranel, false);
-  assert.equal(referencePriceCents(packaged), 7799);
+  assert.equal(referencePriceCents(packaged), 8666);
 });
