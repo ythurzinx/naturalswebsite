@@ -15,6 +15,7 @@ type Estimate = {
     state: string;
   };
   distanceMeters: number;
+  distanceMethod?: "route" | "straight";
   withinArea: boolean;
   enabled: boolean;
   feeCents: number | null;
@@ -163,7 +164,9 @@ export function ShippingPreview({
               {(result.distanceMeters / 1000).toLocaleString("pt-BR", {
                 maximumFractionDigits: 1,
               })}{" "}
-              km entre CEPs, em linha reta.
+              {result.distanceMethod === "route"
+                ? "km de carro da loja até a sua rua."
+                : "km entre CEPs, em linha reta."}
             </small>
           </div>
         </div>

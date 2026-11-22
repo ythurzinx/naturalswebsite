@@ -2,9 +2,20 @@
 
 ## Configurar o frete
 
-Depois de aplicar `npm run db:migrate`, entre no `/admin` e abra **Frete e entregas**. Informe o CEP real da loja, o valor por quilômetro, a taxa base, o frete mínimo e a distância máxima. Deixe o campo de frete grátis vazio para desativar a promoção. Habilite a entrega apenas depois de conferir os valores no simulador e salvar.
+Depois de aplicar `npm run db:migrate`, entre no `/admin` e abra **Frete e entregas**. Informe o CEP real da loja, o endereço de saída (rua e número), o valor por quilômetro, a taxa base, o frete mínimo e a distância máxima. Deixe o campo de frete grátis vazio para desativar a promoção. Habilite a entrega apenas depois de conferir os valores no simulador e testar alguns CEPs.
 
-O cálculo usa a distância em linha reta entre coordenadas aproximadas dos CEPs, obtidas na BrasilAPI. Não calcula uma rota de carro nem promete prazo de entrega. A consulta não exige token de mapas e não envia nome, telefone, número do imóvel ou produtos à BrasilAPI. CEPs genéricos, sem coordenadas ou fora da área precisam de atendimento.
+### Distância de carro com Google Maps (recomendado)
+
+A BrasilAPI encontra rua, bairro e cidade pelo CEP. Com a variável privada `GOOGLE_MAPS_API_KEY` configurada na hospedagem, o servidor pede ao **Google Maps (Routes API)** a distância de carro do endereço de saída da loja até a rua do CEP do cliente. Sem a chave, o site volta à estimativa antiga em linha reta, cujas coordenadas costumam ser do centro da cidade: endereços diferentes de Taboão podem aparecer como 0 km. O painel informa qual método está ativo.
+
+1. Em [console.cloud.google.com](https://console.cloud.google.com/), crie um projeto (ou use um existente) e ative o faturamento. A cota gratuita mensal do Google costuma cobrir uma loja pequena; confira os valores atuais em [Preços da Plataforma Google Maps](https://developers.google.com/maps/billing-and-pricing/pricing).
+2. Em **APIs e serviços → Biblioteca**, ative **Routes API**.
+3. Em **APIs e serviços → Credenciais**, crie uma **chave de API**. Em **Restrições de API**, permita somente **Routes API**. Se a Hostinger informar um IP fixo de saída, restrinja também por IP.
+4. Em **Cotas**, limite as solicitações diárias para evitar cobranças inesperadas. O site também limita a 60 cálculos por minuto e 300 por dia, e guarda cada rota por 6 horas.
+5. Na Hostinger, em **Environment variables**, crie `GOOGLE_MAPS_API_KEY` com a chave (nunca use `NEXT_PUBLIC_`) e reinicie a aplicação.
+6. Em **Frete e entregas**, confirme a mensagem sobre o Google Maps, preencha o endereço de saída e teste CEPs conhecidos.
+
+O Google recebe apenas o endereço da loja e a rua, o bairro, a cidade e o CEP de destino. Nome, telefone, número do imóvel, e-mail e itens não são enviados. Se o Google localizar só a cidade ou o bairro, ou não responder, o cliente é orientado a falar com a equipe em vez de receber um frete errado. A distância é calculada até a rua (sem o número), o que dá precisão de algumas centenas de metros.
 
 O preço é o maior valor entre **frete mínimo** e **taxa base + distância × tarifa por km**, arredondado para centavos. A promoção de frete grátis vale a partir do subtotal configurado e respeita o limite de distância. Exemplo apenas ilustrativo: base de R$ 2,00, tarifa de R$ 3,00/km, mínimo de R$ 8,00 e distância de 3 km resultam em R$ 11,00. Escolha os valores da sua operação.
 

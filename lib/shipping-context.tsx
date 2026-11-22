@@ -19,11 +19,14 @@ export type ShippingSettings = {
   maxDistanceMeters: number;
   freeAboveCents: number | null;
   revision: number;
+  originAddress?: string;
+  distanceMethod?: "route" | "straight";
 };
 export type ShippingQuote = {
   quoteToken: string;
   feeCents: number;
   distanceMeters: number;
+  distanceMethod?: "route" | "straight";
   subtotalCents: number;
   revision: number;
   expiresAt: number;

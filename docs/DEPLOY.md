@@ -37,7 +37,7 @@ Execute `npm run admin:setup` no seu terminal. O comando pede uma senha forte, g
 
 Configure o evento de Orders do Checkout Pro na aplicação Mercado Pago com a URL `https://SEU-DOMINIO/api/mercadopago/webhook`. Copie a assinatura secreta para a Hostinger. Confirme a habilitação da conta para Pix e cartão e o cadastro da chave Pix.
 
-A integração recebe pagamento de **retirada sem frete** e **entrega com frete calculado**. A entrega inicia desativada até você configurar CEP de origem e tarifas em `/admin` → **Frete e entregas**. A distância é estimada em linha reta entre CEPs pela BrasilAPI, sem chave de mapas paga. Fora da área ou sem dados suficientes, o cliente consulta a equipe. A disponibilidade é administrada pelo painel, sem sincronização automática com o estoque do PDV. Reembolsos financeiros são feitos no Mercado Pago.
+A integração recebe pagamento de **retirada sem frete** e **entrega com frete calculado**. A entrega inicia desativada até você configurar CEP de origem e tarifas em `/admin` → **Frete e entregas**. A distância é a rota de carro calculada pelo Google Maps quando `GOOGLE_MAPS_API_KEY` está configurada; sem a chave, é uma estimativa em linha reta entre CEPs pela BrasilAPI. Fora da área ou sem dados suficientes, o cliente consulta a equipe. A disponibilidade é administrada pelo painel, sem sincronização automática com o estoque do PDV. Reembolsos financeiros são feitos no Mercado Pago.
 
 ## 4. Conferência técnica
 

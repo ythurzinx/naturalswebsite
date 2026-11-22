@@ -9,7 +9,7 @@ const faqs = [
   ],
   [
     "Vocês fazem entregas?",
-    "Quando a entrega online estiver habilitada, calcule o frete pelo CEP no carrinho ou na finalização. A distância é estimada em linha reta entre CEPs. Fora da área ou sem dados suficientes, consulte a equipe pelo WhatsApp. Combine o prazo com a loja; a retirada continua disponível sem frete.",
+    "Quando a entrega online estiver habilitada, calcule o frete pelo CEP no carrinho ou na finalização. A distância é calculada da loja até a rua do CEP informado. Fora da área ou sem dados suficientes, consulte a equipe pelo WhatsApp. Combine o prazo com a loja; a retirada continua disponível sem frete.",
   ],
   [
     "Os preços do catálogo estão atualizados?",
