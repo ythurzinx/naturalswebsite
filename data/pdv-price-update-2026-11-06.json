@@ -1,0 +1,3373 @@
+{
+  "origem": "Relatório 'Listagem de Preços' do PDV, gerado em 06/11/2026 às 19:28:09 (coluna Venda).",
+  "regra": "Somente o preço de venda foi alterado. Produtos a granel seguem armazenados por kg; a vitrine continua mostrando o preço por 100 g. Nome, custo, categoria, fotos, disponibilidade e conteúdo não foram alterados.",
+  "correspondencia": "Cada produto do catálogo foi associado a um item do PDV pelo nome. Para itens a granel, priorizaram-se códigos de balança (código de barras 2xxxxxx), descartando embalagens fechadas com o mesmo nome.",
+  "atualizados": [
+    {
+      "id": "prod-92",
+      "nome": "Biscoito Goiabinha",
+      "granel": true,
+      "pdvCodigo": "2.156",
+      "pdvCodigoBarras": "2021900",
+      "pdvDescricao": "BISCOITO GOIABINHA",
+      "precoAnteriorPorKgOuUnidade": 60,
+      "precoNovoPorKgOuUnidade": 60
+    },
+    {
+      "id": "prod-93",
+      "nome": "Soja em Grãos",
+      "granel": true,
+      "pdvCodigo": "6.496",
+      "pdvCodigoBarras": "2070100",
+      "pdvDescricao": "SOJA EM GRÃOS",
+      "precoAnteriorPorKgOuUnidade": 30,
+      "precoNovoPorKgOuUnidade": 30
+    },
+    {
+      "id": "prod-94",
+      "nome": "Soja em Grãos",
+      "granel": true,
+      "pdvCodigo": "6.496",
+      "pdvCodigoBarras": "2070100",
+      "pdvDescricao": "SOJA EM GRÃOS",
+      "precoAnteriorPorKgOuUnidade": 30,
+      "precoNovoPorKgOuUnidade": 30
+    },
+    {
+      "id": "prod-95",
+      "nome": "Mix de Quinua Preta",
+      "granel": true,
+      "pdvCodigo": "437",
+      "pdvCodigoBarras": "2018000",
+      "pdvDescricao": "MIX DE QUINUA PRETA E VERMELHA",
+      "precoAnteriorPorKgOuUnidade": 34,
+      "precoNovoPorKgOuUnidade": 34
+    },
+    {
+      "id": "prod-96",
+      "nome": "Quinua Branca",
+      "granel": true,
+      "pdvCodigo": "285",
+      "pdvCodigoBarras": "2003900",
+      "pdvDescricao": "QUINUA BRANCA EM GRAO",
+      "precoAnteriorPorKgOuUnidade": 38,
+      "precoNovoPorKgOuUnidade": 38
+    },
+    {
+      "id": "prod-97",
+      "nome": "Coco Chips",
+      "granel": true,
+      "pdvCodigo": "3.899",
+      "pdvCodigoBarras": "2035000",
+      "pdvDescricao": "COCO CHIPS S/ AÇUCAR",
+      "precoAnteriorPorKgOuUnidade": 78,
+      "precoNovoPorKgOuUnidade": 78
+    },
+    {
+      "id": "prod-98",
+      "nome": "Coco Chips Skin",
+      "granel": true,
+      "pdvCodigo": "306",
+      "pdvCodigoBarras": "2006000",
+      "pdvDescricao": "COCO CHIPS SKIN",
+      "precoAnteriorPorKgOuUnidade": 75,
+      "precoNovoPorKgOuUnidade": 75
+    },
+    {
+      "id": "prod-99",
+      "nome": "Uva Passa Branca",
+      "granel": true,
+      "pdvCodigo": "281",
+      "pdvCodigoBarras": "2003500",
+      "pdvDescricao": "UVA PASSA BRANCA",
+      "precoAnteriorPorKgOuUnidade": 58,
+      "precoNovoPorKgOuUnidade": 80
+    },
+    {
+      "id": "prod-100",
+      "nome": "Colageno Hidrolisado",
+      "granel": true,
+      "pdvCodigo": "339",
+      "pdvCodigoBarras": "2009600",
+      "pdvDescricao": "COLAGENO HIDROLISADO",
+      "precoAnteriorPorKgOuUnidade": 99,
+      "precoNovoPorKgOuUnidade": 131.1
+    },
+    {
+      "id": "prod-102",
+      "nome": "Palito de Chocolate",
+      "granel": true,
+      "pdvCodigo": "3.740",
+      "pdvCodigoBarras": "2026700",
+      "pdvDescricao": "PALITO DE CHOCOLATE",
+      "precoAnteriorPorKgOuUnidade": 49.99,
+      "precoNovoPorKgOuUnidade": 49.99
+    },
+    {
+      "id": "prod-103",
+      "nome": "Uva Passa c/ Chocolate",
+      "granel": true,
+      "pdvCodigo": "310",
+      "pdvCodigoBarras": "2006400",
+      "pdvDescricao": "UVA PASSA C/ CHOC 70% CACAU",
+      "precoAnteriorPorKgOuUnidade": 155,
+      "precoNovoPorKgOuUnidade": 155
+    },
+    {
+      "id": "prod-104",
+      "nome": "Amarula c/ Chocolate",
+      "granel": true,
+      "pdvCodigo": "3.767",
+      "pdvCodigoBarras": "2029400",
+      "pdvDescricao": "AMARULA C/ CHOCOLATE",
+      "precoAnteriorPorKgOuUnidade": 150,
+      "precoNovoPorKgOuUnidade": 160
+    },
+    {
+      "id": "prod-105",
+      "nome": "Cocada Leite Condensado",
+      "granel": true,
+      "pdvCodigo": "3.748",
+      "pdvCodigoBarras": "2027500",
+      "pdvDescricao": "COCADA LEITE CONDENSADO",
+      "precoAnteriorPorKgOuUnidade": 45,
+      "precoNovoPorKgOuUnidade": 73
+    },
+    {
+      "id": "prod-106",
+      "nome": "Biscoito Margarida",
+      "granel": true,
+      "pdvCodigo": "3.738",
+      "pdvCodigoBarras": "2026500",
+      "pdvDescricao": "BISCOITO MARGARIDA",
+      "precoAnteriorPorKgOuUnidade": 75,
+      "precoNovoPorKgOuUnidade": 75
+    },
+    {
+      "id": "prod-107",
+      "nome": "Doce de Leite",
+      "granel": true,
+      "pdvCodigo": "3.742",
+      "pdvCodigoBarras": "2026900",
+      "pdvDescricao": "DOCE DE LEITE",
+      "precoAnteriorPorKgOuUnidade": 52,
+      "precoNovoPorKgOuUnidade": 80
+    },
+    {
+      "id": "prod-111",
+      "nome": "Choco Power Ball",
+      "granel": true,
+      "pdvCodigo": "8.980",
+      "pdvCodigoBarras": "2098300",
+      "pdvDescricao": "CHOCO POWER BALL",
+      "precoAnteriorPorKgOuUnidade": 40,
+      "precoNovoPorKgOuUnidade": 40
+    },
+    {
+      "id": "prod-112",
+      "nome": "Amendoa c/ Chocolate",
+      "granel": true,
+      "pdvCodigo": "311",
+      "pdvCodigoBarras": "2006500",
+      "pdvDescricao": "AMENDOA C/ CHOCOLATE 70% CACAU",
+      "precoAnteriorPorKgOuUnidade": 175,
+      "precoNovoPorKgOuUnidade": 175
+    },
+    {
+      "id": "prod-113",
+      "nome": "Cereja c/ Chocolate",
+      "granel": true,
+      "pdvCodigo": "3.766",
+      "pdvCodigoBarras": "2029300",
+      "pdvDescricao": "CEREJA C/ CHOCOLATE",
+      "precoAnteriorPorKgOuUnidade": 140,
+      "precoNovoPorKgOuUnidade": 140
+    },
+    {
+      "id": "prod-114",
+      "nome": "Castanha de Caju ao Leite",
+      "granel": true,
+      "pdvCodigo": "3.765",
+      "pdvCodigoBarras": "2029200",
+      "pdvDescricao": "CAST CAJU CHOC AO LEITE DRAGEADO",
+      "precoAnteriorPorKgOuUnidade": 180,
+      "precoNovoPorKgOuUnidade": 180
+    },
+    {
+      "id": "prod-115",
+      "nome": "Castanha do Pará ao leite",
+      "granel": true,
+      "pdvCodigo": "3.764",
+      "pdvCodigoBarras": "2029100",
+      "pdvDescricao": "CASTANHA DO PARA C/ CHOCOLATE",
+      "precoAnteriorPorKgOuUnidade": 135,
+      "precoNovoPorKgOuUnidade": 135
+    },
+    {
+      "id": "prod-116",
+      "nome": "Banana Passa ao leite 70%",
+      "granel": true,
+      "pdvCodigo": "4.858",
+      "pdvCodigoBarras": "2044500",
+      "pdvDescricao": "BANANA PASSA CHOC 70% AMARGO",
+      "precoAnteriorPorKgOuUnidade": 190,
+      "precoNovoPorKgOuUnidade": 190
+    },
+    {
+      "id": "prod-117",
+      "nome": "Canela em pó Pura",
+      "granel": true,
+      "pdvCodigo": "316",
+      "pdvCodigoBarras": "2007300",
+      "pdvDescricao": "CANELA EM PO PURA",
+      "precoAnteriorPorKgOuUnidade": 82,
+      "precoNovoPorKgOuUnidade": 82
+    },
+    {
+      "id": "prod-118",
+      "nome": "Semente de Linhaça Dourada",
+      "granel": true,
+      "pdvCodigo": "412",
+      "pdvCodigoBarras": "2015500",
+      "pdvDescricao": "SEMENTE DE LINHACA DOURADA",
+      "precoAnteriorPorKgOuUnidade": 18,
+      "precoNovoPorKgOuUnidade": 30
+    },
+    {
+      "id": "prod-119",
+      "nome": "Semente de Linhaça Marrom",
+      "granel": true,
+      "pdvCodigo": "414",
+      "pdvCodigoBarras": "2015700",
+      "pdvDescricao": "SEMENTE DE LINHACA MARROM",
+      "precoAnteriorPorKgOuUnidade": 18,
+      "precoNovoPorKgOuUnidade": 30
+    },
+    {
+      "id": "prod-120",
+      "nome": "Semente de abóbora s/ Casca",
+      "granel": true,
+      "pdvCodigo": "405",
+      "pdvCodigoBarras": "2014800",
+      "pdvDescricao": "ABOBORA CRUA S/ CASCA AA",
+      "precoAnteriorPorKgOuUnidade": 66,
+      "precoNovoPorKgOuUnidade": 149
+    },
+    {
+      "id": "prod-121",
+      "nome": "Mix de Sementes",
+      "granel": true,
+      "pdvCodigo": "5.304",
+      "pdvCodigoBarras": "2047100",
+      "pdvDescricao": "MIX DE SEMENTES",
+      "precoAnteriorPorKgOuUnidade": 65,
+      "precoNovoPorKgOuUnidade": 75
+    },
+    {
+      "id": "prod-122",
+      "nome": "Amaranto em Grão",
+      "granel": true,
+      "pdvCodigo": "9.317",
+      "pdvCodigoBarras": "2022200",
+      "pdvDescricao": "AMARANTO EM GRAO",
+      "precoAnteriorPorKgOuUnidade": 39,
+      "precoNovoPorKgOuUnidade": 39
+    },
+    {
+      "id": "prod-123",
+      "nome": "Granulado Chocolate",
+      "granel": true,
+      "pdvCodigo": "3.744",
+      "pdvCodigoBarras": "2027100",
+      "pdvDescricao": "GRANULADO CHOCOLATE MAVALERIO",
+      "precoAnteriorPorKgOuUnidade": 34,
+      "precoNovoPorKgOuUnidade": 34
+    },
+    {
+      "id": "prod-124",
+      "nome": "Chocolate 50% Cacau",
+      "granel": true,
+      "pdvCodigo": "442",
+      "pdvCodigoBarras": "2018500",
+      "pdvDescricao": "CHOCOLATE 50% CACAU",
+      "precoAnteriorPorKgOuUnidade": 39,
+      "precoNovoPorKgOuUnidade": 75
+    },
+    {
+      "id": "prod-125",
+      "nome": "Psyllium Extrato 99%",
+      "granel": true,
+      "pdvCodigo": "404",
+      "pdvCodigoBarras": "2014700",
+      "pdvDescricao": "PSYLLIUM EXTRATO 99%",
+      "precoAnteriorPorKgOuUnidade": 113,
+      "precoNovoPorKgOuUnidade": 113
+    },
+    {
+      "id": "prod-126",
+      "nome": "Farinha De Maracujá",
+      "granel": true,
+      "pdvCodigo": "390",
+      "pdvCodigoBarras": "2013300",
+      "pdvDescricao": "FARINHA DE MARACUJA",
+      "precoAnteriorPorKgOuUnidade": 22,
+      "precoNovoPorKgOuUnidade": 40
+    },
+    {
+      "id": "prod-127",
+      "nome": "Farinha de Amendoa",
+      "granel": true,
+      "pdvCodigo": "290",
+      "pdvCodigoBarras": "2004400",
+      "pdvDescricao": "FARINHA DE AMENDOA CALCONUT",
+      "precoAnteriorPorKgOuUnidade": 81,
+      "precoNovoPorKgOuUnidade": 120
+    },
+    {
+      "id": "prod-128",
+      "nome": "Canela em Pó",
+      "granel": true,
+      "pdvCodigo": "341",
+      "pdvCodigoBarras": "2009800",
+      "pdvDescricao": "CANELA EM PO",
+      "precoAnteriorPorKgOuUnidade": 35,
+      "precoNovoPorKgOuUnidade": 35
+    },
+    {
+      "id": "prod-129",
+      "nome": "Cacau Alcalino",
+      "granel": true,
+      "pdvCodigo": "265",
+      "pdvCodigoBarras": "2001900",
+      "pdvDescricao": "CACAU ALCALINO",
+      "precoAnteriorPorKgOuUnidade": 35,
+      "precoNovoPorKgOuUnidade": 65
+    },
+    {
+      "id": "prod-130",
+      "nome": "Granulado em Flocos",
+      "granel": true,
+      "pdvCodigo": "4.955",
+      "pdvCodigoBarras": "2044800",
+      "pdvDescricao": "GRANULADO EM FLOCOS",
+      "precoAnteriorPorKgOuUnidade": 34,
+      "precoNovoPorKgOuUnidade": 50
+    },
+    {
+      "id": "prod-131",
+      "nome": "Amendoim Confeitado",
+      "granel": true,
+      "pdvCodigo": "8.236",
+      "pdvCodigoBarras": "2080300",
+      "pdvDescricao": "AMENDOIM CONFEITADO COM CHOCOLATE",
+      "precoAnteriorPorKgOuUnidade": 25,
+      "precoNovoPorKgOuUnidade": 30
+    },
+    {
+      "id": "prod-132",
+      "nome": "Amendoim Crocante com Chocolate",
+      "granel": true,
+      "pdvCodigo": "6.297",
+      "pdvCodigoBarras": "2060500",
+      "pdvDescricao": "AMENDOIM CROCANTE COM CHOCOLATE",
+      "precoAnteriorPorKgOuUnidade": 25,
+      "precoNovoPorKgOuUnidade": 25
+    },
+    {
+      "id": "prod-133",
+      "nome": "Amendoim Confeitado",
+      "granel": true,
+      "pdvCodigo": "8.236",
+      "pdvCodigoBarras": "2080300",
+      "pdvDescricao": "AMENDOIM CONFEITADO COM CHOCOLATE",
+      "precoAnteriorPorKgOuUnidade": 25,
+      "precoNovoPorKgOuUnidade": 30
+    },
+    {
+      "id": "prod-135",
+      "nome": "Gergelim c/ Casca",
+      "granel": true,
+      "pdvCodigo": "299",
+      "pdvCodigoBarras": "2005300",
+      "pdvDescricao": "GERGELIM C/ CASCA",
+      "precoAnteriorPorKgOuUnidade": 27,
+      "precoNovoPorKgOuUnidade": 27
+    },
+    {
+      "id": "prod-136",
+      "nome": "Gergelim s/ Casca",
+      "granel": true,
+      "pdvCodigo": "391",
+      "pdvCodigoBarras": "2013400",
+      "pdvDescricao": "GERGELIM S/ CASCA",
+      "precoAnteriorPorKgOuUnidade": 39,
+      "precoNovoPorKgOuUnidade": 39
+    },
+    {
+      "id": "prod-137",
+      "nome": "Farinha de Arroz integral",
+      "granel": true,
+      "pdvCodigo": "423",
+      "pdvCodigoBarras": "2016600",
+      "pdvDescricao": "FARINHA DE ARROZ INTEGRAL",
+      "precoAnteriorPorKgOuUnidade": 13,
+      "precoNovoPorKgOuUnidade": 13
+    },
+    {
+      "id": "prod-138",
+      "nome": "Semolina de Trigo Fina",
+      "granel": true,
+      "pdvCodigo": "2.719",
+      "pdvCodigoBarras": "2030700",
+      "pdvDescricao": "SEMOLINA DE TRIGO FINA",
+      "precoAnteriorPorKgOuUnidade": 21.5,
+      "precoNovoPorKgOuUnidade": 21.5
+    },
+    {
+      "id": "prod-139",
+      "nome": "Pistache Cru Inteiro",
+      "granel": true,
+      "pdvCodigo": "4.684",
+      "pdvCodigoBarras": "2043000",
+      "pdvDescricao": "PISTACHE CRU INTEIRO",
+      "precoAnteriorPorKgOuUnidade": 265,
+      "precoNovoPorKgOuUnidade": 299.99
+    },
+    {
+      "id": "prod-140",
+      "nome": "Farinha de Arroz Branca",
+      "granel": true,
+      "pdvCodigo": "420",
+      "pdvCodigoBarras": "2016300",
+      "pdvDescricao": "FARINHA DE ARROZ BRANCA",
+      "precoAnteriorPorKgOuUnidade": 12,
+      "precoNovoPorKgOuUnidade": 13
+    },
+    {
+      "id": "prod-141",
+      "nome": "Pistache Torrado e Salgado",
+      "granel": true,
+      "pdvCodigo": "6.029",
+      "pdvCodigoBarras": "2058300",
+      "pdvDescricao": "PISTACHE TORRADO E SALGADO",
+      "precoAnteriorPorKgOuUnidade": 230,
+      "precoNovoPorKgOuUnidade": 230
+    },
+    {
+      "id": "prod-142",
+      "nome": "Choco Color",
+      "granel": true,
+      "pdvCodigo": "3.746",
+      "pdvCodigoBarras": "2027300",
+      "pdvDescricao": "CHOCO COLOR",
+      "precoAnteriorPorKgOuUnidade": 80,
+      "precoNovoPorKgOuUnidade": 60
+    },
+    {
+      "id": "prod-143",
+      "nome": "Deliket",
+      "granel": true,
+      "pdvCodigo": "451",
+      "pdvCodigoBarras": "2019400",
+      "pdvDescricao": "DELIKET",
+      "precoAnteriorPorKgOuUnidade": 36,
+      "precoNovoPorKgOuUnidade": 36
+    },
+    {
+      "id": "prod-144",
+      "nome": "Cranberry Desidratado",
+      "granel": true,
+      "pdvCodigo": "424",
+      "pdvCodigoBarras": "2016700",
+      "pdvDescricao": "CRANBERRY DESID FAT",
+      "precoAnteriorPorKgOuUnidade": 65,
+      "precoNovoPorKgOuUnidade": 65
+    },
+    {
+      "id": "prod-145",
+      "nome": "Mix de Frutas Vermelhas",
+      "granel": true,
+      "pdvCodigo": "9.273",
+      "pdvCodigoBarras": "2022500",
+      "pdvDescricao": "MIX DE FRUTAS VERMELHAS",
+      "precoAnteriorPorKgOuUnidade": 136,
+      "precoNovoPorKgOuUnidade": 136
+    },
+    {
+      "id": "prod-146",
+      "nome": "Blueberry",
+      "granel": true,
+      "pdvCodigo": "397",
+      "pdvCodigoBarras": "2014000",
+      "pdvDescricao": "BLUEBERRY MIRTILIO",
+      "precoAnteriorPorKgOuUnidade": 100,
+      "precoNovoPorKgOuUnidade": 299.99
+    },
+    {
+      "id": "prod-147",
+      "nome": "Bala de Coco",
+      "granel": true,
+      "pdvCodigo": "6.381",
+      "pdvCodigoBarras": "2060600",
+      "pdvDescricao": "BALA DE COCO",
+      "precoAnteriorPorKgOuUnidade": 25,
+      "precoNovoPorKgOuUnidade": 25
+    },
+    {
+      "id": "prod-148",
+      "nome": "Bala de Algas Marinhas",
+      "granel": true,
+      "pdvCodigo": "393",
+      "pdvCodigoBarras": "2013600",
+      "pdvDescricao": "BALA DE ALGAS MARINHAS",
+      "precoAnteriorPorKgOuUnidade": 73,
+      "precoNovoPorKgOuUnidade": 73
+    },
+    {
+      "id": "prod-149",
+      "nome": "Bala de Banana c/Açucar",
+      "granel": true,
+      "pdvCodigo": "400",
+      "pdvCodigoBarras": "2014300",
+      "pdvDescricao": "BALA DE BANANA C/ ACUCAR",
+      "precoAnteriorPorKgOuUnidade": 39,
+      "precoNovoPorKgOuUnidade": 39
+    },
+    {
+      "id": "prod-150",
+      "nome": "Bala de Banana s/Açúcar",
+      "granel": true,
+      "pdvCodigo": "399",
+      "pdvCodigoBarras": "2014200",
+      "pdvDescricao": "BALA DE BANANA S/ ACUCAR",
+      "precoAnteriorPorKgOuUnidade": 44,
+      "precoNovoPorKgOuUnidade": 54
+    },
+    {
+      "id": "prod-151",
+      "nome": "Bala Fini Banana",
+      "granel": true,
+      "pdvCodigo": "3.762",
+      "pdvCodigoBarras": "2028900",
+      "pdvDescricao": "BANANAS FINI",
+      "precoAnteriorPorKgOuUnidade": 63.5,
+      "precoNovoPorKgOuUnidade": 70
+    },
+    {
+      "id": "prod-152",
+      "nome": "Mistura CAPCAKE",
+      "granel": true,
+      "pdvCodigo": "8.973",
+      "pdvCodigoBarras": "2085800",
+      "pdvDescricao": "MISTURA CUPCAKE",
+      "precoAnteriorPorKgOuUnidade": 25,
+      "precoNovoPorKgOuUnidade": 25
+    },
+    {
+      "id": "prod-153",
+      "nome": "Hibisco Em Pó",
+      "granel": true,
+      "pdvCodigo": "313",
+      "pdvCodigoBarras": "2006700",
+      "pdvDescricao": "HIBISCO EM PO",
+      "precoAnteriorPorKgOuUnidade": 29,
+      "precoNovoPorKgOuUnidade": 29
+    },
+    {
+      "id": "prod-154",
+      "nome": "Gengibre Cristalizado",
+      "granel": true,
+      "pdvCodigo": "3.743",
+      "pdvCodigoBarras": "2027000",
+      "pdvDescricao": "GENGIBRE CRISTALIZADO",
+      "precoAnteriorPorKgOuUnidade": 146,
+      "precoNovoPorKgOuUnidade": 146
+    },
+    {
+      "id": "prod-155",
+      "nome": "Macadamia S/Sal",
+      "granel": true,
+      "pdvCodigo": "2.717",
+      "pdvCodigoBarras": "2030500",
+      "pdvDescricao": "MACADAMIA S/ SAL",
+      "precoAnteriorPorKgOuUnidade": 134,
+      "precoNovoPorKgOuUnidade": 134
+    },
+    {
+      "id": "prod-156",
+      "nome": "Chocolate Cacau 50%",
+      "granel": true,
+      "pdvCodigo": "442",
+      "pdvCodigoBarras": "2018500",
+      "pdvDescricao": "CHOCOLATE 50% CACAU",
+      "precoAnteriorPorKgOuUnidade": 39,
+      "precoNovoPorKgOuUnidade": 75
+    },
+    {
+      "id": "prod-157",
+      "nome": "Farinha Especial sem Glúten",
+      "granel": true,
+      "pdvCodigo": "439",
+      "pdvCodigoBarras": "2018200",
+      "pdvDescricao": "FARINHA ESPECIAL SEM GLUTEN",
+      "precoAnteriorPorKgOuUnidade": 45,
+      "precoNovoPorKgOuUnidade": 45
+    },
+    {
+      "id": "prod-158",
+      "nome": "Dolomita",
+      "granel": true,
+      "pdvCodigo": "6.841",
+      "pdvCodigoBarras": "2070500",
+      "pdvDescricao": "DOLOMITA",
+      "precoAnteriorPorKgOuUnidade": 10,
+      "precoNovoPorKgOuUnidade": 19.99
+    },
+    {
+      "id": "prod-159",
+      "nome": "Argila Branca",
+      "granel": true,
+      "pdvCodigo": "383",
+      "pdvCodigoBarras": "2012600",
+      "pdvDescricao": "ARGILA BRANCA",
+      "precoAnteriorPorKgOuUnidade": 15,
+      "precoNovoPorKgOuUnidade": 19.99
+    },
+    {
+      "id": "prod-160",
+      "nome": "Argila Verde",
+      "granel": true,
+      "pdvCodigo": "382",
+      "pdvCodigoBarras": "2012500",
+      "pdvDescricao": "ARGILA VERDE",
+      "precoAnteriorPorKgOuUnidade": 15,
+      "precoNovoPorKgOuUnidade": 19.99
+    },
+    {
+      "id": "prod-161",
+      "nome": "Doce de Abóbora",
+      "granel": true,
+      "pdvCodigo": "3.747",
+      "pdvCodigoBarras": "2027400",
+      "pdvDescricao": "DOCE DE ABOBORA",
+      "precoAnteriorPorKgOuUnidade": 52,
+      "precoNovoPorKgOuUnidade": 52
+    },
+    {
+      "id": "prod-162",
+      "nome": "Agnus c/Creme de Avelã",
+      "granel": true,
+      "pdvCodigo": "3.731",
+      "pdvCodigoBarras": "2025800",
+      "pdvDescricao": "AGNUS C/ CREME DE AVELC KISHOW",
+      "precoAnteriorPorKgOuUnidade": 93,
+      "precoNovoPorKgOuUnidade": 110
+    },
+    {
+      "id": "prod-163",
+      "nome": "Lentilha Vegetariana",
+      "granel": true,
+      "pdvCodigo": "5.834",
+      "pdvCodigoBarras": "2056800",
+      "pdvDescricao": "LENTILHADA VEGETARIANA",
+      "precoAnteriorPorKgOuUnidade": 32,
+      "precoNovoPorKgOuUnidade": 32
+    },
+    {
+      "id": "prod-164",
+      "nome": "Mix de Legumes Desitradato",
+      "granel": true,
+      "pdvCodigo": "8.896",
+      "pdvCodigoBarras": "2098900",
+      "pdvDescricao": "MIX DE LEGUMES DISIDRATADOS",
+      "precoAnteriorPorKgOuUnidade": 60,
+      "precoNovoPorKgOuUnidade": 60
+    },
+    {
+      "id": "prod-165",
+      "nome": "Mix de Pimentas",
+      "granel": true,
+      "pdvCodigo": "8.093",
+      "pdvCodigoBarras": "2089400",
+      "pdvDescricao": "MIX DE PIMENTAS",
+      "precoAnteriorPorKgOuUnidade": 77,
+      "precoNovoPorKgOuUnidade": 140
+    },
+    {
+      "id": "prod-166",
+      "nome": "Pimenta Calabresa Flocos",
+      "granel": true,
+      "pdvCodigo": "388",
+      "pdvCodigoBarras": "2013100",
+      "pdvDescricao": "PIMENTA CALABRESA FLOCOS",
+      "precoAnteriorPorKgOuUnidade": 34,
+      "precoNovoPorKgOuUnidade": 34
+    },
+    {
+      "id": "prod-167",
+      "nome": "Pimenta Preta em Grão",
+      "granel": true,
+      "pdvCodigo": "332",
+      "pdvCodigoBarras": "2008900",
+      "pdvDescricao": "PIMENTA PRETA EM GRAO",
+      "precoAnteriorPorKgOuUnidade": 45,
+      "precoNovoPorKgOuUnidade": 95
+    },
+    {
+      "id": "prod-168",
+      "nome": "Pimenta Rosa",
+      "granel": true,
+      "pdvCodigo": "3.338",
+      "pdvCodigoBarras": "2024500",
+      "pdvDescricao": "PIMENTA ROSA",
+      "precoAnteriorPorKgOuUnidade": 98,
+      "precoNovoPorKgOuUnidade": 98
+    },
+    {
+      "id": "prod-169",
+      "nome": "Pimenta Branca Moida",
+      "granel": true,
+      "pdvCodigo": "335",
+      "pdvCodigoBarras": "2009200",
+      "pdvDescricao": "PIMENTA BRANCA MOIDA",
+      "precoAnteriorPorKgOuUnidade": 48,
+      "precoNovoPorKgOuUnidade": 48
+    },
+    {
+      "id": "prod-170",
+      "nome": "Fumaça em Pó",
+      "granel": true,
+      "pdvCodigo": "463",
+      "pdvCodigoBarras": "2020600",
+      "pdvDescricao": "FUMACA EM PO",
+      "precoAnteriorPorKgOuUnidade": 25,
+      "precoNovoPorKgOuUnidade": 30
+    },
+    {
+      "id": "prod-171",
+      "nome": "Pimenta Jamaica - Siria",
+      "granel": true,
+      "pdvCodigo": "395",
+      "pdvCodigoBarras": "2013800",
+      "pdvDescricao": "PIMENTA JAMAICA - SIRIA EM PO",
+      "precoAnteriorPorKgOuUnidade": 72,
+      "precoNovoPorKgOuUnidade": 72
+    },
+    {
+      "id": "prod-172",
+      "nome": "Pimenta Caiena",
+      "granel": true,
+      "pdvCodigo": "8.899",
+      "pdvCodigoBarras": "2089500",
+      "pdvDescricao": "PIMENTA CAIENA",
+      "precoAnteriorPorKgOuUnidade": 46,
+      "precoNovoPorKgOuUnidade": 46
+    },
+    {
+      "id": "prod-173",
+      "nome": "Cebola em Flocos",
+      "granel": true,
+      "pdvCodigo": "435",
+      "pdvCodigoBarras": "2017800",
+      "pdvDescricao": "CEBOLA FLOCOS",
+      "precoAnteriorPorKgOuUnidade": 35,
+      "precoNovoPorKgOuUnidade": 35
+    },
+    {
+      "id": "prod-174",
+      "nome": "Cebola Desidratada",
+      "granel": true,
+      "pdvCodigo": "444",
+      "pdvCodigoBarras": "2018700",
+      "pdvDescricao": "CEBOLA DESIDRATADA EM PO",
+      "precoAnteriorPorKgOuUnidade": 35,
+      "precoNovoPorKgOuUnidade": 35
+    },
+    {
+      "id": "prod-175",
+      "nome": "Glutamina",
+      "granel": true,
+      "pdvCodigo": "2.716",
+      "pdvCodigoBarras": "2030400",
+      "pdvDescricao": "GLUTAMINA",
+      "precoAnteriorPorKgOuUnidade": 169,
+      "precoNovoPorKgOuUnidade": 169
+    },
+    {
+      "id": "prod-176",
+      "nome": "Leite de Coco em Pó",
+      "granel": true,
+      "pdvCodigo": "292",
+      "pdvCodigoBarras": "2004600",
+      "pdvDescricao": "LEITE DE COCO EM PO IMPORTADO",
+      "precoAnteriorPorKgOuUnidade": 140,
+      "precoNovoPorKgOuUnidade": 70
+    },
+    {
+      "id": "prod-177",
+      "nome": "Chantinho Mix em Pó",
+      "granel": true,
+      "pdvCodigo": "8.277",
+      "pdvCodigoBarras": "2088700",
+      "pdvDescricao": "CHANTIINHO MIX EM PO",
+      "precoAnteriorPorKgOuUnidade": 42,
+      "precoNovoPorKgOuUnidade": 42
+    },
+    {
+      "id": "prod-178",
+      "nome": "Stevia em Pó",
+      "granel": true,
+      "pdvCodigo": "9.316",
+      "pdvCodigoBarras": "2022100",
+      "pdvDescricao": "STEVIA EM PO",
+      "precoAnteriorPorKgOuUnidade": 180,
+      "precoNovoPorKgOuUnidade": 180
+    },
+    {
+      "id": "prod-179",
+      "nome": "Gelatina Pura",
+      "granel": true,
+      "pdvCodigo": "314",
+      "pdvCodigoBarras": "2007100",
+      "pdvDescricao": "GELATINA PURA",
+      "precoAnteriorPorKgOuUnidade": 140,
+      "precoNovoPorKgOuUnidade": 140
+    },
+    {
+      "id": "prod-180",
+      "nome": "Açúcar de Coco",
+      "granel": true,
+      "pdvCodigo": "5.961",
+      "pdvCodigoBarras": "2057900",
+      "pdvDescricao": "ACUCAR DE COCO",
+      "precoAnteriorPorKgOuUnidade": 45,
+      "precoNovoPorKgOuUnidade": 45
+    },
+    {
+      "id": "prod-181",
+      "nome": "Xylitol Adoçante Natural",
+      "granel": true,
+      "pdvCodigo": "293",
+      "pdvCodigoBarras": "2004700",
+      "pdvDescricao": "XYLITOL - ADOCANTE NATURAL",
+      "precoAnteriorPorKgOuUnidade": 65,
+      "precoNovoPorKgOuUnidade": 65
+    },
+    {
+      "id": "prod-182",
+      "nome": "Fubá Mimoso",
+      "granel": true,
+      "pdvCodigo": "344",
+      "pdvCodigoBarras": "2010100",
+      "pdvDescricao": "FUBA MIMOSO",
+      "precoAnteriorPorKgOuUnidade": 10,
+      "precoNovoPorKgOuUnidade": 10
+    },
+    {
+      "id": "prod-183",
+      "nome": "Farinha de Milho Amarela",
+      "granel": true,
+      "pdvCodigo": "6.221",
+      "pdvCodigoBarras": "2060100",
+      "pdvDescricao": "FARINHA DE MILHO AMARELA",
+      "precoAnteriorPorKgOuUnidade": 15,
+      "precoNovoPorKgOuUnidade": 15
+    },
+    {
+      "id": "prod-184",
+      "nome": "Pega Marido",
+      "granel": true,
+      "pdvCodigo": "385",
+      "pdvCodigoBarras": "2012800",
+      "pdvDescricao": "TEMPERO PEGA MARIDO",
+      "precoAnteriorPorKgOuUnidade": 52,
+      "precoNovoPorKgOuUnidade": 52
+    },
+    {
+      "id": "prod-185",
+      "nome": "Zathar",
+      "granel": true,
+      "pdvCodigo": "387",
+      "pdvCodigoBarras": "2013000",
+      "pdvDescricao": "ZATHAR",
+      "precoAnteriorPorKgOuUnidade": 18,
+      "precoNovoPorKgOuUnidade": 18
+    },
+    {
+      "id": "prod-186",
+      "nome": "Edu Guedes",
+      "granel": true,
+      "pdvCodigo": "322",
+      "pdvCodigoBarras": "2007900",
+      "pdvDescricao": "TEMPERO P/ CARNE EDU GUEDES",
+      "precoAnteriorPorKgOuUnidade": 43,
+      "precoNovoPorKgOuUnidade": 43
+    },
+    {
+      "id": "prod-187",
+      "nome": "Mix Aromas",
+      "granel": true,
+      "pdvCodigo": "6.132",
+      "pdvCodigoBarras": "2059100",
+      "pdvDescricao": "TEMPERO MIX AROMAS DE FEIJAO",
+      "precoAnteriorPorKgOuUnidade": 40,
+      "precoNovoPorKgOuUnidade": 40
+    },
+    {
+      "id": "prod-188",
+      "nome": "Cebola, Salsa Alho",
+      "granel": true,
+      "pdvCodigo": "328",
+      "pdvCodigoBarras": "2008500",
+      "pdvDescricao": "TEMPERO CEBOLA SALSA ALHO SEM SODIO",
+      "precoAnteriorPorKgOuUnidade": 53,
+      "precoNovoPorKgOuUnidade": 53
+    },
+    {
+      "id": "prod-189",
+      "nome": "Ana Maria",
+      "granel": true,
+      "pdvCodigo": "326",
+      "pdvCodigoBarras": "2008300",
+      "pdvDescricao": "TEMPERO ANA MARIA",
+      "precoAnteriorPorKgOuUnidade": 58,
+      "precoNovoPorKgOuUnidade": 58
+    },
+    {
+      "id": "prod-190",
+      "nome": "Chimi Churri Tradicional",
+      "granel": true,
+      "pdvCodigo": "323",
+      "pdvCodigoBarras": "2008000",
+      "pdvDescricao": "CHIMI CHURRI TRADICIONAL SEM SODIO",
+      "precoAnteriorPorKgOuUnidade": 62,
+      "precoNovoPorKgOuUnidade": 62
+    },
+    {
+      "id": "prod-191",
+      "nome": "Chimi Churri Defumado",
+      "granel": true,
+      "pdvCodigo": "5.832",
+      "pdvCodigoBarras": "2056600",
+      "pdvDescricao": "CHIMICHURRI DEFUMADO",
+      "precoAnteriorPorKgOuUnidade": 60,
+      "precoNovoPorKgOuUnidade": 60
+    },
+    {
+      "id": "prod-192",
+      "nome": "Mineirinho",
+      "granel": true,
+      "pdvCodigo": "389",
+      "pdvCodigoBarras": "2013200",
+      "pdvDescricao": "TEMPERO MINEIRINHO",
+      "precoAnteriorPorKgOuUnidade": 55.5,
+      "precoNovoPorKgOuUnidade": 55.5
+    },
+    {
+      "id": "prod-193",
+      "nome": "Chimi Churri c/ Pimenta",
+      "granel": true,
+      "pdvCodigo": "327",
+      "pdvCodigoBarras": "2008400",
+      "pdvDescricao": "CHIMI CHURRI C/ PIMENTA SEM SODIO",
+      "precoAnteriorPorKgOuUnidade": 60,
+      "precoNovoPorKgOuUnidade": 62
+    },
+    {
+      "id": "prod-194",
+      "nome": "Páprica Picante",
+      "granel": true,
+      "pdvCodigo": "454",
+      "pdvCodigoBarras": "2019700",
+      "pdvDescricao": "PAPRICA PICANTE",
+      "precoAnteriorPorKgOuUnidade": 19.99,
+      "precoNovoPorKgOuUnidade": 28
+    },
+    {
+      "id": "prod-195",
+      "nome": "Lemon Pepper",
+      "granel": true,
+      "pdvCodigo": "457",
+      "pdvCodigoBarras": "2020000",
+      "pdvDescricao": "LEMON PEPPER",
+      "precoAnteriorPorKgOuUnidade": 49,
+      "precoNovoPorKgOuUnidade": 55
+    },
+    {
+      "id": "prod-196",
+      "nome": "Pápricaa Doce Defumada",
+      "granel": true,
+      "pdvCodigo": "448",
+      "pdvCodigoBarras": "2019100",
+      "pdvDescricao": "PAPRICA DOCE DEFUMADA",
+      "precoAnteriorPorKgOuUnidade": 22,
+      "precoNovoPorKgOuUnidade": 30
+    },
+    {
+      "id": "prod-197",
+      "nome": "Páprica Doce",
+      "granel": true,
+      "pdvCodigo": "452",
+      "pdvCodigoBarras": "2019500",
+      "pdvDescricao": "PAPRICA DOCE",
+      "precoAnteriorPorKgOuUnidade": 20,
+      "precoNovoPorKgOuUnidade": 28
+    },
+    {
+      "id": "prod-198",
+      "nome": "Bahiano sem Pimenta",
+      "granel": true,
+      "pdvCodigo": "3.341",
+      "pdvCodigoBarras": "2024800",
+      "pdvDescricao": "TEMPERO BAIANO SEM PIMENTA",
+      "precoAnteriorPorKgOuUnidade": 19.99,
+      "precoNovoPorKgOuUnidade": 19.99
+    },
+    {
+      "id": "prod-199",
+      "nome": "Bahiano Fino",
+      "granel": true,
+      "pdvCodigo": "336",
+      "pdvCodigoBarras": "2009300",
+      "pdvDescricao": "TEMPERO BAIANO FINO",
+      "precoAnteriorPorKgOuUnidade": 19.99,
+      "precoNovoPorKgOuUnidade": 19.99
+    },
+    {
+      "id": "prod-200",
+      "nome": "Açafrão - Cúrcumã",
+      "granel": true,
+      "pdvCodigo": "261",
+      "pdvCodigoBarras": "2001500",
+      "pdvDescricao": "ACAFRAO EM PO - CURCUMA",
+      "precoAnteriorPorKgOuUnidade": 30,
+      "precoNovoPorKgOuUnidade": 30
+    },
+    {
+      "id": "prod-201",
+      "nome": "Açafrão Puro",
+      "granel": true,
+      "pdvCodigo": "3.337",
+      "pdvCodigoBarras": "2024400",
+      "pdvDescricao": "ACAFRAO PURO EM PO",
+      "precoAnteriorPorKgOuUnidade": 48,
+      "precoNovoPorKgOuUnidade": 48
+    },
+    {
+      "id": "prod-202",
+      "nome": "Alho Granulado",
+      "granel": true,
+      "pdvCodigo": "445",
+      "pdvCodigoBarras": "2018800",
+      "pdvDescricao": "ALHO GRANULADO",
+      "precoAnteriorPorKgOuUnidade": 33,
+      "precoNovoPorKgOuUnidade": 49
+    },
+    {
+      "id": "prod-203",
+      "nome": "Alho Frito",
+      "granel": true,
+      "pdvCodigo": "436",
+      "pdvCodigoBarras": "2017900",
+      "pdvDescricao": "ALHO FRITO",
+      "precoAnteriorPorKgOuUnidade": 49,
+      "precoNovoPorKgOuUnidade": 49
+    },
+    {
+      "id": "prod-204",
+      "nome": "Alho em Pó",
+      "granel": true,
+      "pdvCodigo": "441",
+      "pdvCodigoBarras": "2018400",
+      "pdvDescricao": "ALHO EM PO",
+      "precoAnteriorPorKgOuUnidade": 25,
+      "precoNovoPorKgOuUnidade": 34
+    },
+    {
+      "id": "prod-205",
+      "nome": "Creme de Cebola",
+      "granel": true,
+      "pdvCodigo": "462",
+      "pdvCodigoBarras": "2020500",
+      "pdvDescricao": "CREME DE CEBOLA",
+      "precoAnteriorPorKgOuUnidade": 33,
+      "precoNovoPorKgOuUnidade": 33
+    },
+    {
+      "id": "prod-206",
+      "nome": "Café de Milho",
+      "granel": true,
+      "pdvCodigo": "2.715",
+      "pdvCodigoBarras": "2030300",
+      "pdvDescricao": "CAFE DE MILHO TORRES TORRADO E MOIDO",
+      "precoAnteriorPorKgOuUnidade": 15.9,
+      "precoNovoPorKgOuUnidade": 32
+    },
+    {
+      "id": "prod-207",
+      "nome": "Tomilho",
+      "granel": true,
+      "pdvCodigo": "2.722",
+      "pdvCodigoBarras": "2031000",
+      "pdvDescricao": "TOMILHO",
+      "precoAnteriorPorKgOuUnidade": 22,
+      "precoNovoPorKgOuUnidade": 22
+    },
+    {
+      "id": "prod-208",
+      "nome": "Cravo da India em Grão",
+      "granel": true,
+      "pdvCodigo": "338",
+      "pdvCodigoBarras": "2009500",
+      "pdvDescricao": "CRAVO DA INDIA EM GRAO",
+      "precoAnteriorPorKgOuUnidade": 120,
+      "precoNovoPorKgOuUnidade": 120
+    },
+    {
+      "id": "prod-209",
+      "nome": "Maca Peruana Pura",
+      "granel": true,
+      "pdvCodigo": "337",
+      "pdvCodigoBarras": "2009400",
+      "pdvDescricao": "MACA PERUANA PURA",
+      "precoAnteriorPorKgOuUnidade": 70,
+      "precoNovoPorKgOuUnidade": 70
+    },
+    {
+      "id": "prod-210",
+      "nome": "Canela em Pau",
+      "granel": true,
+      "pdvCodigo": "459",
+      "pdvCodigoBarras": "2020200",
+      "pdvDescricao": "CANELA EM PAU",
+      "precoAnteriorPorKgOuUnidade": 100,
+      "precoNovoPorKgOuUnidade": 100
+    },
+    {
+      "id": "prod-211",
+      "nome": "Limão Desidratado",
+      "granel": true,
+      "pdvCodigo": "434",
+      "pdvCodigoBarras": "2017700",
+      "pdvDescricao": "LIMAO DESIDRATADO FATIAS",
+      "precoAnteriorPorKgOuUnidade": 50,
+      "precoNovoPorKgOuUnidade": 50
+    },
+    {
+      "id": "prod-212",
+      "nome": "Fibra de Maçã",
+      "granel": true,
+      "pdvCodigo": "5.301",
+      "pdvCodigoBarras": "2046800",
+      "pdvDescricao": "FIBRA MACA",
+      "precoAnteriorPorKgOuUnidade": 69,
+      "precoNovoPorKgOuUnidade": 69
+    },
+    {
+      "id": "prod-213",
+      "nome": "Feno Grego",
+      "granel": true,
+      "pdvCodigo": "6.292",
+      "pdvCodigoBarras": "2060300",
+      "pdvDescricao": "FENO GREGO EM GRAO",
+      "precoAnteriorPorKgOuUnidade": 30,
+      "precoNovoPorKgOuUnidade": 30
+    },
+    {
+      "id": "prod-214",
+      "nome": "Catuaba em Pó",
+      "granel": true,
+      "pdvCodigo": "6.291",
+      "pdvCodigoBarras": "2060400",
+      "pdvDescricao": "CATUABA EM PO",
+      "precoAnteriorPorKgOuUnidade": 45,
+      "precoNovoPorKgOuUnidade": 45
+    },
+    {
+      "id": "prod-215",
+      "nome": "Marapuama em Pó",
+      "granel": true,
+      "pdvCodigo": "6.840",
+      "pdvCodigoBarras": "2070400",
+      "pdvDescricao": "MARAPUAMA EM PO",
+      "precoAnteriorPorKgOuUnidade": 24,
+      "precoNovoPorKgOuUnidade": 35
+    },
+    {
+      "id": "prod-216",
+      "nome": "Alho Poró",
+      "granel": true,
+      "pdvCodigo": "376",
+      "pdvCodigoBarras": "2011800",
+      "pdvDescricao": "ALHO PORO",
+      "precoAnteriorPorKgOuUnidade": 86,
+      "precoNovoPorKgOuUnidade": 86
+    },
+    {
+      "id": "prod-217",
+      "nome": "Cevada",
+      "granel": true,
+      "pdvCodigo": "9.111",
+      "pdvCodigoBarras": "2099800",
+      "pdvDescricao": "CEVADA",
+      "precoAnteriorPorKgOuUnidade": 15,
+      "precoNovoPorKgOuUnidade": 15
+    },
+    {
+      "id": "prod-218",
+      "nome": "Berinjela em Pó",
+      "granel": true,
+      "pdvCodigo": "458",
+      "pdvCodigoBarras": "2020100",
+      "pdvDescricao": "BERINJELA EM PO",
+      "precoAnteriorPorKgOuUnidade": 35,
+      "precoNovoPorKgOuUnidade": 35
+    },
+    {
+      "id": "prod-219",
+      "nome": "Raiz de Curcúmã",
+      "granel": true,
+      "pdvCodigo": "5.309",
+      "pdvCodigoBarras": "2047200",
+      "pdvDescricao": "RAIZ DE CURCUMA",
+      "precoAnteriorPorKgOuUnidade": 45,
+      "precoNovoPorKgOuUnidade": 45
+    },
+    {
+      "id": "prod-220",
+      "nome": "Alecrim",
+      "granel": true,
+      "pdvCodigo": "2.718",
+      "pdvCodigoBarras": "2030600",
+      "pdvDescricao": "ALECRIM",
+      "precoAnteriorPorKgOuUnidade": 25,
+      "precoNovoPorKgOuUnidade": 25
+    },
+    {
+      "id": "prod-221",
+      "nome": "Manjericão Desidratado",
+      "granel": true,
+      "pdvCodigo": "396",
+      "pdvCodigoBarras": "2013900",
+      "pdvDescricao": "MANJERICAO DESID EM FLOCOS",
+      "precoAnteriorPorKgOuUnidade": 16,
+      "precoNovoPorKgOuUnidade": 16
+    },
+    {
+      "id": "prod-222",
+      "nome": "Ervas Finas",
+      "granel": true,
+      "pdvCodigo": "334",
+      "pdvCodigoBarras": "2009100",
+      "pdvDescricao": "ERVAS FINAS",
+      "precoAnteriorPorKgOuUnidade": 34,
+      "precoNovoPorKgOuUnidade": 34
+    },
+    {
+      "id": "prod-223",
+      "nome": "Vinagrate Desitratado",
+      "granel": true,
+      "pdvCodigo": "384",
+      "pdvCodigoBarras": "2012700",
+      "pdvDescricao": "VINAGRETE DESIDRATADO SEM SODIO",
+      "precoAnteriorPorKgOuUnidade": 60,
+      "precoNovoPorKgOuUnidade": 60
+    },
+    {
+      "id": "prod-224",
+      "nome": "Salsa Desitradado",
+      "granel": true,
+      "pdvCodigo": "378",
+      "pdvCodigoBarras": "2012000",
+      "pdvDescricao": "SALSA DESIDRATADA",
+      "precoAnteriorPorKgOuUnidade": 36,
+      "precoNovoPorKgOuUnidade": 36
+    },
+    {
+      "id": "prod-225",
+      "nome": "Cominho Moido",
+      "granel": true,
+      "pdvCodigo": "330",
+      "pdvCodigoBarras": "2008700",
+      "pdvDescricao": "COMINHO MOIDO",
+      "precoAnteriorPorKgOuUnidade": 45,
+      "precoNovoPorKgOuUnidade": 45
+    },
+    {
+      "id": "prod-226",
+      "nome": "Caldo de Carne",
+      "granel": true,
+      "pdvCodigo": "325",
+      "pdvCodigoBarras": "2008200",
+      "pdvDescricao": "CALDO DE CARNE",
+      "precoAnteriorPorKgOuUnidade": 15.5,
+      "precoNovoPorKgOuUnidade": 15.5
+    },
+    {
+      "id": "prod-227",
+      "nome": "Caldo de Galinha",
+      "granel": true,
+      "pdvCodigo": "319",
+      "pdvCodigoBarras": "2007600",
+      "pdvDescricao": "CALDO DE GALINHA",
+      "precoAnteriorPorKgOuUnidade": 19.99,
+      "precoNovoPorKgOuUnidade": 19.99
+    },
+    {
+      "id": "prod-228",
+      "nome": "Colorau Paraiba Extra",
+      "granel": true,
+      "pdvCodigo": "262",
+      "pdvCodigoBarras": "2001600",
+      "pdvDescricao": "COLORAU PARAIBA EXTRA",
+      "precoAnteriorPorKgOuUnidade": 28.5,
+      "precoNovoPorKgOuUnidade": 35
+    },
+    {
+      "id": "prod-229",
+      "nome": "Coentro em Flocos",
+      "granel": true,
+      "pdvCodigo": "8.897",
+      "pdvCodigoBarras": "2089900",
+      "pdvDescricao": "COENTRO EM FLOCOS",
+      "precoAnteriorPorKgOuUnidade": 50,
+      "precoNovoPorKgOuUnidade": 50
+    },
+    {
+      "id": "prod-230",
+      "nome": "Limão e Ervas Finas",
+      "granel": true,
+      "pdvCodigo": "456",
+      "pdvCodigoBarras": "2019900",
+      "pdvDescricao": "LIMAO E ERVAS FINAS",
+      "precoAnteriorPorKgOuUnidade": 41,
+      "precoNovoPorKgOuUnidade": 41
+    },
+    {
+      "id": "prod-231",
+      "nome": "Extrato de Soja Natural",
+      "granel": true,
+      "pdvCodigo": "425",
+      "pdvCodigoBarras": "2016800",
+      "pdvDescricao": "EXTRATO DE SOJA NATURAL",
+      "precoAnteriorPorKgOuUnidade": 24,
+      "precoNovoPorKgOuUnidade": 24
+    },
+    {
+      "id": "prod-232",
+      "nome": "Coentro em Pó",
+      "granel": true,
+      "pdvCodigo": "321",
+      "pdvCodigoBarras": "2007800",
+      "pdvDescricao": "COENTRO EM PO",
+      "precoAnteriorPorKgOuUnidade": 17.5,
+      "precoNovoPorKgOuUnidade": 17.5
+    },
+    {
+      "id": "prod-233",
+      "nome": "Mostarda em Pó",
+      "granel": true,
+      "pdvCodigo": "464",
+      "pdvCodigoBarras": "2020700",
+      "pdvDescricao": "MOSTARDA EM PO",
+      "precoAnteriorPorKgOuUnidade": 28,
+      "precoNovoPorKgOuUnidade": 28
+    },
+    {
+      "id": "prod-234",
+      "nome": "Curry",
+      "granel": true,
+      "pdvCodigo": "449",
+      "pdvCodigoBarras": "2019200",
+      "pdvDescricao": "CURRY",
+      "precoAnteriorPorKgOuUnidade": 19,
+      "precoNovoPorKgOuUnidade": 19
+    },
+    {
+      "id": "prod-235",
+      "nome": "Caldo de Bacon",
+      "granel": true,
+      "pdvCodigo": "329",
+      "pdvCodigoBarras": "2008600",
+      "pdvDescricao": "CALDO DE BACON",
+      "precoAnteriorPorKgOuUnidade": 12,
+      "precoNovoPorKgOuUnidade": 12
+    },
+    {
+      "id": "prod-236",
+      "nome": "Farinha de Banana Verde",
+      "granel": true,
+      "pdvCodigo": "4.100",
+      "pdvCodigoBarras": "2039800",
+      "pdvDescricao": "FARINHA DE BANANA VERDE INTEGR",
+      "precoAnteriorPorKgOuUnidade": 24,
+      "precoNovoPorKgOuUnidade": 45
+    },
+    {
+      "id": "prod-237",
+      "nome": "Germe de Trigo Tostado",
+      "granel": true,
+      "pdvCodigo": "443",
+      "pdvCodigoBarras": "2018600",
+      "pdvDescricao": "GERME DE TRIGO TOSTADO",
+      "precoAnteriorPorKgOuUnidade": 35,
+      "precoNovoPorKgOuUnidade": 35
+    },
+    {
+      "id": "prod-238",
+      "nome": "Noz Moscada Moida",
+      "granel": true,
+      "pdvCodigo": "2.962",
+      "pdvCodigoBarras": "2023800",
+      "pdvDescricao": "NOZ MOSCADA MOIDA",
+      "precoAnteriorPorKgOuUnidade": 62,
+      "precoNovoPorKgOuUnidade": 62
+    },
+    {
+      "id": "prod-239",
+      "nome": "Flor de Sal",
+      "granel": true,
+      "pdvCodigo": "453",
+      "pdvCodigoBarras": "2019600",
+      "pdvDescricao": "FLOR DE SAL",
+      "precoAnteriorPorKgOuUnidade": 46,
+      "precoNovoPorKgOuUnidade": 46
+    },
+    {
+      "id": "prod-240",
+      "nome": "Levedo de Cerveja em Pó",
+      "granel": true,
+      "pdvCodigo": "461",
+      "pdvCodigoBarras": "2020400",
+      "pdvDescricao": "LEVEDO DE CERVEJA EM PO",
+      "precoAnteriorPorKgOuUnidade": 53,
+      "precoNovoPorKgOuUnidade": 70
+    },
+    {
+      "id": "prod-241",
+      "nome": "Ajinomoto Glutamato",
+      "granel": true,
+      "pdvCodigo": "455",
+      "pdvCodigoBarras": "2019800",
+      "pdvDescricao": "AJINOMOTO GLUTAMATO MONOSSODIC O",
+      "precoAnteriorPorKgOuUnidade": 35,
+      "precoNovoPorKgOuUnidade": 35
+    },
+    {
+      "id": "prod-242",
+      "nome": "Coco Chips Branco",
+      "granel": true,
+      "pdvCodigo": "5.844",
+      "pdvCodigoBarras": "2057400",
+      "pdvDescricao": "COCO CHPS BRANCO",
+      "precoAnteriorPorKgOuUnidade": 75,
+      "precoNovoPorKgOuUnidade": 75
+    },
+    {
+      "id": "prod-243",
+      "nome": "Semente de Girasol s/ Casca",
+      "granel": true,
+      "pdvCodigo": "403",
+      "pdvCodigoBarras": "2014600",
+      "pdvDescricao": "SEMENTE DE GIRASSOL S/ CASCA PEPITA",
+      "precoAnteriorPorKgOuUnidade": 35,
+      "precoNovoPorKgOuUnidade": 35
+    },
+    {
+      "id": "prod-244",
+      "nome": "Tâmara C/ Caroço",
+      "granel": true,
+      "pdvCodigo": "5.681",
+      "pdvCodigoBarras": "",
+      "pdvDescricao": "TAMARA C/ CAROCO",
+      "precoAnteriorPorKgOuUnidade": 42,
+      "precoNovoPorKgOuUnidade": 42
+    },
+    {
+      "id": "prod-245",
+      "nome": "Tâmara S/ Caroço",
+      "granel": true,
+      "pdvCodigo": "415",
+      "pdvCodigoBarras": "2015800",
+      "pdvDescricao": "TAMARA S/ CAROCO",
+      "precoAnteriorPorKgOuUnidade": 45,
+      "precoNovoPorKgOuUnidade": 52
+    },
+    {
+      "id": "prod-246",
+      "nome": "Sal do Himalaia Fino",
+      "granel": true,
+      "pdvCodigo": "348",
+      "pdvCodigoBarras": "2010500",
+      "pdvDescricao": "SAL DO HIMALAIA FINO",
+      "precoAnteriorPorKgOuUnidade": 9,
+      "precoNovoPorKgOuUnidade": 10
+    },
+    {
+      "id": "prod-247",
+      "nome": "Açúcar Demerara",
+      "granel": true,
+      "pdvCodigo": "301",
+      "pdvCodigoBarras": "2005500",
+      "pdvDescricao": "ACUCAR DEMERARA ORGANICO DOURA DO",
+      "precoAnteriorPorKgOuUnidade": 15.5,
+      "precoNovoPorKgOuUnidade": 15.5
+    },
+    {
+      "id": "prod-248",
+      "nome": "Açúcar Mascavo",
+      "granel": true,
+      "pdvCodigo": "268",
+      "pdvCodigoBarras": "2002200",
+      "pdvDescricao": "ACUCAR MASCAVO",
+      "precoAnteriorPorKgOuUnidade": 11,
+      "precoNovoPorKgOuUnidade": 19.99
+    },
+    {
+      "id": "prod-249",
+      "nome": "Sal Marinho",
+      "granel": true,
+      "pdvCodigo": "8.900",
+      "pdvCodigoBarras": "2089600",
+      "pdvDescricao": "SAL MARINHO",
+      "precoAnteriorPorKgOuUnidade": 8,
+      "precoNovoPorKgOuUnidade": 8
+    },
+    {
+      "id": "prod-250",
+      "nome": "Coco Ralado em Flocos",
+      "granel": true,
+      "pdvCodigo": "258",
+      "pdvCodigoBarras": "2001200",
+      "pdvDescricao": "COCO RALADO FLOCOS",
+      "precoAnteriorPorKgOuUnidade": 85,
+      "precoNovoPorKgOuUnidade": 85
+    },
+    {
+      "id": "prod-251",
+      "nome": "Coco Ralado Fino",
+      "granel": true,
+      "pdvCodigo": "259",
+      "pdvCodigoBarras": "2001300",
+      "pdvDescricao": "COCO RALADO FINO",
+      "precoAnteriorPorKgOuUnidade": 46,
+      "precoNovoPorKgOuUnidade": 65
+    },
+    {
+      "id": "prod-252",
+      "nome": "Amendoim Salsa e Cebola",
+      "granel": true,
+      "pdvCodigo": "274",
+      "pdvCodigoBarras": "2002800",
+      "pdvDescricao": "AMENDOIM SALSA E CEBOLA",
+      "precoAnteriorPorKgOuUnidade": 31,
+      "precoNovoPorKgOuUnidade": 31
+    },
+    {
+      "id": "prod-253",
+      "nome": "Amendoim Natural",
+      "granel": true,
+      "pdvCodigo": "289",
+      "pdvCodigoBarras": "2004300",
+      "pdvDescricao": "AMENDOIM NATURAL",
+      "precoAnteriorPorKgOuUnidade": 31,
+      "precoNovoPorKgOuUnidade": 31
+    },
+    {
+      "id": "prod-254",
+      "nome": "Castanha de Caju S/Sal",
+      "granel": true,
+      "pdvCodigo": "355",
+      "pdvCodigoBarras": "2011300",
+      "pdvDescricao": "CASTANHA DE CAJU W1 S/ SAL",
+      "precoAnteriorPorKgOuUnidade": 120,
+      "precoNovoPorKgOuUnidade": 120
+    },
+    {
+      "id": "prod-255",
+      "nome": "Amendoim Picante",
+      "granel": true,
+      "pdvCodigo": "275",
+      "pdvCodigoBarras": "2002900",
+      "pdvDescricao": "AMENDOIM PICANTE",
+      "precoAnteriorPorKgOuUnidade": 31,
+      "precoNovoPorKgOuUnidade": 31
+    },
+    {
+      "id": "prod-256",
+      "nome": "Castanha de Caju C/ Sal",
+      "granel": true,
+      "pdvCodigo": "354",
+      "pdvCodigoBarras": "2011200",
+      "pdvDescricao": "CASTANHA DE CAJU SLW1 COM SAL",
+      "precoAnteriorPorKgOuUnidade": 120,
+      "precoNovoPorKgOuUnidade": 120
+    },
+    {
+      "id": "prod-257",
+      "nome": "Amendoim Mendorato",
+      "granel": true,
+      "pdvCodigo": "276",
+      "pdvCodigoBarras": "2003000",
+      "pdvDescricao": "MENDORATO - AMENDOIM JAPONES",
+      "precoAnteriorPorKgOuUnidade": 31,
+      "precoNovoPorKgOuUnidade": 31
+    },
+    {
+      "id": "prod-258",
+      "nome": "Castanha do Pará Quebrada",
+      "granel": true,
+      "pdvCodigo": "357",
+      "pdvCodigoBarras": "2011500",
+      "pdvDescricao": "CASTANHA DO PARA QUEBRADA",
+      "precoAnteriorPorKgOuUnidade": 69.99,
+      "precoNovoPorKgOuUnidade": 160
+    },
+    {
+      "id": "prod-259",
+      "nome": "Amendoim Ovinho",
+      "granel": true,
+      "pdvCodigo": "270",
+      "pdvCodigoBarras": "2002400",
+      "pdvDescricao": "AMENDOIM OVINHO",
+      "precoAnteriorPorKgOuUnidade": 35,
+      "precoNovoPorKgOuUnidade": 35
+    },
+    {
+      "id": "prod-260",
+      "nome": "Amendoim Doce Vermelho",
+      "granel": true,
+      "pdvCodigo": "273",
+      "pdvCodigoBarras": "2002700",
+      "pdvDescricao": "AMENDOIM DOCE VERMELHO",
+      "precoAnteriorPorKgOuUnidade": 28,
+      "precoNovoPorKgOuUnidade": 31
+    },
+    {
+      "id": "prod-261",
+      "nome": "Amendoim Sem Pele e Sem sal",
+      "granel": true,
+      "pdvCodigo": "286",
+      "pdvCodigoBarras": "2004000",
+      "pdvDescricao": "AMENDOIM S/ PELE S/ SAL TORRAD O",
+      "precoAnteriorPorKgOuUnidade": 24,
+      "precoNovoPorKgOuUnidade": 24
+    },
+    {
+      "id": "prod-262",
+      "nome": "Amendoim Sem Pele com Sal",
+      "granel": true,
+      "pdvCodigo": "287",
+      "pdvCodigoBarras": "2004100",
+      "pdvDescricao": "AMENDOIM S/ PELE C/ SAL",
+      "precoAnteriorPorKgOuUnidade": 24,
+      "precoNovoPorKgOuUnidade": 24
+    },
+    {
+      "id": "prod-263",
+      "nome": "Amendoim s/ Pele c/ Alho",
+      "granel": true,
+      "pdvCodigo": "431",
+      "pdvCodigoBarras": "2017400",
+      "pdvDescricao": "AMENDOIM S/ PELE C/ ALHO",
+      "precoAnteriorPorKgOuUnidade": 36,
+      "precoNovoPorKgOuUnidade": 36
+    },
+    {
+      "id": "prod-264",
+      "nome": "Amendoim Hanner Frito",
+      "granel": true,
+      "pdvCodigo": "272",
+      "pdvCodigoBarras": "2002600",
+      "pdvDescricao": "AMENDOIM HANNER FRITO C/P TORR ADO SALGADO",
+      "precoAnteriorPorKgOuUnidade": 28,
+      "precoNovoPorKgOuUnidade": 28
+    },
+    {
+      "id": "prod-265",
+      "nome": "Macarrão Tricolor",
+      "granel": true,
+      "pdvCodigo": "3.756",
+      "pdvCodigoBarras": "2028300",
+      "pdvDescricao": "MACARRAO TRICOLOR PARAFUSO",
+      "precoAnteriorPorKgOuUnidade": 24,
+      "precoNovoPorKgOuUnidade": 24
+    },
+    {
+      "id": "prod-266",
+      "nome": "Nozes Mariposa",
+      "granel": true,
+      "pdvCodigo": "252",
+      "pdvCodigoBarras": "2000600",
+      "pdvDescricao": "NOZES MARIPOSA 80/20%",
+      "precoAnteriorPorKgOuUnidade": 109.99,
+      "precoNovoPorKgOuUnidade": 109.99
+    },
+    {
+      "id": "prod-267",
+      "nome": "Castanha de Caju c/ Leite condensado",
+      "granel": true,
+      "pdvCodigo": "379",
+      "pdvCodigoBarras": "2012200",
+      "pdvDescricao": "CASTANHA DE CAJU C/ LEITE COND ENSADO CARAMELIZADA",
+      "precoAnteriorPorKgOuUnidade": 89,
+      "precoNovoPorKgOuUnidade": 89
+    },
+    {
+      "id": "prod-268",
+      "nome": "MarshMallow Torcido",
+      "granel": true,
+      "pdvCodigo": "3.737",
+      "pdvCodigoBarras": "2026400",
+      "pdvDescricao": "MARSHMALLOW TORCIDO",
+      "precoAnteriorPorKgOuUnidade": 63,
+      "precoNovoPorKgOuUnidade": 63
+    },
+    {
+      "id": "prod-269",
+      "nome": "Fini Amoras",
+      "granel": true,
+      "pdvCodigo": "3.763",
+      "pdvCodigoBarras": "2029000",
+      "pdvDescricao": "AMORAS FINI",
+      "precoAnteriorPorKgOuUnidade": 77,
+      "precoNovoPorKgOuUnidade": 70
+    },
+    {
+      "id": "prod-270",
+      "nome": "Castanha de Caju Crua",
+      "granel": true,
+      "pdvCodigo": "9.774",
+      "pdvCodigoBarras": "2097500",
+      "pdvDescricao": "CASTANHA DE CAJU CRUA",
+      "precoAnteriorPorKgOuUnidade": 119.99,
+      "precoNovoPorKgOuUnidade": 119.99
+    },
+    {
+      "id": "prod-271",
+      "nome": "Cookies de Amendoim",
+      "granel": true,
+      "pdvCodigo": "250",
+      "pdvCodigoBarras": "2000400",
+      "pdvDescricao": "COOKIES DE AMENDOIM C/ LINHACA S/ GLUTEN",
+      "precoAnteriorPorKgOuUnidade": 57,
+      "precoNovoPorKgOuUnidade": 57
+    },
+    {
+      "id": "prod-272",
+      "nome": "Gomets",
+      "granel": true,
+      "pdvCodigo": "7.578",
+      "pdvCodigoBarras": "2078000",
+      "pdvDescricao": "GOMETS",
+      "precoAnteriorPorKgOuUnidade": 23,
+      "precoNovoPorKgOuUnidade": 25
+    },
+    {
+      "id": "prod-273",
+      "nome": "Gengibre em Pó",
+      "granel": true,
+      "pdvCodigo": "324",
+      "pdvCodigoBarras": "2008100",
+      "pdvDescricao": "GENGIBRE EM PO",
+      "precoAnteriorPorKgOuUnidade": 45,
+      "precoNovoPorKgOuUnidade": 45
+    },
+    {
+      "id": "prod-274",
+      "nome": "Guaraná em Pó",
+      "granel": true,
+      "pdvCodigo": "333",
+      "pdvCodigoBarras": "2009000",
+      "pdvDescricao": "GUARANA EM PO",
+      "precoAnteriorPorKgOuUnidade": 56,
+      "precoNovoPorKgOuUnidade": 56
+    },
+    {
+      "id": "prod-275",
+      "nome": "Farinha de Uva",
+      "granel": true,
+      "pdvCodigo": "8.398",
+      "pdvCodigoBarras": "2089100",
+      "pdvDescricao": "FARINHA DE UVA",
+      "precoAnteriorPorKgOuUnidade": 49.99,
+      "precoNovoPorKgOuUnidade": 49.99
+    },
+    {
+      "id": "prod-276",
+      "nome": "Farinha de Beterraba",
+      "granel": true,
+      "pdvCodigo": "8.627",
+      "pdvCodigoBarras": "2098500",
+      "pdvDescricao": "FARINHA DE BETERREBA EM PO",
+      "precoAnteriorPorKgOuUnidade": 120,
+      "precoNovoPorKgOuUnidade": 120
+    },
+    {
+      "id": "prod-277",
+      "nome": "Mix de Castanhas Nobres",
+      "granel": true,
+      "pdvCodigo": "253",
+      "pdvCodigoBarras": "2000700",
+      "pdvDescricao": "MIX DE CASTANHAS NOBRES S/ SAL",
+      "precoAnteriorPorKgOuUnidade": 121,
+      "precoNovoPorKgOuUnidade": 170
+    },
+    {
+      "id": "prod-278",
+      "nome": "Frutas Cristalizadas",
+      "granel": true,
+      "pdvCodigo": "279",
+      "pdvCodigoBarras": "2003300",
+      "pdvDescricao": "FRUTAS CRISTALIZADAS",
+      "precoAnteriorPorKgOuUnidade": 19,
+      "precoNovoPorKgOuUnidade": 19
+    },
+    {
+      "id": "prod-279",
+      "nome": "Uva Passa Branca",
+      "granel": true,
+      "pdvCodigo": "281",
+      "pdvCodigoBarras": "2003500",
+      "pdvDescricao": "UVA PASSA BRANCA",
+      "precoAnteriorPorKgOuUnidade": 58,
+      "precoNovoPorKgOuUnidade": 80
+    },
+    {
+      "id": "prod-280",
+      "nome": "Ameixa s/ Caroço",
+      "granel": true,
+      "pdvCodigo": "271",
+      "pdvCodigoBarras": "2002500",
+      "pdvDescricao": "AMEIXA S/ CAROCO",
+      "precoAnteriorPorKgOuUnidade": 55,
+      "precoNovoPorKgOuUnidade": 69.99
+    },
+    {
+      "id": "prod-281",
+      "nome": "Uva Passa Preta",
+      "granel": true,
+      "pdvCodigo": "280",
+      "pdvCodigoBarras": "2003400",
+      "pdvDescricao": "UVA PASSA PRETA",
+      "precoAnteriorPorKgOuUnidade": 38,
+      "precoNovoPorKgOuUnidade": 38
+    },
+    {
+      "id": "prod-282",
+      "nome": "Milho Mostarde e Mel",
+      "granel": true,
+      "pdvCodigo": "257",
+      "pdvCodigoBarras": "2001100",
+      "pdvDescricao": "MILHO MOSTARDA E MEL ESPANHOL",
+      "precoAnteriorPorKgOuUnidade": 69,
+      "precoNovoPorKgOuUnidade": 89.99
+    },
+    {
+      "id": "prod-283",
+      "nome": "Amendoim Vermelho Cru",
+      "granel": true,
+      "pdvCodigo": "4.854",
+      "pdvCodigoBarras": "2044200",
+      "pdvDescricao": "AMENDOIM VERMELHO CRU HPS",
+      "precoAnteriorPorKgOuUnidade": 38,
+      "precoNovoPorKgOuUnidade": 55
+    },
+    {
+      "id": "prod-284",
+      "nome": "Xerém de Amendoim",
+      "granel": true,
+      "pdvCodigo": "4.853",
+      "pdvCodigoBarras": "2044100",
+      "pdvDescricao": "XEREM DE AMENDOIM",
+      "precoAnteriorPorKgOuUnidade": 25,
+      "precoNovoPorKgOuUnidade": 25
+    },
+    {
+      "id": "prod-285",
+      "nome": "Farinha de Amendoim",
+      "granel": true,
+      "pdvCodigo": "288",
+      "pdvCodigoBarras": "2004200",
+      "pdvDescricao": "FARINHA DE AMENDOIM",
+      "precoAnteriorPorKgOuUnidade": 24,
+      "precoNovoPorKgOuUnidade": 24
+    },
+    {
+      "id": "prod-286",
+      "nome": "Xerém de Castanha de Caju",
+      "granel": true,
+      "pdvCodigo": "4.855",
+      "pdvCodigoBarras": "2044300",
+      "pdvDescricao": "XEREM DE CAST. CAJU TORRADO",
+      "precoAnteriorPorKgOuUnidade": 55,
+      "precoNovoPorKgOuUnidade": 55
+    },
+    {
+      "id": "prod-287",
+      "nome": "Amendoa Torrada s/ Sal",
+      "granel": true,
+      "pdvCodigo": "433",
+      "pdvCodigoBarras": "2017600",
+      "pdvDescricao": "AMENDOA TORRADA SEM SAL",
+      "precoAnteriorPorKgOuUnidade": 81,
+      "precoNovoPorKgOuUnidade": 120
+    },
+    {
+      "id": "prod-288",
+      "nome": "Amendoa Defumada",
+      "granel": true,
+      "pdvCodigo": "7.113",
+      "pdvCodigoBarras": "2070900",
+      "pdvDescricao": "AMENDOA DEFUMADA",
+      "precoAnteriorPorKgOuUnidade": 120,
+      "precoNovoPorKgOuUnidade": 120
+    },
+    {
+      "id": "prod-289",
+      "nome": "Proteina de Soja Miuda",
+      "granel": true,
+      "pdvCodigo": "408",
+      "pdvCodigoBarras": "2015100",
+      "pdvDescricao": "PROTEINA DE SOJA MIUDA NATURAL NL4000-20",
+      "precoAnteriorPorKgOuUnidade": 20,
+      "precoNovoPorKgOuUnidade": 35
+    },
+    {
+      "id": "prod-290",
+      "nome": "Amendoa Laminada",
+      "granel": true,
+      "pdvCodigo": "263",
+      "pdvCodigoBarras": "2001700",
+      "pdvDescricao": "AMENDOA LAMINADA",
+      "precoAnteriorPorKgOuUnidade": 83.5,
+      "precoNovoPorKgOuUnidade": 150
+    },
+    {
+      "id": "prod-291",
+      "nome": "Suspiro Novais",
+      "granel": true,
+      "pdvCodigo": "3.741",
+      "pdvCodigoBarras": "2026800",
+      "pdvDescricao": "SUSPIRO NOVAIS",
+      "precoAnteriorPorKgOuUnidade": 74,
+      "precoNovoPorKgOuUnidade": 99.99
+    },
+    {
+      "id": "prod-292",
+      "nome": "Proteina de Soja Miuda",
+      "granel": true,
+      "pdvCodigo": "407",
+      "pdvCodigoBarras": "2015000",
+      "pdvDescricao": "PROTEINA DE SOJA MIUDA CARAMEL O CD4000-20",
+      "precoAnteriorPorKgOuUnidade": 20,
+      "precoNovoPorKgOuUnidade": 35
+    },
+    {
+      "id": "prod-293",
+      "nome": "Arroz Preto",
+      "granel": true,
+      "pdvCodigo": "432",
+      "pdvCodigoBarras": "2017500",
+      "pdvDescricao": "ARROZ PRETO",
+      "precoAnteriorPorKgOuUnidade": 42,
+      "precoNovoPorKgOuUnidade": 42
+    },
+    {
+      "id": "prod-294",
+      "nome": "Arroz Cateto",
+      "granel": true,
+      "pdvCodigo": "5.303",
+      "pdvCodigoBarras": "2047000",
+      "pdvDescricao": "ARROZ CATETO INTEGRAL",
+      "precoAnteriorPorKgOuUnidade": 16,
+      "precoNovoPorKgOuUnidade": 23
+    },
+    {
+      "id": "prod-295",
+      "nome": "Arroz Vermelho Integral",
+      "granel": true,
+      "pdvCodigo": "429",
+      "pdvCodigoBarras": "2017200",
+      "pdvDescricao": "ARROZ VERMELHO INTEGRAL",
+      "precoAnteriorPorKgOuUnidade": 20,
+      "precoNovoPorKgOuUnidade": 20
+    },
+    {
+      "id": "prod-296",
+      "nome": "Arroz Agulha Integral",
+      "granel": true,
+      "pdvCodigo": "294",
+      "pdvCodigoBarras": "2004800",
+      "pdvDescricao": "ARROZ AGULHA INTEGRAL",
+      "precoAnteriorPorKgOuUnidade": 16,
+      "precoNovoPorKgOuUnidade": 16
+    },
+    {
+      "id": "prod-297",
+      "nome": "Arroz 7 Grãos",
+      "granel": true,
+      "pdvCodigo": "295",
+      "pdvCodigoBarras": "2004900",
+      "pdvDescricao": "ARROZ 7 GRAOS",
+      "precoAnteriorPorKgOuUnidade": 28,
+      "precoNovoPorKgOuUnidade": 28
+    },
+    {
+      "id": "prod-298",
+      "nome": "Trigo em Grão",
+      "granel": true,
+      "pdvCodigo": "8.990",
+      "pdvCodigoBarras": "2099100",
+      "pdvDescricao": "TRIGO EM GRAO",
+      "precoAnteriorPorKgOuUnidade": 10,
+      "precoNovoPorKgOuUnidade": 10
+    },
+    {
+      "id": "prod-299",
+      "nome": "Arroz á Grega",
+      "granel": true,
+      "pdvCodigo": "8.192",
+      "pdvCodigoBarras": "2080100",
+      "pdvDescricao": "ARROZ A GREGA",
+      "precoAnteriorPorKgOuUnidade": 25,
+      "precoNovoPorKgOuUnidade": 25
+    },
+    {
+      "id": "prod-300",
+      "nome": "Mix de Frutas Completas",
+      "granel": true,
+      "pdvCodigo": "7.915",
+      "pdvCodigoBarras": "2048100",
+      "pdvDescricao": "MIX DE FRUTAS COMPLETAS",
+      "precoAnteriorPorKgOuUnidade": 110,
+      "precoNovoPorKgOuUnidade": 140
+    },
+    {
+      "id": "prod-301",
+      "nome": "Amêndoa Crua",
+      "granel": true,
+      "pdvCodigo": "291",
+      "pdvCodigoBarras": "2004500",
+      "pdvDescricao": "AMENDOA CRUA",
+      "precoAnteriorPorKgOuUnidade": 120,
+      "precoNovoPorKgOuUnidade": 120
+    },
+    {
+      "id": "prod-302",
+      "nome": "Banana Chips Salgada",
+      "granel": true,
+      "pdvCodigo": "307",
+      "pdvCodigoBarras": "2006100",
+      "pdvDescricao": "BANANA CHIPS SALGADA",
+      "precoAnteriorPorKgOuUnidade": 50,
+      "precoNovoPorKgOuUnidade": 50
+    },
+    {
+      "id": "prod-303",
+      "nome": "Banana Chips Canela",
+      "granel": true,
+      "pdvCodigo": "309",
+      "pdvCodigoBarras": "2006300",
+      "pdvDescricao": "BANANA CHIPS C/ CANELA",
+      "precoAnteriorPorKgOuUnidade": 50,
+      "precoNovoPorKgOuUnidade": 50
+    },
+    {
+      "id": "prod-304",
+      "nome": "Aros Cebola",
+      "granel": true,
+      "pdvCodigo": "3.768",
+      "pdvCodigoBarras": "2029500",
+      "pdvDescricao": "AROS DE CEBOLA",
+      "precoAnteriorPorKgOuUnidade": 145,
+      "precoNovoPorKgOuUnidade": 145
+    },
+    {
+      "id": "prod-305",
+      "nome": "Floco de Arroz Crocante",
+      "granel": true,
+      "pdvCodigo": "9.318",
+      "pdvCodigoBarras": "2022300",
+      "pdvDescricao": "FLOCO DE AROZ CROCANTE",
+      "precoAnteriorPorKgOuUnidade": 30,
+      "precoNovoPorKgOuUnidade": 30
+    },
+    {
+      "id": "prod-306",
+      "nome": "Biscoito de Linhaça c/ Azeite",
+      "granel": true,
+      "pdvCodigo": "249",
+      "pdvCodigoBarras": "2000300",
+      "pdvDescricao": "BISCOITO AZEITE DE LINHACA ACAFRAO",
+      "precoAnteriorPorKgOuUnidade": 65,
+      "precoNovoPorKgOuUnidade": 65
+    },
+    {
+      "id": "prod-307",
+      "nome": "Tapioca Granulada Fina",
+      "granel": true,
+      "pdvCodigo": "401",
+      "pdvCodigoBarras": "2014400",
+      "pdvDescricao": "TAPIOCA GRANULADA FINA",
+      "precoAnteriorPorKgOuUnidade": 19,
+      "precoNovoPorKgOuUnidade": 19
+    },
+    {
+      "id": "prod-308",
+      "nome": "Flocão de Milho",
+      "granel": true,
+      "pdvCodigo": "9.673",
+      "pdvCodigoBarras": "2093100",
+      "pdvDescricao": "FLOCAO DE MILHO",
+      "precoAnteriorPorKgOuUnidade": 12,
+      "precoNovoPorKgOuUnidade": 12
+    },
+    {
+      "id": "prod-309",
+      "nome": "Biscoito de Arroz com Barbecure",
+      "granel": true,
+      "pdvCodigo": "377",
+      "pdvCodigoBarras": "2011900",
+      "pdvDescricao": "BISCOITO DE ARROZ BARBECUE",
+      "precoAnteriorPorKgOuUnidade": 102,
+      "precoNovoPorKgOuUnidade": 102
+    },
+    {
+      "id": "prod-310",
+      "nome": "Farinha de Madioca Grosso",
+      "granel": true,
+      "pdvCodigo": "419",
+      "pdvCodigoBarras": "2016200",
+      "pdvDescricao": "FARINHA DE MANDIOCA GROSSA",
+      "precoAnteriorPorKgOuUnidade": 10,
+      "precoNovoPorKgOuUnidade": 13
+    },
+    {
+      "id": "prod-311",
+      "nome": "Biscoito de Polvilho c/ Chia",
+      "granel": true,
+      "pdvCodigo": "3.750",
+      "pdvCodigoBarras": "2027700",
+      "pdvDescricao": "BISCOITO POLVILHO CHIA",
+      "precoAnteriorPorKgOuUnidade": 90,
+      "precoNovoPorKgOuUnidade": 90
+    },
+    {
+      "id": "prod-312",
+      "nome": "Farinha Panko",
+      "granel": true,
+      "pdvCodigo": "6.842",
+      "pdvCodigoBarras": "2070600",
+      "pdvDescricao": "FARINHA PANKO",
+      "precoAnteriorPorKgOuUnidade": 34,
+      "precoNovoPorKgOuUnidade": 34
+    },
+    {
+      "id": "prod-313",
+      "nome": "Farinha de Mandioca Fina",
+      "granel": true,
+      "pdvCodigo": "421",
+      "pdvCodigoBarras": "2016400",
+      "pdvDescricao": "FARINHA DE MANDIOCA FINA",
+      "precoAnteriorPorKgOuUnidade": 10,
+      "precoNovoPorKgOuUnidade": 10
+    },
+    {
+      "id": "prod-314",
+      "nome": "Trigo P/ Kibe",
+      "granel": true,
+      "pdvCodigo": "402",
+      "pdvCodigoBarras": "2014500",
+      "pdvDescricao": "TRIGO P/ KIBE",
+      "precoAnteriorPorKgOuUnidade": 15,
+      "precoNovoPorKgOuUnidade": 15
+    },
+    {
+      "id": "prod-315",
+      "nome": "Farinha de Rosca",
+      "granel": true,
+      "pdvCodigo": "6.049",
+      "pdvCodigoBarras": "2058400",
+      "pdvDescricao": "FARINHA DE ROSCA",
+      "precoAnteriorPorKgOuUnidade": 12,
+      "precoNovoPorKgOuUnidade": 20
+    },
+    {
+      "id": "prod-316",
+      "nome": "Macarrão de Arroz Penne",
+      "granel": true,
+      "pdvCodigo": "3.755",
+      "pdvCodigoBarras": "2028200",
+      "pdvDescricao": "MACARRAO DE ARROZ PENNE",
+      "precoAnteriorPorKgOuUnidade": 15,
+      "precoNovoPorKgOuUnidade": 15
+    },
+    {
+      "id": "prod-317",
+      "nome": "Macarrão integral Parafuso",
+      "granel": true,
+      "pdvCodigo": "3.752",
+      "pdvCodigoBarras": "2027900",
+      "pdvDescricao": "MACARRAO INTEGRAL PARAFUSO",
+      "precoAnteriorPorKgOuUnidade": 23,
+      "precoNovoPorKgOuUnidade": 23
+    },
+    {
+      "id": "prod-318",
+      "nome": "Macarrão de Arroz Parafuso",
+      "granel": true,
+      "pdvCodigo": "3.753",
+      "pdvCodigoBarras": "2028000",
+      "pdvDescricao": "MACARRAO DE ARROZ PARAFUSO",
+      "precoAnteriorPorKgOuUnidade": 15,
+      "precoNovoPorKgOuUnidade": 15
+    },
+    {
+      "id": "prod-319",
+      "nome": "Macarrão Integral Penne",
+      "granel": true,
+      "pdvCodigo": "3.754",
+      "pdvCodigoBarras": "2028100",
+      "pdvDescricao": "MACARRAO INTEGRAL PENNE",
+      "precoAnteriorPorKgOuUnidade": 23,
+      "precoNovoPorKgOuUnidade": 23
+    },
+    {
+      "id": "prod-320",
+      "nome": "Milho para Pipoca",
+      "granel": true,
+      "pdvCodigo": "254",
+      "pdvCodigoBarras": "2000800",
+      "pdvDescricao": "MILHO PARA PIPOCA",
+      "precoAnteriorPorKgOuUnidade": 12,
+      "precoNovoPorKgOuUnidade": 13
+    },
+    {
+      "id": "prod-321",
+      "nome": "Canjica Branca",
+      "granel": true,
+      "pdvCodigo": "426",
+      "pdvCodigoBarras": "2016900",
+      "pdvDescricao": "CANJICA BRANCA",
+      "precoAnteriorPorKgOuUnidade": 16,
+      "precoNovoPorKgOuUnidade": 16
+    },
+    {
+      "id": "prod-322",
+      "nome": "Quirela de Milho",
+      "granel": true,
+      "pdvCodigo": "4.856",
+      "pdvCodigoBarras": "2044400",
+      "pdvDescricao": "QUIRELA DE MILHO",
+      "precoAnteriorPorKgOuUnidade": 6.5,
+      "precoNovoPorKgOuUnidade": 10.5
+    },
+    {
+      "id": "prod-324",
+      "nome": "Sembei ao Leite",
+      "granel": true,
+      "pdvCodigo": "5.843",
+      "pdvCodigoBarras": "2057300",
+      "pdvDescricao": "SEMBEI AO LEITE",
+      "precoAnteriorPorKgOuUnidade": 80,
+      "precoNovoPorKgOuUnidade": 80
+    },
+    {
+      "id": "prod-325",
+      "nome": "Sembei Amendoim",
+      "granel": true,
+      "pdvCodigo": "5.842",
+      "pdvCodigoBarras": "2057200",
+      "pdvDescricao": "SEMBEI AMENDOIM",
+      "precoAnteriorPorKgOuUnidade": 80,
+      "precoNovoPorKgOuUnidade": 80
+    },
+    {
+      "id": "prod-326",
+      "nome": "Feijão Roxão",
+      "granel": true,
+      "pdvCodigo": "7.988",
+      "pdvCodigoBarras": "2088200",
+      "pdvDescricao": "FEIJAO ROXAO",
+      "precoAnteriorPorKgOuUnidade": 23,
+      "precoNovoPorKgOuUnidade": 23
+    },
+    {
+      "id": "prod-327",
+      "nome": "Feijão Preto",
+      "granel": true,
+      "pdvCodigo": "3.735",
+      "pdvCodigoBarras": "2026200",
+      "pdvDescricao": "FEIJAO PRETO",
+      "precoAnteriorPorKgOuUnidade": 17,
+      "precoNovoPorKgOuUnidade": 10
+    },
+    {
+      "id": "prod-329",
+      "nome": "Biscoito Beijo de Moça",
+      "granel": true,
+      "pdvCodigo": "5.925",
+      "pdvCodigoBarras": "2057700",
+      "pdvDescricao": "BISCOITO BEIJO DE MOCA MARACUJA",
+      "precoAnteriorPorKgOuUnidade": 90,
+      "precoNovoPorKgOuUnidade": 90
+    },
+    {
+      "id": "prod-330",
+      "nome": "Purê de Batata em Flocos",
+      "granel": true,
+      "pdvCodigo": "9.430",
+      "pdvCodigoBarras": "2099000",
+      "pdvDescricao": "PURE DE BATATA EM FLOCOS",
+      "precoAnteriorPorKgOuUnidade": 45,
+      "precoNovoPorKgOuUnidade": 45
+    },
+    {
+      "id": "prod-332",
+      "nome": "Biscoito Rosquinha Salgada",
+      "granel": true,
+      "pdvCodigo": "5.924",
+      "pdvCodigoBarras": "2057600",
+      "pdvDescricao": "BISCOITO ROSQUINHA SALGADA VEGANO",
+      "precoAnteriorPorKgOuUnidade": 90,
+      "precoNovoPorKgOuUnidade": 90
+    },
+    {
+      "id": "prod-333",
+      "nome": "Roscas de Milho e Erva Doce",
+      "granel": true,
+      "pdvCodigo": "5.963",
+      "pdvCodigoBarras": "2058100",
+      "pdvDescricao": "ROSCAS DE MILHO E ERVA DOCE",
+      "precoAnteriorPorKgOuUnidade": 79,
+      "precoNovoPorKgOuUnidade": 79
+    },
+    {
+      "id": "prod-335",
+      "nome": "Ebicen",
+      "granel": true,
+      "pdvCodigo": "3.761",
+      "pdvCodigoBarras": "2028800",
+      "pdvDescricao": "EBICEN",
+      "precoAnteriorPorKgOuUnidade": 120,
+      "precoNovoPorKgOuUnidade": 120
+    },
+    {
+      "id": "prod-336",
+      "nome": "Batata Mexicana c/ Cebola",
+      "granel": true,
+      "pdvCodigo": "3.770",
+      "pdvCodigoBarras": "2029700",
+      "pdvDescricao": "BATATA MEXICANA C/ CEBOLA",
+      "precoAnteriorPorKgOuUnidade": 98,
+      "precoNovoPorKgOuUnidade": 98
+    },
+    {
+      "id": "prod-338",
+      "nome": "Batata Mexicana Tradicional",
+      "granel": true,
+      "pdvCodigo": "3.769",
+      "pdvCodigoBarras": "2029600",
+      "pdvDescricao": "BATATA MEXICANA ORIGINAL",
+      "precoAnteriorPorKgOuUnidade": 98,
+      "precoNovoPorKgOuUnidade": 98
+    },
+    {
+      "id": "prod-339",
+      "nome": "Mandioquinha Chips",
+      "granel": true,
+      "pdvCodigo": "450",
+      "pdvCodigoBarras": "2019300",
+      "pdvDescricao": "MANDIOQUINHA CHIPS - KRASH",
+      "precoAnteriorPorKgOuUnidade": 150,
+      "precoNovoPorKgOuUnidade": 150
+    },
+    {
+      "id": "prod-340",
+      "nome": "Cookies de Baunilha",
+      "granel": true,
+      "pdvCodigo": "375",
+      "pdvCodigoBarras": "2011700",
+      "pdvDescricao": "COOKIES BAUNILHA GRANUTA",
+      "precoAnteriorPorKgOuUnidade": 46,
+      "precoNovoPorKgOuUnidade": 46
+    },
+    {
+      "id": "prod-341",
+      "nome": "Biscoito Torradinha",
+      "granel": true,
+      "pdvCodigo": "248",
+      "pdvCodigoBarras": "2000200",
+      "pdvDescricao": "BISCOITO TORRADINHA SEM PARAR DE ALHO",
+      "precoAnteriorPorKgOuUnidade": 45,
+      "precoNovoPorKgOuUnidade": 45
+    },
+    {
+      "id": "prod-342",
+      "nome": "Mix de Vegetais Chips",
+      "granel": true,
+      "pdvCodigo": "380",
+      "pdvCodigoBarras": "2012300",
+      "pdvDescricao": "MIX DE VEGETAIS CHIPS",
+      "precoAnteriorPorKgOuUnidade": 159,
+      "precoNovoPorKgOuUnidade": 180
+    },
+    {
+      "id": "prod-343",
+      "nome": "Torrada Tradicional",
+      "granel": true,
+      "pdvCodigo": "5.794",
+      "pdvCodigoBarras": "2055600",
+      "pdvDescricao": "TORRADA TRADIONAL",
+      "precoAnteriorPorKgOuUnidade": 30,
+      "precoNovoPorKgOuUnidade": 30
+    },
+    {
+      "id": "prod-344",
+      "nome": "Grão de Bico 12MM",
+      "granel": true,
+      "pdvCodigo": "298",
+      "pdvCodigoBarras": "2005200",
+      "pdvDescricao": "GRAO DE BICO 12MM",
+      "precoAnteriorPorKgOuUnidade": 29,
+      "precoNovoPorKgOuUnidade": 29
+    },
+    {
+      "id": "prod-345",
+      "nome": "Biscoito de Polvilho Parmesão",
+      "granel": true,
+      "pdvCodigo": "3.751",
+      "pdvCodigoBarras": "2027800",
+      "pdvDescricao": "BISCOITO POLVILHO PARMESAO TRIELI",
+      "precoAnteriorPorKgOuUnidade": 81,
+      "precoNovoPorKgOuUnidade": 81
+    },
+    {
+      "id": "prod-346",
+      "nome": "Lentilha Vermelha",
+      "granel": true,
+      "pdvCodigo": "413",
+      "pdvCodigoBarras": "2015600",
+      "pdvDescricao": "LENTILHA VERMELHA",
+      "precoAnteriorPorKgOuUnidade": 23,
+      "precoNovoPorKgOuUnidade": 23
+    },
+    {
+      "id": "prod-347",
+      "nome": "Lentilha Canadense",
+      "granel": true,
+      "pdvCodigo": "300",
+      "pdvCodigoBarras": "2005400",
+      "pdvDescricao": "LENTILHA CANADENSE",
+      "precoAnteriorPorKgOuUnidade": 32,
+      "precoNovoPorKgOuUnidade": 32
+    },
+    {
+      "id": "prod-348",
+      "nome": "Feijão Branco",
+      "granel": true,
+      "pdvCodigo": "3.733",
+      "pdvCodigoBarras": "2026000",
+      "pdvDescricao": "FEIJAO BRANCO",
+      "precoAnteriorPorKgOuUnidade": 32,
+      "precoNovoPorKgOuUnidade": 32
+    },
+    {
+      "id": "prod-349",
+      "nome": "Feijão de Corda",
+      "granel": true,
+      "pdvCodigo": "3.734",
+      "pdvCodigoBarras": "2026100",
+      "pdvDescricao": "FEIJAO DE CORDA",
+      "precoAnteriorPorKgOuUnidade": 20,
+      "precoNovoPorKgOuUnidade": 20
+    },
+    {
+      "id": "prod-350",
+      "nome": "Granola Completa",
+      "granel": true,
+      "pdvCodigo": "417",
+      "pdvCodigoBarras": "2016000",
+      "pdvDescricao": "GRANOLA COMPLETA GRANNY",
+      "precoAnteriorPorKgOuUnidade": 44,
+      "precoNovoPorKgOuUnidade": 44
+    },
+    {
+      "id": "prod-351",
+      "nome": "Granola Tradicional",
+      "granel": true,
+      "pdvCodigo": "381",
+      "pdvCodigoBarras": "2012400",
+      "pdvDescricao": "GRANOLA TRADICIONAL PRINAT",
+      "precoAnteriorPorKgOuUnidade": 32,
+      "precoNovoPorKgOuUnidade": 32
+    },
+    {
+      "id": "prod-352",
+      "nome": "Granola sem Açúcar",
+      "granel": true,
+      "pdvCodigo": "350",
+      "pdvCodigoBarras": "2010700",
+      "pdvDescricao": "GRANOLA S/ ACUCAR PRINAT",
+      "precoAnteriorPorKgOuUnidade": 41,
+      "precoNovoPorKgOuUnidade": 41
+    },
+    {
+      "id": "prod-353",
+      "nome": "Goma do Norte",
+      "granel": true,
+      "pdvCodigo": "302",
+      "pdvCodigoBarras": "2005600",
+      "pdvDescricao": "GOMA DO NORTE",
+      "precoAnteriorPorKgOuUnidade": 20,
+      "precoNovoPorKgOuUnidade": 20
+    },
+    {
+      "id": "prod-354",
+      "nome": "Polvilho Azedo",
+      "granel": true,
+      "pdvCodigo": "303",
+      "pdvCodigoBarras": "2005700",
+      "pdvDescricao": "POLVILHO AZEDO",
+      "precoAnteriorPorKgOuUnidade": 15,
+      "precoNovoPorKgOuUnidade": 15
+    },
+    {
+      "id": "prod-355",
+      "nome": "Damasco Turco Premium",
+      "granel": true,
+      "pdvCodigo": "4.857",
+      "pdvCodigoBarras": "2100100",
+      "pdvDescricao": "DAMASCO TURCO",
+      "precoAnteriorPorKgOuUnidade": 118,
+      "precoNovoPorKgOuUnidade": 210
+    },
+    {
+      "id": "prod-356",
+      "nome": "Polvilho Doce",
+      "granel": true,
+      "pdvCodigo": "304",
+      "pdvCodigoBarras": "2005800",
+      "pdvDescricao": "POLVILHO DOCE - FECULA DE MAN DIOCA",
+      "precoAnteriorPorKgOuUnidade": 13,
+      "precoNovoPorKgOuUnidade": 13
+    },
+    {
+      "id": "prod-357",
+      "nome": "Fécula de Batata",
+      "granel": true,
+      "pdvCodigo": "345",
+      "pdvCodigoBarras": "2010200",
+      "pdvDescricao": "FECULA DE BATATA",
+      "precoAnteriorPorKgOuUnidade": 18,
+      "precoNovoPorKgOuUnidade": 20
+    },
+    {
+      "id": "prod-358",
+      "nome": "Aveia Flocos Graudos",
+      "granel": true,
+      "pdvCodigo": "352",
+      "pdvCodigoBarras": "2010900",
+      "pdvDescricao": "AVEIA FLOCOS GRAUDO",
+      "precoAnteriorPorKgOuUnidade": 15,
+      "precoNovoPorKgOuUnidade": 15
+    },
+    {
+      "id": "prod-359",
+      "nome": "Aveia Flocos Finos",
+      "granel": true,
+      "pdvCodigo": "351",
+      "pdvCodigoBarras": "2010800",
+      "pdvDescricao": "AVEIA FLOCOS FINOS",
+      "precoAnteriorPorKgOuUnidade": 15,
+      "precoNovoPorKgOuUnidade": 15
+    },
+    {
+      "id": "prod-360",
+      "nome": "Farelo de Aveia",
+      "granel": true,
+      "pdvCodigo": "2.721",
+      "pdvCodigoBarras": "2030900",
+      "pdvDescricao": "FARELO DE AVEIA",
+      "precoAnteriorPorKgOuUnidade": 15,
+      "precoNovoPorKgOuUnidade": 15
+    },
+    {
+      "id": "prod-361",
+      "nome": "Farinha de Aveia",
+      "granel": true,
+      "pdvCodigo": "2.720",
+      "pdvCodigoBarras": "2030800",
+      "pdvDescricao": "FARINHA DE AVEIA",
+      "precoAnteriorPorKgOuUnidade": 15,
+      "precoNovoPorKgOuUnidade": 15
+    },
+    {
+      "id": "prod-362",
+      "nome": "Semente de Chia",
+      "granel": true,
+      "pdvCodigo": "411",
+      "pdvCodigoBarras": "2015400",
+      "pdvDescricao": "SEMENTE DE CHIA T1 PREMIUM",
+      "precoAnteriorPorKgOuUnidade": 45,
+      "precoNovoPorKgOuUnidade": 45
+    },
+    {
+      "id": "prod-363",
+      "nome": "Farinha de Trigo Integral",
+      "granel": true,
+      "pdvCodigo": "297",
+      "pdvCodigoBarras": "2005100",
+      "pdvDescricao": "FARINHA DE TRIGO INTEGRAL",
+      "precoAnteriorPorKgOuUnidade": 10,
+      "precoNovoPorKgOuUnidade": 15
+    },
+    {
+      "id": "prod-364",
+      "nome": "Bicarbonato de Sódio",
+      "granel": true,
+      "pdvCodigo": "353",
+      "pdvCodigoBarras": "2011000",
+      "pdvDescricao": "BICARBONATO DE SODIO",
+      "precoAnteriorPorKgOuUnidade": 15,
+      "precoNovoPorKgOuUnidade": 15
+    },
+    {
+      "id": "prod-365",
+      "nome": "Corn Sugar",
+      "granel": true,
+      "pdvCodigo": "284",
+      "pdvCodigoBarras": "2003800",
+      "pdvDescricao": "CORN SUGAR",
+      "precoAnteriorPorKgOuUnidade": 28,
+      "precoNovoPorKgOuUnidade": 45
+    },
+    {
+      "id": "prod-366",
+      "nome": "Corn Sugar Mascavo",
+      "granel": true,
+      "pdvCodigo": "422",
+      "pdvCodigoBarras": "2016500",
+      "pdvDescricao": "CORN SUGAR MASCAVO",
+      "precoAnteriorPorKgOuUnidade": 31,
+      "precoNovoPorKgOuUnidade": 31
+    },
+    {
+      "id": "prod-367",
+      "nome": "Corn Flakes Natural",
+      "granel": true,
+      "pdvCodigo": "347",
+      "pdvCodigoBarras": "2010400",
+      "pdvDescricao": "CORN FLAKES NATURAL",
+      "precoAnteriorPorKgOuUnidade": 38,
+      "precoNovoPorKgOuUnidade": 38
+    },
+    {
+      "id": "prod-368",
+      "nome": "Chocoboll",
+      "granel": true,
+      "pdvCodigo": "349",
+      "pdvCodigoBarras": "2010600",
+      "pdvDescricao": "CHOCOBOLL",
+      "precoAnteriorPorKgOuUnidade": 35,
+      "precoNovoPorKgOuUnidade": 35
+    },
+    {
+      "id": "prod-369",
+      "nome": "Fruit Rings",
+      "granel": true,
+      "pdvCodigo": "251",
+      "pdvCodigoBarras": "2000500",
+      "pdvDescricao": "FRUIT RINGS",
+      "precoAnteriorPorKgOuUnidade": 31,
+      "precoNovoPorKgOuUnidade": 31
+    },
+    {
+      "id": "prod-370",
+      "nome": "Oliveira",
+      "granel": true,
+      "pdvCodigo": "3.339",
+      "pdvCodigoBarras": "2024600",
+      "pdvDescricao": "OLIVEIRA",
+      "precoAnteriorPorKgOuUnidade": 42,
+      "precoNovoPorKgOuUnidade": 42
+    },
+    {
+      "id": "prod-371",
+      "nome": "Chá Verde Nacional",
+      "granel": true,
+      "pdvCodigo": "342",
+      "pdvCodigoBarras": "2009900",
+      "pdvDescricao": "CHA VERDE NACIONAL - BANCHA",
+      "precoAnteriorPorKgOuUnidade": 22,
+      "precoNovoPorKgOuUnidade": 35
+    },
+    {
+      "id": "prod-372",
+      "nome": "Orégano",
+      "granel": true,
+      "pdvCodigo": "317",
+      "pdvCodigoBarras": "2007400",
+      "pdvDescricao": "OREGANO",
+      "precoAnteriorPorKgOuUnidade": 42,
+      "precoNovoPorKgOuUnidade": 42
+    },
+    {
+      "id": "prod-373",
+      "nome": "Espinheira Santa",
+      "granel": true,
+      "pdvCodigo": "5.841",
+      "pdvCodigoBarras": "2057100",
+      "pdvDescricao": "ESPINHEIRA SANTA",
+      "precoAnteriorPorKgOuUnidade": 49,
+      "precoNovoPorKgOuUnidade": 49
+    },
+    {
+      "id": "prod-374",
+      "nome": "Louro Folhas",
+      "granel": true,
+      "pdvCodigo": "4.192",
+      "pdvCodigoBarras": "2041000",
+      "pdvDescricao": "LOURO FOLHAS",
+      "precoAnteriorPorKgOuUnidade": 48,
+      "precoNovoPorKgOuUnidade": 65
+    },
+    {
+      "id": "prod-375",
+      "nome": "Mulungu Flocos",
+      "granel": true,
+      "pdvCodigo": "9.220",
+      "pdvCodigoBarras": "2096400",
+      "pdvDescricao": "MULUNGU FLOCOS",
+      "precoAnteriorPorKgOuUnidade": 39,
+      "precoNovoPorKgOuUnidade": 39
+    },
+    {
+      "id": "prod-376",
+      "nome": "Camomila",
+      "granel": true,
+      "pdvCodigo": "282",
+      "pdvCodigoBarras": "2003600",
+      "pdvDescricao": "CAMOMILA EM FLOR",
+      "precoAnteriorPorKgOuUnidade": 55,
+      "precoNovoPorKgOuUnidade": 55
+    },
+    {
+      "id": "prod-377",
+      "nome": "Capim Cidreira",
+      "granel": true,
+      "pdvCodigo": "2.723",
+      "pdvCodigoBarras": "2031100",
+      "pdvDescricao": "CAPIM CIDREIRA - CHA",
+      "precoAnteriorPorKgOuUnidade": 35,
+      "precoNovoPorKgOuUnidade": 35
+    },
+    {
+      "id": "prod-378",
+      "nome": "Hibuscus",
+      "granel": true,
+      "pdvCodigo": "283",
+      "pdvCodigoBarras": "2003700",
+      "pdvDescricao": "HIBISCUS FLORES - CHA",
+      "precoAnteriorPorKgOuUnidade": 65,
+      "precoNovoPorKgOuUnidade": 65
+    },
+    {
+      "id": "prod-379",
+      "nome": "Cavalinha",
+      "granel": true,
+      "pdvCodigo": "343",
+      "pdvCodigoBarras": "2010000",
+      "pdvDescricao": "CAVALINHA",
+      "precoAnteriorPorKgOuUnidade": 45,
+      "precoNovoPorKgOuUnidade": 89
+    },
+    {
+      "id": "prod-380",
+      "nome": "Aroeira em Casca",
+      "granel": true,
+      "pdvCodigo": "9.221",
+      "pdvCodigoBarras": "2096500",
+      "pdvDescricao": "AROEIRA CASCA",
+      "precoAnteriorPorKgOuUnidade": 25,
+      "precoNovoPorKgOuUnidade": 30
+    },
+    {
+      "id": "prod-381",
+      "nome": "Sene",
+      "granel": true,
+      "pdvCodigo": "5.310",
+      "pdvCodigoBarras": "2047300",
+      "pdvDescricao": "SENE",
+      "precoAnteriorPorKgOuUnidade": 85,
+      "precoNovoPorKgOuUnidade": 85
+    },
+    {
+      "id": "prod-382",
+      "nome": "Boldo do Chile",
+      "granel": true,
+      "pdvCodigo": "2.724",
+      "pdvCodigoBarras": "2031200",
+      "pdvDescricao": "BOLDO DO CHILE",
+      "precoAnteriorPorKgOuUnidade": 88,
+      "precoNovoPorKgOuUnidade": 88
+    },
+    {
+      "id": "prod-383",
+      "nome": "Tanchagem",
+      "granel": true,
+      "pdvCodigo": "2.960",
+      "pdvCodigoBarras": "2023900",
+      "pdvDescricao": "TANCHAGEM",
+      "precoAnteriorPorKgOuUnidade": 72,
+      "precoNovoPorKgOuUnidade": 72
+    },
+    {
+      "id": "prod-384",
+      "nome": "Hortelã",
+      "granel": true,
+      "pdvCodigo": "5.840",
+      "pdvCodigoBarras": "2057000",
+      "pdvDescricao": "HORTELA EM FLOCOS",
+      "precoAnteriorPorKgOuUnidade": 38,
+      "precoNovoPorKgOuUnidade": 38
+    },
+    {
+      "id": "prod-385",
+      "nome": "Maçã p/ Chá",
+      "granel": true,
+      "pdvCodigo": "409",
+      "pdvCodigoBarras": "2015200",
+      "pdvDescricao": "MACA P/ CHA PREMIUM",
+      "precoAnteriorPorKgOuUnidade": 40,
+      "precoNovoPorKgOuUnidade": 40
+    },
+    {
+      "id": "prod-386",
+      "nome": "Anis Estrelado",
+      "granel": true,
+      "pdvCodigo": "318",
+      "pdvCodigoBarras": "2007500",
+      "pdvDescricao": "ANIS ESTRELADO",
+      "precoAnteriorPorKgOuUnidade": 127,
+      "precoNovoPorKgOuUnidade": 127
+    },
+    {
+      "id": "prod-387",
+      "nome": "Emburana",
+      "granel": true,
+      "pdvCodigo": "9.226",
+      "pdvCodigoBarras": "2097000",
+      "pdvDescricao": "EMBURANA CASCA",
+      "precoAnteriorPorKgOuUnidade": 36,
+      "precoNovoPorKgOuUnidade": 36
+    },
+    {
+      "id": "prod-388",
+      "nome": "Órapronobis",
+      "granel": true,
+      "pdvCodigo": "2.725",
+      "pdvCodigoBarras": "2031300",
+      "pdvDescricao": "ORAPRONOBIS",
+      "precoAnteriorPorKgOuUnidade": 140,
+      "precoNovoPorKgOuUnidade": 140
+    },
+    {
+      "id": "prod-389",
+      "nome": "Chá Branco",
+      "granel": true,
+      "pdvCodigo": "9.222",
+      "pdvCodigoBarras": "2096660",
+      "pdvDescricao": "CHA BRANCO",
+      "precoAnteriorPorKgOuUnidade": 60,
+      "precoNovoPorKgOuUnidade": 60
+    },
+    {
+      "id": "prod-390",
+      "nome": "Erva Matte",
+      "granel": true,
+      "pdvCodigo": "8.979",
+      "pdvCodigoBarras": "2098200",
+      "pdvDescricao": "ERVA MATTE CHIMARRAO",
+      "precoAnteriorPorKgOuUnidade": 37,
+      "precoNovoPorKgOuUnidade": 37
+    },
+    {
+      "id": "prod-391",
+      "nome": "Buxinha",
+      "granel": true,
+      "pdvCodigo": "9.225",
+      "pdvCodigoBarras": "2096900",
+      "pdvDescricao": "BUXINHA",
+      "precoAnteriorPorKgOuUnidade": 116,
+      "precoNovoPorKgOuUnidade": 116
+    },
+    {
+      "id": "prod-392",
+      "nome": "Tereré Tradicional",
+      "granel": true,
+      "pdvCodigo": "8.978",
+      "pdvCodigoBarras": "2098100",
+      "pdvDescricao": "TERERE TRADICIONAL",
+      "precoAnteriorPorKgOuUnidade": 37,
+      "precoNovoPorKgOuUnidade": 37
+    },
+    {
+      "id": "prod-393",
+      "nome": "Mentruz",
+      "granel": true,
+      "pdvCodigo": "9.224",
+      "pdvCodigoBarras": "2096800",
+      "pdvDescricao": "MENTRUZ",
+      "precoAnteriorPorKgOuUnidade": 98,
+      "precoNovoPorKgOuUnidade": 98
+    },
+    {
+      "id": "prod-394",
+      "nome": "Erva Doce",
+      "granel": true,
+      "pdvCodigo": "2.154",
+      "pdvCodigoBarras": "2021800",
+      "pdvDescricao": "ERVA DOCE",
+      "precoAnteriorPorKgOuUnidade": 40,
+      "precoNovoPorKgOuUnidade": 40
+    },
+    {
+      "id": "prod-396",
+      "nome": "Sal Marinho",
+      "granel": true,
+      "pdvCodigo": "9.935",
+      "pdvCodigoBarras": "2099300",
+      "pdvDescricao": "SAL MARINHO",
+      "precoAnteriorPorKgOuUnidade": 30,
+      "precoNovoPorKgOuUnidade": 30
+    },
+    {
+      "id": "prod-581",
+      "nome": "Barra Chocolate Dr.Oetker",
+      "granel": true,
+      "pdvCodigo": "3.944",
+      "pdvCodigoBarras": "7891048014431",
+      "pdvDescricao": "BARRA DR.OETKER 1KG",
+      "precoAnteriorPorKgOuUnidade": 37.99,
+      "precoNovoPorKgOuUnidade": 42.99
+    },
+    {
+      "id": "prod-584",
+      "nome": "Cobertura Para Sorvete",
+      "granel": true,
+      "pdvCodigo": "7.013",
+      "pdvCodigoBarras": "7896492200409",
+      "pdvDescricao": "COBERTURA SORV CHOCOLATE ROSSETO 1,3KG",
+      "precoAnteriorPorKgOuUnidade": 18,
+      "precoNovoPorKgOuUnidade": 18
+    },
+    {
+      "id": "prod-17",
+      "nome": "Creatina Probiotica",
+      "granel": false,
+      "pdvCodigo": "7.033",
+      "pdvCodigoBarras": "7896438200906",
+      "pdvDescricao": "CREATINA PROBIOTICA 300G",
+      "precoAnteriorPorKgOuUnidade": 131.99,
+      "precoNovoPorKgOuUnidade": 99
+    },
+    {
+      "id": "prod-18",
+      "nome": "Creatina Max Titanium",
+      "granel": false,
+      "pdvCodigo": "7.001",
+      "pdvCodigoBarras": "7898920041448",
+      "pdvDescricao": "CREATINA MAX TITANIUM 300G",
+      "precoAnteriorPorKgOuUnidade": 119.99,
+      "precoNovoPorKgOuUnidade": 110
+    },
+    {
+      "id": "prod-54",
+      "nome": "Serra das araras MEL",
+      "granel": false,
+      "pdvCodigo": "9.916",
+      "pdvCodigoBarras": "192505432353",
+      "pdvDescricao": "MEL SERRA DAS ARARAS 280G",
+      "precoAnteriorPorKgOuUnidade": 10.99,
+      "precoNovoPorKgOuUnidade": 10.99
+    },
+    {
+      "id": "prod-456",
+      "nome": "Óleo de Andiroba",
+      "granel": false,
+      "pdvCodigo": "8.421",
+      "pdvCodigoBarras": "7898693390798",
+      "pdvDescricao": "OLEO DE ANDIROBA 30ML",
+      "precoAnteriorPorKgOuUnidade": 23.99,
+      "precoNovoPorKgOuUnidade": 23.99
+    },
+    {
+      "id": "prod-457",
+      "nome": "Óleo de Abacate",
+      "granel": false,
+      "pdvCodigo": "8.424",
+      "pdvCodigoBarras": "7898693390781",
+      "pdvDescricao": "OLEO DE ABACATE 30ML",
+      "precoAnteriorPorKgOuUnidade": 20,
+      "precoNovoPorKgOuUnidade": 20
+    },
+    {
+      "id": "prod-458",
+      "nome": "Óleo semente de Abóbora",
+      "granel": false,
+      "pdvCodigo": "1.700",
+      "pdvCodigoBarras": "7894442116978",
+      "pdvDescricao": "OLEO DE SEMENTE DE ABOBORA 30ML",
+      "precoAnteriorPorKgOuUnidade": 21.99,
+      "precoNovoPorKgOuUnidade": 14.99
+    },
+    {
+      "id": "prod-464",
+      "nome": "Óleo de Rosa Mosqueta",
+      "granel": false,
+      "pdvCodigo": "8.422",
+      "pdvCodigoBarras": "7898693390248",
+      "pdvDescricao": "OLEO DE ROSA MOSQUETA 30ML",
+      "precoAnteriorPorKgOuUnidade": 14.99,
+      "precoNovoPorKgOuUnidade": 19.99
+    },
+    {
+      "id": "prod-478",
+      "nome": "Extrato Fluido de Amora",
+      "granel": false,
+      "pdvCodigo": "6.430",
+      "pdvCodigoBarras": "",
+      "pdvDescricao": "EXTRATO FLUIDO AMORA 30 ML",
+      "precoAnteriorPorKgOuUnidade": 14.99,
+      "precoNovoPorKgOuUnidade": 14.99
+    },
+    {
+      "id": "prod-582",
+      "nome": "Granulado Dori",
+      "granel": false,
+      "pdvCodigo": "8.335",
+      "pdvCodigoBarras": "7896058503302",
+      "pdvDescricao": "GRANULADO DORI 300G",
+      "precoAnteriorPorKgOuUnidade": 8.99,
+      "precoNovoPorKgOuUnidade": 8.99
+    },
+    {
+      "id": "prod-612",
+      "nome": "Kit Pote Tampa Copaza",
+      "granel": false,
+      "pdvCodigo": "7.413",
+      "pdvCodigoBarras": "7896979505775",
+      "pdvDescricao": "KIT POTE E TAMPA COPAZA 145ML",
+      "precoAnteriorPorKgOuUnidade": 16.5,
+      "precoNovoPorKgOuUnidade": 9.99
+    },
+    {
+      "id": "prod-75",
+      "nome": "Barra Trio Banana Aveia Mel",
+      "granel": false,
+      "pdvCodigo": "3.985",
+      "pdvCodigoBarras": "7897900310765",
+      "pdvDescricao": "TRIO BARRA CEREAL CASTANHA DE CAJU",
+      "precoAnteriorPorKgOuUnidade": 2.8,
+      "precoNovoPorKgOuUnidade": 2.8
+    },
+    {
+      "id": "prod-420",
+      "nome": "Alcachofra Biovital",
+      "granel": false,
+      "pdvCodigo": "3.142",
+      "pdvCodigoBarras": "7898906351912",
+      "pdvDescricao": "ALCACHOFRA 60 CP",
+      "precoAnteriorPorKgOuUnidade": 21.99,
+      "precoNovoPorKgOuUnidade": 21.99
+    },
+    {
+      "id": "prod-474",
+      "nome": "Gotas Varizes",
+      "granel": false,
+      "pdvCodigo": "4.378",
+      "pdvCodigoBarras": "",
+      "pdvDescricao": "GOTAS VARIZES",
+      "precoAnteriorPorKgOuUnidade": 18.99,
+      "precoNovoPorKgOuUnidade": 18.99
+    },
+    {
+      "id": "prod-475",
+      "nome": "Gotas Vias Urinarias",
+      "granel": false,
+      "pdvCodigo": "5.824",
+      "pdvCodigoBarras": "",
+      "pdvDescricao": "GOTAS PARA VIAS URINARIAS",
+      "precoAnteriorPorKgOuUnidade": 18.99,
+      "precoNovoPorKgOuUnidade": 18.99
+    },
+    {
+      "id": "prod-476",
+      "nome": "Gotas Vias Respiratórias",
+      "granel": false,
+      "pdvCodigo": "5.825",
+      "pdvCodigoBarras": "",
+      "pdvDescricao": "GOTAS PARA VIAS RESPIRATORIAS",
+      "precoAnteriorPorKgOuUnidade": 18.99,
+      "precoNovoPorKgOuUnidade": 18.99
+    },
+    {
+      "id": "prod-487",
+      "nome": "Óleo de Crava DNA da Amazônia",
+      "granel": false,
+      "pdvCodigo": "8.004",
+      "pdvCodigoBarras": "602883047440",
+      "pdvDescricao": "OLEO DE CRAVO DNA AMAZONIA 30ML",
+      "precoAnteriorPorKgOuUnidade": 24.99,
+      "precoNovoPorKgOuUnidade": 24.99
+    },
+    {
+      "id": "prod-488",
+      "nome": "Óleo de Hortelã DNA da Amazônia",
+      "granel": false,
+      "pdvCodigo": "6.710",
+      "pdvCodigoBarras": "736532764997",
+      "pdvDescricao": "OLEO DE HORTELA DNA AMAZONIA",
+      "precoAnteriorPorKgOuUnidade": 23.99,
+      "precoNovoPorKgOuUnidade": 23.99
+    },
+    {
+      "id": "prod-499",
+      "nome": "Curcuma Unilife",
+      "granel": false,
+      "pdvCodigo": "9.949",
+      "pdvCodigoBarras": "7898483539994",
+      "pdvDescricao": "CURCUMA UNILIFE",
+      "precoAnteriorPorKgOuUnidade": 47.99,
+      "precoNovoPorKgOuUnidade": 47.99
+    },
+    {
+      "id": "prod-505",
+      "nome": "Xarope da vovo",
+      "granel": false,
+      "pdvCodigo": "9.207",
+      "pdvCodigoBarras": "7898042159472",
+      "pdvDescricao": "XAROPE DA VOVO",
+      "precoAnteriorPorKgOuUnidade": 11.99,
+      "precoNovoPorKgOuUnidade": 12
+    },
+    {
+      "id": "prod-506",
+      "nome": "Vida mel",
+      "granel": false,
+      "pdvCodigo": "9.210",
+      "pdvCodigoBarras": "7893791367444",
+      "pdvDescricao": "XAROPE VIDA MEL 450G",
+      "precoAnteriorPorKgOuUnidade": 10.99,
+      "precoNovoPorKgOuUnidade": 10.99
+    },
+    {
+      "id": "prod-510",
+      "nome": "Bronquisai xarope",
+      "granel": false,
+      "pdvCodigo": "6.140",
+      "pdvCodigoBarras": "1380556515470",
+      "pdvDescricao": "XAROPE BRONQUISAI 250ML",
+      "precoAnteriorPorKgOuUnidade": 14.99,
+      "precoNovoPorKgOuUnidade": 14.99
+    },
+    {
+      "id": "prod-511",
+      "nome": "Saúde do homem",
+      "granel": false,
+      "pdvCodigo": "202",
+      "pdvCodigoBarras": "7896083400607",
+      "pdvDescricao": "SAUDE DO HOMEN 300ML",
+      "precoAnteriorPorKgOuUnidade": 11.7,
+      "precoNovoPorKgOuUnidade": 11.7
+    },
+    {
+      "id": "prod-547",
+      "nome": "Copos Copaza",
+      "granel": false,
+      "pdvCodigo": "1.688",
+      "pdvCodigoBarras": "7896979501616",
+      "pdvDescricao": "COPOS 400ML C/50 COPAZA",
+      "precoAnteriorPorKgOuUnidade": 11.5,
+      "precoNovoPorKgOuUnidade": 11.5
+    },
+    {
+      "id": "prod-550",
+      "nome": "Copos Copomais",
+      "granel": false,
+      "pdvCodigo": "1.948",
+      "pdvCodigoBarras": "7897147500295",
+      "pdvDescricao": "COPOS 500ML C/50 COPOMAIS",
+      "precoAnteriorPorKgOuUnidade": 16.99,
+      "precoNovoPorKgOuUnidade": 16.99
+    },
+    {
+      "id": "prod-558",
+      "nome": "Prato PR30",
+      "granel": false,
+      "pdvCodigo": "4.988",
+      "pdvCodigoBarras": "7896979501814",
+      "pdvDescricao": "PRATO PR30",
+      "precoAnteriorPorKgOuUnidade": 17.99,
+      "precoNovoPorKgOuUnidade": 17.99
+    },
+    {
+      "id": "prod-602",
+      "nome": "Mini Vela Cromus",
+      "granel": false,
+      "pdvCodigo": "2.614",
+      "pdvCodigoBarras": "7909107974272",
+      "pdvDescricao": "MINI VELA CROMUS N9",
+      "precoAnteriorPorKgOuUnidade": 2.5,
+      "precoNovoPorKgOuUnidade": 2.5
+    },
+    {
+      "id": "prod-609",
+      "nome": "PF 50 Baixa Torta",
+      "granel": false,
+      "pdvCodigo": "6.275",
+      "pdvCodigoBarras": "",
+      "pdvDescricao": "PF 50 TORTA BAIXA",
+      "precoAnteriorPorKgOuUnidade": 2,
+      "precoNovoPorKgOuUnidade": 2
+    },
+    {
+      "id": "prod-418",
+      "nome": "Uxi Amarelo composto",
+      "granel": false,
+      "pdvCodigo": "6.442",
+      "pdvCodigoBarras": "7898906331884",
+      "pdvDescricao": "UXI AMARELO COMPOSTO",
+      "precoAnteriorPorKgOuUnidade": 23.99,
+      "precoNovoPorKgOuUnidade": 24.99
+    },
+    {
+      "id": "prod-496",
+      "nome": "vinagre de maçã organico Almaroni",
+      "granel": false,
+      "pdvCodigo": "3.980",
+      "pdvCodigoBarras": "7898908593617",
+      "pdvDescricao": "VINAGRE DE MAÇA ORGANICO ALMARONI",
+      "precoAnteriorPorKgOuUnidade": 17.99,
+      "precoNovoPorKgOuUnidade": 18.99
+    },
+    {
+      "id": "prod-590",
+      "nome": "Bala Yogurte 100",
+      "granel": false,
+      "pdvCodigo": "1.952",
+      "pdvCodigoBarras": "7896058591507",
+      "pdvDescricao": "BALA YOGURTE 100 600G DORI",
+      "precoAnteriorPorKgOuUnidade": 9.99,
+      "precoNovoPorKgOuUnidade": 11.99
+    },
+    {
+      "id": "prod-504",
+      "nome": "Oléo de coco copra",
+      "granel": false,
+      "pdvCodigo": "1.715",
+      "pdvCodigoBarras": "7898905356567",
+      "pdvDescricao": "OLEO DE COCO COPRA 200ML EXTRAVIRGEN SEM CHEIRO",
+      "precoAnteriorPorKgOuUnidade": 24.99,
+      "precoNovoPorKgOuUnidade": 25.99
+    },
+    {
+      "id": "prod-466",
+      "nome": "Barbatimão Pomada",
+      "granel": false,
+      "pdvCodigo": "3.597",
+      "pdvCodigoBarras": "7899792300268",
+      "pdvDescricao": "BARBATIMÃO 20G",
+      "precoAnteriorPorKgOuUnidade": 2.99,
+      "precoNovoPorKgOuUnidade": 2.5
+    }
+  ],
+  "mantidosParaRevisao": [
+    {
+      "id": "prod-101",
+      "nome": "Creatina em pó",
+      "granel": true,
+      "precoAtualPorKgOuUnidade": 450,
+      "motivo": "Mais de um item correspondente no PDV com preços diferentes"
+    },
+    {
+      "id": "prod-108",
+      "nome": "Gotas de Chocolate",
+      "granel": true,
+      "precoAtualPorKgOuUnidade": 200,
+      "motivo": "Mais de um item correspondente no PDV com preços diferentes"
+    },
+    {
+      "id": "prod-109",
+      "nome": "Chocolate Branco em Gotas",
+      "granel": true,
+      "precoAtualPorKgOuUnidade": 90,
+      "motivo": "Mais de um item correspondente no PDV com preços diferentes"
+    },
+    {
+      "id": "prod-110",
+      "nome": "Gotas de Chocolatea Harnd",
+      "granel": true,
+      "precoAtualPorKgOuUnidade": 58,
+      "motivo": "Mais de um item correspondente no PDV com preços diferentes"
+    },
+    {
+      "id": "prod-134",
+      "nome": "Gergelim Preto",
+      "granel": true,
+      "precoAtualPorKgOuUnidade": 36,
+      "motivo": "Mais de um item correspondente no PDV com preços diferentes"
+    },
+    {
+      "id": "prod-323",
+      "nome": "Canjica Amarela",
+      "granel": true,
+      "precoAtualPorKgOuUnidade": 16,
+      "motivo": "Nenhum item a granel correspondente no PDV"
+    },
+    {
+      "id": "prod-328",
+      "nome": "Fava Branca Grauda",
+      "granel": true,
+      "precoAtualPorKgOuUnidade": 15,
+      "motivo": "Nenhum item a granel correspondente no PDV"
+    },
+    {
+      "id": "prod-331",
+      "nome": "Ervilha Partida",
+      "granel": true,
+      "precoAtualPorKgOuUnidade": 15,
+      "motivo": "Mais de um item correspondente no PDV com preços diferentes"
+    },
+    {
+      "id": "prod-334",
+      "nome": "Cookies de Café",
+      "granel": true,
+      "precoAtualPorKgOuUnidade": 52,
+      "motivo": "Mais de um item correspondente no PDV com preços diferentes"
+    },
+    {
+      "id": "prod-337",
+      "nome": "Cookies de Amendoas",
+      "granel": true,
+      "precoAtualPorKgOuUnidade": 52,
+      "motivo": "Mais de um item correspondente no PDV com preços diferentes"
+    },
+    {
+      "id": "prod-395",
+      "nome": "Queijo Parmesão",
+      "granel": true,
+      "precoAtualPorKgOuUnidade": 75,
+      "motivo": "Mais de um item correspondente no PDV com preços diferentes"
+    },
+    {
+      "id": "prod-580",
+      "nome": "Barra Chocolate Harald",
+      "granel": true,
+      "precoAtualPorKgOuUnidade": 33.99,
+      "motivo": "Mais de um item correspondente no PDV com preços diferentes"
+    }
+  ]
+}
