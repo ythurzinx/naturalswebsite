@@ -2,6 +2,13 @@
 import { useEffect, useRef, useState } from "react";
 import type { Cart } from "@/lib/types";
 
+export type CheckoutCoupon = {
+  code: string;
+  percent: number;
+  minSubtotalCents: number;
+  endsAt: number | null;
+};
+
 export function usePaymentCheckout() {
   const [available, setAvailable] = useState(false),
     [checking, setChecking] = useState(true),
@@ -45,6 +52,7 @@ export function usePaymentCheckout() {
       phone?: string;
       whatsappOptIn?: boolean;
       delivery?: { quoteToken: string; number: string; complement: string };
+      couponCode?: string;
     } = {},
   ) {
     if (submitting.current) return;
@@ -79,6 +87,7 @@ export function usePaymentCheckout() {
           ...(options.notes ? { notes: options.notes } : {}),
           ...(options.phone ? { phone: options.phone } : {}),
           ...(options.delivery ? { delivery: options.delivery } : {}),
+          ...(options.couponCode ? { couponCode: options.couponCode } : {}),
         }),
       });
       const result = await response.json();
@@ -117,5 +126,41 @@ export function usePaymentCheckout() {
       submitting.current = false;
     }
   }
-  return { available, checking, busy, error, pay, testMode };
+  async function previewCoupon(code: string): Promise<CheckoutCoupon> {
+    if (!available || !csrf.current)
+      throw Error(
+        "Os cupons valem para o pagamento online. Atualize a página ou fale com a equipe.",
+      );
+    const response = await fetch("/api/checkout/coupon", {
+      method: "POST",
+      credentials: "same-origin",
+      cache: "no-store",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRF-Token": csrf.current,
+      },
+      body: JSON.stringify({ code }),
+    });
+    const result = await response.json().catch(() => ({}));
+    const coupon = result?.coupon;
+    if (
+      !response.ok ||
+      !coupon ||
+      typeof coupon.code !== "string" ||
+      !Number.isInteger(coupon.percent) ||
+      !Number.isSafeInteger(coupon.minSubtotalCents)
+    )
+      throw Error(
+        typeof result?.error === "string"
+          ? result.error
+          : "Não foi possível conferir o cupom.",
+      );
+    return {
+      code: coupon.code,
+      percent: coupon.percent,
+      minSubtotalCents: coupon.minSubtotalCents,
+      endsAt: Number.isSafeInteger(coupon.endsAt) ? coupon.endsAt : null,
+    };
+  }
+  return { available, checking, busy, error, pay, previewCoupon, testMode };
 }

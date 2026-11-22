@@ -5848,3 +5848,137 @@ svg {
   .merchandising-section .section-heading .eyebrow{font-size:7px;letter-spacing:.8px;margin-bottom:8px}
 }
 .review-rating input{inset:0;z-index:2}
+
+/* Cupons de desconto: checkout e painel */
+.coupon-box {
+  margin-top: 22px;
+  padding: 16px;
+  border: 1px dashed #c9b97f;
+  border-radius: 9px;
+  background: #fdfaef;
+}
+.coupon-entry {
+  display: flex;
+  gap: 10px;
+  align-items: flex-end;
+}
+.coupon-entry .field-label {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+}
+.coupon-entry .button {
+  min-height: 48px;
+  flex-shrink: 0;
+}
+.coupon-applied {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  font-size: 14px;
+  color: var(--green);
+}
+.coupon-applied span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+.coupon-applied .text-button {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.coupon-box .payment-error,
+.coupon-box .fine-print {
+  margin: 12px 0 0;
+}
+.coupon-savings {
+  margin: 12px 0 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: #315836;
+}
+.order-summary > .summary-discount {
+  color: #315836;
+  font-weight: 600;
+}
+.order-coupon {
+  padding: 10px 14px;
+  border-radius: 7px;
+  background: #fbf4da;
+  font-size: 13px;
+}
+.admin-coupons .coupon-create h3,
+.admin-coupons h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.admin-coupons .coupon-create .admin-toggle {
+  margin: 4px 0 12px;
+}
+.coupon-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 18px 0;
+  border-top: 1px solid var(--line);
+}
+.coupon-row-main {
+  min-width: 0;
+}
+.coupon-row-main p {
+  margin: 6px 0 0;
+  font-size: 13px;
+}
+.coupon-code {
+  font-size: 18px;
+  letter-spacing: 0.04em;
+  color: var(--green);
+  margin-right: 10px;
+  overflow-wrap: anywhere;
+}
+.coupon-status {
+  display: inline-block;
+  padding: 3px 9px;
+  border-radius: 999px;
+  font-size: 11px;
+  background: #eef0e8;
+  color: #68725f;
+}
+.coupon-status.on {
+  background: #e3efdc;
+  color: #2d513b;
+}
+.coupon-usage {
+  color: #68725f;
+}
+.coupon-row-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-end;
+  flex-shrink: 0;
+}
+.coupon-row-actions .text-button {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+@media (max-width: 650px) {
+  .coupon-entry {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .coupon-row {
+    flex-direction: column;
+  }
+  .coupon-row-actions {
+    flex-direction: row;
+    align-items: center;
+  }
+}

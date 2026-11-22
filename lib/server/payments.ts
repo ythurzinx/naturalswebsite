@@ -28,4 +28,5 @@ export const payments = createPaymentService({
   catalogProvider: publicCatalog,
   shipping,
   notifications: customerNotifications,
+  coupons: repository?.coupons ?? null,
 });

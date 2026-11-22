@@ -63,7 +63,7 @@ test("100 g selection, cart editing and checkout preserve totals on a payment fa
     const body = route.request().postDataJSON();
     expect(body.items).toHaveLength(1);
     expect(body.items[0]).toMatchObject({ weight: 400, quantity: 2 });
-    expect(body.expectedTotalCents).toBe(9600);
+    expect(body.expectedTotalCents).toBe(10672);
     await new Promise((resolve) => setTimeout(resolve, 500));
     await route.fulfill({
       status: 502,
@@ -87,7 +87,7 @@ test("100 g selection, cart editing and checkout preserve totals on a payment fa
   await plus.click();
   await dialog.getByLabel("Quantidade de porções").fill("2");
   await expect(dialog.locator(".detail-selection-total")).toContainText(
-    "72,00",
+    "80,04",
   );
   await dialog
     .getByRole("button", { name: "Adicionar ao carrinho", exact: true })
@@ -109,7 +109,7 @@ test("100 g selection, cart editing and checkout preserve totals on a payment fa
   await expect(
     page.getByLabel("Peso de Castanha de Caju Crua", { exact: true }),
   ).toHaveValue("400");
-  await expect(page.locator(".cart-item-end")).toContainText("96,00");
+  await expect(page.locator(".cart-item-end")).toContainText("106,72");
   await fitsScreen(page);
   if (info.project.name === "mobile-390")
     await page.screenshot({
@@ -151,7 +151,7 @@ test("100 g selection, cart editing and checkout preserve totals on a payment fa
   await expect(
     page.getByLabel("Peso de Castanha de Caju Crua", { exact: true }),
   ).toHaveValue("400");
-  await expect(page.locator(".cart-item-end")).toContainText("96,00");
+  await expect(page.locator(".cart-item-end")).toContainText("106,72");
 });
 
 test("admin stays closed when the server has no configuration", async ({

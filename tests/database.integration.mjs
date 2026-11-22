@@ -20,6 +20,7 @@ import { createReviewService } from "../lib/server/review-service.mjs";
 import { deriveKey, seal, mac } from "../lib/server/crypto-state.mjs";
 import contentDefaults from "../lib/product-content.json" with { type: "json" };
 import { buildCheckout, money } from "../lib/server/checkout-core.mjs";
+import { CouponStore } from "../lib/server/coupon-store.mjs";
 const target = process.env.INTEGRATION_DATABASE_URL;
 if (!target)
   throw Error(
@@ -91,6 +92,7 @@ beforeEach(async () => {
     "mn_admin_limits",
     "mn_admin_totp",
     "mn_audit",
+    "mn_coupon_redemptions",
   ])
     await pool.query(`DELETE FROM ${table}`);
 });
@@ -1442,5 +1444,130 @@ test("reviews bind completed purchases, deduplicate retries, moderate without ch
   assert.equal(
     (await pool.execute("SELECT COUNT(*) n FROM mn_orders"))[0][0].n,
     1,
+  );
+});
+
+test("coupons are created, paused and removed with audit, and orders show the discount", async () => {
+  let clock = 1800000000000;
+  const store = new CouponStore(pool, () => clock);
+  let listed = await store.create({
+    code: "inaugura10",
+    percent: 10,
+    onePerCustomer: true,
+    note: "Inauguração",
+  });
+  assert.equal(listed.coupons.length, 1);
+  assert.equal(listed.coupons[0].code, "INAUGURA10");
+  assert.equal(listed.coupons[0].current, true);
+  await assert.rejects(store.create({ code: "INAUGURA10", percent: 5 }), {
+    code: "COUPON_EXISTS",
+  });
+  const resolved = await store.resolve(" inaugura10 ");
+  assert.equal(resolved.percent, 10);
+  const products = (await repo.catalog(false)).filter((p) => p.id !== "prod-3");
+  const total = 1200 * 2 - 120 * 2 + 1999 - 200;
+  const selection = buildCheckout(
+    {
+      name: "Cliente Teste",
+      email: "cliente@example.invalid",
+      fulfillment: "pickup",
+      items: [
+        { id: "prod-1", quantity: 1, weight: 200 },
+        { id: "prod-2", quantity: 1 },
+      ],
+      expectedTotalCents: total,
+      couponCode: "INAUGURA10",
+    },
+    products,
+    policy,
+    null,
+    resolved,
+  );
+  assert.equal(selection.coupon.discountCents, 440);
+  await store.reserve("fixture-coupon-reference", selection);
+  await store.reserve("fixture-coupon-reference", selection);
+  await repo.recordOrder(
+    {
+      id: "ORD01COUPONDBFIXTURE",
+      external_reference: "fixture-coupon-reference",
+      total_amount: money(total),
+      total_paid_amount: money(total),
+      status: "processed",
+      status_detail: "accredited",
+      created_date: new Date(clock).toISOString(),
+    },
+    selection,
+  );
+  const order = await repo.order("ORD01COUPONDBFIXTURE");
+  assert.equal(order.total_cents, total);
+  assert.equal(order.coupon_code, "INAUGURA10");
+  assert.equal(order.coupon_discount_cents, 440);
+  assert.equal((await repo.orders())[0].coupon_code, "INAUGURA10");
+  // One use per e-mail: a paid order keeps counting after any time window.
+  clock += 3 * 86400000;
+  await assert.rejects(
+    store.reserve("fixture-coupon-second", selection),
+    { code: "COUPON_ALREADY_USED" },
+  );
+  await store.reserve("fixture-coupon-other", {
+    ...selection,
+    email: "outra@example.invalid",
+  });
+  listed = await store.list();
+  assert.deepEqual(listed.coupons[0].usage, {
+    paidUses: 1,
+    paidDiscountCents: 440,
+    pendingUses: 0,
+  });
+  listed = await store.setActive("INAUGURA10", false);
+  assert.equal(listed.coupons[0].active, false);
+  await assert.rejects(store.resolve("INAUGURA10"), { code: "COUPON_INVALID" });
+  await assert.rejects(
+    store.reserve("fixture-coupon-third", {
+      ...selection,
+      email: "terceira@example.invalid",
+    }),
+    { code: "COUPON_INVALID" },
+  );
+  listed = await store.remove("INAUGURA10");
+  assert.equal(listed.coupons.length, 0);
+  const [audit] = await pool.query(
+    "SELECT event FROM mn_audit WHERE event LIKE 'coupon.%' ORDER BY id",
+  );
+  assert.deepEqual(
+    audit.map((row) => row.event),
+    ["coupon.create", "coupon.update", "coupon.delete"],
+  );
+  // The order keeps its coupon history after the coupon is removed.
+  assert.equal((await repo.order("ORD01COUPONDBFIXTURE")).coupon_code, "INAUGURA10");
+});
+
+test("coupon usage limits hold under concurrent checkouts and release abandoned attempts", async () => {
+  let clock = 1800000000000;
+  const store = new CouponStore(pool, () => clock);
+  await store.create({ code: "LIMITE2", percent: 10, maxUses: 2 });
+  const selection = (n) => ({
+    email: `cliente${n}@example.invalid`,
+    coupon: { code: "LIMITE2", percent: 10, discountCents: 100 },
+  });
+  const results = await Promise.allSettled(
+    [1, 2, 3, 4, 5].map((n) => store.reserve(`fixture-limit-${n}`, selection(n))),
+  );
+  assert.equal(results.filter((r) => r.status === "fulfilled").length, 2);
+  assert.ok(
+    results
+      .filter((r) => r.status === "rejected")
+      .every((r) => r.reason.code === "COUPON_EXHAUSTED"),
+  );
+  // Attempts that never became an order stop counting after 30 minutes.
+  clock += 31 * 60000;
+  await store.reserve("fixture-limit-6", selection(6));
+  await store.reserve("fixture-limit-7", selection(7));
+  await assert.rejects(store.reserve("fixture-limit-8", selection(8)), {
+    code: "COUPON_EXHAUSTED",
+  });
+  await assert.rejects(
+    store.reserve("fixture-limit-6", { ...selection(6), email: "x@example.invalid" }),
+    { code: "CHECKOUT_CONFLICT" },
   );
 });
