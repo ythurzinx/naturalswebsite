@@ -24,7 +24,7 @@ Combos não acumulam ofertas individuais: usam os preços regulares dos ingredie
 
 Em **Frete e entregas**, informe o CEP exato da loja, valor por km, taxa base, mínimo, distância máxima e, se desejar, limite para frete grátis. Salve e habilite a entrega. Não há tarifa inventada nem chave paga de mapas.
 
-O cliente informa o CEP; a BrasilAPI encontra rua, bairro, cidade e coordenadas. A distância é **estimada em linha reta entre CEPs**, não uma rota de carro nem a distância exata da porta do cliente. Número, complemento e telefone completam o endereço no checkout. CEP genérico ou sem coordenadas pede atendimento em vez de produzir frete zero.
+O cliente informa o CEP; a BrasilAPI encontra rua, bairro e cidade. Com `GOOGLE_MAPS_API_KEY` configurada, a distância é a **rota de carro** da loja até a rua do CEP; sem ela, é uma estimativa em linha reta entre CEPs. Veja [o guia de frete](OPERACAO-PEDIDOS-FRETE.md). Número, complemento e telefone completam o endereço no checkout. CEP genérico ou sem coordenadas pede atendimento em vez de produzir frete zero.
 
 O teste de CEP no painel consulta um destino usando a regra salva. O simulador manual permite conferir tarifas ainda em edição. A cobrança usa a cotação assinada pelo servidor, vinculada aos itens, preços, CEP e versão do frete, válida por 10 minutos. Alterar a regra não muda fretes de pedidos já feitos.
 

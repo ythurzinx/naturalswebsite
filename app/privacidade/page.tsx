@@ -96,8 +96,11 @@ export default function PrivacyPage() {
         <h2>Cálculo de frete pelo CEP</h2>
         <p>
           Ao calcular o frete, o servidor consulta o CEP na BrasilAPI para obter
-          o endereço público e as coordenadas aproximadas. Não envia nome,
-          telefone, número do imóvel, e-mail ou itens da compra a esse serviço.
+          o endereço público e as coordenadas aproximadas. Quando a loja usa o
+          Google Maps para medir a rota de carro, o servidor envia ao Google
+          apenas a rua, o bairro, a cidade e o CEP de destino, junto com o
+          endereço da loja. Nome, telefone, número do imóvel, e-mail e itens da
+          compra não são enviados a esses serviços.
           Um cookie essencial de até 1 hora protege a consulta; a cotação
           assinada vale por 10 minutos. Os campos do endereço ficam em memória
           no navegador e são registrados pela loja quando você inicia o

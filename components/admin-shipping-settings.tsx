@@ -15,6 +15,7 @@ export function AdminShippingSettings({ api }: { api: Api }) {
     [busy, setBusy] = useState(false);
   const [draft, setDraft] = useState({
     originPostalCode: "",
+    originAddress: "",
     rate: "",
     base: "",
     minimum: "",
@@ -35,6 +36,7 @@ export function AdminShippingSettings({ api }: { api: Api }) {
       state: string;
     };
     distanceMeters: number;
+    distanceMethod?: "route" | "straight";
     withinArea: boolean;
     enabled: boolean;
     feeCents: number | null;
@@ -67,6 +69,7 @@ export function AdminShippingSettings({ api }: { api: Api }) {
       setCepResult(null);
       setDraft({
         originPostalCode: result.originPostalCode,
+        originAddress: result.originAddress || "",
         rate: (result.pricePerKmCents / 100).toFixed(2),
         base: (result.baseFeeCents / 100).toFixed(2),
         minimum: (result.minimumFeeCents / 100).toFixed(2),
@@ -105,6 +108,7 @@ export function AdminShippingSettings({ api }: { api: Api }) {
       const result = await api<ShippingSettings>("shipping", "PUT", {
         enabled: draft.enabled,
         originPostalCode: draft.originPostalCode,
+        originAddress: draft.originAddress,
         pricePerKmCents: parse(draft.rate),
         baseFeeCents: parse(draft.base),
         minimumFeeCents: parse(draft.minimum),
@@ -158,10 +162,20 @@ export function AdminShippingSettings({ api }: { api: Api }) {
         <h2>
           <Truck size={24} /> Frete por quilômetro
         </h2>
-        <p>
-          Distância aproximada, em linha reta entre as coordenadas dos CEPs.
-          Consulta pela BrasilAPI, sem chave de mapas paga.
-        </p>
+        {value?.distanceMethod === "route" ? (
+          <p>
+            Distância de carro calculada pelo Google Maps, do endereço de saída
+            da loja até a rua do cliente. O endereço vem do CEP pela BrasilAPI.
+          </p>
+        ) : (
+          <p className="admin-notice">
+            Google Maps não configurado: a distância é uma estimativa em linha
+            reta entre coordenadas aproximadas dos CEPs, e endereços diferentes
+            da mesma cidade podem aparecer como 0 km. Configure
+            GOOGLE_MAPS_API_KEY na hospedagem para cobrar pela distância de
+            carro.
+          </p>
+        )}
         <fieldset disabled={busy || !value} className="checkout-fieldset">
           <label className="admin-toggle">
             <input
@@ -189,6 +203,26 @@ export function AdminShippingSettings({ api }: { api: Api }) {
               }
             />
           </label>
+          <label className="field-label">
+            Endereço de saída (rua e número)
+            <input
+              maxLength={120}
+              autoComplete="off"
+              placeholder="Rua José Duarte Souza, 21"
+              value={draft.originAddress}
+              onChange={(e) =>
+                setDraft((prior) => ({
+                  ...prior,
+                  originAddress: e.target.value,
+                }))
+              }
+            />
+          </label>
+          <p className="fine-print">
+            Usado pelo Google Maps como ponto de partida. Bairro, cidade e
+            estado vêm do CEP de origem. Sem preencher, o cálculo parte da rua
+            do CEP.
+          </p>
           <div className="form-row">
             {field("rate", "Valor por km (R$)")}
             {field("base", "Taxa base (R$)")}
@@ -276,8 +310,10 @@ export function AdminShippingSettings({ api }: { api: Api }) {
         <div className="shipping-live-test">
           <h3>Testar um CEP de entrega</h3>
           <p className="fine-print">
-            Consulta o endereço na BrasilAPI e usa o CEP de origem e a regra já
-            salva. A distância é uma estimativa em linha reta entre CEPs.
+            Consulta o endereço na BrasilAPI e usa a origem e a regra já salvas.
+            {value?.distanceMethod === "route"
+              ? " A distância é a rota de carro calculada pelo Google Maps até a rua do CEP."
+              : " A distância é uma estimativa em linha reta entre CEPs."}
           </p>
           <label className="field-label">
             CEP de destino para teste
@@ -317,7 +353,9 @@ export function AdminShippingSettings({ api }: { api: Api }) {
                 {(cepResult.distanceMeters / 1000).toLocaleString("pt-BR", {
                   maximumFractionDigits: 2,
                 })}{" "}
-                km estimados
+                {cepResult.distanceMethod === "route"
+                  ? "km de carro"
+                  : "km estimados"}
               </strong>
               <p>
                 {!cepResult.withinArea

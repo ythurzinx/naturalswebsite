@@ -106,7 +106,10 @@ export function DeliveryEstimator({ details = false }: { details?: boolean }) {
                     "pt-BR",
                     { maximumFractionDigits: 1 },
                   )}{" "}
-                  km entre CEPs, em linha reta. Cotação válida por 10 minutos.
+                  {shipping.quote.distanceMethod === "route"
+                    ? "km de carro da loja até a sua rua."
+                    : "km entre CEPs, em linha reta."}{" "}
+                  Cotação válida por 10 minutos.
                 </small>
               </div>
             </div>
