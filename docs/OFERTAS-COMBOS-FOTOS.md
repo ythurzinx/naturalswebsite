@@ -18,7 +18,7 @@ Em **Ofertas e combos**:
 - Cadastre até 24 ofertas individuais e, opcionalmente, início e fim. O formulário usa o fuso do aparelho e o servidor valida o período. Ofertas inativas ou fora do período não aparecem no carrossel.
 - Clique em **Publicar alterações**. Alterações não salvas não entram no site. Duas abas não sobrescrevem silenciosamente a mesma versão.
 
-Combos não acumulam ofertas individuais: usam os preços regulares dos ingredientes e o desconto do próprio combo. Os centavos são rateados de forma determinística. O checkout recebe apenas identificadores, quantidade e peso, recalcula o preço e expande os ingredientes para o Mercado Pago, para a fila de embalagem e para o custo do pedido. Ingrediente indisponível retira o combo inteiro da venda. Alterar preço, desconto ou composição invalida totais/cotações antigos. Valores já registrados em pedidos permanecem imutáveis.
+Combos não acumulam ofertas individuais: usam os preços regulares dos ingredientes e o desconto do próprio combo. Preços de combos e ofertas com desconto são arredondados para cima até a dezena de centavos, sem passar do preço regular. Os centavos são rateados de forma determinística. O checkout recebe apenas identificadores, quantidade e peso, recalcula o preço e expande os ingredientes para o Mercado Pago, para a fila de embalagem e para o custo do pedido. Ingrediente indisponível retira o combo inteiro da venda. Alterar preço, desconto ou composição invalida totais/cotações antigos. Valores já registrados em pedidos permanecem imutáveis.
 
 ## CEP e frete
 

@@ -12,7 +12,11 @@ import {
 import type { Product } from "@/lib/types";
 import { formatPrice } from "@/lib/products";
 import { allocateCombo } from "@/lib/merchandising.mjs";
-import { portionPriceCents, referencePriceCents } from "@/lib/pricing.mjs";
+import {
+  discountedPriceCents,
+  portionPriceCents,
+  referencePriceCents,
+} from "@/lib/pricing.mjs";
 
 type Ingredient = { productId: string; weight: number };
 type Combo = {
@@ -553,9 +557,8 @@ export function AdminMerchandising({ api }: { api: Api }) {
                       <strong>
                         por{" "}
                         {formatPrice(
-                          Math.round(
-                            (price * (100 - offer.discountPercent)) / 100,
-                          ) / 100,
+                          discountedPriceCents(price, offer.discountPercent) /
+                            100,
                         )}
                       </strong>
                       <small>{p?.isGranel ? "por 100 g" : "por unidade"}</small>
