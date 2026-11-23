@@ -1465,7 +1465,7 @@ test("coupons are created, paused and removed with audit, and orders show the di
   const resolved = await store.resolve(" inaugura10 ");
   assert.equal(resolved.percent, 10);
   const products = (await repo.catalog(false)).filter((p) => p.id !== "prod-3");
-  const total = 1200 * 2 - 120 * 2 + 1999 - 200;
+  const total = 1200 * 2 - 120 * 2 + 1999 - 209;
   const selection = buildCheckout(
     {
       name: "Cliente Teste",
@@ -1483,7 +1483,7 @@ test("coupons are created, paused and removed with audit, and orders show the di
     null,
     resolved,
   );
-  assert.equal(selection.coupon.discountCents, 440);
+  assert.equal(selection.coupon.discountCents, 449);
   await store.reserve("fixture-coupon-reference", selection);
   await store.reserve("fixture-coupon-reference", selection);
   await repo.recordOrder(
@@ -1501,7 +1501,7 @@ test("coupons are created, paused and removed with audit, and orders show the di
   const order = await repo.order("ORD01COUPONDBFIXTURE");
   assert.equal(order.total_cents, total);
   assert.equal(order.coupon_code, "INAUGURA10");
-  assert.equal(order.coupon_discount_cents, 440);
+  assert.equal(order.coupon_discount_cents, 449);
   assert.equal((await repo.orders())[0].coupon_code, "INAUGURA10");
   // One use per e-mail: a paid order keeps counting after any time window.
   clock += 3 * 86400000;
@@ -1516,7 +1516,7 @@ test("coupons are created, paused and removed with audit, and orders show the di
   listed = await store.list();
   assert.deepEqual(listed.coupons[0].usage, {
     paidUses: 1,
-    paidDiscountCents: 440,
+    paidDiscountCents: 449,
     pendingUses: 0,
   });
   listed = await store.setActive("INAUGURA10", false);

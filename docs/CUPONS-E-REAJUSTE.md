@@ -6,12 +6,14 @@ Todos os 619 produtos subiram cerca de **11,12%** e foram **arredondados para ci
 
 | Antes | Depois | Com cupom de 10% |
 |---|---|---|
-| R$ 8,00 / 100 g | R$ 8,90 / 100 g | R$ 8,01 / 100 g |
-| R$ 12,00 / 100 g | R$ 13,40 / 100 g | R$ 12,06 / 100 g |
-| R$ 1,00 / 100 g | R$ 1,20 / 100 g | R$ 1,08 / 100 g |
+| R$ 8,00 / 100 g | R$ 8,90 / 100 g | R$ 8,00 / 100 g |
+| R$ 12,00 / 100 g | R$ 13,40 / 100 g | R$ 12,00 / 100 g |
+| R$ 1,00 / 100 g | R$ 1,20 / 100 g | R$ 1,00 / 100 g |
 | R$ 99,00 / un. | R$ 110,00 / un. | R$ 99,00 / un. |
 
-Com um cupom de 10%, o cliente paga o preço anterior ou até R$ 0,08 a mais por 100 g ou unidade (o desconto é calculado a cada 100 g ou unidade, arredondado a favor do cliente). Os combos somam os preços arredondados dos ingredientes. Pedidos já feitos mantêm os valores da compra.
+O preço com cupom é calculado a cada 100 g (ou unidade) e arredondado **para baixo** até a dezena de centavos, a favor do cliente. Com um cupom de 10%, 301 dos 308 itens a granel voltam exatamente ao preço anterior; os demais ficam a poucos centavos dele, porque o preço anterior não terminava em dezena de centavos. Pedidos já feitos mantêm os valores da compra.
+
+Combos e ofertas com desconto também terminam em dezena de centavos: o preço com desconto é arredondado **para cima** (por exemplo, 10% sobre R$ 30,90 dá R$ 27,90, e não R$ 27,81), então o desconto concedido nunca passa do percentual configurado. Se o arredondamento anular uma oferta pequena em um item barato, o painel avisa que o desconto não altera o preço.
 
 Produtos já editados no painel guardam o preço no MySQL, que tem prioridade sobre o catálogo do código. Depois da implantação, importe no phpMyAdmin [`database/precos-inauguracao.sql`](../database/precos-inauguracao.sql), de preferência antes de editar produtos:
 

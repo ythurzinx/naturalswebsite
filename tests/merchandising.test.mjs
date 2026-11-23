@@ -78,16 +78,16 @@ test("combo cents are allocated exactly even with unequal portions and rounding"
   const products = applyMerchandising(catalog, settings());
   const combo = products.find((p) => p.combo);
   assert.equal(combo.originalPriceCents, 4975);
-  assert.equal(referencePriceCents(combo), 4627);
+  assert.equal(referencePriceCents(combo), 4630);
   assert.equal(
     combo.combo.reduce((s, c) => s + c.unitCents, 0),
-    4627,
+    4630,
   );
-  const selection = checkout(products, 13881);
+  const selection = checkout(products, 13890);
   assert.equal(selection.items.length, 2);
   assert.equal(
     selection.items.reduce((s, i) => s + i.quantity * i.unitCents, 0),
-    13881,
+    13890,
   );
   assert.ok(
     selection.items.every((i) => i.key.startsWith("combo-castanhas|prod-")),
@@ -95,7 +95,7 @@ test("combo cents are allocated exactly even with unequal portions and rounding"
   assert.throws(() => checkout(products, 100), { code: "PRICE_CHANGED" });
   assert.throws(
     () =>
-      checkout(products, 13881, [
+      checkout(products, 13890, [
         {
           id: combo.id,
           quantity: 3,
@@ -113,6 +113,10 @@ test("combo cents are allocated exactly even with unequal portions and rounding"
       value.components.reduce((s, c) => s + c.unitCents, 0),
       value.totalCents,
     );
+    // Discounted bundle prices end in tens of cents and never exceed the sum.
+    assert.ok(value.totalCents <= value.originalCents);
+    if (discount > 0 && value.totalCents < value.originalCents)
+      assert.equal(value.totalCents % 10, 0);
   }
 });
 test("offers expire, never stack on combos, and unavailable ingredients hide the entire bundle", () => {
@@ -129,21 +133,21 @@ test("offers expire, never stack on combos, and unavailable ingredients hide the
   let products = applyMerchandising(catalog, config, 2000);
   assert.equal(referencePriceCents(products[0]), 1080);
   assert.equal(products[0].originalPriceCents, 1200);
-  assert.equal(referencePriceCents(products.find((p) => p.combo)), 4627);
+  assert.equal(referencePriceCents(products.find((p) => p.combo)), 4630);
   assert.equal(
     referencePriceCents(applyMerchandising(catalog, config, 3000)[0]),
     1200,
   );
   assert.ok(!applyMerchandising(catalog.slice(1), config).some((p) => p.combo));
   assert.throws(
-    () => checkout(applyMerchandising(catalog.slice(1), config), 4627),
+    () => checkout(applyMerchandising(catalog.slice(1), config), 4630),
     { code: "PRODUCT_UNAVAILABLE" },
   );
   const changed = applyMerchandising(
     catalog.map((p) => ({ ...p, valor_unitario: p.valor_unitario + 10 })),
     config,
   );
-  assert.throws(() => checkout(changed, 13881), { code: "PRICE_CHANGED" });
+  assert.throws(() => checkout(changed, 13890), { code: "PRICE_CHANGED" });
 });
 test("merchandising rejects nested combos, duplicate ingredients, invalid discounts, periods and arbitrary fields", () => {
   assert.deepEqual(validateMerchandising(settings(), catalog), settings());

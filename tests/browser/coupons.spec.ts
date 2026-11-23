@@ -51,8 +51,8 @@ test("a coupon discounts the products, not the delivery, and reaches the payment
     checkoutCalls++;
     const body = route.request().postDataJSON();
     expect(body.couponCode).toBe("INAUGURA10");
-    // 300 g of Castanha de Caju Crua: R$ 13,40 → R$ 12,06 per 100 g.
-    expect(body.expectedTotalCents).toBe(3618);
+    // 300 g of Castanha de Caju Crua: R$ 13,40 → R$ 12,00 per 100 g.
+    expect(body.expectedTotalCents).toBe(3600);
     await route.fulfill({
       status: 502,
       json: { error: "Pagamento de teste indisponível." },
@@ -81,8 +81,8 @@ test("a coupon discounts the products, not the delivery, and reaches the payment
   await field.fill("inaugura10");
   await field.press("Enter");
   await expect(page.locator(".coupon-applied")).toContainText("INAUGURA10");
-  await expect(page.locator(".summary-discount")).toContainText("4,02");
-  await expect(page.locator(".summary-total")).toContainText("36,18");
+  await expect(page.locator(".summary-discount")).toContainText("4,20");
+  await expect(page.locator(".summary-total")).toContainText("36,00");
   await expect(page.locator(".coupon-savings")).toContainText(
     "não vale para o frete",
   );

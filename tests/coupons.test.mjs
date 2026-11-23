@@ -33,14 +33,14 @@ const bulk = {
   nome_produto: "Uva passa",
   peso_produto: "A granel",
   isGranel: true,
-  valor_unitario: 88.9,
+  valor_unitario: 89,
 };
 const unit = {
   id: "unit",
   nome_produto: "Mel 280 g",
   peso_produto: "280 g",
   isGranel: false,
-  valor_unitario: 12.21,
+  valor_unitario: 12.2,
 };
 
 test("catalog prices end in tens of cents and a 10% coupon is applied per 100 g", () => {
@@ -57,7 +57,7 @@ test("catalog prices end in tens of cents and a 10% coupon is applied per 100 g"
           blocks,
           percent: 10,
         }),
-        Math.floor((price * 90) / 100) * blocks,
+        Math.floor((price * 90) / 1000) * 10 * blocks,
         `${product.id} ${weight} g`,
       );
     }
@@ -73,8 +73,9 @@ test("the coupon never stacks on a larger offer and improves a smaller one", () 
   });
   const item = (product) => [{ product, quantity: 1, selectedWeight: 200 }];
   assert.equal(cartCouponDiscountCents(item(bigOffer), 10), 0);
-  // 889 regular → 845 offer; coupon price is floor(889 × 0.9) = 800 per 100 g.
-  assert.equal(cartCouponDiscountCents(item(smallOffer), 10), (845 - 800) * 2);
+  // 890 regular → 850 offer (rounded up to tens of cents); the coupon price
+  // is 801 rounded down to 800 per 100 g.
+  assert.equal(cartCouponDiscountCents(item(smallOffer), 10), (850 - 800) * 2);
 });
 
 test("checkout applies the coupon per line, keeps shipping and matches the cart", () => {
@@ -99,10 +100,10 @@ test("checkout applies the coupon per line, keeps shipping and matches the cart"
     { product: unit, quantity: 1 },
     { product: combo, quantity: 1 },
   ];
-  const subtotal = 889 * 3 * 2 + 1221 + 889 * 3;
+  const subtotal = 890 * 3 * 2 + 1220 + 890 * 3;
   const discount = cartCouponDiscountCents(cart, 10);
-  // Previous prices: 800 per 100 g and floor(1221 × 0.9) = 1098 per unit.
-  assert.equal(discount, subtotal - (800 * 3 * 2 + 1098 + 800 * 3));
+  // Coupon prices round down to tens of cents: 800 per 100 g and 1090 per unit.
+  assert.equal(discount, subtotal - (800 * 3 * 2 + 1090 + 800 * 3));
   const input = {
     items: [
       { id: "bulk", quantity: 2, weight: 300 },
@@ -281,7 +282,7 @@ test("the payment service charges the discounted total and reserves the coupon",
     request("/api/checkout/coupon", "POST", { code: "NAOEXISTE" }, headers),
   );
   assert.equal(invalid.status, 404);
-  const total = 800 * 2 + 1098;
+  const total = 800 * 2 + 1090;
   const response = await service.checkout(
     request(
       "/api/checkout",
@@ -301,11 +302,11 @@ test("the payment service charges the discounted total and reserves the coupon",
     ),
   );
   assert.equal(response.status, 200);
-  assert.equal(body.total_amount, "26.98");
+  assert.equal(body.total_amount, "26.90");
   assert.deepEqual(
     body.items.map((i) => i.unit_price),
-    ["16.00", "10.98"],
+    ["16.00", "10.90"],
   );
   assert.equal(reserved.length, 1);
-  assert.equal(reserved[0].coupon.discountCents, 889 * 2 + 1221 - total);
+  assert.equal(reserved[0].coupon.discountCents, 890 * 2 + 1220 - total);
 });
