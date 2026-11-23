@@ -43,24 +43,21 @@ const unit = {
   valor_unitario: 12.21,
 };
 
-test("a 10% coupon returns every raised catalog price to the previous one", () => {
-  // The raise used ceil(previous / 0.9) per 100 g or per unit.
+test("catalog prices end in tens of cents and a 10% coupon is applied per 100 g", () => {
   for (const product of catalogData) {
-    const raised = referencePriceCents(product);
-    const previous = Math.floor((raised * 90) / 100);
-    assert.ok(Math.floor((previous * 10 + 8) / 9) === raised, product.id);
+    const price = referencePriceCents(product);
+    assert.equal(price % 10, 0, product.id);
     const weights = product.isGranel ? [100, 300, 1000, 5000] : [0];
     for (const weight of weights) {
       const blocks = product.isGranel ? weight / 100 : 1;
-      const unitCents = portionPriceCents(product, weight);
       assert.equal(
         couponPortionCents({
-          unitCents,
-          regularBlockCents: raised,
+          unitCents: portionPriceCents(product, weight),
+          regularBlockCents: price,
           blocks,
           percent: 10,
         }),
-        previous * blocks,
+        Math.floor((price * 90) / 100) * blocks,
         `${product.id} ${weight} g`,
       );
     }

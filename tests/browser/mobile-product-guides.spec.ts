@@ -13,7 +13,7 @@ test("instant suggestions open a rich product sheet with recipe, weight and a CE
     );
     expect(r.request().postDataJSON()).toEqual({
       items: [{ id: "prod-125", weight: 200, quantity: 1 }],
-      expectedSubtotalCents: 2512,
+      expectedSubtotalCents: 2520,
       postalCode: "06754-100",
     });
     await r.fulfill({
@@ -58,7 +58,7 @@ test("instant suggestions open a rich product sheet with recipe, weight and a CE
     })
     .click();
   await expect(dialog.locator(".detail-selection-total")).toContainText(
-    "25,12",
+    "25,20",
   );
   await dialog.getByRole("tab", { name: "Entrega", exact: true }).click();
   await dialog.getByLabel("CEP para consultar a entrega").fill("06754-100");
