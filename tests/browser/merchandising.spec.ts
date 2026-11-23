@@ -139,10 +139,10 @@ test("bulk-only catalog and combo ingredients keep the displayed total on a mobi
   await expect(dialog.locator(".combo-ingredients")).toContainText(
     "Maca Peruana Pura",
   );
-  await expect(dialog.locator(".detail-price")).toContainText("26,68");
+  await expect(dialog.locator(".detail-price")).toContainText("26,80");
   await dialog.getByLabel("Quantidade", { exact: true }).fill("2");
   await expect(dialog.locator(".detail-selection-total")).toContainText(
-    "53,36",
+    "53,60",
   );
   await dialog
     .getByRole("button", { name: "Adicionar ao carrinho", exact: true })
@@ -150,7 +150,7 @@ test("bulk-only catalog and combo ingredients keep the displayed total on a mobi
   await dialog.getByRole("button", { name: "Fechar janela" }).click();
   await page.goto("/carrinho");
   await expect(page.locator(".cart-item")).toHaveCount(1);
-  await expect(page.locator(".cart-item-end")).toContainText("53,36");
+  await expect(page.locator(".cart-item-end")).toContainText("53,60");
   expect(
     await page.evaluate(
       () => document.documentElement.scrollWidth <= innerWidth + 1,

@@ -51,8 +51,8 @@ test("a coupon discounts the products, not the delivery, and reaches the payment
     checkoutCalls++;
     const body = route.request().postDataJSON();
     expect(body.couponCode).toBe("INAUGURA10");
-    // 300 g of Castanha de Caju Crua: R$ 13,34 → R$ 12,00 per 100 g.
-    expect(body.expectedTotalCents).toBe(3600);
+    // 300 g of Castanha de Caju Crua: R$ 13,40 → R$ 12,06 per 100 g.
+    expect(body.expectedTotalCents).toBe(3618);
     await route.fulfill({
       status: 502,
       json: { error: "Pagamento de teste indisponível." },
@@ -69,7 +69,7 @@ test("a coupon discounts the products, not the delivery, and reaches the payment
   await page
     .getByLabel("Telefone para contato", { exact: true })
     .fill("11999999999");
-  await expect(page.locator(".summary-total")).toContainText("40,02");
+  await expect(page.locator(".summary-total")).toContainText("40,20");
   const field = page.getByLabel("Cupom de desconto (opcional)", {
     exact: true,
   });
@@ -82,7 +82,7 @@ test("a coupon discounts the products, not the delivery, and reaches the payment
   await field.press("Enter");
   await expect(page.locator(".coupon-applied")).toContainText("INAUGURA10");
   await expect(page.locator(".summary-discount")).toContainText("4,02");
-  await expect(page.locator(".summary-total")).toContainText("36,00");
+  await expect(page.locator(".summary-total")).toContainText("36,18");
   await expect(page.locator(".coupon-savings")).toContainText(
     "não vale para o frete",
   );
@@ -102,7 +102,7 @@ test("a coupon discounts the products, not the delivery, and reaches the payment
   await page
     .getByRole("button", { name: "Remover cupom INAUGURA10", exact: true })
     .click();
-  await expect(page.locator(".summary-total")).toContainText("40,02");
+  await expect(page.locator(".summary-total")).toContainText("40,20");
   await expect(page.locator(".summary-discount")).toHaveCount(0);
 });
 

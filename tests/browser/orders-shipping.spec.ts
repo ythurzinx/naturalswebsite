@@ -21,11 +21,11 @@ test("delivery quote and full address reach checkout with the displayed total", 
       return route.fulfill({ json: { csrfToken: "shipping-fixture" } });
     const body = route.request().postDataJSON();
     expect(route.request().headers()["x-csrf-token"]).toBe("shipping-fixture");
-    expect(body.expectedSubtotalCents).toBe(1334);
+    expect(body.expectedSubtotalCents).toBe(1340);
     return route.fulfill({
       json: {
         revision: 3,
-        subtotalCents: 1334,
+        subtotalCents: 1340,
         feeCents: 800,
         distanceMeters: 1500,
         quoteToken: "signed-fixture",
@@ -48,7 +48,7 @@ test("delivery quote and full address reach checkout with the displayed total", 
   await page.route("**/api/checkout", async (route) => {
     calls++;
     const body = route.request().postDataJSON();
-    expect(body.expectedTotalCents).toBe(2134);
+    expect(body.expectedTotalCents).toBe(2140);
     expect(body.fulfillment).toBe("delivery");
     expect(body.delivery).toEqual({
       quoteToken: "signed-fixture",
@@ -96,7 +96,7 @@ test("delivery quote and full address reach checkout with the displayed total", 
   await page
     .getByLabel("Observações (opcional)", { exact: true })
     .fill("Entregar na portaria");
-  await expect(page.locator(".summary-total")).toContainText("21,34");
+  await expect(page.locator(".summary-total")).toContainText("21,40");
   const pay = info.project.name.startsWith("mobile")
     ? page.getByRole("button", { name: "Pagar agora", exact: true })
     : page.getByRole("button", { name: /Pagar .* com Mercado Pago/ });
