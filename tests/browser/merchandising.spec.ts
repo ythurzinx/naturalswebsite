@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+import { readinessFixture } from "./readiness-fixture";
 
 test("private Mercado Pago homologation returns to the admin and never calls the storefront checkout", async ({
   page,
@@ -229,6 +230,8 @@ test("admin publishes chosen discounts, shows MPV08 diagnosis and estimates a de
           counts: { new: 0, packing: 0, ready: 0, outForDelivery: 0 },
         },
       });
+    if (path === "readiness")
+      return route.fulfill({ json: readinessFixture });
     if (path === "dashboard")
       return route.fulfill({
         json: {

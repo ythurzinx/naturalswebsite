@@ -57,6 +57,10 @@ O lucro estimado exige custos e taxas conhecidos. Custos ficam registrados por p
 
 O painel exibe e recebe preço/custo a granel por 100 g. O catálogo importado e as colunas existentes do MySQL mantêm a base interna por kg para compatibilidade; `lib/pricing.mjs` converte a unidade de venda. O editor envia `priceUnit: "100g"`, convertido para a base interna no servidor. Não divida manualmente os valores armazenados por dez. Pedidos e custos históricos permanecem registrados pelo valor da porção original.
 
+## Prontidão para vender
+
+Em **Admin → Visão geral**, o quadro **Prontidão da loja** confere sem expor chaves: pagamento em produção, Webhook do Mercado Pago, verificação em duas etapas, cupons, entrega, Google Maps, e-mails e WhatsApp da Brevo e o agendador dos avisos. Itens essenciais pendentes aparecem em destaque; os opcionais indicam a variável ou a tela a configurar. O site publica `robots.txt` (painel, carrinho, checkout e API fora das buscas) e `sitemap.xml` com as páginas e os produtos.
+
 ## Dados e operação
 
 - `lib/store.ts`: contatos e endereço. Contato oficial: **(11) 5199-3525** (`551151993525`).

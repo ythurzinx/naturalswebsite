@@ -5982,3 +5982,74 @@ svg {
     align-items: center;
   }
 }
+
+/* Prontidão da loja (painel) */
+.readiness-card {
+  margin-bottom: 20px;
+}
+.readiness-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.readiness-head h2 {
+  margin: 6px 0 4px;
+}
+.readiness-summary {
+  margin: 0;
+  font-size: 13px;
+  color: #315836;
+  font-weight: 600;
+}
+.readiness-summary.warn {
+  color: #985e37;
+}
+.readiness-list {
+  list-style: none;
+  margin: 16px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+.readiness-list li {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fbfcf7;
+}
+.readiness-list li svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.readiness-list li.ok svg {
+  color: #3f7a4a;
+}
+.readiness-list li.required {
+  background: #fff2e9;
+  border-color: #efd5c2;
+}
+.readiness-list li.required svg {
+  color: #b5562f;
+}
+.readiness-list li.optional svg {
+  color: #a4996b;
+}
+.readiness-list strong,
+.readiness-list small {
+  display: block;
+}
+.readiness-list strong {
+  font-size: 14px;
+}
+.readiness-list small {
+  margin-top: 3px;
+  font-size: 12px;
+  line-height: 1.6;
+  color: #68725f;
+  overflow-wrap: anywhere;
+}
