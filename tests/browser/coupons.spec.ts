@@ -1,4 +1,5 @@
 import { test, expect, type Page } from "@playwright/test";
+import { readinessFixture } from "./readiness-fixture";
 
 async function fitsScreen(page: Page) {
   expect(
@@ -134,6 +135,7 @@ test("the team creates, pauses and deletes coupons in the admin panel", async ({
         csrfToken: "ui-fixture",
         mfa: true,
       };
+    else if (path === "readiness") json = readinessFixture;
     else if (path === "dashboard")
       json = {
         orders: 0,

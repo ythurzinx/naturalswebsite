@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+import { readinessFixture } from "./readiness-fixture";
 const settings = {
   enabled: true,
   originPostalCode: "06754000",
@@ -184,6 +185,7 @@ test("admin sound activation, live paid alerts, packing and shipping settings wo
         csrfToken: "admin-fixture",
         mfa: true,
       };
+    else if (path === "readiness") json = readinessFixture;
     else if (path === "dashboard")
       json = {
         orders: 1,

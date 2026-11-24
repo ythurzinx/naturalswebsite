@@ -32,6 +32,7 @@ import { AdminOrderAlerts } from "./admin-order-alerts";
 import { AdminShippingSettings } from "./admin-shipping-settings";
 import { AdminMerchandising } from "./admin-merchandising";
 import { AdminCoupons } from "./admin-coupons";
+import { AdminReadiness } from "./admin-readiness";
 import { AdminPaymentDiagnostics } from "./admin-payment-diagnostics";
 import { AdminReviews } from "./admin-reviews";
 import { AdminProductContent } from "./admin-product-content";
@@ -698,6 +699,7 @@ export function AdminDashboard() {
             <AdminPaymentDiagnostics api={api} />
           </>
         )}
+        {tab === "dashboard" && <AdminReadiness api={api} />}
         {tab === "dashboard" && (
           <>
             <div className="admin-toolbar">

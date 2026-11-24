@@ -1,4 +1,5 @@
 import { test, expect, type Page } from "@playwright/test";
+import { readinessFixture } from "./readiness-fixture";
 
 async function essentials(page: Page) {
   const button = page.getByRole("button", {
@@ -241,6 +242,7 @@ test("admin product batches and order filters work with isolated UI fixtures", a
         csrfToken: "ui-fixture",
         mfa: true,
       };
+    else if (path === "readiness") json = readinessFixture;
     else if (path === "dashboard")
       json = {
         orders: 2,
@@ -286,6 +288,16 @@ test("admin product batches and order filters work with isolated UI fixtures", a
     await route.fulfill({ json });
   });
   await page.goto("/admin");
+  const readiness = page.locator(".readiness-card");
+  await expect(readiness).toContainText("Prontidão da loja");
+  await expect(readiness).toContainText(
+    "Itens essenciais para vender estão prontos.",
+  );
+  await expect(readiness.locator("li.ok")).toHaveCount(4);
+  await expect(readiness.locator("li.required")).toHaveCount(0);
+  await expect(readiness).toContainText("GOOGLE_MAPS_API_KEY");
+  if (info.project.name === "mobile-390")
+    await readiness.screenshot({ path: info.outputPath("prontidao.png") });
   const nav = page.getByRole("navigation", { name: "Painel administrativo" });
   await nav.getByRole("button", { name: "Produtos e fotos" }).click();
   await page.getByLabel("Mostrar produtos").selectOption("photos");

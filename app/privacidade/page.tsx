@@ -66,7 +66,10 @@ export default function PrivacyPage() {
           pixels de publicidade ou cookies de marketing. Imagens e fontes da
           loja são servidas junto com o site. A infraestrutura de hospedagem
           pode processar dados técnicos de acesso, como IP, data, navegador e
-          registros de segurança, segundo as políticas do provedor.
+          registros de segurança, segundo as políticas do provedor. Ela também
+          pode definir um cookie técnico de segurança para filtrar acessos
+          automatizados antes de abrir a página; ele não é usado pela loja para
+          publicidade ou perfil de navegação.
         </p>
         <h2>Como alterar sua escolha</h2>
         <p>
@@ -92,6 +95,43 @@ export default function PrivacyPage() {
           acessíveis à equipe autenticada. Números de cartão não são armazenados
           pela loja. A hospedagem pode registrar dados técnicos e
           identificadores de pedido para segurança e diagnóstico.
+        </p>
+        <h2>Cupons de desconto</h2>
+        <p>
+          Ao usar um cupom no pagamento online, a loja registra o código, o
+          e-mail informado, o percentual e o valor do desconto junto ao pedido.
+          Esse registro serve para aplicar as regras divulgadas, como limite de
+          usos e uso único por e-mail, e para conciliar o pedido. Ele não é
+          usado para enviar ofertas.
+        </p>
+        <h2>Por que tratamos seus dados</h2>
+        <ul>
+          <li>
+            <strong>Para atender sua compra:</strong> nome, e-mail, telefone,
+            endereço de entrega, itens, pagamento e cupom são usados para
+            criar, preparar, entregar e acompanhar o pedido.
+          </li>
+          <li>
+            <strong>Para cumprir obrigações legais:</strong> registros de
+            pedidos e pagamentos são guardados pelo prazo exigido pela
+            legislação aplicável, como a fiscal e a de defesa do consumidor.
+          </li>
+          <li>
+            <strong>Para segurança:</strong> limites de tentativas, cookies
+            essenciais e registros técnicos protegem a loja e os clientes
+            contra fraudes e acessos indevidos.
+          </li>
+          <li>
+            <strong>Com o seu consentimento:</strong> favoritos lembrados entre
+            visitas e atualizações do pedido pelo WhatsApp. Você pode desativar
+            quando quiser, sem perder acesso à loja.
+          </li>
+        </ul>
+        <p>
+          A loja não vende dados pessoais. Os dados são compartilhados apenas
+          com os serviços necessários para cada etapa descritos nesta página,
+          como Mercado Pago, hospedagem e, quando ativados, os serviços de
+          frete e de mensagens.
         </p>
         <h2>Cálculo de frete pelo CEP</h2>
         <p>

@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+import { readinessFixture } from "./readiness-fixture";
 
 test("admin configures transactional channels without exposing credentials and fits mobile", async ({
   page,
@@ -27,6 +28,7 @@ test("admin configures transactional channels without exposing credentials and f
         csrfToken: "admin-fixture",
         mfa: true,
       };
+    else if (path === "readiness") json = readinessFixture;
     else if (path === "dashboard")
       json = {
         orders: 0,

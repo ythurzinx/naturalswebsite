@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+import { readinessFixture } from "./readiness-fixture";
 import guideData from "../../lib/product-content.json";
 
 test("instant suggestions open a rich product sheet with recipe, weight and a CEP preview", async ({
@@ -112,6 +113,7 @@ test("admin edits information and recipes and moderates a real-review fixture wi
         csrfToken: "admin-content-fixture",
         mfa: true,
       };
+    else if (path === "readiness") json = readinessFixture;
     else if (path === "dashboard")
       json = {
         orders: 0,

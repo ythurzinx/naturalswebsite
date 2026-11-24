@@ -1571,3 +1571,83 @@ test("coupon usage limits hold under concurrent checkouts and release abandoned 
     { code: "CHECKOUT_CONFLICT" },
   );
 });
+
+test("the launch checklist reports readiness without exposing configuration values", async () => {
+  const config = {
+    origin: "https://loja.example",
+    secure: true,
+    username: "admin",
+    passwordHash,
+    sessionSecret: "s".repeat(43),
+    totpSecret: "",
+  };
+  const secretLike = "APP_USR-" + "x".repeat(40);
+  const service = createAdminService({
+    config,
+    repository: repo,
+    payments: {
+      diagnostics: async () => ({
+        configured: true,
+        environment: "production",
+        origin: config.origin,
+        webhookConfigured: true,
+        accessToken: secretLike,
+      }),
+    },
+    shipping: {
+      publicSettings: async () => ({
+        enabled: false,
+        distanceMethod: "straight",
+        originAddress: "",
+      }),
+    },
+    notifications: {
+      getSettings: async () => ({
+        settings: { emailEnabled: false, whatsappEnabled: false },
+        readiness: { apiKey: false, email: false, whatsapp: false },
+        queue: { pending: 0, issues: 0 },
+      }),
+    },
+    workerConfigured: false,
+  });
+  const anonymous = await service.handle(
+    new Request(config.origin + "/api/admin/readiness"),
+    ["readiness"],
+  );
+  assert.equal(anonymous.status, 401);
+  const login = await service.handle(
+    new Request(config.origin + "/api/admin/login", {
+      method: "POST",
+      headers: { Origin: config.origin, "Content-Type": "application/json" },
+      body: JSON.stringify({
+        username: "admin",
+        password: "correct-fixture-password",
+      }),
+    }),
+    ["login"],
+  );
+  const cookie = login.headers.getSetCookie()[0].split(";")[0];
+  const response = await service.handle(
+    new Request(config.origin + "/api/admin/readiness", {
+      headers: { Cookie: cookie },
+    }),
+    ["readiness"],
+  );
+  assert.equal(response.status, 200);
+  const text = await response.text();
+  assert.ok(!text.includes(secretLike));
+  assert.deepEqual(JSON.parse(text), {
+    payments: { configured: true, production: true, webhook: true },
+    security: { mfa: false },
+    coupons: { storage: true, active: 0 },
+    shipping: { enabled: false, route: false, originAddress: false },
+    notifications: {
+      email: false,
+      whatsapp: false,
+      emailEnabled: false,
+      whatsappEnabled: false,
+      worker: false,
+      issues: 0,
+    },
+  });
+});

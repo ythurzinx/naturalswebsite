@@ -51,6 +51,7 @@ function status(coupon: Coupon) {
 }
 export function AdminCoupons({ api }: { api: Api }) {
   const [coupons, setCoupons] = useState<Coupon[]>([]),
+    [storage, setStorage] = useState(true),
     [form, setForm] = useState(empty),
     [busy, setBusy] = useState(""),
     [loaded, setLoaded] = useState(false),
@@ -59,7 +60,11 @@ export function AdminCoupons({ api }: { api: Api }) {
   const load = useCallback(async () => {
     setError("");
     try {
-      setCoupons((await api<{ coupons: Coupon[] }>("coupons")).coupons);
+      const result = await api<{ coupons: Coupon[]; storage?: boolean }>(
+        "coupons",
+      );
+      setCoupons(result.coupons);
+      setStorage(result.storage !== false);
       setLoaded(true);
     } catch (e) {
       setError(
@@ -169,6 +174,14 @@ export function AdminCoupons({ api }: { api: Api }) {
       {notice && (
         <p className="admin-notice" role="status">
           {notice}
+        </p>
+      )}
+      {!storage && (
+        <p className="payment-error" role="alert">
+          O banco ainda não tem a tabela de usos de cupom, e o servidor não
+          conseguiu criá-la. Antes de divulgar um cupom, importe
+          database/mundo-natural-schema.sql no phpMyAdmin (só acrescenta
+          tabelas que faltam).
         </p>
       )}
       <form className="admin-card coupon-create" onSubmit={create}>

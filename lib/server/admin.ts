@@ -26,4 +26,7 @@ export const admin = createAdminService({
   notifications: customerNotifications,
   productContent,
   reviews,
+  workerConfigured: /^[A-Za-z0-9_-]{32,128}$/.test(
+    process.env.NOTIFICATION_WORKER_SECRET || "",
+  ),
 });
