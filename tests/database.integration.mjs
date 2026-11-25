@@ -21,6 +21,8 @@ import { deriveKey, seal, mac } from "../lib/server/crypto-state.mjs";
 import contentDefaults from "../lib/product-content.json" with { type: "json" };
 import { buildCheckout, money } from "../lib/server/checkout-core.mjs";
 import { CouponStore } from "../lib/server/coupon-store.mjs";
+import { createCostImportService } from "../lib/server/cost-import.mjs";
+import { initializeAutomaticEmail, readSetting } from "../lib/server/notification-repository.mjs";
 const target = process.env.INTEGRATION_DATABASE_URL;
 if (!target)
   throw Error(
@@ -1103,6 +1105,8 @@ test("alerts, freight settings, packing and operations require authentication an
     ["PUT", ["reviews", "a".repeat(64)]],
     ["PUT", ["notifications"]],
     ["POST", ["notifications", "drain"]],
+    ["POST", ["costs", "preview"]],
+    ["POST", ["costs", "apply"]],
   ]) {
     const response = await service.handle(
       new Request(config.origin + "/api/admin/" + path.join("/"), {
@@ -1135,6 +1139,8 @@ test("alerts, freight settings, packing and operations require authentication an
     ["POST", ["notifications", "drain"]],
     ["PUT", ["merchandising"]],
     ["POST", ["shipping", "estimate"]],
+    ["POST", ["costs", "preview"]],
+    ["POST", ["costs", "apply"]],
   ])
     for (const headers of [
       { Origin: config.origin },
@@ -1661,4 +1667,138 @@ test("WhatsApp texts are saved with versions and stale edits are refused", async
     { code: "SETTINGS_CHANGED" },
   );
   assert.equal((await repo.messageTemplates()).templates.confirmed, "Oi {nome}!");
+});
+
+test("cost CSV imports preserve the storefront, feed real paid-order profit and never rewrite cost snapshots", async () => {
+  const image = await repo.saveImage(Buffer.from("private-cost-import-photo"));
+  await repo.saveProduct({ ...product(), costCents: null, active: false, imageSha: image });
+  await repo.saveProduct({ ...product("prod-2"), costCents: null });
+  const imports = createCostImportService({ repository: repo });
+  const body = {
+    fileBase64: Buffer.from("ID;Custo\nprod-1;85,00\nprod-2;12,34\nprod-3;0").toString("base64"),
+    options: {},
+  };
+  const preview = await imports.preview(body);
+  assert.equal(preview.entries.length, 3);
+  assert.equal((await imports.apply({ ...body, fingerprint: preview.fingerprint })).updated, 3);
+  const imported = (await repo.catalog(true)).find((p) => p.id === "prod-1");
+  assert.equal(imported.priceCents, 11999);
+  assert.equal(imported.active, false);
+  assert.equal(imported.imageSha, image);
+  assert.equal(imported.costCents, 8500);
+  assert.equal((await repo.catalog(true)).find((p) => p.id === "prod-3").costCents, 0);
+  const publicItems = await repo.catalog(false);
+  assert.ok(!publicItems.some((p) => p.id === "prod-1"));
+  assert.doesNotMatch(JSON.stringify(publicItems), /costCents|cost_cents|custo|total_unitario|estoque/);
+  const selection = buildCheckout({
+    name: "Cliente do teste", email: "custos@example.invalid", fulfillment: "pickup",
+    items: [{ id: "prod-2", quantity: 2 }], expectedTotalCents: 3998,
+  }, publicItems, policy);
+  const paid = {
+    id: "ORD01COSTIMPORTDBFIXTURE", external_reference: "fixture-cost-import-reference",
+    total_amount: "39.98", total_paid_amount: "39.98", status: "processed", status_detail: "accredited",
+    created_date: new Date().toISOString(),
+  };
+  await repo.recordOrder(paid, selection);
+  await pool.execute("UPDATE mn_orders SET fee_cents=100,refunded_cents=0 WHERE id=?", [paid.id]);
+  assert.equal((await repo.order(paid.id)).cost_total_cents, 2468);
+  assert.equal((await repo.dashboard()).profitCents, 1430);
+  const replace = { fileBase64: Buffer.from("ID;Custo\nprod-2;14,00").toString("base64"), options: { mode: "replace" } };
+  await imports.apply({ ...replace, fingerprint: (await imports.preview(replace)).fingerprint });
+  assert.equal((await repo.order(paid.id)).cost_total_cents, 2468);
+  assert.equal((await repo.dashboard()).profitCents, 1430);
+  await assert.rejects(repo.importCosts([
+    { id: "prod-1", isBulk: true, beforeCostCents: 8500, costCents: 9000 },
+    { id: "prod-2", isBulk: false, beforeCostCents: 1234, costCents: 1500 },
+  ], "a".repeat(64), "replace"), { code: "COST_IMPORT_CHANGED" });
+  assert.equal((await repo.catalog(true)).find((p) => p.id === "prod-1").costCents, 8500);
+});
+
+test("delivery stage and ETA are committed together and packing failures roll both back", async () => {
+  await repo.saveProduct(product());
+  const notifications = createCustomerNotifications({ repository: repo, env: {
+    BREVO_API_KEY: "fixture".repeat(8), BREVO_SENDER_EMAIL: "loja@example.invalid",
+  } });
+  await notifications.saveSettings({ revision: 0, emailEnabled: true, whatsappEnabled: false, whatsappTemplates: { paid: null, ready: null, out_for_delivery: null } });
+  const { order, selection } = deliveryOrderFixture();
+  Object.assign(order, { status: "processed", status_detail: "accredited", total_paid_amount: "44.00" });
+  await repo.recordOrder(order, selection);
+  await repo.saveOrderOperations(order.id, { staffNote: "Conferir embalagem", courierName: "Equipe", deliveryCostCents: 500, estimatedMinutes: 15 });
+  await assert.rejects(repo.setFulfillment(order.id, "out_for_delivery", 30), { code: "PACKING_INCOMPLETE" });
+  let saved = await repo.order(order.id);
+  assert.equal(saved.fulfillment_status, "new");
+  assert.equal(saved.estimated_minutes, 15);
+  await repo.setPacked(order.id, "prod-1:300", true);
+  await repo.setFulfillment(order.id, "out_for_delivery", 30);
+  saved = await repo.order(order.id);
+  assert.equal(saved.fulfillment_status, "out_for_delivery");
+  assert.equal(saved.estimated_minutes, 30);
+  assert.equal(saved.staff_note, "Conferir embalagem");
+  assert.equal(saved.courier_name, "Equipe");
+  assert.equal(saved.delivery_cost_cents, 500);
+  assert.equal(saved.notifications.find((n) => n.event === "out_for_delivery").status, "pending");
+  const [jobs] = await pool.execute("SELECT value_json FROM mn_settings WHERE setting_key LIKE 'notify-job:%'");
+  const out = jobs.map((r) => JSON.parse(r.value_json)).find((j) => j.event === "out_for_delivery");
+  assert.equal(out.estimatedMinutes, 30);
+});
+
+test("verified sender auto-enables future email once without replaying historical purchases", async () => {
+  const { order, selection } = deliveryOrderFixture();
+  const paid = { ...order, status: "processed", status_detail: "accredited", total_paid_amount: "44.00" };
+  await repo.recordOrder(paid, selection);
+  const calls = [];
+  const options = { repository: repo, env: { APP_URL: "https://loja.example", BREVO_API_KEY: "xkeysib-local-integration-fixture" },
+    fetcher: async (url, init) => { calls.push({ url, init });
+      return init.method === "GET" ? Response.json({ senders: [{ email: "pedidos@loja.example", active: true }] }) : new Response("{}", { status: 201 });
+    } };
+  const first = createCustomerNotifications(options), second = createCustomerNotifications(options);
+  await Promise.all([first.prepare(), second.prepare()]);
+  const settings = await first.getSettings();
+  assert.equal(settings.settings.emailEnabled, true);
+  assert.equal(settings.settings.revision, 1);
+  assert.equal(settings.emailSetup.state, "verified");
+  await repo.recordOrder(paid);
+  await first.drain();
+  assert.equal((await repo.order(order.id)).notifications.length, 0);
+  assert.equal(calls.filter((c) => c.init.method === "POST").length, 0);
+  const next = { ...paid, id: "ORD01MNEMAILNEW", external_reference: "email-future-fixture" };
+  await repo.recordOrder(next, selection);
+  await Promise.all([first.drain(), second.drain()]);
+  assert.equal(calls.filter((c) => c.init.method === "POST").length, 1);
+  assert.equal((await repo.order(next.id)).notifications[0].status, "accepted");
+  const payload = JSON.parse(calls.find((c) => c.init.method === "POST").init.body);
+  assert.equal(payload.sender.email, "pedidos@loja.example");
+  assert.match(payload.htmlContent, /Mundo Natural/);
+});
+
+test("automatic email respects a manual disable after restarts and test orders never queue messages", async () => {
+  const options = { repository: repo, env: { BREVO_API_KEY: "xkeysib-local-integration-fixture", BREVO_SENDER_EMAIL: "fixture@example.invalid" },
+    fetcher: async () => { throw Error("must not send"); } };
+  const service = createCustomerNotifications(options);
+  await service.prepare();
+  await service.saveSettings({ revision: 1, emailEnabled: false, whatsappEnabled: false,
+    whatsappTemplates: { paid: null, ready: null, out_for_delivery: null } });
+  await createCustomerNotifications(options).prepare();
+  assert.equal((await service.getSettings()).settings.emailEnabled, false);
+  await service.saveSettings({ revision: 2, emailEnabled: true, whatsappEnabled: false,
+    whatsappTemplates: { paid: null, ready: null, out_for_delivery: null } });
+  const { order, selection } = deliveryOrderFixture();
+  await repo.recordOrder({ ...order, status: "processed", status_detail: "accredited", total_paid_amount: "44.00" }, selection, false);
+  assert.equal((await repo.order(order.id)).notifications.length, 0);
+});
+
+test("initial email setup preserves already queued WhatsApp work at the current revision", async () => {
+  const settings = { emailEnabled: false, whatsappEnabled: true, whatsappTemplates: { paid: 1, ready: 2, out_for_delivery: 3 } };
+  await pool.execute("INSERT INTO mn_settings(setting_key,value_json,version,updated_at) VALUES('customer-notifications',?,7,?)", [JSON.stringify(settings), Date.now()]);
+  const { order, selection } = deliveryOrderFixture(); selection.whatsappOptIn = true;
+  await repo.recordOrder({ ...order, status: "processed", status_detail: "accredited", total_paid_amount: "44.00" }, selection);
+  await initializeAutomaticEmail(repo);
+  assert.equal((await readSetting(pool, "customer-notifications")).revision, 8);
+  const calls = [];
+  const service = createCustomerNotifications({ repository: repo,
+    env: { BREVO_API_KEY: "xkeysib-local-integration-fixture", BREVO_SENDER_EMAIL: "fixture@example.invalid", BREVO_WHATSAPP_SENDER: "551151993525" },
+    fetcher: async (url) => { calls.push(url); return new Response("{}", { status: 201 }); } });
+  await service.drain();
+  assert.deepEqual(calls, ["https://api.brevo.com/v3/whatsapp/sendMessage"]);
+  assert.equal((await repo.order(order.id)).notifications.length, 1);
 });

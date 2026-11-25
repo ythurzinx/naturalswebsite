@@ -50,7 +50,9 @@ export function AdminOrderAlerts({
           </button>
         )}
       </div>
-      <div className="admin-alert-preferences">
+      <details className="admin-alert-preferences">
+        <summary>Preferências dos avisos</summary>
+        <div>
         <label>
           <input
             type="checkbox"
@@ -64,7 +66,8 @@ export function AdminOrderAlerts({
           painel aberto e o volume ligado; o navegador pode pausar avisos em
           segundo plano.
         </small>
-      </div>
+        </div>
+      </details>
       {alerts.audioError && (
         <p role="alert" className="payment-error">
           {alerts.audioError}

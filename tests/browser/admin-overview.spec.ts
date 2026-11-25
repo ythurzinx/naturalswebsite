@@ -1,3 +1,4 @@
+import { navigateAdmin } from "./admin-navigation";
 import { test, expect } from "@playwright/test";
 
 const now = Date.now();
@@ -49,6 +50,7 @@ test("the overview shows today's numbers, the order board and editable WhatsApp 
   ];
   let templates: Record<string, string> = {};
   let revision = 0;
+  let rejectStage = true;
   const saved: unknown[] = [];
   await page.route("**/api/admin/**", async (route) => {
     const request = route.request(),
@@ -93,6 +95,7 @@ test("the overview shows today's numbers, the order board and editable WhatsApp 
     else if (path.startsWith("orders/") && path.split("/").length === 2)
       json = { order: orders.find((o) => o.id === path.split("/")[1]) };
     else if (path.endsWith("/fulfillment")) {
+      if (rejectStage) return route.fulfill({ status: 409, json: { error: "O pagamento mudou. Atualize o pedido." } });
       const target = orders.find((o) => o.id === path.split("/")[1])!;
       target.fulfillment_status = request.postDataJSON().state;
       json = { ok: true, order: target };
@@ -125,7 +128,7 @@ test("the overview shows today's numbers, the order board and editable WhatsApp 
   await expect(column("Saiu para entrega")).toContainText("Carla");
   await expect(board).not.toContainText("Davi");
   await expect(board).not.toContainText("Eva");
-  if (info.project.name === "mobile-390")
+  if (info.project.name === "mobile-390" || info.project.name === "desktop")
     await page.screenshot({ path: info.outputPath("visao-geral.png"), fullPage: true });
 
   // Edit the confirmation text and insert a field from the chips.
@@ -153,10 +156,7 @@ test("the overview shows today's numbers, the order board and editable WhatsApp 
   );
 
   // The order opened from the board uses the edited text.
-  await page
-    .getByRole("navigation", { name: "Painel administrativo" })
-    .getByRole("button", { name: "Visão geral" })
-    .click();
+  await navigateAdmin(page, "Visão geral");
   await page.evaluate(() => {
     const opened: string[] = [];
     (window as unknown as { __opened: string[] }).__opened = opened;
@@ -178,7 +178,7 @@ test("the overview shows today's numbers, the order board and editable WhatsApp 
   await page.getByRole("button", { name: "Abrir pedido de Ana Souza" }).click();
   const dialog = page.getByRole("dialog");
   const expected = "Oi Ana! *Pagamento ok* ✅ 🌿 💚. Total: R$ 49,20";
-  const copy = dialog.getByRole("button", { name: "Copiar mensagem: pagamento confirmado", exact: true });
+  const copy = dialog.getByRole("button", { name: "Copiar mensagem atual", exact: true });
   await copy.click();
   await expect(dialog.getByText("Mensagem copiada.", { exact: false })).toBeVisible();
   expect(await page.evaluate(() => (window as unknown as { __copied: string }).__copied)).toBe(expected);
@@ -189,7 +189,7 @@ test("the overview shows today's numbers, the order board and editable WhatsApp 
   await expect(dialog.getByRole("textbox", { name: "Texto da mensagem para copiar" })).toHaveValue(expected);
   expect(orders[0].fulfillment_status).toBe("new");
   await dialog
-    .getByRole("button", { name: "Enviar: pagamento confirmado" })
+    .getByRole("button", { name: "Abrir no WhatsApp" })
     .click();
   const opened = await page.evaluate(
     () => (window as unknown as { __opened: string[] }).__opened,
@@ -199,6 +199,16 @@ test("the overview shows today's numbers, the order board and editable WhatsApp 
   expect(destination.pathname).toBe("/send");
   expect(destination.searchParams.get("phone")).toBe("5511988887777");
   expect(destination.searchParams.get("text")).toBe(expected);
+  expect(orders[0].fulfillment_status).toBe("new");
+  await dialog.getByLabel("Etapa do pedido", { exact: true }).selectOption("packing");
+  await expect(copy).toBeDisabled();
+  await dialog.getByRole("button", { name: "Salvar etapa e copiar mensagem" }).click();
+  await expect(dialog.getByRole("alert")).toContainText("O pagamento mudou");
+  expect(orders[0].fulfillment_status).toBe("new");
+  expect(await page.evaluate(() => (window as unknown as { __opened: string[] }).__opened)).toHaveLength(1);
+  await expect(dialog.getByRole("textbox", { name: "Texto da mensagem para copiar" })).toHaveCount(0);
+  rejectStage = false;
+  await dialog.getByRole("button", { name: "Salvar etapa e copiar mensagem" }).click();
   await expect.poll(() => orders[0].fulfillment_status).toBe("packing");
   expect(
     await page.evaluate(

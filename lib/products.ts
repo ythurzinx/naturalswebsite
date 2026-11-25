@@ -6,10 +6,11 @@ import defaults from "./merchandising-defaults.json";
 import { defaultProductVisible } from "./catalog-visibility.mjs";
 import { findProducts } from "./search.mjs";
 import { applyMerchandising } from "./merchandising.mjs";
+import { publicProduct } from "./public-product.mjs";
 export const products: Product[] = applyMerchandising(
   data.filter((p) => defaultProductVisible(p, policy)),
   defaults,
-);
+).map(publicProduct);
 export async function fetchProducts(): Promise<Product[]> {
   return products;
 }

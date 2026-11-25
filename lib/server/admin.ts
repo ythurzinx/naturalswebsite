@@ -26,7 +26,7 @@ export const admin = createAdminService({
   notifications: customerNotifications,
   productContent,
   reviews,
-  workerConfigured: /^[A-Za-z0-9_-]{32,128}$/.test(
+  workerConfigured: !!(process.env.NODE_ENV === "production" && process.env.DATABASE_URL && process.env.BREVO_API_KEY) || /^[A-Za-z0-9_-]{32,128}$/.test(
     process.env.NOTIFICATION_WORKER_SECRET || "",
   ),
 });

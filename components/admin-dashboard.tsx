@@ -38,6 +38,8 @@ import { AdminReadiness } from "./admin-readiness";
 import { AdminPrinterSettings } from "./admin-printer-settings";
 import { AdminMessageTemplates } from "./admin-message-templates";
 import { AdminOverview } from "./admin-overview";
+import { AdminNavigation, adminAreas } from "./admin-navigation";
+import { AdminCostImport } from "./admin-cost-import";
 import {
   claimAutoPrint,
   printOrderReceipt,
@@ -211,7 +213,6 @@ export function AdminDashboard() {
     [username, setUsername] = useState("admin"),
     [password, setPassword] = useState(""),
     [otp, setOtp] = useState("");
-  const [showMore, setShowMore] = useState(false);
   const [templates, setTemplates] = useState<Record<string, string>>({});
   const [tab, setTab] = useState("dashboard"),
     [days, setDays] = useState(30),
@@ -320,6 +321,7 @@ export function AdminDashboard() {
         setStats(dashboard);
         setOrders(list.orders);
       }
+      if (tab === "finance") setStats(await api<Stats>(`dashboard?days=${days}`));
       if (tab === "products")
         setProducts(
           (await api<{ products: AdminProduct[] }>("products")).products,
@@ -342,7 +344,7 @@ export function AdminDashboard() {
       .catch(() => {});
   });
   useEffect(() => {
-    if (auth && alerts.revision && (tab === "orders" || tab === "dashboard"))
+    if (auth && alerts.revision && ["orders", "dashboard", "finance"].includes(tab))
       void reload();
   }, [auth, alerts.revision, tab, reload]);
   // Latest WhatsApp texts each time an order is opened.
@@ -404,6 +406,7 @@ export function AdminDashboard() {
         priceCents: amount(price),
         costCents: cost.trim() ? amount(cost) : null,
         priceUnit: fields.isBulk ? "100g" : "unit",
+        costUnit: fields.isBulk ? "kg" : "unit",
       });
       setDraft(null);
       setNotice(
@@ -436,11 +439,7 @@ export function AdminDashboard() {
       cost:
         product.costCents == null
           ? ""
-          : (
-              (product.isGranel
-                ? Math.round(product.costCents / 10)
-                : product.costCents) / 100
-            ).toFixed(2),
+          : (product.costCents / 100).toFixed(2),
       active: product.active,
       imageSha: product.imageSha,
       defaultImage: product.imagem,
@@ -596,25 +595,7 @@ export function AdminDashboard() {
         </div>
       </main>
     );
-  // Daily work first; technical setup stays under "Mais opções".
-  const tabs = [
-    { id: "dashboard", label: "Visão geral", icon: LayoutDashboard },
-    { id: "orders", label: "Pedidos", icon: ShoppingBag },
-    { id: "products", label: "Produtos e fotos", icon: Package },
-    { id: "messages", label: "Mensagens", icon: MessageCircle },
-    { id: "coupons", label: "Cupons", icon: TicketPercent },
-    { id: "merchandising", label: "Ofertas e combos", icon: Tags },
-    { id: "shipping", label: "Frete e entregas", icon: Truck },
-    { id: "reviews", label: "Avaliações", icon: Activity },
-    { id: "content", label: "Conteúdo e receitas", icon: Package },
-    { id: "expenses", label: "Despesas", icon: ReceiptText },
-  ];
-  const moreTabs = [
-    { id: "setup", label: "Configuração", icon: Settings2 },
-    { id: "notifications", label: "E-mails automáticos", icon: ShoppingBag },
-    { id: "payments", label: "Pagamentos", icon: CreditCard },
-    { id: "audit", label: "Atividade", icon: Activity },
-  ];
+  const tabs = adminAreas;
   const filtered = products.filter(
     (p) =>
       normalize(`${p.nome_produto} ${p.categoria}`).includes(
@@ -644,62 +625,28 @@ export function AdminDashboard() {
               : item.state === orderFilter)),
   );
   return (
-    <main id="conteudo" className="shell admin-app">
-      <aside className="admin-sidebar">
-        <span className="eyebrow">MUNDO NATURAL</span>
-        <strong>Gestão da loja</strong>
-        <nav aria-label="Painel administrativo">
-          {[
-            ...tabs,
-            ...(showMore || moreTabs.some((t) => t.id === tab) ? moreTabs : []),
-          ].map(({ id, label, icon: Icon }) => (
-            <button
-              key={id}
-              className={tab === id ? "active" : ""}
-              onClick={() => {
-                setTab(id);
-                setNotice("");
-                setError("");
-              }}
-            >
-              <Icon size={18} />
-              {label}
-            </button>
-          ))}
-          {!moreTabs.some((t) => t.id === tab) && (
-            <button
-              type="button"
-              className="admin-more-toggle"
-              aria-expanded={showMore}
-              onClick={() => setShowMore((value) => !value)}
-            >
-              {showMore ? "Menos opções" : "Mais opções"}
-            </button>
-          )}
-        </nav>
-        <span className="admin-session">
-          <ShieldCheck size={15} />
-          {mfa ? "Acesso com autenticador" : "Sessão protegida"}
-        </span>
-        <button
-          className="admin-logout"
-          disabled={busy}
-          onClick={() =>
-            void action(async () => {
-              await api("logout", "POST");
-              csrf.current = "";
-              setAuth(false);
-            })
-          }
-        >
-          <LogOut size={16} /> Sair
-        </button>
-      </aside>
+    <main id="conteudo" className="shell admin-app admin-workspace">
+      <AdminNavigation
+        active={tab}
+        busy={busy}
+        mfa={mfa}
+        onNavigate={(id) => {
+          setTab(id);
+          setNotice("");
+          setError("");
+        }}
+        onLogout={() => void action(async () => {
+          await api("logout", "POST");
+          csrf.current = "";
+          setAuth(false);
+        })}
+      />
       <section className="admin-content">
         <header className="admin-heading">
           <div>
             <span className="eyebrow">OLÁ, {username.toUpperCase()}</span>
             <h1>{tabs.find((t) => t.id === tab)?.label}</h1>
+            <p className="admin-page-description">{tabs.find((t) => t.id === tab)?.description}</p>
           </div>
           <div>
             <Link
@@ -757,10 +704,14 @@ export function AdminDashboard() {
         )}
         {tab === "setup" && <AdminReadiness api={api} />}
         {tab === "messages" && <AdminMessageTemplates api={api} />}
+        {tab === "costs" && <AdminCostImport api={api} onApplied={() => void reload()} />}
         {tab === "dashboard" && (
           <AdminOverview
             today={stats?.today ?? null}
             averageTicketCents={stats?.averageTicketCents ?? null}
+            profitCents={stats?.profitCents ?? null}
+            missingCosts={stats?.missingCosts ?? 0}
+            days={days}
             orders={orders}
             onNavigate={(next) => {
               setTab(next);
@@ -774,7 +725,7 @@ export function AdminDashboard() {
             }
           />
         )}
-        {tab === "dashboard" && (
+        {tab === "finance" && (
           <>
             <div className="admin-toolbar">
               <h2 className="overview-section-title">Resultados do período</h2>
@@ -1471,6 +1422,7 @@ export function AdminDashboard() {
           if (!open && !busy) setDraft(null);
         }}
         title={draft?.id ? "Editar produto" : "Novo produto"}
+        className="admin-product-dialog"
         wide
       >
         {draft && (
@@ -1568,7 +1520,7 @@ export function AdminDashboard() {
                         setDraft({ ...draft, isBulk: e.target.checked })
                       }
                     />{" "}
-                    Produto a granel (preço e custo por 100 g)
+                    Produto a granel (venda de 100 em 100 g)
                   </label>
                   <div className="form-row">
                     <label className="field-label">
@@ -1586,7 +1538,7 @@ export function AdminDashboard() {
                       />
                     </label>
                     <label className="field-label">
-                      Custo (R$ {draft.isBulk ? "/ 100 g" : "/ unidade"},
+                      Custo (R$ {draft.isBulk ? "/ kg" : "/ unidade"},
                       opcional)
                       <input
                         type="number"
@@ -1629,17 +1581,47 @@ export function AdminDashboard() {
           if (!open) setOrder(null);
         }}
         title="Detalhes do pedido"
+        className="admin-order-dialog"
         wide
       >
         {order && (
           <>
-            <p className="admin-id">{order.id}</p>
-            <p>
-              {order.customer_name} · {order.customer_email}
-            </p>
-            <span className={`admin-badge ${order.state}`}>
-              {stateLabel[order.state]}
-            </span>
+            <div className="order-summary-top">
+              <div><span>Pedido de</span><strong>{order.customer_name || "Cliente"}</strong><small>{order.id}</small></div>
+              <div><span className={`admin-badge ${order.state}`}>{stateLabel[order.state]}</span><strong>{currency(order.total_cents)}</strong></div>
+            </div>
+            <AdminOrderOperations
+              key={order.id}
+              order={order}
+              templates={templates}
+              busy={busy}
+              transition={async (state, estimatedMinutes) => {
+                if (busy) throw Error("Aguarde a atualização em andamento.");
+                setBusy(true);
+                try {
+                  const value = await api<{ order: Order }>(
+                    `orders/${order.id}/fulfillment`, "PUT", { state, ...(estimatedMinutes !== undefined ? { estimatedMinutes } : {}) },
+                  );
+                  setOrder(value.order);
+                  await reload();
+                  return value.order;
+                } finally { setBusy(false); }
+              }}
+              update={(path, body) =>
+                action(async () => {
+                  const result = await api<{ order: Order }>(
+                    `orders/${order.id}/${path}`,
+                    "PUT",
+                    body,
+                  );
+                  setOrder(result.order);
+                  setNotice("Informações do pedido atualizadas.");
+                  await reload();
+                })
+              }
+            />
+            <details className="order-section-details order-financial-details">
+              <summary><ReceiptText size={17} /> Valores, custos e pagamento</summary>
             <button
               disabled={busy}
               className="button button-outline button-small"
@@ -1691,55 +1673,7 @@ export function AdminDashboard() {
               Total: <strong>{currency(order.total_cents)}</strong> · Taxas:{" "}
               {currency(order.fee_cents)}
             </p>
-            <AdminOrderOperations
-              key={order.id}
-              order={order}
-              templates={templates}
-              busy={busy}
-              update={(path, body) =>
-                action(async () => {
-                  const result = await api<{ order: Order }>(
-                    `orders/${order.id}/${path}`,
-                    "PUT",
-                    body,
-                  );
-                  setOrder(result.order);
-                  setNotice("Informações do pedido atualizadas.");
-                  await reload();
-                })
-              }
-            />
-            <label className="field-label">
-              Etapa de preparação e recebimento
-              <select
-                disabled={busy || order.state !== "paid"}
-                value={order.fulfillment_status}
-                onChange={(e) =>
-                  void action(async () => {
-                    await api(`orders/${order.id}/fulfillment`, "PUT", {
-                      state: e.target.value,
-                    });
-                    setOrder(
-                      (await api<{ order: Order }>(`orders/${order.id}`)).order,
-                    );
-                    await reload();
-                  })
-                }
-              >
-                <option value="new">Novo</option>
-                <option value="packing">Em separação</option>
-                <option value="ready">Embalado e pronto</option>
-                {order.fulfillment_mode === "delivery" && (
-                  <option value="out_for_delivery">Saiu para entrega</option>
-                )}
-                <option value="completed">
-                  Concluído · entregue ou retirado
-                </option>
-              </select>
-            </label>
-            <p className="fine-print">
-              Disponível depois que o pagamento é aprovado.
-            </p>
+            </details>
             {error && (
               <p className="payment-error" role="alert">
                 {error}

@@ -106,6 +106,7 @@ test("private test checkout has isolated cookies and returns only authoritative 
     fulfillment: "pickup",
     stage: null,
     etaMinutes: null,
+    emailState: null,
     summary: null,
     testMode: true,
   });

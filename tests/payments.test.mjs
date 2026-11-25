@@ -70,7 +70,7 @@ const input = () => ({
   expectedTotalCents: 14798,
 });
 const key = deriveKey(config.accessToken);
-function setup(customFetcher, repository = null) {
+function setup(customFetcher, repository = null, notifications = null) {
   const calls = [],
     orders = new Map(),
     jar = new Map();
@@ -106,6 +106,7 @@ function setup(customFetcher, repository = null) {
     policy,
     config,
     repository,
+    notifications,
     fetcher,
     now: () => now,
   });
@@ -383,6 +384,7 @@ test("customers see the preparation stage and arrival estimate, never contacts o
     customer_phone: "11999998888",
     staff_note: "nota interna",
     address: { street: "Rua A", number: "1" },
+    notifications: [{ channel: "email", event: "paid", status: "accepted", code: "PRIVATE_PROVIDER_DETAIL" }],
   };
   const repository = {
     recordCheckoutIntent: async () => {},
@@ -397,6 +399,7 @@ test("customers see the preparation stage and arrival estimate, never contacts o
   assert.equal(body.state, "pending");
   assert.equal(body.stage, null);
   assert.equal(body.etaMinutes, null);
+  assert.equal(body.emailState, null);
   const order = f.orders.get(data.orderId);
   order.status = "processed";
   order.status_detail = "accredited";
@@ -410,13 +413,30 @@ test("customers see the preparation stage and arrival estimate, never contacts o
   assert.equal(body.stage, "out_for_delivery");
   assert.equal(body.etaMinutes, 25);
   assert.equal(body.fulfillment, "delivery");
-  assert.ok(!/99999|nota interna|Rua A|address|phone/.test(text));
+  assert.equal(body.emailState, "accepted");
+  assert.ok(!/99999|nota interna|Rua A|address|phone|PRIVATE_PROVIDER/.test(text));
   saved.fulfillment_status = "packing";
   body = await (
     await f.service.status(f.request("/api/orders/current"), "current")
   ).json();
   assert.equal(body.stage, "packing");
   assert.equal(body.etaMinutes, null);
+});
+test("payment persistence initializes email before recording and survives provider setup failure", async () => {
+  const actions = [];
+  let fail = false;
+  const repository = { order: async () => null, recordOrder: async (_order, _selection, notify) => {
+    assert.equal(notify, true); actions.push("record");
+  } };
+  const notifications = { prepare: async () => { actions.push("prepare"); if (fail) throw Error("provider down"); },
+    drain: async () => { actions.push("drain"); } };
+  const f = setup(null, repository, notifications);
+  const created = await f.checkout(); assert.equal(created.status, 200);
+  assert.deepEqual(actions, ["prepare", "record"]);
+  fail = true; actions.length = 0;
+  const response = await f.service.status(f.request("/api/orders/current"), "current");
+  assert.equal(response.status, 200);
+  assert.deepEqual(actions, ["prepare", "record", "drain"]);
 });
 test("another order, currency, amount or signed reference cannot be substituted", () => {
   const ref = externalReference(key, "a".repeat(22), 1000),

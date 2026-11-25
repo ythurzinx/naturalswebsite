@@ -20,6 +20,7 @@ type Data = {
   settings: Settings;
   readiness: { apiKey: boolean; email: boolean; whatsapp: boolean };
   queue: { pending: number; issues: number };
+  emailSetup?: { state: string; email: string; source: string | null };
 };
 const eventLabels = {
   paid: "Pagamento aprovado",
@@ -89,7 +90,7 @@ export function AdminNotificationSettings({ api }: { api: Api }) {
       <div className="section-heading">
         <div>
           <span className="eyebrow">CUIDADO EM CADA ETAPA</span>
-          <h2>Mensagens aos clientes</h2>
+          <h2>Avisos automáticos da loja</h2>
           <p>
             Confirmação de pagamento, separação e saída para entrega. Contato da
             loja: <strong>(11) 5199-3525</strong>.
@@ -116,9 +117,9 @@ export function AdminNotificationSettings({ api }: { api: Api }) {
       )}
       {data && draft && (
         <>
-          <details className="notification-setup-card">
+          <details className="notification-setup-card" open={!data.readiness.email}>
             <summary>
-              <h3>Conectar a Brevo (configuração técnica)</h3>
+              <h3>Começar com os e-mails da Brevo</h3>
             </summary>
             <ol>
               <li>
@@ -130,22 +131,23 @@ export function AdminNotificationSettings({ api }: { api: Api }) {
                 >
                   Brevo
                 </a>{" "}
-                e verifique o remetente de e-mail.
+                e verifique um remetente com o domínio da loja. A Brevo pode
+                solicitar a autenticação do domínio nos registros DNS.
               </li>
               <li>
-                Ative o WhatsApp, conecte o número da loja e aprove três modelos
-                de utilidade.
+                Gere uma chave de API v3 na Brevo. Na Hostinger → Variáveis de
+                ambiente, adicione <code>BREVO_API_KEY</code> e reimplante a aplicação.
               </li>
               <li>
-                Na Hostinger, configure <code>BREVO_API_KEY</code>,{" "}
-                <code>BREVO_SENDER_EMAIL</code> e{" "}
-                <code>BREVO_WHATSAPP_SENDER=551151993525</code>. Reimplante a
-                aplicação.
+                O servidor procura um remetente ativo do domínio configurado em{" "}
+                <code>APP_URL</code> e ativa o e-mail na primeira configuração.
+                Para escolher outro remetente já verificado, defina também{" "}
+                <code>BREVO_SENDER_EMAIL</code> na hospedagem.
               </li>
               <li>
-                Preencha os IDs dos modelos e ative os canais abaixo. Para
-                enviar mesmo com o painel fechado, configure o agendador
-                descrito em <code>docs/NOTIFICACOES.md</code>.
+                Confira o status abaixo. Os próximos pagamentos confirmados e
+                as etapas do pedido entram na fila automaticamente, inclusive
+                com o painel fechado. Uma desativação feita aqui será respeitada.
               </li>
             </ol>
             <p className="fine-print">
@@ -161,9 +163,19 @@ export function AdminNotificationSettings({ api }: { api: Api }) {
               </h3>
               <p>
                 {data.readiness.email
-                  ? "Credencial e remetente configurados no servidor."
-                  : "Configure a chave e o remetente de e-mail na Hostinger."}
+                  ? data.emailSetup?.state === "verified"
+                    ? "Remetente ativo identificado na Brevo. Tudo pronto para os próximos avisos."
+                    : "Chave e remetente configurados. Confirme a verificação do endereço na Brevo."
+                  : data.emailSetup?.state === "invalid_key"
+                    ? "A Brevo recusou a chave. Confira a credencial de API v3 na Hostinger."
+                    : data.emailSetup?.state === "sender_required"
+                      ? "Chave conectada. Falta verificar um remetente do domínio na Brevo."
+                      : data.emailSetup?.state === "provider_unavailable"
+                        ? "Não foi possível consultar a Brevo agora. Tente atualizar os canais em instantes."
+                        : "Adicione a chave de API na Hostinger e verifique o remetente na Brevo."}
               </p>
+              {data.emailSetup?.email && <p className="fine-print">Remetente: <strong>{data.emailSetup.email}</strong></p>}
+              <p className="fine-print">Confirmação com os itens, valores, recebimento e acompanhamento do pedido. Sem anúncios ou dados internos da loja.</p>
               <label className="notification-toggle">
                 <input
                   type="checkbox"
@@ -189,6 +201,7 @@ export function AdminNotificationSettings({ api }: { api: Api }) {
                 Somente para clientes que autorizarem no checkout. O número
                 informado para contato também vale nos pedidos de retirada.
               </p>
+              <p className="fine-print">Para ativar: conecte o WhatsApp Business à Brevo, aprove os três modelos de utilidade e configure <code>BREVO_WHATSAPP_SENDER=551151993525</code> na Hostinger. O atendimento manual e a cópia das mensagens continuam disponíveis em Pedidos.</p>
               {Object.entries(eventLabels).map(([event, label]) => (
                 <label className="field-label" key={event}>
                   ID do modelo: {label}
@@ -247,9 +260,10 @@ export function AdminNotificationSettings({ api }: { api: Api }) {
               envio incerto.
             </p>
             <p>
-              O painel processa a fila enquanto está aberto. O agendador mantém
-              os envios ativos quando a equipe sai do painel. A confirmação de
-              pagamento também pode acionar os avisos pelo webhook verificado.
+              A aplicação Node.js processa a fila a cada minuto, mesmo com o
+              painel fechado, enquanto o servidor estiver em execução. O
+              pagamento verificado também aciona o envio. Um agendador externo
+              pode ser configurado como apoio em <code>docs/NOTIFICACOES.md</code>.
             </p>
             <button
               type="button"

@@ -42,6 +42,8 @@ No seu terminal, execute `npm run admin:setup`. Digite uma senha forte de pelo m
 
 Depois de fazer redeploy, acesse `/admin`. O usuário padrão é `admin`. O painel permite editar produtos e custos, disponibilizar/indisponibilizar itens, associar fotos, acompanhar pedidos, registrar despesas, exportar os últimos pedidos e conferir o histórico de alterações. As fotos JPEG/PNG/WebP são normalizadas para WebP, com metadados removidos, e guardadas no banco. Não são geradas novas imagens por IA.
 
+O menu está dividido em Dia a dia, Catálogo, Gestão e Configuração. Em **Custos e importação**, envie o CSV original com a coluna de custo para alimentar o resultado privado; o relatório público de preços de venda não substitui esse arquivo. Em **E-mails automáticos**, confira a integração Brevo: verifique um remetente do domínio no provedor, adicione `BREVO_API_KEY` na Hostinger e reimplante. O servidor identifica o remetente e processa os próximos avisos com o painel fechado. Consulte [o guia do painel](PAINEL-CUSTOS-EMAIL.md) e [as notificações](NOTIFICACOES.md).
+
 ## 4. Configurar o Mercado Pago
 
 Na conta da loja, crie/selecione a aplicação de **Checkout Pro via Orders API**, obtenha o Access Token adequado e confirme os meios de pagamento disponíveis. Para oferecer Pix, a conta precisa estar habilitada e ter sua chave Pix cadastrada.

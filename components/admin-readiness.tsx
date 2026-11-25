@@ -91,17 +91,17 @@ function items(r: Readiness): Item[] {
         ? "E-mails automáticos ainda não configurados."
         : n.emailEnabled
           ? "Pagamento aprovado, pedido separado e saída para entrega."
-          : "Ative o canal em Mais opções → Mensagens aos clientes.",
-      tech: "Hostinger: BREVO_API_KEY e BREVO_SENDER_EMAIL.",
+          : "Ative o canal em E-mails automáticos.",
+      tech: "Hostinger: BREVO_API_KEY. Verifique um remetente do domínio na Brevo; BREVO_SENDER_EMAIL é opcional.",
     },
     {
       label: "WhatsApp de pedido (Brevo)",
       state: n?.whatsapp && n.whatsappEnabled ? "ok" : "optional",
       hint: !n?.whatsapp
-        ? "Serviço pago. Enquanto isso, use “Enviar para o cliente” em cada pedido."
+        ? "Serviço pago. Enquanto isso, copie a mensagem ou abra o WhatsApp no pedido."
         : n.whatsappEnabled
           ? "Enviado a quem autorizar na finalização da compra."
-          : "Informe os modelos aprovados e ative em Mensagens aos clientes.",
+          : "Informe os modelos aprovados e ative em E-mails automáticos.",
       tech: "Hostinger: BREVO_WHATSAPP_SENDER; Brevo: WhatsApp Business e modelos aprovados.",
     },
     {
@@ -109,10 +109,10 @@ function items(r: Readiness): Item[] {
       state: n?.worker ? "ok" : "optional",
       hint: n?.worker
         ? n.issues
-          ? `${n.issues} aviso(s) com falha: confira em Mensagens aos clientes.`
-          : "Segredo do agendador configurado; confira se o agendador chama o site a cada minuto."
+          ? `${n.issues} aviso(s) com falha: confira em E-mails automáticos.`
+          : "Processamento no servidor configurado. Confira o histórico de envio em cada pedido."
         : "Só necessário com os avisos automáticos da Brevo.",
-      tech: "Hostinger: NOTIFICATION_WORKER_SECRET e um agendador (docs/NOTIFICACOES.md).",
+      tech: "O servidor Node.js processa a fila a cada minuto. Agendador externo opcional: docs/NOTIFICACOES.md.",
     },
   ];
 }

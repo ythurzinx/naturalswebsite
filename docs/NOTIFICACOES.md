@@ -6,17 +6,15 @@ Sem a Brevo, a equipe pode enviar os mesmos avisos manualmente pelo WhatsApp da 
 
 ## Ativação na Hostinger
 
-1. Crie uma conta Brevo e ative o serviço de e-mails transacionais. Verifique um remetente de e-mail que você controla. Configure a autenticação de domínio solicitada pela Brevo (DKIM e demais registros indicados no painel), preservando os registros A/CNAME do site.
-2. Ative WhatsApp na Brevo e conecte o WhatsApp Business da loja **+55 11 5199-3525**. O número precisa ser verificado pelo provedor; informar o número no site não faz essa habilitação.
-3. Crie três modelos de **utilidade**, em português do Brasil. Aguarde aprovação da Meta. Para os campos dinâmicos, associe os nomes dos parâmetros abaixo no editor da Brevo; não use um atributo global do contato como previsão de entrega.
-4. Na aplicação Node.js da Hostinger → Variáveis de ambiente, configure:
-   - `BREVO_API_KEY`: chave privada da Brevo;
-   - `BREVO_SENDER_EMAIL`: remetente de e-mail verificado;
-   - `BREVO_WHATSAPP_SENDER=551151993525`: número conectado na Brevo;
-   - `NOTIFICATION_WORKER_SECRET`: segredo aleatório separado, com 32 a 128 caracteres de letras, números, `_` ou `-`.
-5. Reimplante a aplicação. Em **Admin → Mensagens aos clientes**, preencha os IDs numéricos dos três modelos e ative os canais desejados. Eles ficam desligados inicialmente. Credenciais não aparecem no painel nem no navegador. A indicação “configurado” verifica a presença/formato dos valores; a aprovação e validade real devem ser conferidas no provedor.
-6. Configure um agendador confiável para fazer **POST HTTPS** a `https://mundonaturaltaboao.com.br/api/notifications/worker` **a cada minuto**, com cabeçalho `Authorization: Bearer SEU_SEGREDO_DO_WORKER`. Guarde o segredo no cofre do agendador, não na URL ou em um repositório. O serviço executa no máximo quatro avisos por chamada. Sem o agendador, o painel autenticado processa a fila enquanto permanece aberto e a confirmação de pagamento tenta processá-la pelo webhook/consulta verificada.
-7. Faça uma compra controlada com contatos seus, marque o consentimento WhatsApp e confira os três avisos. Marque cada item da embalagem antes de “Separado”. Salve a **previsão de chegada (1–240 minutos)** antes de “Saiu para entrega”. Retirada não permite saída para entrega.
+1. Crie uma conta Brevo e ative o serviço de e-mails transacionais. Verifique um remetente do domínio da loja, por exemplo `pedidos@mundonaturaltaboao.com.br`. Use um endereço que você controla; informar o endereço no código não o verifica. Configure a autenticação de domínio solicitada pela Brevo (DKIM e demais registros indicados no painel), preservando os registros A/CNAME do site.
+2. Em **Hostinger → Variáveis de ambiente**, adicione `BREVO_API_KEY` com uma chave privada de **API v3**. Confira `APP_URL=https://mundonaturaltaboao.com.br` e reimplante a aplicação.
+3. O servidor consulta `GET /v3/senders` e escolhe apenas um remetente **ativo do domínio exato de APP_URL**, sem `www`. Prioridade: `pedidos`, `contato`, `atendimento`, `noreply`, `no-reply`, depois os demais. Se não houver remetente verificado, o painel indica a pendência e o canal não é ativado. Para usar outro endereço já verificado na Brevo, configure opcionalmente `BREVO_SENDER_EMAIL`; nesse caso a verificação no provedor é sua responsabilidade.
+4. Em **Admin → E-mails automáticos**, confira o remetente e o status. Na primeira configuração válida, o canal de e-mail é ativado para eventos futuros. Uma escolha explícita feita no painel, incluindo desligar o canal, prevalece após reinícios. Não há envio em massa de pedidos antigos. As chaves nunca aparecem no navegador.
+5. A aplicação **Node.js em produção processa a fila a cada minuto**, inclusive com o painel fechado, enquanto estiver em execução. A confirmação verificada do pagamento também inicializa o canal e tenta enviar. O processo não inicia durante `npm run build`, desenvolvimento ou testes. Não é necessário configurar cron para o uso normal na Hostinger.
+6. **Opcional: WhatsApp automático.** Conecte o WhatsApp Business **+55 11 5199-3525** na Brevo, aprove três modelos de utilidade com a Meta, configure `BREVO_WHATSAPP_SENDER=551151993525` na Hostinger e reimplante. Preencha os três IDs em **E-mails automáticos** e ative esse canal. A verificação e os créditos do WhatsApp são independentes dos e-mails. Sem isso, use a cópia e a conversa manual no pedido.
+7. Faça uma compra controlada com contatos seus. Confira o e-mail, o histórico do pedido e o relatório da Brevo. Para WhatsApp automático, autorize o canal no checkout. Confira todos os itens da embalagem e use o bloco **Etapa e mensagem ao cliente** para salvar a separação/saída; a previsão de 1–240 minutos é salva junto da saída para entrega.
+
+Como redundância, um agendador externo pode fazer **POST HTTPS** a `https://mundonaturaltaboao.com.br/api/notifications/worker` a cada minuto, com `Authorization: Bearer SEU_SEGREDO_DO_WORKER`. Configure esse mesmo segredo em `NOTIFICATION_WORKER_SECRET` (32–128 caracteres de letras, números, `_` ou `-`). Guarde-o no cofre do agendador, nunca na URL. Os processos compartilham as mesmas travas no banco. Cada execução envia até quatro avisos; em grande volume, acompanhe a fila e a capacidade do provedor.
 
 Não é necessária uma nova importação SQL: a integração usa a tabela `mn_settings` já existente. A URL de checkout, os tokens e os pedidos de homologação do Mercado Pago continuam separados; a homologação privada não produz avisos reais.
 
@@ -28,7 +26,7 @@ Parâmetros enviados por mensagem: `nome`, `pedido`, `recebimento`, `previsao_mi
 - **Pedido separado:** “Olá, {{nome}}! O pedido {{pedido}} foi separado e embalado pela Mundo Natural. Forma de recebimento: {{recebimento}}. Para retirada, já pode buscar na loja; para entrega, aguarde o aviso de saída. Atendimento: {{telefone_loja}}.”
 - **Saiu para entrega:** “Olá, {{nome}}! Seu pedido {{pedido}} saiu para entrega. A previsão é de aproximadamente {{previsao_minutos}} minutos a partir da saída e pode variar com o trânsito. Atendimento: {{telefone_loja}}.”
 
-O e-mail já possui modelos próprios em português, com o mesmo conteúdo operacional. Não envia endereço, custos internos, observações privadas, dados de cartão ou conteúdo promocional.
+O e-mail possui HTML responsivo e texto simples em português, com primeiro nome, itens (combo agrupado uma vez), valores da compra, forma de recebimento, acompanhamento e contato da loja. Não envia endereço, custos internos, observações privadas, dados de cartão ou conteúdo promocional.
 
 ## Custos, consentimento e acompanhamento
 
@@ -43,6 +41,8 @@ O histórico em cada pedido distingue **na fila**, **enviando**, **aceito pelo s
 - [API WhatsApp](https://developers.brevo.com/docs/whatsapp-messages)
 - [Modelo oficial dos parâmetros de WhatsApp](https://github.com/getbrevo/brevo-csharp/blob/master/docs/SendWhatsappMessage.md)
 - [Parâmetros transacionais](https://help.brevo.com/hc/en-us/articles/15923206071826-Personalize-your-WhatsApp-messages-with-transactional-parameters)
+- [Consultar remetentes ativos](https://developers.brevo.com/reference/get-senders)
+- [Remetentes e domínios](https://developers.brevo.com/docs/getting-started-with-senders-and-domains)
 - [API e-mail](https://developers.brevo.com/reference/send-transac-email)
 - [Idempotência](https://developers.brevo.com/docs/heterogenous-versions-batch-emails)
 - [Planos e créditos](https://help.brevo.com/hc/en-us/articles/208589409-About-Brevo-s-pricing-plans)

@@ -1,3 +1,4 @@
+import { navigateAdmin } from "./admin-navigation";
 import { test, expect } from "@playwright/test";
 import { readinessFixture } from "./readiness-fixture";
 
@@ -78,12 +79,10 @@ test("admin configures transactional channels without exposing credentials and f
     await route.fulfill({ json });
   });
   await page.goto("/admin");
-  const nav = page.getByRole("navigation", { name: "Painel administrativo" });
-  await nav.getByRole("button", { name: "Mais opções" }).click();
-  await nav.getByRole("button", { name: "E-mails automáticos" }).click();
+  await navigateAdmin(page, "E-mails automáticos");
   await expect(
     page.getByRole("heading", {
-      name: "Mensagens aos clientes",
+      name: "Avisos automáticos da loja",
       level: 2,
       exact: true,
     }),

@@ -1,3 +1,4 @@
+import { navigateAdmin } from "./admin-navigation";
 import { test, expect } from "@playwright/test";
 import { readinessFixture } from "./readiness-fixture";
 const settings = {
@@ -255,6 +256,11 @@ test("admin sound activation, live paid alerts, packing and shipping settings wo
     } else if (path === `orders/${order.id}/fulfillment`) {
       const body = route.request().postDataJSON();
       fulfillmentWrites.push(body.state);
+      expect(route.request().headers()["x-csrf-token"]).toBe("admin-fixture");
+      if (body.state === "out_for_delivery") {
+        expect(body.estimatedMinutes).toBe(30);
+        order.estimated_minutes = body.estimatedMinutes;
+      }
       order.fulfillment_status = body.state;
       json = { ok: true, order };
     } else if (path === `orders/${order.id}/operations`) {
@@ -263,13 +269,11 @@ test("admin sound activation, live paid alerts, packing and shipping settings wo
         staffNote: "Bancada 2",
         courierName: "Entregador teste",
         deliveryCostCents: 600,
-        estimatedMinutes: 30,
       });
       Object.assign(order, {
         staff_note: body.staffNote,
         courier_name: body.courierName,
         delivery_cost_cents: body.deliveryCostCents,
-        estimated_minutes: body.estimatedMinutes,
       });
       json = { order };
     } else throw Error("Unexpected fixture API path " + path);
@@ -312,6 +316,7 @@ test("admin sound activation, live paid alerts, packing and shipping settings wo
   await expect(page.locator(".order-toast")).toHaveCount(1);
   await page.locator(".order-toast").click();
   const dialog = page.getByRole("dialog");
+  await dialog.getByText("Dados do cliente e entrega", { exact: true }).click();
   await expect(dialog).toContainText("Rua de teste");
   const waze = dialog.getByRole("link", { name: "Abrir no Waze" });
   await expect(waze).toHaveAttribute(
@@ -339,12 +344,12 @@ test("admin sound activation, live paid alerts, packing and shipping settings wo
       return null;
     }) as typeof window.open;
   });
-  const send = dialog.locator(".send-customer");
-  await expect(send).toContainText("Enviar para o cliente");
+  const send = dialog.getByRole("region", { name: "Etapa e mensagem do pedido" });
+  await expect(send).toContainText("Etapa e mensagem ao cliente");
   if (info.project.name === "mobile-390")
     await send.screenshot({ path: info.outputPath("enviar-cliente.png") });
   const confirmed = send.getByRole("button", {
-    name: "Enviar: pagamento confirmado",
+    name: "Abrir no WhatsApp",
   });
   expect((await confirmed.boundingBox())!.height).toBeGreaterThanOrEqual(44);
   await confirmed.click();
@@ -364,22 +369,38 @@ test("admin sound activation, live paid alerts, packing and shipping settings wo
   expect(text).toContain("Total pago: R$ 44,00");
   expect(text).toContain("Entrega em:* Rua de teste, 22 (Apto 2) — Centro");
   expect(text).not.toContain("ORD01MNADMINOPSFIXTURE");
+  expect(fulfillmentWrites).toEqual([]);
+  const stage = send.getByLabel("Etapa do pedido", { exact: true });
+  const saveStage = send.getByRole("button", { name: "Salvar etapa e copiar mensagem" });
+  await stage.selectOption("packing");
+  await expect(send.getByRole("button", { name: "Abrir no WhatsApp" })).toBeDisabled();
+  await saveStage.click();
   await expect.poll(() => fulfillmentWrites).toEqual(["packing"]);
-  await send.getByRole("button", { name: "Enviar: saiu para entrega" }).click();
+  await stage.selectOption("out_for_delivery");
+  await saveStage.click();
   await expect(send.getByRole("alert")).toContainText("Informe a previsão");
+  await send.getByLabel("Previsão de chegada (minutos)", { exact: true }).fill("30");
+  await saveStage.click();
+  await expect(send.getByRole("alert")).toContainText("marque todos os produtos");
+  expect(fulfillmentWrites).toEqual(["packing"]);
   await dialog.getByRole("checkbox").click();
   await expect(dialog.getByRole("checkbox")).toBeChecked();
   await expect.poll(() => packingWrites).toBe(1);
   await expect(
     dialog.getByText("1/1 itens conferidos", { exact: true }),
   ).toBeVisible();
+  await saveStage.click();
+  await expect.poll(() => fulfillmentWrites).toEqual(["packing", "out_for_delivery"]);
+  await expect(send.getByRole("button", { name: "Copiar mensagem atual" })).toBeEnabled();
+  await send.getByText("Conferir mensagem", { exact: true }).click();
+  await expect(send.locator(".workflow-preview")).toContainText("30 minutos");
+  await dialog.getByText("Equipe, anotações e custo da entrega", { exact: true }).click();
   await dialog
     .getByLabel("Observação interna (não vai para o cliente)", { exact: true })
     .fill("Bancada 2");
   await dialog
     .getByLabel("Entregador ou serviço", { exact: true })
     .fill("Entregador teste");
-  await dialog.getByLabel(/^Previsão de chegada/).fill("30");
   await dialog
     .getByLabel("Custo real da entrega (R$)", { exact: true })
     .fill("6,00");
@@ -392,10 +413,7 @@ test("admin sound activation, live paid alerts, packing and shipping settings wo
   await dialog
     .getByRole("button", { name: "Fechar janela", exact: true })
     .click();
-  await page
-    .getByRole("navigation", { name: "Painel administrativo" })
-    .getByRole("button", { name: "Frete e entregas", exact: true })
-    .click();
+  await navigateAdmin(page, "Frete e entregas");
   await page.getByLabel("Valor por km (R$)", { exact: true }).fill("4,50");
   await page
     .getByRole("button", { name: "Salvar configuração do frete", exact: true })
