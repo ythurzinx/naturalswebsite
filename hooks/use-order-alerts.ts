@@ -20,7 +20,13 @@ type Api = <T>(
   method?: string,
   body?: Record<string, unknown>,
 ) => Promise<T>;
-export function useOrderAlerts(active: boolean, api: Api) {
+export function useOrderAlerts(
+  active: boolean,
+  api: Api,
+  onPaid?: (orderId: string) => void,
+) {
+  const paidRef = useRef(onPaid);
+  paidRef.current = onPaid;
   const [sound, setSound] = useState(false),
     [allOrders, setAllOrders] = useState(false),
     [events, setEvents] = useState<OrderEvent[]>([]),
@@ -129,6 +135,8 @@ export function useOrderAlerts(active: boolean, api: Api) {
           if (incoming.length) {
             setEvents((prior) => [...incoming.reverse(), ...prior].slice(0, 8));
             if (soundRef.current) await chime();
+            for (const event of incoming)
+              if (event.kind === "paid") paidRef.current?.(event.order_id);
           }
         }
         if (result.hasMore) delay = 200;

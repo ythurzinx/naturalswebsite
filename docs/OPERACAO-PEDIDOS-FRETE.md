@@ -49,18 +49,24 @@ O preço é o maior valor entre **frete mínimo** e **taxa base + distância × 
 
 O carrinho e o checkout compartilham o cálculo. A cotação vale por 10 minutos e fica vinculada aos produtos, às quantidades, aos preços e à versão das tarifas. Alterações exigem novo cálculo antes de pagar. O servidor calcula e valida o total; taxas ou distâncias enviadas manualmente pelo navegador são rejeitadas. O frete fica registrado no pedido e não muda quando você altera as tarifas da loja.
 
-## Avisar o cliente sem custo
+## Enviar mensagens ao cliente
 
-Enquanto os avisos automáticos (Brevo) não estiverem ativos, o pedido pago mostra no painel o quadro **Avisar o cliente pelo WhatsApp**. Cada botão abre o WhatsApp da loja com a mensagem pronta para o telefone do cliente; confira e toque em enviar:
+Cada pedido pago abre com o quadro **Enviar para o cliente**. Os botões abrem o WhatsApp da loja com uma mensagem completa — primeiro nome, itens comprados (cada combo uma vez), frete, cupom, total e endereço de entrega ou da loja, sem o número do pedido — e já atualizam a etapa:
 
-- **Pedido confirmado**: pagamento aprovado e link para acompanhar o pedido.
-- **Separado e embalado** (entrega) ou **Pronto para retirar** (retirada, com o endereço da loja).
-- **Saiu para entrega**: inclui a previsão de chegada salva no pedido.
-- **Agradecer**: convite para avaliar os produtos.
+- **Enviar: pagamento confirmado** → etapa “Em separação”.
+- **Enviar: separado e embalado** (entrega) ou **pronto para retirar** (retirada) → “Embalado e pronto” (exige todos os itens conferidos).
+- **Enviar: saiu para entrega** → informe em quantos minutos chega; a previsão é salva no pedido e entra na mensagem e na página do cliente.
+- **Enviar agradecimento e concluir** → “Concluído”, com convite para avaliar.
 
-Os botões de atualização só aparecem quando o cliente marcou, na finalização, que quer receber atualizações pelo WhatsApp. Sem essa autorização, aparece apenas **Combinar com o cliente**, para acertar entrega ou retirada. As mensagens usam só o primeiro nome e o número do pedido.
+Confira o texto no WhatsApp e toque em enviar. Se o cliente não marcou atualizações pelo WhatsApp no checkout, o painel lembra de enviar só o necessário sobre o pedido. Na página do pedido, o botão **Falar com a loja** do cliente também envia os itens, o total e a forma de recebimento, sem o código do pedido.
 
-O cliente acompanha as etapas em **Acompanhar pagamento** (`/pagamento/retorno`), no navegador em que comprou: pagamento aprovado, em separação, separado/pronto, saiu para entrega (com a previsão) e entregue/retirado. A página se atualiza sozinha a cada minuto enquanto estiver aberta e não mostra contatos, endereço nem notas internas.
+O cliente acompanha as etapas em **Acompanhar pagamento** (`/pagamento/retorno`), no navegador em que comprou. A página se atualiza a cada minuto enquanto estiver aberta e não mostra contatos, endereço nem notas internas.
+
+## Impressora térmica
+
+Em **Pedidos → Impressora da loja**, no computador da loja, marque **Imprimir automaticamente cada pedido pago neste computador** e escolha o papel (80 mm ou 58 mm). Com o painel aberto, cada pedido aprovado é impresso uma vez, com cliente, telefone, endereço, itens para conferência, frete, cupom, total e observações. **Imprimir pedido**, dentro de cada pedido, reimprime quando precisar.
+
+Para imprimir sem a janela de confirmação do navegador: defina a térmica como impressora padrão do Windows, crie um atalho do Google Chrome com `--kiosk-printing` no final do campo Destino, feche todas as janelas do Chrome e abra o painel por esse atalho. A configuração vale só para aquele computador.
 
 ## Receber avisos
 

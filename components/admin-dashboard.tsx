@@ -33,6 +33,12 @@ import { AdminShippingSettings } from "./admin-shipping-settings";
 import { AdminMerchandising } from "./admin-merchandising";
 import { AdminCoupons } from "./admin-coupons";
 import { AdminReadiness } from "./admin-readiness";
+import { AdminPrinterSettings } from "./admin-printer-settings";
+import {
+  claimAutoPrint,
+  printOrderReceipt,
+  printerSettings,
+} from "@/lib/thermal-receipt";
 import { AdminPaymentDiagnostics } from "./admin-payment-diagnostics";
 import { AdminReviews } from "./admin-reviews";
 import { AdminProductContent } from "./admin-product-content";
@@ -194,6 +200,7 @@ export function AdminDashboard() {
     [username, setUsername] = useState("admin"),
     [password, setPassword] = useState(""),
     [otp, setOtp] = useState("");
+  const [showMore, setShowMore] = useState(false);
   const [tab, setTab] = useState("dashboard"),
     [days, setDays] = useState(30),
     [busy, setBusy] = useState(false),
@@ -309,7 +316,13 @@ export function AdminDashboard() {
       setError(error instanceof Error ? error.message : "Falha ao atualizar.");
     }
   }, [tab, days, api]);
-  const alerts = useOrderAlerts(auth === true, api);
+  // Store PC: print each newly paid order once, when enabled on this computer.
+  const alerts = useOrderAlerts(auth === true, api, (orderId) => {
+    if (!printerSettings().auto || !claimAutoPrint(orderId)) return;
+    void api<{ order: Order }>(`orders/${orderId}`)
+      .then(({ order }) => printOrderReceipt(order))
+      .catch(() => {});
+  });
   useEffect(() => {
     if (auth && alerts.revision && (tab === "orders" || tab === "dashboard"))
       void reload();
@@ -558,18 +571,21 @@ export function AdminDashboard() {
         </div>
       </main>
     );
+  // Daily work first; technical setup stays under "Mais opções".
   const tabs = [
     { id: "dashboard", label: "Visão geral", icon: LayoutDashboard },
+    { id: "orders", label: "Pedidos", icon: ShoppingBag },
     { id: "products", label: "Produtos e fotos", icon: Package },
+    { id: "coupons", label: "Cupons", icon: TicketPercent },
+    { id: "merchandising", label: "Ofertas e combos", icon: Tags },
+    { id: "shipping", label: "Frete e entregas", icon: Truck },
     { id: "reviews", label: "Avaliações", icon: Activity },
     { id: "content", label: "Conteúdo e receitas", icon: Package },
-    { id: "merchandising", label: "Ofertas e combos", icon: Tags },
-    { id: "coupons", label: "Cupons", icon: TicketPercent },
-    { id: "orders", label: "Pedidos", icon: ShoppingBag },
-    { id: "shipping", label: "Frete e entregas", icon: Truck },
+    { id: "expenses", label: "Despesas", icon: ReceiptText },
+  ];
+  const moreTabs = [
     { id: "notifications", label: "Mensagens aos clientes", icon: ShoppingBag },
     { id: "payments", label: "Pagamentos", icon: CreditCard },
-    { id: "expenses", label: "Despesas", icon: ReceiptText },
     { id: "audit", label: "Atividade", icon: Activity },
   ];
   const filtered = products.filter(
@@ -606,7 +622,10 @@ export function AdminDashboard() {
         <span className="eyebrow">MUNDO NATURAL</span>
         <strong>Gestão da loja</strong>
         <nav aria-label="Painel administrativo">
-          {tabs.map(({ id, label, icon: Icon }) => (
+          {[
+            ...tabs,
+            ...(showMore || moreTabs.some((t) => t.id === tab) ? moreTabs : []),
+          ].map(({ id, label, icon: Icon }) => (
             <button
               key={id}
               className={tab === id ? "active" : ""}
@@ -620,6 +639,16 @@ export function AdminDashboard() {
               {label}
             </button>
           ))}
+          {!moreTabs.some((t) => t.id === tab) && (
+            <button
+              type="button"
+              className="admin-more-toggle"
+              aria-expanded={showMore}
+              onClick={() => setShowMore((value) => !value)}
+            >
+              {showMore ? "Menos opções" : "Mais opções"}
+            </button>
+          )}
         </nav>
         <span className="admin-session">
           <ShieldCheck size={15} />
@@ -1117,6 +1146,7 @@ export function AdminDashboard() {
         )}
         {tab === "orders" && (
           <>
+            <AdminPrinterSettings />
             <div className="admin-toolbar">
               <p>
                 Últimos 200 pedidos. Acompanhe o pagamento, confira os produtos
@@ -1662,8 +1692,7 @@ export function AdminDashboard() {
               </select>
             </label>
             <p className="fine-print">
-              A alteração exige uma nova consulta ao Mercado Pago e pagamento
-              integral aprovado.
+              Disponível depois que o pagamento é aprovado.
             </p>
             {error && (
               <p className="payment-error" role="alert">

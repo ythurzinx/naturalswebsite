@@ -9,13 +9,13 @@ import {
   MessageCircle,
 } from "lucide-react";
 import {
-  contactMessage,
   orderMessages,
   whatsappLink,
   whatsappPhone,
 } from "@/lib/order-messages.mjs";
 import { formatPrice } from "@/lib/products";
 import type { Order } from "./admin-dashboard";
+import { printOrderReceipt } from "@/lib/thermal-receipt";
 // Navigation links open the delivery address in the courier's app. They use
 // public URLs only: no map key is needed and nothing is sent until tapped.
 export function navigationLinks(address: NonNullable<Order["address"]>) {
@@ -24,47 +24,6 @@ export function navigationLinks(address: NonNullable<Order["address"]>) {
     google: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`,
     waze: `https://waze.com/ul?q=${encodeURIComponent(query)}&navigate=yes`,
   };
-}
-export function printPackingSlip(order: Order) {
-  if (order.state !== "paid") return;
-  const popup = window.open("", "_blank", "width=760,height=800");
-  if (!popup) return;
-  popup.opener = null;
-  popup.document.title = "Resumo de separação · Mundo Natural";
-  const style = popup.document.createElement("style");
-  style.textContent =
-    "body{font:16px/1.7 system-ui,sans-serif;max-width:680px;margin:32px auto;padding:0 16px;color:#172e20}h1{font-size:23px}p{white-space:pre-wrap;overflow-wrap:anywhere}footer{font-size:12px;margin-top:28px;border-top:1px solid #ccc}@media print{button{display:none}}";
-  popup.document.head.append(style);
-  const heading = popup.document.createElement("h1");
-  heading.textContent = "Mundo Natural · Separação e embalagem";
-  popup.document.body.append(heading);
-  const address = order.address;
-  const lines = [
-    order.id,
-    `Cliente: ${order.customer_name}`,
-    `Recebimento: ${order.fulfillment_mode === "delivery" ? "Entrega" : "Retirada na loja"}`,
-    order.customer_phone ? `Telefone: ${order.customer_phone}` : "",
-    address
-      ? `${address.street}, ${address.number}${address.complement ? ` · ${address.complement}` : ""}\n${address.neighborhood} · ${address.city}/${address.state} · CEP ${address.postalCode}`
-      : "",
-    "PRODUTOS",
-    ...(order.items || [])
-      .filter((i) => i.product_id !== "__shipping__")
-      .map((i) => `${i.packed ? "[✓]" : "[  ]"} ${i.quantity} × ${i.title}`),
-    order.customer_note ? `Observações do cliente: ${order.customer_note}` : "",
-    `Total pago: ${formatPrice(order.total_cents / 100)}`,
-  ];
-  for (const line of lines.filter(Boolean)) {
-    const p = popup.document.createElement("p");
-    p.textContent = line;
-    popup.document.body.append(p);
-  }
-  const footer = popup.document.createElement("footer");
-  footer.textContent =
-    "Resumo para conferência. Não é documento fiscal. Confira alergênicos e integridade das embalagens antes da saída.";
-  popup.document.body.append(footer);
-  popup.focus();
-  popup.print();
 }
 type Props = {
   order: Order;
@@ -113,6 +72,7 @@ export function AdminOrderOperations({ order, busy, update }: Props) {
   }
   return (
     <section className="admin-order-operations">
+      <SendToCustomer order={order} busy={busy} update={update} />
       <div className="order-customer-card">
         <h3>Dados do cliente</h3>
         <dl>
@@ -160,7 +120,6 @@ export function AdminOrderOperations({ order, busy, update }: Props) {
           Contatos disponíveis apenas para a equipe autenticada. Use para
           atender esta compra.
         </p>
-        <CustomerWhatsapp order={order} />
       </div>
       <div className="order-delivery-card">
         <h3>
@@ -225,8 +184,9 @@ export function AdminOrderOperations({ order, busy, update }: Props) {
           </p>
         )}
       </div>
+      {!!order.notifications?.length && (
       <div className="order-customer-card">
-        <h3>Avisos ao cliente</h3>
+        <h3>Avisos automáticos enviados</h3>
         {order.notifications?.length ? (
           <ul className="notification-order-history">
             {order.notifications.map((item) => (
@@ -262,12 +222,8 @@ export function AdminOrderOperations({ order, busy, update }: Props) {
             aos clientes” para os próximos eventos.
           </p>
         )}
-        <p className="fine-print">
-          “Aceito pelo serviço” confirma o recebimento da solicitação pela
-          Brevo. A entrega ou leitura pode ser consultada no relatório do
-          provedor.
-        </p>
       </div>
+      )}
       <div className="packing-heading">
         <h3>
           <PackageCheck size={20} /> Conferência da embalagem
@@ -320,9 +276,9 @@ export function AdminOrderOperations({ order, busy, update }: Props) {
         type="button"
         className="button button-small button-outline"
         disabled={order.state !== "paid"}
-        onClick={() => printPackingSlip(order)}
+        onClick={() => printOrderReceipt(order)}
       >
-        <Printer size={17} /> Imprimir resumo de separação
+        <Printer size={17} /> Imprimir pedido
       </button>
       <form onSubmit={save} className="order-operations-form">
         <h3>Anotações da equipe</h3>
@@ -395,55 +351,132 @@ export function AdminOrderOperations({ order, busy, update }: Props) {
   );
 }
 
-// Manual updates from the store's own WhatsApp: each button opens the chat
-// with a ready message; the team reviews it and taps send.
-function CustomerWhatsapp({ order }: { order: Order }) {
+const nextStage: Record<string, string> = {
+  confirmed: "packing",
+  ready: "ready",
+  out_for_delivery: "out_for_delivery",
+  completed: "completed",
+};
+const stageOrder = ["new", "packing", "ready", "out_for_delivery", "completed"];
+// One tap: opens the store's WhatsApp with a complete message and moves the
+// order forward. The team reviews the text and taps send in WhatsApp.
+function SendToCustomer({ order, busy, update }: Props) {
+  const [minutes, setMinutes] = useState(
+      order.estimated_minutes ? String(order.estimated_minutes) : "",
+    ),
+    [error, setError] = useState("");
   const phone = whatsappPhone(order.customer_phone);
-  if (!phone || order.state !== "paid") return null;
+  if (order.state !== "paid") return null;
   const origin = typeof window === "undefined" ? "" : window.location.origin;
-  const messages = orderMessages(order, origin);
+  const delivery = order.fulfillment_mode === "delivery";
+  async function advance(target: string) {
+    if (
+      stageOrder.indexOf(order.fulfillment_status) < stageOrder.indexOf(target)
+    )
+      await update("fulfillment", { state: target });
+  }
+  function send(id: string) {
+    setError("");
+    if (!phone) return;
+    let eta: number | null = null;
+    if (id === "out_for_delivery") {
+      eta = Number(minutes);
+      if (!/^\d{1,3}$/.test(minutes.trim()) || eta < 1 || eta > 240) {
+        setError("Informe a previsão de chegada, de 1 a 240 minutos.");
+        return;
+      }
+    }
+    const message = orderMessages(
+      { ...order, ...(eta ? { estimated_minutes: eta } : {}) },
+      origin,
+    ).find((m) => m.id === id);
+    if (!message) return;
+    window.open(
+      whatsappLink(phone, message.text),
+      "_blank",
+      "noopener,noreferrer",
+    );
+    void (async () => {
+      if (eta)
+        await update("operations", {
+          staffNote: order.staff_note || "",
+          courierName: order.courier_name || "",
+          deliveryCostCents: order.delivery_cost_cents ?? null,
+          estimatedMinutes: eta,
+        });
+      await advance(nextStage[id]);
+    })();
+  }
   return (
-    <div className="customer-whatsapp">
-      <h4>
-        <MessageCircle size={17} /> Avisar o cliente pelo WhatsApp
-      </h4>
-      {order.whatsapp_opt_in ? (
-        <>
-          <p className="fine-print">
-            O cliente autorizou atualizações pelo WhatsApp. Cada botão abre a
-            conversa com a mensagem pronta; confira e toque em enviar.
-          </p>
-          <div className="customer-whatsapp-actions">
-            {messages.map((message) => (
-              <a
-                key={message.id}
-                className={`button button-small ${order.fulfillment_status === message.id || (message.id === "confirmed" && order.fulfillment_status === "new") ? "" : "button-outline"}`}
-                href={whatsappLink(phone, message.text)}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {message.label}
-              </a>
-            ))}
-          </div>
-        </>
+    <div className="send-customer">
+      <h3>
+        <MessageCircle size={19} /> Enviar para o cliente
+      </h3>
+      {!phone ? (
+        <p className="fine-print">Telefone não informado neste pedido.</p>
       ) : (
         <>
+          <button
+            type="button"
+            className="button"
+            disabled={busy}
+            onClick={() => send("confirmed")}
+          >
+            Enviar: pagamento confirmado
+          </button>
+          <button
+            type="button"
+            className="button button-outline"
+            disabled={busy}
+            onClick={() => send("ready")}
+          >
+            {delivery
+              ? "Enviar: separado e embalado"
+              : "Enviar: pronto para retirar"}
+          </button>
+          {delivery && (
+            <div className="send-customer-eta">
+              <label className="field-label">
+                Chega em quantos minutos?
+                <input
+                  type="number"
+                  inputMode="numeric"
+                  min={1}
+                  max={240}
+                  value={minutes}
+                  onChange={(e) => setMinutes(e.target.value)}
+                  placeholder="Ex.: 30"
+                />
+              </label>
+              <button
+                type="button"
+                className="button"
+                disabled={busy}
+                onClick={() => send("out_for_delivery")}
+              >
+                Enviar: saiu para entrega
+              </button>
+            </div>
+          )}
+          <button
+            type="button"
+            className="text-button"
+            disabled={busy}
+            onClick={() => send("completed")}
+          >
+            Enviar agradecimento e concluir
+          </button>
+          {error && (
+            <p className="payment-error" role="alert">
+              {error}
+            </p>
+          )}
           <p className="fine-print">
-            O cliente não marcou atualizações pelo WhatsApp: ele acompanha as
-            etapas na página do pedido. Use a conversa só para combinar a
-            entrega ou a retirada.
+            Abre o WhatsApp da loja com a mensagem pronta (itens, total e
+            endereço) e atualiza a etapa do pedido. Confira e toque em enviar.
+            {!order.whatsapp_opt_in &&
+              " O cliente não marcou atualizações pelo WhatsApp: envie só o necessário sobre este pedido."}
           </p>
-          <div className="customer-whatsapp-actions">
-            <a
-              className="button button-small button-outline"
-              href={whatsappLink(phone, contactMessage(order))}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Combinar com o cliente
-            </a>
-          </div>
         </>
       )}
     </div>

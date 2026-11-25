@@ -77,10 +77,9 @@ test("admin configures transactional channels without exposing credentials and f
     await route.fulfill({ json });
   });
   await page.goto("/admin");
-  await page
-    .getByRole("navigation", { name: "Painel administrativo" })
-    .getByRole("button", { name: "Mensagens aos clientes" })
-    .click();
+  const nav = page.getByRole("navigation", { name: "Painel administrativo" });
+  await nav.getByRole("button", { name: "Mais opções" }).click();
+  await nav.getByRole("button", { name: "Mensagens aos clientes" }).click();
   await expect(
     page.getByRole("heading", {
       name: "Mensagens aos clientes",

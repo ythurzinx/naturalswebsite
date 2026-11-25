@@ -13,6 +13,7 @@ import {
 import { useCart } from "@/lib/cart-context";
 import { formatPrice } from "@/lib/products";
 import { whatsappUrl } from "@/lib/store";
+import { customerToStoreMessage } from "@/lib/order-messages.mjs";
 type Order = {
   testMode?: boolean;
   orderId: string;
@@ -21,6 +22,11 @@ type Order = {
   fulfillment?: string;
   stage?: "new" | "packing" | "ready" | "out_for_delivery" | "completed" | null;
   etaMinutes?: number | null;
+  summary?: {
+    firstName: string;
+    shippingCents: number;
+    items: { line_key: string; title: string; quantity: number }[];
+  } | null;
 };
 const stageIndex = {
   new: 0,
@@ -207,7 +213,14 @@ function Status() {
             className="button"
             href={whatsappUrl(
               order
-                ? `Olá! Gostaria de falar sobre meu pedido ${order.orderId}.`
+                ? customerToStoreMessage({
+                    firstName: order.summary?.firstName || "",
+                    items: order.summary?.items || [],
+                    shippingCents: order.summary?.shippingCents || 0,
+                    totalCents: order.totalCents,
+                    fulfillment: order.fulfillment,
+                    paid: order.state === "paid",
+                  })
                 : undefined,
             )}
             target="_blank"

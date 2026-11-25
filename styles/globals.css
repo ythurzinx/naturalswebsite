@@ -6141,3 +6141,106 @@ svg {
   font-size: 12px;
   color: #68725f;
 }
+
+/* Enviar para o cliente (painel) */
+.send-customer {
+  display: grid;
+  gap: 10px;
+  padding: 16px;
+  margin-bottom: 18px;
+  border: 1px solid #cfe0c6;
+  border-radius: 10px;
+  background: #f3f9ef;
+}
+.send-customer h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 4px;
+}
+.send-customer .button {
+  min-height: 48px;
+  width: 100%;
+  justify-content: center;
+}
+.send-customer .text-button {
+  min-height: 44px;
+}
+.send-customer-eta {
+  display: grid;
+  gap: 8px;
+  padding: 12px;
+  border-radius: 8px;
+  background: #fff;
+  border: 1px solid var(--line);
+}
+.send-customer-eta .field-label {
+  margin: 0;
+}
+.send-customer .fine-print {
+  margin: 0;
+}
+.admin-more-toggle {
+  font-size: 13px;
+  opacity: 0.8;
+}
+
+/* Impressora da loja (painel) */
+.printer-card {
+  margin-bottom: 18px;
+}
+.printer-card h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 8px;
+}
+.printer-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 10px 0;
+}
+.printer-row .field-label {
+  margin: 0;
+  min-width: 140px;
+}
+.printer-row .button {
+  min-height: 44px;
+}
+.printer-help summary {
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  min-height: 32px;
+}
+.printer-help ol {
+  font-size: 13px;
+  line-height: 1.7;
+  padding-left: 18px;
+}
+
+.readiness-tech {
+  margin-top: 12px;
+  font-size: 12px;
+  color: #68725f;
+}
+.readiness-tech summary {
+  cursor: pointer;
+  font-weight: 600;
+  min-height: 32px;
+}
+.readiness-tech ul {
+  padding-left: 18px;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+
+details.notification-setup-card > summary {
+  cursor: pointer;
+  list-style: none;
+}
+details.notification-setup-card > summary h3 {
+  display: inline;
+}

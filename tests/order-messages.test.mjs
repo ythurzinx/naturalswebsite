@@ -2,17 +2,39 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import {
   contactMessage,
+  customerToStoreMessage,
+  itemLines,
   orderMessages,
   whatsappLink,
   whatsappPhone,
 } from "../lib/order-messages.mjs";
 
 const order = {
-  id: "ORD01ABCDEF123",
+  id: "ORD01M88MFKDYAZER4GESSR22EGTT",
   customer_name: "Maria da Silva",
+  customer_phone: "11999998888",
   fulfillment_mode: "delivery",
   fulfillment_status: "out_for_delivery",
   estimated_minutes: 25,
+  shipping_cents: 1340,
+  total_cents: 9420,
+  coupon_code: "INAUGURA10",
+  coupon_discount_cents: 420,
+  address: {
+    street: "Rua das Magnólias",
+    number: "22",
+    complement: "Apto 2",
+    neighborhood: "Parque Assunção",
+    city: "Taboão da Serra",
+    state: "SP",
+    postalCode: "06754100",
+  },
+  items: [
+    { line_key: "prod-270:300", product_id: "prod-270", title: "Castanha de Caju Crua · 300 g", quantity: 2, unit_cents: 3600 },
+    { line_key: "combo-mix|prod-275:100", product_id: "prod-275", title: "Combo energia natural · Farinha de Uva · 100 g", quantity: 1, unit_cents: 532 },
+    { line_key: "combo-mix|prod-276:100", product_id: "prod-276", title: "Combo energia natural · Farinha de Beterraba · 100 g", quantity: 1, unit_cents: 1273 },
+    { line_key: "__shipping__:0", product_id: "__shipping__", title: "Entrega", quantity: 1, unit_cents: 1340 },
+  ],
 };
 
 test("customer phones become WhatsApp numbers with the Brazilian prefix", () => {
@@ -23,39 +45,86 @@ test("customer phones become WhatsApp numbers with the Brazilian prefix", () => 
     assert.equal(whatsappPhone(value), null);
 });
 
-test("delivery orders get confirmation, ready, out-for-delivery and thanks messages", () => {
+test("item lists show what was bought, with each combo once and no shipping line", () => {
+  assert.deepEqual(itemLines(order.items), [
+    "• 2× Castanha de Caju Crua · 300 g",
+    "• 1× Combo energia natural",
+  ]);
+  const many = Array.from({ length: 30 }, (_, i) => ({
+    line_key: `p${i}:100`,
+    product_id: `p${i}`,
+    title: `Item ${i}`,
+    quantity: 1,
+  }));
+  const lines = itemLines(many);
+  assert.equal(lines.length, 26);
+  assert.equal(lines.at(-1), "• … e mais 5 itens");
+});
+
+test("store messages list the items, totals and address instead of the order number", () => {
   const messages = orderMessages(order, "https://loja.example");
   assert.deepEqual(
     messages.map((m) => m.id),
     ["confirmed", "ready", "out_for_delivery", "completed"],
   );
   const [confirmed, ready, out, thanks] = messages.map((m) => m.text);
-  assert.match(confirmed, /^Olá, Maria! Aqui é a Mundo Natural\. Recebemos seu pedido ORD01ABCDEF123/);
-  assert.match(confirmed, /https:\/\/loja\.example\/pagamento\/retorno\?order_id=ORD01ABCDEF123$/);
+  assert.match(confirmed, /^Olá, Maria! Aqui é a Mundo Natural 🌿/);
+  assert.match(confirmed, /Seu pagamento foi confirmado/);
+  assert.match(confirmed, /• 2× Castanha de Caju Crua · 300 g\n• 1× Combo energia natural/);
+  assert.match(confirmed, /Frete: R\$ 13,40\nCupom INAUGURA10: −R\$ 4,20\nTotal pago: R\$ 94,20/);
+  assert.match(confirmed, /\*Entrega em:\* Rua das Magnólias, 22 \(Apto 2\) — Parque Assunção/);
   assert.match(ready, /separado e embalado/);
-  assert.match(out, /saiu para entrega! A previsão de chegada é de cerca de 25 minutos\./);
+  assert.match(out, /saiu para entrega!\n\n\*Previsão de chegada:\* cerca de 25 minutos\./);
   assert.match(thanks, /https:\/\/loja\.example\/avaliacoes/);
-  // Only the first name; no surname, address, phone or e-mail.
-  assert.ok(messages.every((m) => !/Silva|@|99999/.test(m.text)));
+  for (const text of [confirmed, ready, out, thanks]) {
+    assert.ok(!text.includes("ORD01M88"), "sem número do pedido no texto");
+    assert.ok(!/Silva|@|99999/.test(text), "sem sobrenome, e-mail ou telefone");
+  }
 });
 
-test("pickup orders skip the delivery message and point to the store", () => {
+test("pickup orders point to the store and skip the delivery message", () => {
   const messages = orderMessages(
-    { ...order, fulfillment_mode: "pickup", estimated_minutes: null },
+    { ...order, fulfillment_mode: "pickup", shipping_cents: 0, address: null },
     "",
   );
   assert.deepEqual(
     messages.map((m) => m.id),
     ["confirmed", "ready", "completed"],
   );
-  assert.match(messages[1].text, /pronto para retirada em Rua José Duarte Souza, 21/);
-  assert.ok(messages.every((m) => !m.text.includes("Acompanhe")));
-  assert.equal(
-    contactMessage({ ...order, customer_name: "" }),
-    "Olá! Aqui é a Mundo Natural, sobre o seu pedido ORD01ABCDEF123.",
-  );
+  assert.match(messages[1].text, /pronto para retirada!/);
+  assert.match(messages[1].text, /\*Retirada na loja:\* Rua José Duarte Souza, 21/);
+  assert.ok(messages.every((m) => !m.text.includes("Acompanhe") && !m.text.includes("Frete")));
+  assert.match(contactMessage(order), /Sobre o seu pedido:\n• 2× Castanha/);
   assert.equal(
     whatsappLink("5511999998888", "Olá & tchau"),
     "https://wa.me/5511999998888?text=Ol%C3%A1%20%26%20tchau",
+  );
+});
+
+test("the customer writes to the store with the items, not the order code", () => {
+  const text = customerToStoreMessage({
+    firstName: "Maria",
+    items: order.items,
+    shippingCents: 1340,
+    totalCents: 9420,
+    fulfillment: "delivery",
+    paid: true,
+  });
+  assert.equal(
+    text,
+    [
+      "Olá, Mundo Natural! 🌿",
+      "",
+      "Sou Maria e fiz um pedido pelo site:",
+      "• 2× Castanha de Caju Crua · 300 g",
+      "• 1× Combo energia natural",
+      "",
+      "Frete: R$ 13,40",
+      "Total: R$ 94,20",
+      "Recebimento: entrega",
+      "Pagamento: confirmado",
+      "",
+      "Gostaria de falar sobre ele.",
+    ].join("\n"),
   );
 });

@@ -21,6 +21,7 @@ type Item = {
   label: string;
   state: "ok" | "required" | "optional";
   hint: string;
+  tech?: string;
 };
 function items(r: Readiness): Item[] {
   const n = r.notifications,
@@ -33,21 +34,24 @@ function items(r: Readiness): Item[] {
       hint:
         r.payments.configured && r.payments.production
           ? "Pix e cartão ativos."
-          : "Confira MERCADOPAGO_ACCESS_TOKEN e MERCADOPAGO_ENV=production na Hostinger.",
+          : "O pagamento online não está ativo.",
+      tech: "Hostinger: MERCADOPAGO_ACCESS_TOKEN e MERCADOPAGO_ENV=production.",
     },
     {
-      label: "Avisos de pagamento do Mercado Pago (Webhook)",
+      label: "Confirmação automática dos pagamentos",
       state: r.payments.webhook ? "ok" : "required",
       hint: r.payments.webhook
-        ? "Assinatura configurada."
-        : "Configure MERCADOPAGO_WEBHOOK_SECRET e o Webhook no Mercado Pago.",
+        ? "O Mercado Pago avisa a loja quando um pagamento é aprovado."
+        : "A loja não recebe os avisos de pagamento do Mercado Pago.",
+      tech: "Hostinger: MERCADOPAGO_WEBHOOK_SECRET; Mercado Pago: Webhook em /api/mercadopago/webhook.",
     },
     {
       label: "Login do painel com verificação em duas etapas",
       state: r.security.mfa ? "ok" : "required",
       hint: r.security.mfa
         ? "Código do autenticador exigido no login."
-        : "Gere ADMIN_TOTP_SECRET com npm run admin:setup.",
+        : "O login não pede o código do autenticador.",
+      tech: "Hostinger: ADMIN_TOTP_SECRET (gerado com npm run admin:setup).",
     },
     {
       label: "Cupons de desconto",
@@ -57,10 +61,11 @@ function items(r: Readiness): Item[] {
           ? "ok"
           : "optional",
       hint: !r.coupons.storage
-        ? "Importe database/mundo-natural-schema.sql no phpMyAdmin para registrar os usos."
+        ? "O banco ainda não registra os usos de cupom."
         : r.coupons.active
           ? `${r.coupons.active} ${r.coupons.active === 1 ? "cupom valendo" : "cupons valendo"} agora.`
           : "Nenhum cupom valendo agora. Crie em Cupons.",
+      tech: "phpMyAdmin: importar database/mundo-natural-schema.sql (só acrescenta tabelas).",
     },
     {
       label: "Entrega com frete",
@@ -70,40 +75,44 @@ function items(r: Readiness): Item[] {
         : "Desativada: o site vende com retirada na loja. Ative em Frete e entregas.",
     },
     {
-      label: "Distância de carro (serviço de rotas)",
+      label: "Frete pela distância de carro",
       state: s?.route && s.originAddress ? "ok" : "optional",
       hint: !s?.route
-        ? "Cadastre TOMTOM_API_KEY (grátis, sem cartão) na Hostinger e reinicie a aplicação."
+        ? "O frete usa uma estimativa aproximada da distância."
         : s.originAddress
           ? "Rota calculada do endereço de saída até a rua do cliente."
           : "Preencha o endereço de saída (rua e número) em Frete e entregas.",
+      tech: "Hostinger: TOMTOM_API_KEY (grátis, em developer.tomtom.com) e reiniciar a aplicação.",
     },
     {
       label: "E-mails de pedido (Brevo)",
       state: n?.email && n.emailEnabled ? "ok" : "optional",
       hint: !n?.email
-        ? "Cadastre BREVO_API_KEY e BREVO_SENDER_EMAIL na Hostinger."
+        ? "E-mails automáticos ainda não configurados."
         : n.emailEnabled
           ? "Pagamento aprovado, pedido separado e saída para entrega."
-          : "Ative o canal em Mensagens aos clientes.",
+          : "Ative o canal em Mais opções → Mensagens aos clientes.",
+      tech: "Hostinger: BREVO_API_KEY e BREVO_SENDER_EMAIL.",
     },
     {
       label: "WhatsApp de pedido (Brevo)",
       state: n?.whatsapp && n.whatsappEnabled ? "ok" : "optional",
       hint: !n?.whatsapp
-        ? "Cadastre BREVO_WHATSAPP_SENDER e conecte o WhatsApp Business na Brevo."
+        ? "Serviço pago. Enquanto isso, use “Enviar para o cliente” em cada pedido."
         : n.whatsappEnabled
           ? "Enviado a quem autorizar na finalização da compra."
           : "Informe os modelos aprovados e ative em Mensagens aos clientes.",
+      tech: "Hostinger: BREVO_WHATSAPP_SENDER; Brevo: WhatsApp Business e modelos aprovados.",
     },
     {
-      label: "Envio automático dos avisos",
+      label: "Envio automático dos e-mails",
       state: n?.worker ? "ok" : "optional",
       hint: n?.worker
         ? n.issues
           ? `${n.issues} aviso(s) com falha: confira em Mensagens aos clientes.`
           : "Segredo do agendador configurado; confira se o agendador chama o site a cada minuto."
-        : "Cadastre NOTIFICATION_WORKER_SECRET e um agendador (veja docs/NOTIFICACOES.md).",
+        : "Só necessário com os avisos automáticos da Brevo.",
+      tech: "Hostinger: NOTIFICATION_WORKER_SECRET e um agendador (docs/NOTIFICACOES.md).",
     },
   ];
 }
@@ -181,6 +190,20 @@ export function AdminReadiness({ api }: { api: Api }) {
           </li>
         ))}
       </ul>
+      {list.some((item) => item.state !== "ok" && item.tech) && (
+        <details className="readiness-tech">
+          <summary>Detalhes para configurar</summary>
+          <ul>
+            {list
+              .filter((item) => item.state !== "ok" && item.tech)
+              .map((item) => (
+                <li key={item.label}>
+                  <strong>{item.label}:</strong> {item.tech}
+                </li>
+              ))}
+          </ul>
+        </details>
+      )}
     </section>
   );
 }
