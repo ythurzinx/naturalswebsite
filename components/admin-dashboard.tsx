@@ -26,6 +26,8 @@ import {
   Tags,
   CreditCard,
   TicketPercent,
+  MessageCircle,
+  Settings2,
 } from "lucide-react";
 import { useOrderAlerts } from "@/hooks/use-order-alerts";
 import { AdminOrderAlerts } from "./admin-order-alerts";
@@ -34,6 +36,8 @@ import { AdminMerchandising } from "./admin-merchandising";
 import { AdminCoupons } from "./admin-coupons";
 import { AdminReadiness } from "./admin-readiness";
 import { AdminPrinterSettings } from "./admin-printer-settings";
+import { AdminMessageTemplates } from "./admin-message-templates";
+import { AdminOverview } from "./admin-overview";
 import {
   claimAutoPrint,
   printOrderReceipt,
@@ -130,6 +134,13 @@ type Stats = {
   missingDeliveryCosts: number;
   deliveryCostsCents: number;
   incompletePayments: number;
+  today?: {
+    orders: number;
+    paidOrders: number;
+    grossCents: number;
+    pending: number;
+  };
+  averageTicketCents?: number | null;
   chart: { day: number; cents: number }[];
   catalogHealth: {
     total: number;
@@ -201,6 +212,7 @@ export function AdminDashboard() {
     [password, setPassword] = useState(""),
     [otp, setOtp] = useState("");
   const [showMore, setShowMore] = useState(false);
+  const [templates, setTemplates] = useState<Record<string, string>>({});
   const [tab, setTab] = useState("dashboard"),
     [days, setDays] = useState(30),
     [busy, setBusy] = useState(false),
@@ -300,8 +312,14 @@ export function AdminDashboard() {
   const reload = useCallback(async () => {
     setError("");
     try {
-      if (tab === "dashboard")
-        setStats(await api<Stats>(`dashboard?days=${days}`));
+      if (tab === "dashboard") {
+        const [dashboard, list] = await Promise.all([
+          api<Stats>(`dashboard?days=${days}`),
+          api<{ orders: Order[] }>("orders"),
+        ]);
+        setStats(dashboard);
+        setOrders(list.orders);
+      }
       if (tab === "products")
         setProducts(
           (await api<{ products: AdminProduct[] }>("products")).products,
@@ -327,6 +345,13 @@ export function AdminDashboard() {
     if (auth && alerts.revision && (tab === "orders" || tab === "dashboard"))
       void reload();
   }, [auth, alerts.revision, tab, reload]);
+  // Latest WhatsApp texts each time an order is opened.
+  useEffect(() => {
+    if (!order?.id) return;
+    void api<{ templates: Record<string, string> }>("message-templates")
+      .then((result) => setTemplates(result.templates || {}))
+      .catch(() => {});
+  }, [order?.id, api]);
   useEffect(() => {
     if (auth) void reload();
   }, [auth, reload]);
@@ -576,6 +601,7 @@ export function AdminDashboard() {
     { id: "dashboard", label: "Visão geral", icon: LayoutDashboard },
     { id: "orders", label: "Pedidos", icon: ShoppingBag },
     { id: "products", label: "Produtos e fotos", icon: Package },
+    { id: "messages", label: "Mensagens", icon: MessageCircle },
     { id: "coupons", label: "Cupons", icon: TicketPercent },
     { id: "merchandising", label: "Ofertas e combos", icon: Tags },
     { id: "shipping", label: "Frete e entregas", icon: Truck },
@@ -584,7 +610,8 @@ export function AdminDashboard() {
     { id: "expenses", label: "Despesas", icon: ReceiptText },
   ];
   const moreTabs = [
-    { id: "notifications", label: "Mensagens aos clientes", icon: ShoppingBag },
+    { id: "setup", label: "Configuração", icon: Settings2 },
+    { id: "notifications", label: "E-mails automáticos", icon: ShoppingBag },
     { id: "payments", label: "Pagamentos", icon: CreditCard },
     { id: "audit", label: "Atividade", icon: Activity },
   ];
@@ -728,11 +755,29 @@ export function AdminDashboard() {
             <AdminPaymentDiagnostics api={api} />
           </>
         )}
-        {tab === "dashboard" && <AdminReadiness api={api} />}
+        {tab === "setup" && <AdminReadiness api={api} />}
+        {tab === "messages" && <AdminMessageTemplates api={api} />}
+        {tab === "dashboard" && (
+          <AdminOverview
+            today={stats?.today ?? null}
+            averageTicketCents={stats?.averageTicketCents ?? null}
+            orders={orders}
+            onNavigate={(next) => {
+              setTab(next);
+              setNotice("");
+              setError("");
+            }}
+            onOpen={(id) =>
+              void action(async () =>
+                setOrder((await api<{ order: Order }>(`orders/${id}`)).order),
+              )
+            }
+          />
+        )}
         {tab === "dashboard" && (
           <>
             <div className="admin-toolbar">
-              <p>Resultados reais das compras registradas por esta loja.</p>
+              <h2 className="overview-section-title">Resultados do período</h2>
               <label>
                 Período
                 <select
@@ -1649,6 +1694,7 @@ export function AdminDashboard() {
             <AdminOrderOperations
               key={order.id}
               order={order}
+              templates={templates}
               busy={busy}
               update={(path, body) =>
                 action(async () => {

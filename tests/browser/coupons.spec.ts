@@ -136,6 +136,8 @@ test("the team creates, pauses and deletes coupons in the admin panel", async ({
         mfa: true,
       };
     else if (path === "readiness") json = readinessFixture;
+    else if (path === "message-templates") json = { templates: {}, revision: 0 };
+    else if (path === "orders") json = { orders: [] };
     else if (path === "dashboard")
       json = {
         orders: 0,

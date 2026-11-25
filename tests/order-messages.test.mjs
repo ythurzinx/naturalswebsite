@@ -128,3 +128,37 @@ test("the customer writes to the store with the items, not the order code", () =
     ].join("\n"),
   );
 });
+
+test("edited templates fill the order fields and are validated before saving", async () => {
+  const { renderTemplate, validateTemplates, DEFAULT_TEMPLATES } = await import(
+    "../lib/order-messages.mjs"
+  );
+  const custom = {
+    confirmed: "Oi {nome}! Seu total ficou {total}.\n\n\n{itens}\n{desconhecido}",
+  };
+  const [confirmed, ready] = orderMessages(order, "", custom);
+  assert.equal(
+    confirmed.text,
+    "Oi Maria! Seu total ficou R$ 94,20.\n\n• 2× Castanha de Caju Crua · 300 g\n• 1× Combo energia natural\n{desconhecido}",
+  );
+  // Templates not edited keep the default text.
+  assert.match(ready.text, /separado e embalado/);
+  assert.equal(
+    renderTemplate("{saudacao} {previsao}", { saudacao: "Olá!", previsao: "" }),
+    "Olá!",
+  );
+  assert.deepEqual(validateTemplates({ confirmed: "  Oi {nome}\r\n" }), {
+    confirmed: "Oi {nome}",
+  });
+  for (const bad of [
+    null,
+    [],
+    { outro: "x" },
+    { confirmed: "" },
+    { confirmed: 5 },
+    { confirmed: "x".repeat(2001) },
+    { confirmed: "tem\u0000controle" },
+  ])
+    assert.equal(validateTemplates(bad), null);
+  assert.ok(Object.keys(DEFAULT_TEMPLATES).length === 5);
+});
