@@ -4,7 +4,18 @@
 
 Depois de aplicar `npm run db:migrate`, entre no `/admin` e abra **Frete e entregas**. Informe o CEP real da loja, o endereço de saída (rua e número), o valor por quilômetro, a taxa base, o frete mínimo e a distância máxima. Deixe o campo de frete grátis vazio para desativar a promoção. Habilite a entrega apenas depois de conferir os valores no simulador e testar alguns CEPs.
 
-### Distância de carro grátis com openrouteservice (recomendado)
+### Distância de carro grátis com TomTom (recomendado)
+
+A BrasilAPI encontra rua, bairro e cidade pelo CEP; o cliente confere a rua na tela, e o endereço completo aparece no pedido. Para medir a rota de carro sem cartão de crédito, use o plano gratuito da **TomTom** (cerca de 2.500 consultas por dia, uso comercial permitido, mapa próprio com boa cobertura no Brasil):
+
+1. Crie uma conta grátis em [developer.tomtom.com](https://developer.tomtom.com) (**Register**) com seu e-mail e confirme o cadastro.
+2. No painel (**Dashboard → Keys**), copie a chave de API criada automaticamente (ou crie uma nova).
+3. Na Hostinger, em **Environment variables**, crie `TOMTOM_API_KEY` com a chave e reinicie a aplicação.
+4. Em **Admin → Frete e entregas**, confirme a mensagem da TomTom, preencha o endereço de saída (rua e número), revise as tarifas, teste CEPs conhecidos e ative a entrega.
+
+Cada novo endereço usa até duas consultas (localizar a rua e calcular a rota); o endereço da loja e as rotas ficam guardados por 6 horas, e o site limita a 300 cálculos por dia. Se a TomTom localizar só a cidade ou o bairro, encontrar outra cidade ou não responder, o cliente é orientado a falar com a equipe em vez de receber um frete errado. A chave fica só no servidor. A TomTom recebe apenas o endereço da loja e a rua, o bairro, a cidade e o CEP de destino, e a tela de frete exibe a atribuição “© TomTom”.
+
+### Alternativa grátis: openrouteservice
 
 A BrasilAPI encontra rua, bairro e cidade pelo CEP (o cliente confere a rua na tela, e o endereço completo aparece no pedido). Para medir a rota de carro sem cartão de crédito, use o **openrouteservice**, da HeiGIT (Universidade de Heidelberg), com dados do OpenStreetMap:
 
@@ -14,6 +25,8 @@ A BrasilAPI encontra rua, bairro e cidade pelo CEP (o cliente confere a rua na t
 4. Em **Admin → Frete e entregas**, confirme a mensagem do openrouteservice, preencha o endereço de saída (rua e número), revise as tarifas, teste CEPs conhecidos e ative a entrega.
 
 O plano gratuito permite cerca de 2.000 rotas por dia; o site usa no máximo 300 cálculos por dia e guarda cada rota por 6 horas. A precisão é menor que a do Google em algumas ruas: se o serviço localizar só a cidade, encontrar outra cidade ou não responder, o cliente é orientado a falar com a equipe em vez de receber um frete errado. O serviço recebe apenas o endereço da loja e a rua, o bairro, a cidade e o CEP de destino. A tela de frete exibe a atribuição exigida (openrouteservice.org e colaboradores do OpenStreetMap).
+
+Se mais de uma chave estiver configurada, o site usa nesta ordem: Google Maps, TomTom, openrouteservice.
 
 Nos pedidos com entrega, o painel mostra o endereço completo e os botões **Abrir no Google Maps** e **Abrir no Waze**, que abrem a navegação no celular sem chave de API.
 

@@ -16,7 +16,7 @@ type Estimate = {
   };
   distanceMeters: number;
   distanceMethod?: "route" | "straight";
-  routeProvider?: "google" | "openrouteservice" | null;
+  routeProvider?: "google" | "tomtom" | "openrouteservice" | null;
   withinArea: boolean;
   enabled: boolean;
   feeCents: number | null;
@@ -171,6 +171,7 @@ export function ShippingPreview({
               {result.routeProvider === "openrouteservice" && (
                 <> Rota: openrouteservice.org · © colaboradores do OpenStreetMap.</>
               )}
+              {result.routeProvider === "tomtom" && <> Rota: © TomTom.</>}
             </small>
           </div>
         </div>
