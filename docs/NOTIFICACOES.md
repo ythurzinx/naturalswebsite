@@ -2,6 +2,8 @@
 
 Integração escolhida: **Brevo**, reunindo e-mail transacional e WhatsApp oficial em uma conta. As mensagens refletem eventos confirmados: uma IA não inventa pagamento, etapa ou prazo. A geração com IA é usada nas imagens do catálogo.
 
+Sem a Brevo, a equipe pode enviar os mesmos avisos manualmente pelo WhatsApp da loja, pelos botões do pedido no painel; veja [o guia de operação](OPERACAO-PEDIDOS-FRETE.md#avisar-o-cliente-sem-custo).
+
 ## Ativação na Hostinger
 
 1. Crie uma conta Brevo e ative o serviço de e-mails transacionais. Verifique um remetente de e-mail que você controla. Configure a autenticação de domínio solicitada pela Brevo (DKIM e demais registros indicados no painel), preservando os registros A/CNAME do site.

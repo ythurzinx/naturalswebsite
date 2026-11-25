@@ -104,6 +104,8 @@ test("private test checkout has isolated cookies and returns only authoritative 
     state: "paid",
     totalCents: 100,
     fulfillment: "pickup",
+    stage: null,
+    etaMinutes: null,
     testMode: true,
   });
   const before = f.calls();

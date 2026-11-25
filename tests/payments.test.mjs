@@ -375,6 +375,49 @@ test("payment status needs ownership and never trusts redirect query parameters"
   assert.equal(denied.status, 404);
   assert.equal(f.calls.length, count);
 });
+test("customers see the preparation stage and arrival estimate, never contacts or notes", async () => {
+  const saved = {
+    fulfillment_mode: "delivery",
+    fulfillment_status: "out_for_delivery",
+    estimated_minutes: 25,
+    customer_phone: "11999998888",
+    staff_note: "nota interna",
+    address: { street: "Rua A", number: "1" },
+  };
+  const repository = {
+    recordCheckoutIntent: async () => {},
+    recordOrder: async () => {},
+    order: async () => saved,
+  };
+  const f = setup(null, repository),
+    data = await (await f.checkout()).json();
+  let body = await (
+    await f.service.status(f.request("/api/orders/current"), "current")
+  ).json();
+  assert.equal(body.state, "pending");
+  assert.equal(body.stage, null);
+  assert.equal(body.etaMinutes, null);
+  const order = f.orders.get(data.orderId);
+  order.status = "processed";
+  order.status_detail = "accredited";
+  order.total_paid_amount = order.total_amount;
+  const response = await f.service.status(
+    f.request("/api/orders/current"),
+    "current",
+  );
+  const text = await response.text();
+  body = JSON.parse(text);
+  assert.equal(body.stage, "out_for_delivery");
+  assert.equal(body.etaMinutes, 25);
+  assert.equal(body.fulfillment, "delivery");
+  assert.ok(!/99999|nota interna|Rua A|address|phone/.test(text));
+  saved.fulfillment_status = "packing";
+  body = await (
+    await f.service.status(f.request("/api/orders/current"), "current")
+  ).json();
+  assert.equal(body.stage, "packing");
+  assert.equal(body.etaMinutes, null);
+});
 test("another order, currency, amount or signed reference cannot be substituted", () => {
   const ref = externalReference(key, "a".repeat(22), 1000),
     good = {

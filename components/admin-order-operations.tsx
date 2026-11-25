@@ -1,6 +1,19 @@
 "use client";
 import { useState, type FormEvent } from "react";
-import { Printer, PackageCheck, Truck, Store, Navigation } from "lucide-react";
+import {
+  Printer,
+  PackageCheck,
+  Truck,
+  Store,
+  Navigation,
+  MessageCircle,
+} from "lucide-react";
+import {
+  contactMessage,
+  orderMessages,
+  whatsappLink,
+  whatsappPhone,
+} from "@/lib/order-messages.mjs";
 import { formatPrice } from "@/lib/products";
 import type { Order } from "./admin-dashboard";
 // Navigation links open the delivery address in the courier's app. They use
@@ -147,6 +160,7 @@ export function AdminOrderOperations({ order, busy, update }: Props) {
           Contatos disponíveis apenas para a equipe autenticada. Use para
           atender esta compra.
         </p>
+        <CustomerWhatsapp order={order} />
       </div>
       <div className="order-delivery-card">
         <h3>
@@ -378,5 +392,60 @@ export function AdminOrderOperations({ order, busy, update }: Props) {
         )}
       </form>
     </section>
+  );
+}
+
+// Manual updates from the store's own WhatsApp: each button opens the chat
+// with a ready message; the team reviews it and taps send.
+function CustomerWhatsapp({ order }: { order: Order }) {
+  const phone = whatsappPhone(order.customer_phone);
+  if (!phone || order.state !== "paid") return null;
+  const origin = typeof window === "undefined" ? "" : window.location.origin;
+  const messages = orderMessages(order, origin);
+  return (
+    <div className="customer-whatsapp">
+      <h4>
+        <MessageCircle size={17} /> Avisar o cliente pelo WhatsApp
+      </h4>
+      {order.whatsapp_opt_in ? (
+        <>
+          <p className="fine-print">
+            O cliente autorizou atualizações pelo WhatsApp. Cada botão abre a
+            conversa com a mensagem pronta; confira e toque em enviar.
+          </p>
+          <div className="customer-whatsapp-actions">
+            {messages.map((message) => (
+              <a
+                key={message.id}
+                className={`button button-small ${order.fulfillment_status === message.id || (message.id === "confirmed" && order.fulfillment_status === "new") ? "" : "button-outline"}`}
+                href={whatsappLink(phone, message.text)}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {message.label}
+              </a>
+            ))}
+          </div>
+        </>
+      ) : (
+        <>
+          <p className="fine-print">
+            O cliente não marcou atualizações pelo WhatsApp: ele acompanha as
+            etapas na página do pedido. Use a conversa só para combinar a
+            entrega ou a retirada.
+          </p>
+          <div className="customer-whatsapp-actions">
+            <a
+              className="button button-small button-outline"
+              href={whatsappLink(phone, contactMessage(order))}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Combinar com o cliente
+            </a>
+          </div>
+        </>
+      )}
+    </div>
   );
 }

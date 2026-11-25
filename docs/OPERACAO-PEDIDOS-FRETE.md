@@ -49,6 +49,19 @@ O preço é o maior valor entre **frete mínimo** e **taxa base + distância × 
 
 O carrinho e o checkout compartilham o cálculo. A cotação vale por 10 minutos e fica vinculada aos produtos, às quantidades, aos preços e à versão das tarifas. Alterações exigem novo cálculo antes de pagar. O servidor calcula e valida o total; taxas ou distâncias enviadas manualmente pelo navegador são rejeitadas. O frete fica registrado no pedido e não muda quando você altera as tarifas da loja.
 
+## Avisar o cliente sem custo
+
+Enquanto os avisos automáticos (Brevo) não estiverem ativos, o pedido pago mostra no painel o quadro **Avisar o cliente pelo WhatsApp**. Cada botão abre o WhatsApp da loja com a mensagem pronta para o telefone do cliente; confira e toque em enviar:
+
+- **Pedido confirmado**: pagamento aprovado e link para acompanhar o pedido.
+- **Separado e embalado** (entrega) ou **Pronto para retirar** (retirada, com o endereço da loja).
+- **Saiu para entrega**: inclui a previsão de chegada salva no pedido.
+- **Agradecer**: convite para avaliar os produtos.
+
+Os botões de atualização só aparecem quando o cliente marcou, na finalização, que quer receber atualizações pelo WhatsApp. Sem essa autorização, aparece apenas **Combinar com o cliente**, para acertar entrega ou retirada. As mensagens usam só o primeiro nome e o número do pedido.
+
+O cliente acompanha as etapas em **Acompanhar pagamento** (`/pagamento/retorno`), no navegador em que comprou: pagamento aprovado, em separação, separado/pronto, saiu para entrega (com a previsão) e entregue/retirado. A página se atualiza sozinha a cada minuto enquanto estiver aberta e não mostra contatos, endereço nem notas internas.
+
 ## Receber avisos
 
 Com o painel aberto e a sessão autenticada, toque em **Ativar avisos sonoros**. Esse toque é necessário porque os navegadores bloqueiam áudio automático. A ativação toca o som de teste; depois você pode testar novamente ou silenciar. O aparelho precisa estar com volume audível.

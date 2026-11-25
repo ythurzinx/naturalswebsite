@@ -19,7 +19,61 @@ type Order = {
   state: "paid" | "pending" | "failed" | "refunded" | "canceled";
   totalCents: number;
   fulfillment?: string;
+  stage?: "new" | "packing" | "ready" | "out_for_delivery" | "completed" | null;
+  etaMinutes?: number | null;
 };
+const stageIndex = {
+  new: 0,
+  packing: 1,
+  ready: 2,
+  out_for_delivery: 3,
+  completed: 4,
+};
+function Timeline({ order }: { order: Order }) {
+  const delivery = order.fulfillment === "delivery";
+  const steps = delivery
+    ? [
+        "Pagamento aprovado",
+        "Em separação",
+        "Separado e embalado",
+        "Saiu para entrega",
+        "Entregue",
+      ]
+    : [
+        "Pagamento aprovado",
+        "Em separação",
+        "Pronto para retirar na loja",
+        "Retirado",
+      ];
+  const raw = stageIndex[order.stage || "new"];
+  const current = delivery ? raw : raw === 4 ? 3 : Math.min(raw, 2);
+  return (
+    <ol className="order-timeline" aria-label="Etapas do pedido">
+      {steps.map((step, index) => (
+        <li
+          key={step}
+          className={
+            index < current ? "done" : index === current ? "current" : ""
+          }
+          aria-current={index === current ? "step" : undefined}
+        >
+          <span aria-hidden>{index <= current ? "✓" : index + 1}</span>
+          <div>
+            <strong>{step}</strong>
+            {index === current &&
+              step === "Saiu para entrega" &&
+              order.etaMinutes && (
+                <small>
+                  Previsão de chegada: cerca de {order.etaMinutes} minutos a
+                  partir da saída.
+                </small>
+              )}
+          </div>
+        </li>
+      ))}
+    </ol>
+  );
+}
 const labels = {
   paid: "Pagamento confirmado",
   pending: "Aguardando confirmação",
@@ -57,6 +111,9 @@ function Status() {
         attempts++;
         if (data.state === "pending" && attempts < 12)
           timer = setTimeout(check, Math.min(5000 * attempts, 15000));
+        // After payment, follow the preparation steps while the page is open.
+        else if (data.state === "paid" && data.stage !== "completed")
+          timer = setTimeout(check, 60000);
       } catch (e) {
         if (!controller.signal.aborted)
           setError(
@@ -129,12 +186,13 @@ function Status() {
             <p>
               {paid
                 ? order?.fulfillment === "delivery"
-                  ? "Seu pagamento foi confirmado. A equipe vai separar e embalar seus produtos. Combine o prazo de entrega com a loja e guarde o número do pedido."
-                  : "Seu pagamento foi confirmado. Combine o horário de retirada com a nossa equipe e apresente o número do pedido."
+                  ? "Seu pagamento foi confirmado. Acompanhe abaixo cada etapa do pedido; esta página se atualiza sozinha enquanto estiver aberta."
+                  : "Seu pagamento foi confirmado. Acompanhe abaixo a separação e apresente o número do pedido na retirada."
                 : order.state === "pending"
                   ? "O Pix ou a análise do cartão pode levar um tempo para ser confirmado. Você pode atualizar esta página. Evite iniciar outro pagamento para o mesmo pedido."
                   : "Consulte a equipe para receber ajuda com esta compra."}
             </p>
+            {paid && <Timeline order={order} />}
           </>
         )}
         <div className="payment-status-actions">

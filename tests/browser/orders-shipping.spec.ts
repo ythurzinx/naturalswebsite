@@ -307,6 +307,19 @@ test("admin sound activation, live paid alerts, packing and shipping settings wo
   await expect(
     dialog.getByText("Autorizado pelo cliente neste pedido"),
   ).toBeVisible();
+  const whatsapp = dialog.locator(".customer-whatsapp");
+  await expect(whatsapp).toContainText("Avisar o cliente pelo WhatsApp");
+  const confirmed = whatsapp.getByRole("link", { name: "Pedido confirmado" });
+  const href = (await confirmed.getAttribute("href"))!;
+  expect(href).toMatch(/^https:\/\/wa\.me\/5511999999999\?text=/);
+  const text = decodeURIComponent(href.split("text=")[1]);
+  expect(text).toContain("Olá, Cliente! Aqui é a Mundo Natural.");
+  expect(text).toContain("ORD01MNADMINOPSFIXTURE");
+  expect(text).toContain("/pagamento/retorno?order_id=ORD01MNADMINOPSFIXTURE");
+  await expect(
+    whatsapp.getByRole("link", { name: "Saiu para entrega" }),
+  ).toBeVisible();
+  expect((await confirmed.boundingBox())!.height).toBeGreaterThanOrEqual(44);
   await dialog.getByRole("checkbox").click();
   await expect(dialog.getByRole("checkbox")).toBeChecked();
   await expect.poll(() => packingWrites).toBe(1);

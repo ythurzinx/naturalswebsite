@@ -167,6 +167,13 @@ export default function PrivacyPage() {
           processam os dados conforme seus termos. Para interromper avisos ou
           exercer seus direitos, fale com a loja pelo contato abaixo.
         </p>
+        <p>
+          Se você autorizar o WhatsApp, a equipe também pode enviar essas
+          atualizações manualmente pelo WhatsApp da loja, {store.phoneLabel}.
+          Sem a autorização, o WhatsApp é usado apenas para combinar a entrega
+          ou a retirada, e você acompanha as etapas na página do pedido, neste
+          navegador.
+        </p>
         <h2>Quando você usa o WhatsApp</h2>
         <p>
           Os campos preenchidos na finalização permanecem em memória enquanto a
