@@ -178,10 +178,8 @@ export function AdminCoupons({ api }: { api: Api }) {
       )}
       {!storage && (
         <p className="payment-error" role="alert">
-          O banco ainda não tem a tabela de usos de cupom, e o servidor não
-          conseguiu criá-la. Antes de divulgar um cupom, importe
-          database/mundo-natural-schema.sql no phpMyAdmin (só acrescenta
-          tabelas que faltam).
+          O banco ainda não está pronto para registrar os usos de cupom. Antes
+          de divulgar um cupom, veja “Detalhes para configurar” em Visão geral.
         </p>
       )}
       <form className="admin-card coupon-create" onSubmit={create}>

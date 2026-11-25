@@ -123,6 +123,7 @@ test("admin sound activation, live paid alerts, packing and shipping settings wo
     packingWrites = 0,
     settingsWrites = 0,
     feedCursor = 0;
+  const fulfillmentWrites: string[] = [];
   const order = {
     id: "ORD01MNADMINOPSFIXTURE",
     customer_name: "Cliente Teste",
@@ -169,6 +170,11 @@ test("admin sound activation, live paid alerts, packing and shipping settings wo
       count++;
       document.documentElement.dataset.soundCount = String(count);
     });
+    // Store PC with automatic printing on.
+    localStorage.setItem(
+      "mn-thermal-printer",
+      JSON.stringify({ auto: true, width: 80 }),
+    );
   });
   await page.route("**/api/admin/**", async (route) => {
     const url = new URL(route.request().url()),
@@ -245,6 +251,11 @@ test("admin sound activation, live paid alerts, packing and shipping settings wo
       });
       order.items[0].packed = 1;
       json = { order };
+    } else if (path === `orders/${order.id}/fulfillment`) {
+      const body = route.request().postDataJSON();
+      fulfillmentWrites.push(body.state);
+      order.fulfillment_status = body.state;
+      json = { ok: true, order };
     } else if (path === `orders/${order.id}/operations`) {
       const body = route.request().postDataJSON();
       expect(body).toEqual({
@@ -281,6 +292,18 @@ test("admin sound activation, live paid alerts, packing and shipping settings wo
   await expect(
     page.getByText("Pedido pago! Pode iniciar a separação.", { exact: true }),
   ).toBeVisible();
+  const printed = () =>
+    page.evaluate(() =>
+      [...document.querySelectorAll("iframe")]
+        .filter((frame) => frame.title === "Impressão do pedido")
+        .map((frame) => frame.contentDocument?.body?.innerText || ""),
+    );
+  await expect.poll(async () => (await printed()).length).toBe(1);
+  const receipt = (await printed())[0];
+  expect(receipt).toContain("PEDIDO PAGO · ENTREGA");
+  expect(receipt).toContain("[ ] 1x Castanha · 300 g");
+  expect(receipt).toContain("Rua de teste, 22 (Apto 2)");
+  expect(receipt).toContain("TOTAL");
   await expect
     .poll(() => page.locator("html").getAttribute("data-sound-count"))
     .toBe("2");
@@ -307,19 +330,38 @@ test("admin sound activation, live paid alerts, packing and shipping settings wo
   await expect(
     dialog.getByText("Autorizado pelo cliente neste pedido"),
   ).toBeVisible();
-  const whatsapp = dialog.locator(".customer-whatsapp");
-  await expect(whatsapp).toContainText("Avisar o cliente pelo WhatsApp");
-  const confirmed = whatsapp.getByRole("link", { name: "Pedido confirmado" });
-  const href = (await confirmed.getAttribute("href"))!;
-  expect(href).toMatch(/^https:\/\/wa\.me\/5511999999999\?text=/);
-  const text = decodeURIComponent(href.split("text=")[1]);
-  expect(text).toContain("Olá, Cliente! Aqui é a Mundo Natural.");
-  expect(text).toContain("ORD01MNADMINOPSFIXTURE");
-  expect(text).toContain("/pagamento/retorno?order_id=ORD01MNADMINOPSFIXTURE");
-  await expect(
-    whatsapp.getByRole("link", { name: "Saiu para entrega" }),
-  ).toBeVisible();
+  await page.evaluate(() => {
+    const opened: string[] = [];
+    (window as unknown as { __opened: string[] }).__opened = opened;
+    window.open = ((url?: string | URL) => {
+      opened.push(String(url));
+      return null;
+    }) as typeof window.open;
+  });
+  const send = dialog.locator(".send-customer");
+  await expect(send).toContainText("Enviar para o cliente");
+  if (info.project.name === "mobile-390")
+    await send.screenshot({ path: info.outputPath("enviar-cliente.png") });
+  const confirmed = send.getByRole("button", {
+    name: "Enviar: pagamento confirmado",
+  });
   expect((await confirmed.boundingBox())!.height).toBeGreaterThanOrEqual(44);
+  await confirmed.click();
+  const opened = await page.evaluate(
+    () => (window as unknown as { __opened: string[] }).__opened,
+  );
+  expect(opened).toHaveLength(1);
+  expect(opened[0]).toMatch(/^https:\/\/wa\.me\/5511999999999\?text=/);
+  const text = decodeURIComponent(opened[0].split("text=")[1]);
+  expect(text).toContain("Olá, Cliente! Aqui é a Mundo Natural");
+  expect(text).toContain("• 1× Castanha · 300 g");
+  expect(text).toContain("Frete: R$ 8,00");
+  expect(text).toContain("Total pago: R$ 44,00");
+  expect(text).toContain("Entrega em:* Rua de teste, 22 (Apto 2) — Centro");
+  expect(text).not.toContain("ORD01MNADMINOPSFIXTURE");
+  await expect.poll(() => fulfillmentWrites).toEqual(["packing"]);
+  await send.getByRole("button", { name: "Enviar: saiu para entrega" }).click();
+  await expect(send.getByRole("alert")).toContainText("Informe a previsão");
   await dialog.getByRole("checkbox").click();
   await expect(dialog.getByRole("checkbox")).toBeChecked();
   await expect.poll(() => packingWrites).toBe(1);

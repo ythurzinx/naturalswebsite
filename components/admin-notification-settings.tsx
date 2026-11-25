@@ -116,8 +116,10 @@ export function AdminNotificationSettings({ api }: { api: Api }) {
       )}
       {data && draft && (
         <>
-          <div className="notification-setup-card">
-            <h3>Conectar a Brevo</h3>
+          <details className="notification-setup-card">
+            <summary>
+              <h3>Conectar a Brevo (configuração técnica)</h3>
+            </summary>
             <ol>
               <li>
                 Crie a conta na{" "}
@@ -151,7 +153,7 @@ export function AdminNotificationSettings({ api }: { api: Api }) {
               WhatsApp têm regras e limites do provedor; WhatsApp exige créditos
               e modelos aprovados.
             </p>
-          </div>
+          </details>
           <form className="notification-channels" onSubmit={save}>
             <div className="notification-setup-card">
               <h3>

@@ -361,6 +361,7 @@ test("admin publishes chosen discounts, shows MPV08 diagnosis and estimates a de
       path: info.outputPath("painel-ofertas-celular.png"),
       fullPage: true,
     });
+  await page.getByRole("button", { name: "Mais opções", exact: true }).click();
   await page.getByRole("button", { name: "Pagamentos", exact: true }).click();
   await expect(page.locator(".payment-diagnostics")).toContainText("MPV08");
   await expect(page.locator(".payment-diagnostics")).toContainText(

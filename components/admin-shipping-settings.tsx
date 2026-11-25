@@ -171,15 +171,13 @@ export function AdminShippingSettings({ api }: { api: Api }) {
                 ? "TomTom (grátis)"
                 : "openrouteservice (grátis)"}
             , do endereço de saída da loja até a rua do cliente. A rua, o bairro
-            e a cidade vêm do CEP pela BrasilAPI.
+            e a cidade são encontrados pelo CEP.
           </p>
         ) : (
           <p className="admin-notice">
-            Serviço de rotas não configurado: a distância é uma estimativa em
-            linha reta entre coordenadas aproximadas dos CEPs, e endereços
-            diferentes da mesma cidade podem aparecer como 0 km. Cadastre
-            TOMTOM_API_KEY (grátis, sem cartão) na hospedagem para cobrar pela
-            distância de carro.
+            Cálculo de rota não configurado: a distância é só uma estimativa e
+            endereços da mesma cidade podem aparecer como 0 km. Veja “Detalhes
+            para configurar” em Visão geral.
           </p>
         )}
         <fieldset disabled={busy || !value} className="checkout-fieldset">
