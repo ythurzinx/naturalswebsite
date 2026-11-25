@@ -7,11 +7,13 @@ import {
   Store,
   Navigation,
   MessageCircle,
+  Copy,
 } from "lucide-react";
 import {
   orderMessages,
   whatsappLink,
   whatsappPhone,
+  hasDamagedMessageText,
 } from "@/lib/order-messages.mjs";
 import { formatPrice } from "@/lib/products";
 import type { Order } from "./admin-dashboard";
@@ -375,7 +377,9 @@ function SendToCustomer({ order, busy, update, templates }: Props) {
   const [minutes, setMinutes] = useState(
       order.estimated_minutes ? String(order.estimated_minutes) : "",
     ),
-    [error, setError] = useState("");
+    [error, setError] = useState(""),
+    [copyNotice, setCopyNotice] = useState(""),
+    [manualCopy, setManualCopy] = useState("");
   const phone = whatsappPhone(order.customer_phone);
   if (order.state !== "paid") return null;
   const origin = typeof window === "undefined" ? "" : window.location.origin;
@@ -386,15 +390,13 @@ function SendToCustomer({ order, busy, update, templates }: Props) {
     )
       await update("fulfillment", { state: target });
   }
-  function send(id: string) {
-    setError("");
-    if (!phone) return;
+  function prepare(id: string) {
     let eta: number | null = null;
     if (id === "out_for_delivery") {
       eta = Number(minutes);
       if (!/^\d{1,3}$/.test(minutes.trim()) || eta < 1 || eta > 240) {
         setError("Informe a previsão de chegada, de 1 a 240 minutos.");
-        return;
+        return null;
       }
     }
     const message = orderMessages(
@@ -402,7 +404,23 @@ function SendToCustomer({ order, busy, update, templates }: Props) {
       origin,
       templates,
     ).find((m) => m.id === id);
-    if (!message) return;
+    if (!message) return null;
+    if (hasDamagedMessageText(message.text)) {
+      setError(
+        "Esta mensagem contém símbolos corrompidos (�). Confira o modelo e os dados do pedido antes de enviar.",
+      );
+      return null;
+    }
+    return { message, eta };
+  }
+  function send(id: string) {
+    setError("");
+    setCopyNotice("");
+    setManualCopy("");
+    if (!phone) return;
+    const prepared = prepare(id);
+    if (!prepared) return;
+    const { message, eta } = prepared;
     window.open(
       whatsappLink(phone, message.text),
       "_blank",
@@ -419,6 +437,37 @@ function SendToCustomer({ order, busy, update, templates }: Props) {
       await advance(nextStage[id]);
     })();
   }
+  async function copy(id: string) {
+    setError("");
+    setCopyNotice("");
+    setManualCopy("");
+    const prepared = prepare(id);
+    if (!prepared) return;
+    try {
+      await navigator.clipboard.writeText(prepared.message.text);
+      setCopyNotice(
+        "Mensagem copiada. Cole na conversa do cliente e confira antes de enviar. A etapa do pedido não foi alterada.",
+      );
+    } catch {
+      setManualCopy(prepared.message.text);
+      setCopyNotice(
+        "O navegador não permitiu copiar automaticamente. Selecione e copie o texto abaixo para colar no WhatsApp. A etapa do pedido não foi alterada.",
+      );
+    }
+  }
+  function copyButton(id: string, label: string) {
+    return (
+      <button
+        type="button"
+        className="text-button message-copy"
+        disabled={busy}
+        aria-label={`Copiar mensagem: ${label}`}
+        onClick={() => void copy(id)}
+      >
+        <Copy size={16} /> Copiar
+      </button>
+    );
+  }
   return (
     <div className="send-customer">
       <h3>
@@ -428,24 +477,33 @@ function SendToCustomer({ order, busy, update, templates }: Props) {
         <p className="fine-print">Telefone não informado neste pedido.</p>
       ) : (
         <>
-          <button
-            type="button"
-            className="button"
-            disabled={busy}
-            onClick={() => send("confirmed")}
-          >
-            Enviar: pagamento confirmado
-          </button>
-          <button
-            type="button"
-            className="button button-outline"
-            disabled={busy}
-            onClick={() => send("ready")}
-          >
-            {delivery
-              ? "Enviar: separado e embalado"
-              : "Enviar: pronto para retirar"}
-          </button>
+          <div className="send-customer-actions">
+            <button
+              type="button"
+              className="button"
+              disabled={busy}
+              onClick={() => send("confirmed")}
+            >
+              Enviar: pagamento confirmado
+            </button>
+            {copyButton("confirmed", "pagamento confirmado")}
+          </div>
+          <div className="send-customer-actions">
+            <button
+              type="button"
+              className="button button-outline"
+              disabled={busy}
+              onClick={() => send("ready")}
+            >
+              {delivery
+                ? "Enviar: separado e embalado"
+                : "Enviar: pronto para retirar"}
+            </button>
+            {copyButton(
+              "ready",
+              delivery ? "separado e embalado" : "pronto para retirar",
+            )}
+          </div>
           {delivery && (
             <div className="send-customer-eta">
               <label className="field-label">
@@ -460,24 +518,46 @@ function SendToCustomer({ order, busy, update, templates }: Props) {
                   placeholder="Ex.: 30"
                 />
               </label>
-              <button
-                type="button"
-                className="button"
-                disabled={busy}
-                onClick={() => send("out_for_delivery")}
-              >
-                Enviar: saiu para entrega
-              </button>
+              <div className="send-customer-actions">
+                <button
+                  type="button"
+                  className="button"
+                  disabled={busy}
+                  onClick={() => send("out_for_delivery")}
+                >
+                  Enviar: saiu para entrega
+                </button>
+                {copyButton("out_for_delivery", "saiu para entrega")}
+              </div>
             </div>
           )}
-          <button
-            type="button"
-            className="text-button"
-            disabled={busy}
-            onClick={() => send("completed")}
-          >
-            Enviar agradecimento e concluir
-          </button>
+          <div className="send-customer-actions">
+            <button
+              type="button"
+              className="text-button"
+              disabled={busy}
+              onClick={() => send("completed")}
+            >
+              Enviar agradecimento e concluir
+            </button>
+            {copyButton("completed", "agradecimento")}
+          </div>
+          {copyNotice && (
+            <p className="admin-notice" role="status">
+              {copyNotice}
+            </p>
+          )}
+          {manualCopy && (
+            <label className="field-label">
+              Texto da mensagem para copiar
+              <textarea
+                readOnly
+                rows={8}
+                value={manualCopy}
+                onFocus={(event) => event.currentTarget.select()}
+              />
+            </label>
+          )}
           {error && (
             <p className="payment-error" role="alert">
               {error}
@@ -486,6 +566,9 @@ function SendToCustomer({ order, busy, update, templates }: Props) {
           <p className="fine-print">
             Abre o WhatsApp da loja com a mensagem pronta (itens, total e
             endereço) e atualiza a etapa do pedido. Confira e toque em enviar.
+            {" "}
+            Se os emojis não aparecerem no aplicativo, use Copiar e cole o
+            texto na conversa. Copiar não altera a etapa do pedido.
             {!order.whatsapp_opt_in &&
               " O cliente não marcou atualizações pelo WhatsApp: envie só o necessário sobre este pedido."}
           </p>

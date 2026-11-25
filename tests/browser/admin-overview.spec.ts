@@ -137,16 +137,19 @@ test("the overview shows today's numbers, the order board and editable WhatsApp 
     hasText: "Pagamento confirmado",
   });
   const textarea = card.getByLabel("Texto da mensagem");
-  await textarea.fill("Oi {nome}! Pagamento ok. Total: ");
+  await textarea.fill("Olá! �");
+  await expect(card.getByRole("alert")).toContainText("caracteres corrompidos");
+  await expect(page.getByRole("button", { name: "Salvar mensagens" })).toBeDisabled();
+  await textarea.fill("Oi {nome}! **Pagamento ok** ✅ 🌿 💚. Total: ");
   await card.getByRole("button", { name: "Total pago" }).click();
   await expect(card.locator(".message-preview")).toContainText(
-    "Oi Maria! Pagamento ok. Total: R$ 49,20",
+    "Oi Maria! *Pagamento ok* ✅ 🌿 💚. Total: R$ 49,20",
   );
   await page.getByRole("button", { name: "Salvar mensagens" }).click();
   await expect(page.getByText("Mensagens salvas.", { exact: false })).toBeVisible();
   expect(saved).toHaveLength(1);
   expect((saved[0] as { templates: Record<string, string> }).templates.confirmed).toBe(
-    "Oi {nome}! Pagamento ok. Total: {total}",
+    "Oi {nome}! *Pagamento ok* ✅ 🌿 💚. Total: {total}",
   );
 
   // The order opened from the board uses the edited text.
@@ -161,18 +164,41 @@ test("the overview shows today's numbers, the order board and editable WhatsApp 
       opened.push(String(url));
       return null;
     }) as typeof window.open;
+    Object.defineProperty(navigator, "clipboard", {
+      configurable: true,
+      value: {
+        writeText: async (text: string) => {
+          const state = window as unknown as { __copied: string; __denyClipboard: boolean };
+          if (state.__denyClipboard) throw new Error("Clipboard blocked fixture");
+          state.__copied = text;
+        },
+      },
+    });
   });
   await page.getByRole("button", { name: "Abrir pedido de Ana Souza" }).click();
   const dialog = page.getByRole("dialog");
+  const expected = "Oi Ana! *Pagamento ok* ✅ 🌿 💚. Total: R$ 49,20";
+  const copy = dialog.getByRole("button", { name: "Copiar mensagem: pagamento confirmado", exact: true });
+  await copy.click();
+  await expect(dialog.getByText("Mensagem copiada.", { exact: false })).toBeVisible();
+  expect(await page.evaluate(() => (window as unknown as { __copied: string }).__copied)).toBe(expected);
+  expect(orders[0].fulfillment_status).toBe("new");
+  expect(await page.evaluate(() => (window as unknown as { __opened: string[] }).__opened)).toHaveLength(0);
+  await page.evaluate(() => { (window as unknown as { __denyClipboard: boolean }).__denyClipboard = true; });
+  await copy.click();
+  await expect(dialog.getByRole("textbox", { name: "Texto da mensagem para copiar" })).toHaveValue(expected);
+  expect(orders[0].fulfillment_status).toBe("new");
   await dialog
     .getByRole("button", { name: "Enviar: pagamento confirmado" })
     .click();
   const opened = await page.evaluate(
     () => (window as unknown as { __opened: string[] }).__opened,
   );
-  expect(decodeURIComponent(opened[0].split("text=")[1])).toBe(
-    "Oi Ana! Pagamento ok. Total: R$ 49,20",
-  );
+  const destination = new URL(opened[0]);
+  expect(destination.origin).toBe("https://api.whatsapp.com");
+  expect(destination.pathname).toBe("/send");
+  expect(destination.searchParams.get("phone")).toBe("5511988887777");
+  expect(destination.searchParams.get("text")).toBe(expected);
   await expect.poll(() => orders[0].fulfillment_status).toBe("packing");
   expect(
     await page.evaluate(

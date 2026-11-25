@@ -60,11 +60,17 @@ Cada pedido pago abre com o quadro **Enviar para o cliente**. Os botões abrem o
 
 Confira o texto no WhatsApp e toque em enviar. Se o cliente não marcou atualizações pelo WhatsApp no checkout, o painel lembra de enviar só o necessário sobre o pedido. Na página do pedido, o botão **Falar com a loja** do cliente também envia os itens, o total e a forma de recebimento, sem o código do pedido.
 
+Os links abrem diretamente `api.whatsapp.com/send`, preservando o texto Unicode e evitando o redirecionamento de `wa.me` que pode transformar emojis em `�`. Não há envio automático por esse link: a equipe ainda confere a mensagem e toca em enviar no WhatsApp.
+
+Ao lado de cada aviso existe **Copiar**. Esse botão copia a mensagem completa, com emojis e formatação, para colar na conversa; ele não atualiza a etapa nem salva uma previsão de entrega. Se o navegador bloquear a área de transferência, o painel mostra um campo de texto para selecionar e copiar manualmente. Uma mensagem de saída para entrega continua exigindo uma previsão válida.
+
 O cliente acompanha as etapas em **Acompanhar pagamento** (`/pagamento/retorno`), no navegador em que comprou. A página se atualiza a cada minuto enquanto estiver aberta e não mostra contatos, endereço nem notas internas.
 
 ### Editar os textos
 
 Em **Admin → Mensagens**, cada aviso (pagamento confirmado, separado e embalado, pronto para retirar, saiu para entrega e agradecimento) tem um texto editável com prévia ao vivo de um pedido de exemplo. Os botões de campo inserem dados que mudam a cada pedido: saudação, primeiro nome, nome da loja, lista de itens, frete/cupom/total, total pago, entrega ou retirada, endereço, previsão, telefone da loja e link de avaliações. **Restaurar padrão** volta ao texto original. Os textos salvos valem para os próximos envios.
+
+Use um asterisco de cada lado para negrito: `*Pagamento confirmado*`. Negrito copiado com dois ou três asteriscos, inclusive asteriscos escapados com barra, é ajustado ao formato do WhatsApp antes de preencher os dados do pedido. Os emojis originais são mantidos. Textos que já contenham `�` ou Unicode incompleto são bloqueados: cole novamente o original ou restaure o padrão, pois o símbolo perdido não pode ser reconstruído com segurança. Prefira `{telefone_loja}` a um número fixo no modelo.
 
 ## Visão geral
 
