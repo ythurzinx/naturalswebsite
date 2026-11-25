@@ -352,8 +352,12 @@ test("admin sound activation, live paid alerts, packing and shipping settings wo
     () => (window as unknown as { __opened: string[] }).__opened,
   );
   expect(opened).toHaveLength(1);
-  expect(opened[0]).toMatch(/^https:\/\/wa\.me\/5511999999999\?text=/);
-  const text = decodeURIComponent(opened[0].split("text=")[1]);
+  const destination = new URL(opened[0]);
+  expect(destination.origin).toBe("https://api.whatsapp.com");
+  expect(destination.pathname).toBe("/send");
+  expect(destination.searchParams.get("phone")).toBe("5511999999999");
+  const text = destination.searchParams.get("text")!;
+  expect(text).not.toContain("�");
   expect(text).toContain("Olá, Cliente! Aqui é a Mundo Natural");
   expect(text).toContain("• 1× Castanha · 300 g");
   expect(text).toContain("Frete: R$ 8,00");

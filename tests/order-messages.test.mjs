@@ -4,10 +4,37 @@ import {
   contactMessage,
   customerToStoreMessage,
   itemLines,
+  renderTemplate,
+  validateTemplates,
   orderMessages,
   whatsappLink,
   whatsappPhone,
 } from "../lib/order-messages.mjs";
+
+test("copied Markdown becomes WhatsApp bold without changing emojis or inserted customer data", () => {
+  const template = String.raw`{saudacao} 🌿
+\***{loja}**\*
+✅ **PAGAMENTO CONFIRMADO!** 💚
+📦 {itens}`;
+  const fields = {
+    saudacao: "Olá, João!",
+    loja: "Mundo Natural",
+    itens: "• 1× Aveia · 100 g",
+  };
+  const expected = "Olá, João! 🌿\n*Mundo Natural*\n✅ *PAGAMENTO CONFIRMADO!* 💚\n📦 • 1× Aveia · 100 g";
+  const text = renderTemplate(template, fields);
+  assert.equal(text, expected);
+  assert.equal(new URL(whatsappLink("5511999998888", text)).searchParams.get("text"), expected);
+  assert.equal(validateTemplates({ confirmed: "**Olá!** 🌿" }).confirmed, "*Olá!* 🌿");
+  assert.equal(renderTemplate("**{nome}**", { nome: "**João**" }), "***João***");
+});
+
+test("templates reject already lost Unicode and unpaired surrogates without rejecting valid emoji sequences", () => {
+  for (const text of ["Olá �", "Olá \ud83c", "Olá \udf3f"])
+    assert.equal(validateTemplates({ confirmed: text }), null);
+  const text = "✅ 🌿 💚 📦 🚚 ☎️ 👩🏽‍🍳 Família 👨‍👩‍👧‍👦 – Taboão";
+  assert.equal(validateTemplates({ confirmed: text }).confirmed, text);
+});
 
 const order = {
   id: "ORD01M88MFKDYAZER4GESSR22EGTT",
@@ -97,7 +124,7 @@ test("pickup orders point to the store and skip the delivery message", () => {
   assert.match(contactMessage(order), /Sobre o seu pedido:\n• 2× Castanha/);
   assert.equal(
     whatsappLink("5511999998888", "Olá & tchau"),
-    "https://wa.me/5511999998888?text=Ol%C3%A1%20%26%20tchau",
+    "https://api.whatsapp.com/send?phone=5511999998888&text=Ol%C3%A1%20%26%20tchau",
   );
 });
 

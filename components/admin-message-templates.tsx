@@ -7,6 +7,8 @@ import {
   TEMPLATE_FIELDS,
   messageFields,
   renderTemplate,
+  hasDamagedMessageText,
+  normalizeWhatsappTemplate,
 } from "@/lib/order-messages.mjs";
 
 type Api = <T>(
@@ -65,6 +67,9 @@ export function AdminMessageTemplates({ api }: { api: Api }) {
     void load();
   }, [load]);
   const dirty = MESSAGE_TEMPLATES.some((t) => draft[t.id] !== saved[t.id]);
+  const damaged = MESSAGE_TEMPLATES.some((t) =>
+    hasDamagedMessageText(draft[t.id] || ""),
+  );
   function insert(id: string, key: string) {
     const area = fields.current[id];
     const value = draft[id] || "";
@@ -79,7 +84,7 @@ export function AdminMessageTemplates({ api }: { api: Api }) {
     });
   }
   async function save() {
-    if (revision === null) return;
+    if (revision === null || damaged) return;
     setBusy(true);
     setError("");
     setNotice("");
@@ -87,7 +92,15 @@ export function AdminMessageTemplates({ api }: { api: Api }) {
       const result = await api<{ templates: Templates; revision: number }>(
         "message-templates",
         "PUT",
-        { templates: draft, revision },
+        {
+          templates: Object.fromEntries(
+            Object.entries(draft).map(([key, text]) => [
+              key,
+              normalizeWhatsappTemplate(text),
+            ]),
+          ),
+          revision,
+        },
       );
       const value = { ...DEFAULT_TEMPLATES, ...result.templates };
       setDraft(value);
@@ -110,14 +123,15 @@ export function AdminMessageTemplates({ api }: { api: Api }) {
             Estes textos aparecem prontos quando você toca em “Enviar para o
             cliente” em um pedido. Toque em um campo para inserir no texto; ele
             é trocado pelos dados de cada pedido. Use *asteriscos* para negrito
-            no WhatsApp.
+            no WhatsApp. Negrito copiado com dois ou três asteriscos é ajustado
+            para o formato do WhatsApp.
           </p>
         </div>
         <div className="admin-toolbar-actions">
           <button
             type="button"
             className="button"
-            disabled={busy || !dirty || revision === null}
+            disabled={busy || !dirty || damaged || revision === null}
             onClick={() => void save()}
           >
             <Save size={16} /> {busy ? "Salvando…" : "Salvar mensagens"}
@@ -185,6 +199,12 @@ export function AdminMessageTemplates({ api }: { api: Api }) {
                     setDraft({ ...draft, [template.id]: e.target.value })
                   }
                 />
+                {hasDamagedMessageText(draft[template.id] || "") && (
+                  <span className="payment-error" role="alert">
+                    Este texto contém caracteres corrompidos (�). Cole novamente
+                    a mensagem original ou restaure o padrão antes de salvar.
+                  </span>
+                )}
               </label>
               <div className="message-preview" aria-label={`Prévia: ${template.label}`}>
                 <span>Prévia com um pedido de exemplo</span>

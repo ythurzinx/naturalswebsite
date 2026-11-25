@@ -6166,6 +6166,31 @@ svg {
 .send-customer .text-button {
   min-height: 44px;
 }
+.send-customer-actions {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px;
+  align-items: center;
+  min-width: 0;
+}
+.send-customer-actions > .button {
+  white-space: normal;
+  overflow-wrap: anywhere;
+  line-height: 1.4;
+}
+.send-customer .message-copy {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px;
+  white-space: nowrap;
+}
+.send-customer textarea {
+  width: 100%;
+  font-size: 16px;
+  line-height: 1.6;
+}
 .send-customer-eta {
   display: grid;
   gap: 8px;
