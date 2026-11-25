@@ -112,6 +112,8 @@ export function DeliveryEstimator({ details = false }: { details?: boolean }) {
                   Cotação válida por 10 minutos.
                   {shipping.quote.routeProvider === "openrouteservice" &&
                     " Rota: openrouteservice.org · © colaboradores do OpenStreetMap."}
+                  {shipping.quote.routeProvider === "tomtom" &&
+                    " Rota: © TomTom."}
                 </small>
               </div>
             </div>

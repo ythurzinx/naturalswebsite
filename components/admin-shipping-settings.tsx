@@ -167,7 +167,9 @@ export function AdminShippingSettings({ api }: { api: Api }) {
             Distância de carro calculada pelo{" "}
             {value.routeProvider === "google"
               ? "Google Maps"
-              : "openrouteservice (grátis)"}
+              : value.routeProvider === "tomtom"
+                ? "TomTom (grátis)"
+                : "openrouteservice (grátis)"}
             , do endereço de saída da loja até a rua do cliente. A rua, o bairro
             e a cidade vêm do CEP pela BrasilAPI.
           </p>
@@ -176,7 +178,7 @@ export function AdminShippingSettings({ api }: { api: Api }) {
             Serviço de rotas não configurado: a distância é uma estimativa em
             linha reta entre coordenadas aproximadas dos CEPs, e endereços
             diferentes da mesma cidade podem aparecer como 0 km. Cadastre
-            OPENROUTESERVICE_API_KEY (grátis) na hospedagem para cobrar pela
+            TOMTOM_API_KEY (grátis, sem cartão) na hospedagem para cobrar pela
             distância de carro.
           </p>
         )}
