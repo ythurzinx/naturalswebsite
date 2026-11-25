@@ -22,6 +22,10 @@ test("transactional email groups combo components and uses only purchase prices"
   assert.match(message.textContent, /Economia já incluída · BEMVINDA: R\$\s2,00/);
   assert.match(message.textContent, /Total pago: R\$\s28,00/);
   assert.match(message.htmlContent, /https:\/\/loja.example\/pagamento\/retorno/);
+  assert.ok(message.htmlContent.includes("https://loja.example/pagamento/retorno?order_id=ORD-FIXTURE"));
+  const second = orderEmail({ ...order, id: "ORD-ANOTHER" }, "paid", null, "https://loja.example");
+  assert.ok(second.textContent.includes("https://loja.example/pagamento/retorno?order_id=ORD-ANOTHER"));
+  assert.ok(!second.textContent.includes("order_id=ORD-FIXTURE"));
   assert.doesNotMatch(JSON.stringify(message), /private|1753|cost_unit|173|Páprica|Orégano/);
 });
 test("email escapes untrusted purchase text and uses safe tracking URLs", () => {
