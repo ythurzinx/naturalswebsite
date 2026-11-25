@@ -4,7 +4,22 @@
 
 Depois de aplicar `npm run db:migrate`, entre no `/admin` e abra **Frete e entregas**. Informe o CEP real da loja, o endereço de saída (rua e número), o valor por quilômetro, a taxa base, o frete mínimo e a distância máxima. Deixe o campo de frete grátis vazio para desativar a promoção. Habilite a entrega apenas depois de conferir os valores no simulador e testar alguns CEPs.
 
-### Distância de carro com Google Maps (recomendado)
+### Distância de carro grátis com openrouteservice (recomendado)
+
+A BrasilAPI encontra rua, bairro e cidade pelo CEP (o cliente confere a rua na tela, e o endereço completo aparece no pedido). Para medir a rota de carro sem cartão de crédito, use o **openrouteservice**, da HeiGIT (Universidade de Heidelberg), com dados do OpenStreetMap:
+
+1. Crie uma conta grátis em [account.heigit.org](https://account.heigit.org) com seu e-mail e confirme o cadastro.
+2. No painel da conta, escolha o plano gratuito (**Standard**) do openrouteservice e copie a chave de API.
+3. Na Hostinger, em **Environment variables**, crie `OPENROUTESERVICE_API_KEY` com a chave e reinicie a aplicação.
+4. Em **Admin → Frete e entregas**, confirme a mensagem do openrouteservice, preencha o endereço de saída (rua e número), revise as tarifas, teste CEPs conhecidos e ative a entrega.
+
+O plano gratuito permite cerca de 2.000 rotas por dia; o site usa no máximo 300 cálculos por dia e guarda cada rota por 6 horas. A precisão é menor que a do Google em algumas ruas: se o serviço localizar só a cidade, encontrar outra cidade ou não responder, o cliente é orientado a falar com a equipe em vez de receber um frete errado. O serviço recebe apenas o endereço da loja e a rua, o bairro, a cidade e o CEP de destino. A tela de frete exibe a atribuição exigida (openrouteservice.org e colaboradores do OpenStreetMap).
+
+Nos pedidos com entrega, o painel mostra o endereço completo e os botões **Abrir no Google Maps** e **Abrir no Waze**, que abrem a navegação no celular sem chave de API.
+
+### Distância de carro com Google Maps (alternativa paga)
+
+Se `GOOGLE_MAPS_API_KEY` estiver configurada, ela tem prioridade sobre o openrouteservice. Exige faturamento no Google Cloud com cartão de crédito.
 
 A BrasilAPI encontra rua, bairro e cidade pelo CEP. Com a variável privada `GOOGLE_MAPS_API_KEY` configurada na hospedagem, o servidor pede ao **Google Maps (Routes API)** a distância de carro do endereço de saída da loja até a rua do CEP do cliente. Sem a chave, o site volta à estimativa antiga em linha reta, cujas coordenadas costumam ser do centro da cidade: endereços diferentes de Taboão podem aparecer como 0 km. O painel informa qual método está ativo.
 

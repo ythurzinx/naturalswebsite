@@ -21,12 +21,14 @@ export type ShippingSettings = {
   revision: number;
   originAddress?: string;
   distanceMethod?: "route" | "straight";
+  routeProvider?: "google" | "openrouteservice" | null;
 };
 export type ShippingQuote = {
   quoteToken: string;
   feeCents: number;
   distanceMeters: number;
   distanceMethod?: "route" | "straight";
+  routeProvider?: "google" | "openrouteservice" | null;
   subtotalCents: number;
   revision: number;
   expiresAt: number;

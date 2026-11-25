@@ -16,6 +16,7 @@ type Estimate = {
   };
   distanceMeters: number;
   distanceMethod?: "route" | "straight";
+  routeProvider?: "google" | "openrouteservice" | null;
   withinArea: boolean;
   enabled: boolean;
   feeCents: number | null;
@@ -167,6 +168,9 @@ export function ShippingPreview({
               {result.distanceMethod === "route"
                 ? "km de carro da loja até a sua rua."
                 : "km entre CEPs, em linha reta."}
+              {result.routeProvider === "openrouteservice" && (
+                <> Rota: openrouteservice.org · © colaboradores do OpenStreetMap.</>
+              )}
             </small>
           </div>
         </div>

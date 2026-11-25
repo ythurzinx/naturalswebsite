@@ -110,6 +110,8 @@ export function DeliveryEstimator({ details = false }: { details?: boolean }) {
                     ? "km de carro da loja até a sua rua."
                     : "km entre CEPs, em linha reta."}{" "}
                   Cotação válida por 10 minutos.
+                  {shipping.quote.routeProvider === "openrouteservice" &&
+                    " Rota: openrouteservice.org · © colaboradores do OpenStreetMap."}
                 </small>
               </div>
             </div>

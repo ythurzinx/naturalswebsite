@@ -164,16 +164,20 @@ export function AdminShippingSettings({ api }: { api: Api }) {
         </h2>
         {value?.distanceMethod === "route" ? (
           <p>
-            Distância de carro calculada pelo Google Maps, do endereço de saída
-            da loja até a rua do cliente. O endereço vem do CEP pela BrasilAPI.
+            Distância de carro calculada pelo{" "}
+            {value.routeProvider === "google"
+              ? "Google Maps"
+              : "openrouteservice (grátis)"}
+            , do endereço de saída da loja até a rua do cliente. A rua, o bairro
+            e a cidade vêm do CEP pela BrasilAPI.
           </p>
         ) : (
           <p className="admin-notice">
-            Google Maps não configurado: a distância é uma estimativa em linha
-            reta entre coordenadas aproximadas dos CEPs, e endereços diferentes
-            da mesma cidade podem aparecer como 0 km. Configure
-            GOOGLE_MAPS_API_KEY na hospedagem para cobrar pela distância de
-            carro.
+            Serviço de rotas não configurado: a distância é uma estimativa em
+            linha reta entre coordenadas aproximadas dos CEPs, e endereços
+            diferentes da mesma cidade podem aparecer como 0 km. Cadastre
+            OPENROUTESERVICE_API_KEY (grátis) na hospedagem para cobrar pela
+            distância de carro.
           </p>
         )}
         <fieldset disabled={busy || !value} className="checkout-fieldset">
@@ -219,7 +223,7 @@ export function AdminShippingSettings({ api }: { api: Api }) {
             />
           </label>
           <p className="fine-print">
-            Usado pelo Google Maps como ponto de partida. Bairro, cidade e
+            Usado pelo serviço de rotas como ponto de partida. Bairro, cidade e
             estado vêm do CEP de origem. Sem preencher, o cálculo parte da rua
             do CEP.
           </p>
@@ -312,7 +316,7 @@ export function AdminShippingSettings({ api }: { api: Api }) {
           <p className="fine-print">
             Consulta o endereço na BrasilAPI e usa a origem e a regra já salvas.
             {value?.distanceMethod === "route"
-              ? " A distância é a rota de carro calculada pelo Google Maps até a rua do CEP."
+              ? " A distância é a rota de carro até a rua do CEP."
               : " A distância é uma estimativa em linha reta entre CEPs."}
           </p>
           <label className="field-label">
