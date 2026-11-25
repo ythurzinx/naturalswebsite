@@ -295,7 +295,7 @@ test("admin product batches and order filters work with isolated UI fixtures", a
   );
   await expect(readiness.locator("li.ok")).toHaveCount(4);
   await expect(readiness.locator("li.required")).toHaveCount(0);
-  await expect(readiness).toContainText("GOOGLE_MAPS_API_KEY");
+  await expect(readiness).toContainText("OPENROUTESERVICE_API_KEY");
   if (info.project.name === "mobile-390")
     await readiness.screenshot({ path: info.outputPath("prontidao.png") });
   const nav = page.getByRole("navigation", { name: "Painel administrativo" });

@@ -6053,3 +6053,16 @@ svg {
   color: #68725f;
   overflow-wrap: anywhere;
 }
+
+.delivery-navigation {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 4px 0 14px;
+}
+.delivery-navigation .button {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}

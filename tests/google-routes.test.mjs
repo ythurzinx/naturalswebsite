@@ -46,7 +46,13 @@ test("the Google client needs a plausible server key and sends only addresses", 
     from,
     "Rua José Duarte Souza, 21, Jardim das Margaridas, Taboão da Serra - SP, 06787-525, Brasil",
   );
-  assert.equal(await client.distance(from, to), 4235);
+  assert.equal(
+    await client.distance(
+      { place: store, streetLine: "Rua José Duarte Souza, 21" },
+      { place: { ...store, postalCode: "06754100", street: "Rua A" } },
+    ),
+    4235,
+  );
   const { url, options } = routesResponse.last;
   assert.equal(
     url,
@@ -65,7 +71,7 @@ test("the Google client needs a plausible server key and sends only addresses", 
   assert.equal(body.travelMode, "DRIVE");
   // Google omits distanceMeters for a zero-length route.
   const same = googleRoutesClient(key, routesResponse({ routes: [{}] }));
-  assert.equal(await same.distance(from, from), 0);
+  assert.equal(await same.distance({ place: store }, { place: store }), 0);
 });
 
 test("imprecise addresses, provider errors and oversized answers never produce a fee", async () => {
@@ -77,7 +83,7 @@ test("imprecise addresses, provider errors and oversized answers never produce a
         routes: [{ distanceMeters: 100 }],
         geocodingResults: { destination: city },
       }),
-    ).distance("a", "b"),
+    ).distance({ place: store }, { place: store }),
     { code: "CEP_MANUAL_QUOTE" },
   );
   await assert.rejects(
@@ -87,11 +93,11 @@ test("imprecise addresses, provider errors and oversized answers never produce a
         routes: [{ distanceMeters: 100 }],
         geocodingResults: { origin: city },
       }),
-    ).distance("a", "b"),
+    ).distance({ place: store }, { place: store }),
     { code: "ORIGIN_IMPRECISE" },
   );
   await assert.rejects(
-    googleRoutesClient(key, routesResponse({ routes: [] })).distance("a", "b"),
+    googleRoutesClient(key, routesResponse({ routes: [] })).distance({ place: store }, { place: store }),
     { code: "CEP_MANUAL_QUOTE" },
   );
   const logged = [];
@@ -102,7 +108,7 @@ test("imprecise addresses, provider errors and oversized answers never produce a
       googleRoutesClient(
         key,
         routesResponse({ error: { message: "API key invalid" } }, 403),
-      ).distance("a", "b"),
+      ).distance({ place: store }, { place: store }),
       { code: "ROUTE_UNAVAILABLE", status: 503 },
     );
   } finally {
@@ -113,7 +119,7 @@ test("imprecise addresses, provider errors and oversized answers never produce a
     googleRoutesClient(
       key,
       async () => new Response("x".repeat(70000), { status: 200 }),
-    ).distance("a", "b"),
+    ).distance({ place: store }, { place: store }),
     { code: "ROUTE_UNAVAILABLE" },
   );
 });
@@ -132,8 +138,12 @@ test("shipping charges the driving distance from the saved origin address and ca
   };
   const calls = [];
   const routes = {
+    provider: "google",
     async distance(from, to) {
-      calls.push({ from, to });
+      calls.push({
+        from: routeAddress(from.place, from.streetLine),
+        to: routeAddress(to.place),
+      });
       return 4200;
     },
   };

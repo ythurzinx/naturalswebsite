@@ -70,10 +70,10 @@ function items(r: Readiness): Item[] {
         : "Desativada: o site vende com retirada na loja. Ative em Frete e entregas.",
     },
     {
-      label: "Distância de carro pelo Google Maps",
+      label: "Distância de carro (serviço de rotas)",
       state: s?.route && s.originAddress ? "ok" : "optional",
       hint: !s?.route
-        ? "Cadastre GOOGLE_MAPS_API_KEY na Hostinger e reinicie a aplicação."
+        ? "Cadastre OPENROUTESERVICE_API_KEY (grátis) na Hostinger e reinicie a aplicação."
         : s.originAddress
           ? "Rota calculada do endereço de saída até a rua do cliente."
           : "Preencha o endereço de saída (rua e número) em Frete e entregas.",

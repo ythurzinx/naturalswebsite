@@ -41,8 +41,9 @@ export default function TermsPage() {
         <h2>4. Combine o recebimento</h2>
         <p>
           Quando habilitado, o frete considera a distância da loja até a rua do
-          CEP informado (rota de carro pelo Google Maps, quando configurado, ou
-          estimativa em linha reta entre CEPs), com tarifas e limite de
+          CEP informado (rota de carro calculada por um serviço de mapas, quando
+          configurado, ou estimativa em linha reta entre CEPs), com tarifas e
+          limite de
           distância definidos pela loja. Confira a rua retornada, o número, o
           complemento e o valor antes de pagar. Cotações valem por 10 minutos e
           precisam ser refeitas se o carrinho ou as tarifas mudarem. CEPs sem

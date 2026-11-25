@@ -1,8 +1,17 @@
 "use client";
 import { useState, type FormEvent } from "react";
-import { Printer, PackageCheck, Truck, Store } from "lucide-react";
+import { Printer, PackageCheck, Truck, Store, Navigation } from "lucide-react";
 import { formatPrice } from "@/lib/products";
 import type { Order } from "./admin-dashboard";
+// Navigation links open the delivery address in the courier's app. They use
+// public URLs only: no map key is needed and nothing is sent until tapped.
+export function navigationLinks(address: NonNullable<Order["address"]>) {
+  const query = `${address.street}, ${address.number}, ${address.neighborhood}, ${address.city} - ${address.state}, ${address.postalCode}, Brasil`;
+  return {
+    google: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`,
+    waze: `https://waze.com/ul?q=${encodeURIComponent(query)}&navigate=yes`,
+  };
+}
 export function printPackingSlip(order: Order) {
   if (order.state !== "paid") return;
   const popup = window.open("", "_blank", "width=760,height=800");
@@ -159,6 +168,26 @@ export function AdminOrderOperations({ order, busy, update }: Props) {
             <br />
             CEP {address.postalCode}
           </p>
+        )}
+        {address && order.fulfillment_mode === "delivery" && (
+          <div className="delivery-navigation">
+            <a
+              className="button button-outline button-small"
+              href={navigationLinks(address).google}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Navigation size={15} /> Abrir no Google Maps
+            </a>
+            <a
+              className="button button-outline button-small"
+              href={navigationLinks(address).waze}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Navigation size={15} /> Abrir no Waze
+            </a>
+          </div>
         )}
         {order.customer_phone && (
           <p>

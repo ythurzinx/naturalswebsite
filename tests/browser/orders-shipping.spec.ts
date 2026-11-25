@@ -289,6 +289,15 @@ test("admin sound activation, live paid alerts, packing and shipping settings wo
   await page.locator(".order-toast").click();
   const dialog = page.getByRole("dialog");
   await expect(dialog).toContainText("Rua de teste");
+  const waze = dialog.getByRole("link", { name: "Abrir no Waze" });
+  await expect(waze).toHaveAttribute(
+    "href",
+    /^https:\/\/waze\.com\/ul\?q=Rua%20de%20teste%2C%2022%2C%20Centro%2C%20Tabo%C3%A3o%20da%20Serra.*navigate=yes$/,
+  );
+  await expect(
+    dialog.getByRole("link", { name: "Abrir no Google Maps" }),
+  ).toHaveAttribute("href", /^https:\/\/www\.google\.com\/maps\/search\/\?api=1&query=/);
+  expect((await waze.boundingBox())!.height).toBeGreaterThanOrEqual(44);
   await expect(
     dialog.getByRole("heading", { name: "Dados do cliente" }),
   ).toBeVisible();
