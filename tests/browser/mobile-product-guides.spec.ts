@@ -114,6 +114,8 @@ test("admin edits information and recipes and moderates a real-review fixture wi
         mfa: true,
       };
     else if (path === "readiness") json = readinessFixture;
+    else if (path === "message-templates") json = { templates: {}, revision: 0 };
+    else if (path === "orders") json = { orders: [] };
     else if (path === "dashboard")
       json = {
         orders: 0,

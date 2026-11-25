@@ -1651,3 +1651,14 @@ test("the launch checklist reports readiness without exposing configuration valu
     },
   });
 });
+
+test("WhatsApp texts are saved with versions and stale edits are refused", async () => {
+  assert.deepEqual(await repo.messageTemplates(), { templates: {}, revision: 0 });
+  const saved = await repo.saveMessageTemplates({ confirmed: "Oi {nome}!" }, 0);
+  assert.deepEqual(saved, { templates: { confirmed: "Oi {nome}!" }, revision: 1 });
+  await assert.rejects(
+    repo.saveMessageTemplates({ confirmed: "Outra aba" }, 0),
+    { code: "SETTINGS_CHANGED" },
+  );
+  assert.equal((await repo.messageTemplates()).templates.confirmed, "Oi {nome}!");
+});

@@ -62,6 +62,14 @@ Confira o texto no WhatsApp e toque em enviar. Se o cliente não marcou atualiza
 
 O cliente acompanha as etapas em **Acompanhar pagamento** (`/pagamento/retorno`), no navegador em que comprou. A página se atualiza a cada minuto enquanto estiver aberta e não mostra contatos, endereço nem notas internas.
 
+### Editar os textos
+
+Em **Admin → Mensagens**, cada aviso (pagamento confirmado, separado e embalado, pronto para retirar, saiu para entrega e agradecimento) tem um texto editável com prévia ao vivo de um pedido de exemplo. Os botões de campo inserem dados que mudam a cada pedido: saudação, primeiro nome, nome da loja, lista de itens, frete/cupom/total, total pago, entrega ou retirada, endereço, previsão, telefone da loja e link de avaliações. **Restaurar padrão** volta ao texto original. Os textos salvos valem para os próximos envios.
+
+## Visão geral
+
+A primeira tela do painel mostra as vendas e os pedidos pagos de hoje, os pagamentos pendentes, o ticket médio do período e o **quadro de pedidos em andamento** (pagos a separar, em separação, prontos e saiu para entrega). Toque em um cartão para abrir o pedido com **Enviar para o cliente**. Os resultados do período, o gráfico e os produtos mais vendidos ficam logo abaixo. A conferência de configurações da loja está em **Mais opções → Configuração**.
+
 ## Impressora térmica
 
 Em **Pedidos → Impressora da loja**, no computador da loja, marque **Imprimir automaticamente cada pedido pago neste computador** e escolha o papel (80 mm ou 58 mm). Com o painel aberto, cada pedido aprovado é impresso uma vez, com cliente, telefone, endereço, itens para conferência, frete, cupom, total e observações. **Imprimir pedido**, dentro de cada pedido, reimprime quando precisar.

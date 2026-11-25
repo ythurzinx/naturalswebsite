@@ -243,6 +243,7 @@ test("admin product batches and order filters work with isolated UI fixtures", a
         mfa: true,
       };
     else if (path === "readiness") json = readinessFixture;
+    else if (path === "message-templates") json = { templates: {}, revision: 0 };
     else if (path === "dashboard")
       json = {
         orders: 2,
@@ -288,6 +289,11 @@ test("admin product batches and order filters work with isolated UI fixtures", a
     await route.fulfill({ json });
   });
   await page.goto("/admin");
+  await expect(page.locator(".readiness-card")).toHaveCount(0);
+  await expect(page.locator(".overview-hello")).toBeVisible();
+  const menu = page.getByRole("navigation", { name: "Painel administrativo" });
+  await menu.getByRole("button", { name: "Mais opções" }).click();
+  await menu.getByRole("button", { name: "Configuração" }).click();
   const readiness = page.locator(".readiness-card");
   await expect(readiness).toContainText("Prontidão da loja");
   await expect(readiness).toContainText(

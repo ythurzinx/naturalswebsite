@@ -192,6 +192,7 @@ test("admin sound activation, live paid alerts, packing and shipping settings wo
         mfa: true,
       };
     else if (path === "readiness") json = readinessFixture;
+    else if (path === "message-templates") json = { templates: {}, revision: 0 };
     else if (path === "dashboard")
       json = {
         orders: 1,

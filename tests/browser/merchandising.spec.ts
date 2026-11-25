@@ -232,6 +232,9 @@ test("admin publishes chosen discounts, shows MPV08 diagnosis and estimates a de
       });
     if (path === "readiness")
       return route.fulfill({ json: readinessFixture });
+    if (path === "orders") return route.fulfill({ json: { orders: [] } });
+    if (path === "message-templates")
+      return route.fulfill({ json: { templates: {}, revision: 0 } });
     if (path === "dashboard")
       return route.fulfill({
         json: {

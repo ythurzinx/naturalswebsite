@@ -29,6 +29,7 @@ test("admin configures transactional channels without exposing credentials and f
         mfa: true,
       };
     else if (path === "readiness") json = readinessFixture;
+    else if (path === "message-templates") json = { templates: {}, revision: 0 };
     else if (path === "dashboard")
       json = {
         orders: 0,
@@ -79,7 +80,7 @@ test("admin configures transactional channels without exposing credentials and f
   await page.goto("/admin");
   const nav = page.getByRole("navigation", { name: "Painel administrativo" });
   await nav.getByRole("button", { name: "Mais opções" }).click();
-  await nav.getByRole("button", { name: "Mensagens aos clientes" }).click();
+  await nav.getByRole("button", { name: "E-mails automáticos" }).click();
   await expect(
     page.getByRole("heading", {
       name: "Mensagens aos clientes",

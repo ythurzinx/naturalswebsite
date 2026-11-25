@@ -29,8 +29,14 @@ type Props = {
   order: Order;
   busy: boolean;
   update: (path: string, body: Record<string, unknown>) => Promise<void>;
+  templates?: Record<string, string>;
 };
-export function AdminOrderOperations({ order, busy, update }: Props) {
+export function AdminOrderOperations({
+  order,
+  busy,
+  update,
+  templates,
+}: Props) {
   const [staffNote, setStaffNote] = useState(order.staff_note || ""),
     [courierName, setCourierName] = useState(order.courier_name || ""),
     [deliveryCost, setDeliveryCost] = useState(
@@ -72,7 +78,12 @@ export function AdminOrderOperations({ order, busy, update }: Props) {
   }
   return (
     <section className="admin-order-operations">
-      <SendToCustomer order={order} busy={busy} update={update} />
+      <SendToCustomer
+        order={order}
+        busy={busy}
+        update={update}
+        templates={templates}
+      />
       <div className="order-customer-card">
         <h3>Dados do cliente</h3>
         <dl>
@@ -360,7 +371,7 @@ const nextStage: Record<string, string> = {
 const stageOrder = ["new", "packing", "ready", "out_for_delivery", "completed"];
 // One tap: opens the store's WhatsApp with a complete message and moves the
 // order forward. The team reviews the text and taps send in WhatsApp.
-function SendToCustomer({ order, busy, update }: Props) {
+function SendToCustomer({ order, busy, update, templates }: Props) {
   const [minutes, setMinutes] = useState(
       order.estimated_minutes ? String(order.estimated_minutes) : "",
     ),
@@ -389,6 +400,7 @@ function SendToCustomer({ order, busy, update }: Props) {
     const message = orderMessages(
       { ...order, ...(eta ? { estimated_minutes: eta } : {}) },
       origin,
+      templates,
     ).find((m) => m.id === id);
     if (!message) return;
     window.open(
