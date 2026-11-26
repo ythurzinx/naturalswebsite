@@ -1,3 +1,4 @@
+import { navigateAdmin } from "./admin-navigation";
 import { test, expect, type Page } from "@playwright/test";
 import { readinessFixture } from "./readiness-fixture";
 
@@ -291,9 +292,7 @@ test("admin product batches and order filters work with isolated UI fixtures", a
   await page.goto("/admin");
   await expect(page.locator(".readiness-card")).toHaveCount(0);
   await expect(page.locator(".overview-hello")).toBeVisible();
-  const menu = page.getByRole("navigation", { name: "Painel administrativo" });
-  await menu.getByRole("button", { name: "Mais opções" }).click();
-  await menu.getByRole("button", { name: "Configuração" }).click();
+  await navigateAdmin(page, "Configuração");
   const readiness = page.locator(".readiness-card");
   await expect(readiness).toContainText("Prontidão da loja");
   await expect(readiness).toContainText(
@@ -304,8 +303,7 @@ test("admin product batches and order filters work with isolated UI fixtures", a
   await expect(readiness).toContainText("TOMTOM_API_KEY");
   if (info.project.name === "mobile-390")
     await readiness.screenshot({ path: info.outputPath("prontidao.png") });
-  const nav = page.getByRole("navigation", { name: "Painel administrativo" });
-  await nav.getByRole("button", { name: "Produtos e fotos" }).click();
+  await navigateAdmin(page, "Produtos e fotos");
   await page.getByLabel("Mostrar produtos").selectOption("photos");
   await expect(page.locator(".admin-product-table tbody tr")).toHaveCount(1);
   await page.getByLabel("Selecionar Castanha teste", { exact: true }).check();
@@ -329,7 +327,7 @@ test("admin product batches and order filters work with isolated UI fixtures", a
       path: info.outputPath("admin-celular.png"),
       fullPage: true,
     });
-  await nav.getByRole("button", { name: "Pedidos", exact: true }).click();
+  await navigateAdmin(page, "Pedidos");
   await page
     .getByRole("combobox", { name: "Situação do pedido", exact: true })
     .selectOption("pending");
@@ -344,6 +342,7 @@ test("admin product batches and order filters work with isolated UI fixtures", a
   await expect(page.locator(".admin-order-table tbody tr")).toHaveCount(1);
   await fitsScreen(page);
   await page.getByRole("button", { name: "Ver pedido", exact: true }).click();
+  await page.getByText("Valores, custos e pagamento", { exact: true }).click();
   await page
     .getByRole("button", { name: "Consultar pagamento deste pedido" })
     .click();

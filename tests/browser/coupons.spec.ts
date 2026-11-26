@@ -1,3 +1,4 @@
+import { navigateAdmin } from "./admin-navigation";
 import { test, expect, type Page } from "@playwright/test";
 import { readinessFixture } from "./readiness-fixture";
 
@@ -182,10 +183,7 @@ test("the team creates, pauses and deletes coupons in the admin panel", async ({
   await page.goto("/admin");
   const cookie = page.getByRole("button", { name: "Só essenciais", exact: true });
   if (await cookie.isVisible()) await cookie.click();
-  await page
-    .getByRole("navigation", { name: "Painel administrativo" })
-    .getByRole("button", { name: "Cupons" })
-    .click();
+  await navigateAdmin(page, "Cupons");
   await expect(page.getByText("Nenhum cupom cadastrado ainda.")).toBeVisible();
   await page.getByLabel("Código", { exact: true }).fill("inaugura10");
   await page.getByLabel("Desconto (%)", { exact: true }).fill("10");

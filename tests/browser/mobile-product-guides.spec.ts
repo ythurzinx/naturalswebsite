@@ -1,3 +1,4 @@
+import { navigateAdmin } from "./admin-navigation";
 import { test, expect } from "@playwright/test";
 import { readinessFixture } from "./readiness-fixture";
 import guideData from "../../lib/product-content.json";
@@ -198,10 +199,7 @@ test("admin edits information and recipes and moderates a real-review fixture wi
     await r.fulfill({ json });
   });
   await page.goto("/admin");
-  const nav = page.getByRole("navigation", { name: "Painel administrativo" });
-  await nav
-    .getByRole("button", { name: "Conteúdo e receitas", exact: true })
-    .click();
+  await navigateAdmin(page, "Conteúdo e receitas");
   await page
     .getByRole("textbox", { name: "Descrição completa", exact: true })
     .fill("Castanhas selecionadas para porções e receitas da loja.");
@@ -223,7 +221,7 @@ test("admin edits information and recipes and moderates a real-review fixture wi
       () => document.documentElement.scrollWidth <= innerWidth + 1,
     ),
   ).toBe(true);
-  await nav.getByRole("button", { name: "Avaliações", exact: true }).click();
+  await navigateAdmin(page, "Avaliações");
   await expect(page.getByLabel("2 de 5 estrelas")).toBeVisible();
   await page
     .getByLabel("Resposta da loja (opcional)")

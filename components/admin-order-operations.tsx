@@ -6,15 +6,8 @@ import {
   Truck,
   Store,
   Navigation,
-  MessageCircle,
-  Copy,
 } from "lucide-react";
-import {
-  orderMessages,
-  whatsappLink,
-  whatsappPhone,
-  hasDamagedMessageText,
-} from "@/lib/order-messages.mjs";
+import { AdminOrderWorkflow } from "./admin-order-workflow";
 import { formatPrice } from "@/lib/products";
 import type { Order } from "./admin-dashboard";
 import { printOrderReceipt } from "@/lib/thermal-receipt";
@@ -32,12 +25,14 @@ type Props = {
   busy: boolean;
   update: (path: string, body: Record<string, unknown>) => Promise<void>;
   templates?: Record<string, string>;
+  transition: (state: string, estimatedMinutes?: number) => Promise<Order>;
 };
 export function AdminOrderOperations({
   order,
   busy,
   update,
   templates,
+  transition,
 }: Props) {
   const [staffNote, setStaffNote] = useState(order.staff_note || ""),
     [courierName, setCourierName] = useState(order.courier_name || ""),
@@ -45,9 +40,6 @@ export function AdminOrderOperations({
       order.delivery_cost_cents == null
         ? ""
         : (order.delivery_cost_cents / 100).toFixed(2),
-    ),
-    [estimatedMinutes, setEstimatedMinutes] = useState(
-      order.estimated_minutes?.toString() || "",
     ),
     [error, setError] = useState("");
   const productItems = (order.items || []).filter(
@@ -63,29 +55,78 @@ export function AdminOrderOperations({
       setError("Use um custo em reais com até duas casas decimais.");
       return;
     }
-    const eta = estimatedMinutes.trim();
-    if (
-      eta &&
-      (!/^\d{1,3}$/.test(eta) || Number(eta) < 1 || Number(eta) > 240)
-    ) {
-      setError("Informe uma previsão de 1 a 240 minutos.");
-      return;
-    }
     await update("operations", {
       staffNote,
       courierName,
-      estimatedMinutes: eta ? Number(eta) : null,
       deliveryCostCents: raw ? Math.round(Number(raw) * 100) : null,
     });
   }
   return (
     <section className="admin-order-operations">
-      <SendToCustomer
+      <AdminOrderWorkflow
         order={order}
         busy={busy}
-        update={update}
+        transition={transition}
         templates={templates}
       />
+      <div className="packing-heading">
+        <h3>
+          <PackageCheck size={20} /> Conferência da embalagem
+        </h3>
+        <span>
+          {packed}/{productItems.length} itens conferidos
+        </span>
+      </div>
+      <progress
+        max={Math.max(1, productItems.length)}
+        value={packed}
+        aria-label="Progresso da conferência"
+      />
+      {order.state !== "paid" && (
+        <p className="payment-error">
+          Aguarde a aprovação do pagamento antes de separar ou liberar este
+          pedido.
+        </p>
+      )}
+      <div className="packing-checklist">
+        {productItems.map((item) => (
+          <label key={item.line_key} className={item.packed ? "checked" : ""}>
+            <input
+              type="checkbox"
+              checked={!!item.packed}
+              disabled={
+                busy ||
+                order.state !== "paid" ||
+                ["completed", "out_for_delivery"].includes(
+                  order.fulfillment_status,
+                )
+              }
+              onChange={(e) =>
+                void update("packing", {
+                  lineKey: item.line_key,
+                  packed: e.target.checked,
+                })
+              }
+            />
+            <span>
+              <strong>
+                {item.quantity} × {item.title}
+              </strong>
+              <small>Confira produto, peso, quantidade e embalagem.</small>
+            </span>
+          </label>
+        ))}
+      </div>
+      <button
+        type="button"
+        className="button button-small button-outline"
+        disabled={order.state !== "paid"}
+        onClick={() => printOrderReceipt(order)}
+      >
+        <Printer size={17} /> Imprimir pedido
+      </button>
+      <details className="order-section-details">
+        <summary><Store size={17} /> Dados do cliente e {order.fulfillment_mode === "delivery" ? "entrega" : "retirada"}</summary>
       <div className="order-customer-card">
         <h3>Dados do cliente</h3>
         <dl>
@@ -237,62 +278,9 @@ export function AdminOrderOperations({
         )}
       </div>
       )}
-      <div className="packing-heading">
-        <h3>
-          <PackageCheck size={20} /> Conferência da embalagem
-        </h3>
-        <span>
-          {packed}/{productItems.length} itens conferidos
-        </span>
-      </div>
-      <progress
-        max={Math.max(1, productItems.length)}
-        value={packed}
-        aria-label="Progresso da conferência"
-      />
-      {order.state !== "paid" && (
-        <p className="payment-error">
-          Aguarde a aprovação do pagamento antes de separar ou liberar este
-          pedido.
-        </p>
-      )}
-      <div className="packing-checklist">
-        {productItems.map((item) => (
-          <label key={item.line_key} className={item.packed ? "checked" : ""}>
-            <input
-              type="checkbox"
-              checked={!!item.packed}
-              disabled={
-                busy ||
-                order.state !== "paid" ||
-                ["completed", "out_for_delivery"].includes(
-                  order.fulfillment_status,
-                )
-              }
-              onChange={(e) =>
-                void update("packing", {
-                  lineKey: item.line_key,
-                  packed: e.target.checked,
-                })
-              }
-            />
-            <span>
-              <strong>
-                {item.quantity} × {item.title}
-              </strong>
-              <small>Confira produto, peso, quantidade e embalagem.</small>
-            </span>
-          </label>
-        ))}
-      </div>
-      <button
-        type="button"
-        className="button button-small button-outline"
-        disabled={order.state !== "paid"}
-        onClick={() => printOrderReceipt(order)}
-      >
-        <Printer size={17} /> Imprimir pedido
-      </button>
+      </details>
+      <details className="order-section-details">
+        <summary><Navigation size={17} /> Equipe, anotações e custo da entrega</summary>
       <form onSubmit={save} className="order-operations-form">
         <h3>Anotações da equipe</h3>
         <label className="field-label">
@@ -315,23 +303,6 @@ export function AdminOrderOperations({
                 onChange={(e) => setCourierName(e.target.value)}
                 placeholder="Nome do entregador"
               />
-            </label>
-            <label className="field-label">
-              Previsão de chegada (minutos)
-              <input
-                type="number"
-                min={1}
-                max={240}
-                step={1}
-                inputMode="numeric"
-                value={estimatedMinutes}
-                onChange={(e) => setEstimatedMinutes(e.target.value)}
-                placeholder="Ex.: 30"
-              />
-              <small>
-                Salve antes de marcar “Saiu para entrega”. A mensagem usa esta
-                previsão.
-              </small>
             </label>
             <label className="field-label">
               Custo real da entrega (R$)
@@ -359,221 +330,7 @@ export function AdminOrderOperations({
             {error}
           </p>
         )}
-      </form>
+      </form>      </details>
     </section>
-  );
-}
-
-const nextStage: Record<string, string> = {
-  confirmed: "packing",
-  ready: "ready",
-  out_for_delivery: "out_for_delivery",
-  completed: "completed",
-};
-const stageOrder = ["new", "packing", "ready", "out_for_delivery", "completed"];
-// One tap: opens the store's WhatsApp with a complete message and moves the
-// order forward. The team reviews the text and taps send in WhatsApp.
-function SendToCustomer({ order, busy, update, templates }: Props) {
-  const [minutes, setMinutes] = useState(
-      order.estimated_minutes ? String(order.estimated_minutes) : "",
-    ),
-    [error, setError] = useState(""),
-    [copyNotice, setCopyNotice] = useState(""),
-    [manualCopy, setManualCopy] = useState("");
-  const phone = whatsappPhone(order.customer_phone);
-  if (order.state !== "paid") return null;
-  const origin = typeof window === "undefined" ? "" : window.location.origin;
-  const delivery = order.fulfillment_mode === "delivery";
-  async function advance(target: string) {
-    if (
-      stageOrder.indexOf(order.fulfillment_status) < stageOrder.indexOf(target)
-    )
-      await update("fulfillment", { state: target });
-  }
-  function prepare(id: string) {
-    let eta: number | null = null;
-    if (id === "out_for_delivery") {
-      eta = Number(minutes);
-      if (!/^\d{1,3}$/.test(minutes.trim()) || eta < 1 || eta > 240) {
-        setError("Informe a previsão de chegada, de 1 a 240 minutos.");
-        return null;
-      }
-    }
-    const message = orderMessages(
-      { ...order, ...(eta ? { estimated_minutes: eta } : {}) },
-      origin,
-      templates,
-    ).find((m) => m.id === id);
-    if (!message) return null;
-    if (hasDamagedMessageText(message.text)) {
-      setError(
-        "Esta mensagem contém símbolos corrompidos (�). Confira o modelo e os dados do pedido antes de enviar.",
-      );
-      return null;
-    }
-    return { message, eta };
-  }
-  function send(id: string) {
-    setError("");
-    setCopyNotice("");
-    setManualCopy("");
-    if (!phone) return;
-    const prepared = prepare(id);
-    if (!prepared) return;
-    const { message, eta } = prepared;
-    window.open(
-      whatsappLink(phone, message.text),
-      "_blank",
-      "noopener,noreferrer",
-    );
-    void (async () => {
-      if (eta)
-        await update("operations", {
-          staffNote: order.staff_note || "",
-          courierName: order.courier_name || "",
-          deliveryCostCents: order.delivery_cost_cents ?? null,
-          estimatedMinutes: eta,
-        });
-      await advance(nextStage[id]);
-    })();
-  }
-  async function copy(id: string) {
-    setError("");
-    setCopyNotice("");
-    setManualCopy("");
-    const prepared = prepare(id);
-    if (!prepared) return;
-    try {
-      await navigator.clipboard.writeText(prepared.message.text);
-      setCopyNotice(
-        "Mensagem copiada. Cole na conversa do cliente e confira antes de enviar. A etapa do pedido não foi alterada.",
-      );
-    } catch {
-      setManualCopy(prepared.message.text);
-      setCopyNotice(
-        "O navegador não permitiu copiar automaticamente. Selecione e copie o texto abaixo para colar no WhatsApp. A etapa do pedido não foi alterada.",
-      );
-    }
-  }
-  function copyButton(id: string, label: string) {
-    return (
-      <button
-        type="button"
-        className="text-button message-copy"
-        disabled={busy}
-        aria-label={`Copiar mensagem: ${label}`}
-        onClick={() => void copy(id)}
-      >
-        <Copy size={16} /> Copiar
-      </button>
-    );
-  }
-  return (
-    <div className="send-customer">
-      <h3>
-        <MessageCircle size={19} /> Enviar para o cliente
-      </h3>
-      {!phone ? (
-        <p className="fine-print">Telefone não informado neste pedido.</p>
-      ) : (
-        <>
-          <div className="send-customer-actions">
-            <button
-              type="button"
-              className="button"
-              disabled={busy}
-              onClick={() => send("confirmed")}
-            >
-              Enviar: pagamento confirmado
-            </button>
-            {copyButton("confirmed", "pagamento confirmado")}
-          </div>
-          <div className="send-customer-actions">
-            <button
-              type="button"
-              className="button button-outline"
-              disabled={busy}
-              onClick={() => send("ready")}
-            >
-              {delivery
-                ? "Enviar: separado e embalado"
-                : "Enviar: pronto para retirar"}
-            </button>
-            {copyButton(
-              "ready",
-              delivery ? "separado e embalado" : "pronto para retirar",
-            )}
-          </div>
-          {delivery && (
-            <div className="send-customer-eta">
-              <label className="field-label">
-                Chega em quantos minutos?
-                <input
-                  type="number"
-                  inputMode="numeric"
-                  min={1}
-                  max={240}
-                  value={minutes}
-                  onChange={(e) => setMinutes(e.target.value)}
-                  placeholder="Ex.: 30"
-                />
-              </label>
-              <div className="send-customer-actions">
-                <button
-                  type="button"
-                  className="button"
-                  disabled={busy}
-                  onClick={() => send("out_for_delivery")}
-                >
-                  Enviar: saiu para entrega
-                </button>
-                {copyButton("out_for_delivery", "saiu para entrega")}
-              </div>
-            </div>
-          )}
-          <div className="send-customer-actions">
-            <button
-              type="button"
-              className="text-button"
-              disabled={busy}
-              onClick={() => send("completed")}
-            >
-              Enviar agradecimento e concluir
-            </button>
-            {copyButton("completed", "agradecimento")}
-          </div>
-          {copyNotice && (
-            <p className="admin-notice" role="status">
-              {copyNotice}
-            </p>
-          )}
-          {manualCopy && (
-            <label className="field-label">
-              Texto da mensagem para copiar
-              <textarea
-                readOnly
-                rows={8}
-                value={manualCopy}
-                onFocus={(event) => event.currentTarget.select()}
-              />
-            </label>
-          )}
-          {error && (
-            <p className="payment-error" role="alert">
-              {error}
-            </p>
-          )}
-          <p className="fine-print">
-            Abre o WhatsApp da loja com a mensagem pronta (itens, total e
-            endereço) e atualiza a etapa do pedido. Confira e toque em enviar.
-            {" "}
-            Se os emojis não aparecerem no aplicativo, use Copiar e cole o
-            texto na conversa. Copiar não altera a etapa do pedido.
-            {!order.whatsapp_opt_in &&
-              " O cliente não marcou atualizações pelo WhatsApp: envie só o necessário sobre este pedido."}
-          </p>
-        </>
-      )}
-    </div>
   );
 }

@@ -30,3 +30,6 @@ next-env.d.ts
 # Browser test artifacts
 /test-results/
 /playwright-report/
+
+# Private PDV exports with product costs belong in MySQL, never in this public repo.
+/private-imports/

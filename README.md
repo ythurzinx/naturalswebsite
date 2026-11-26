@@ -55,17 +55,17 @@ Execute `npm run admin:setup` no seu terminal para gerar o hash da senha, o segr
 
 O lucro estimado exige custos e taxas conhecidos. Custos ficam registrados por pedido; preencher custos históricos ausentes exige uma ação explícita do administrador. Nenhuma margem é inventada.
 
-O painel exibe e recebe preço/custo a granel por 100 g. O catálogo importado e as colunas existentes do MySQL mantêm a base interna por kg para compatibilidade; `lib/pricing.mjs` converte a unidade de venda. O editor envia `priceUnit: "100g"`, convertido para a base interna no servidor. Não divida manualmente os valores armazenados por dez. Pedidos e custos históricos permanecem registrados pelo valor da porção original.
+O painel exibe e recebe **preço de venda a granel por 100 g e custo de compra por kg**, preservando centavos do custo importado sem arredondamento a cada edição. O catálogo importado e as colunas existentes do MySQL mantêm a base interna por kg para compatibilidade; `lib/pricing.mjs` converte a unidade de venda. O editor envia `priceUnit: "100g"` e `costUnit: "kg"`, convertidos separadamente no servidor. A importação privada do CSV aceita custos por kg ou por 100 g, com prévia; veja [custos e resultado](docs/PAINEL-CUSTOS-EMAIL.md). Não divida manualmente os valores armazenados por dez. Pedidos e custos históricos permanecem registrados pelo valor da porção original.
 
 ## Prontidão para vender
 
-Em **Admin → Visão geral**, o quadro **Prontidão da loja** confere sem expor chaves: pagamento em produção, Webhook do Mercado Pago, verificação em duas etapas, cupons, entrega, Google Maps, e-mails e WhatsApp da Brevo e o agendador dos avisos. Itens essenciais pendentes aparecem em destaque; os opcionais indicam a variável ou a tela a configurar. O site publica `robots.txt` (painel, carrinho, checkout e API fora das buscas) e `sitemap.xml` com as páginas e os produtos.
+Em **Admin → Configuração**, o quadro **Prontidão da loja** confere sem expor chaves: pagamento em produção, Webhook do Mercado Pago, verificação em duas etapas, cupons, entrega, Google Maps, e-mails e WhatsApp da Brevo e o agendador dos avisos. Itens essenciais pendentes aparecem em destaque; os opcionais indicam a variável ou a tela a configurar. O site publica `robots.txt` (painel, carrinho, checkout e API fora das buscas) e `sitemap.xml` com as páginas e os produtos.
 
 ## Dados e operação
 
 - `lib/store.ts`: contatos e endereço. Contato oficial: **(11) 5199-3525** (`551151993525`).
 - `lib/catalog.json`: produtos e preços em reais, extraídos do CSV referenciado pela loja. Os preços de venda foram atualizados pelo relatório do PDV de 06/11/2026; veja [atualização de preços](docs/ATUALIZACAO-PRECOS.md), inclusive o SQL para os produtos já editados no painel.
-- `lib/sales-policy.json`: confirmação de preços, habilitação de retirada, produtos indisponíveis e limites de venda. Os campos antigos de quantidade/validade do catálogo não são usados como controle de estoque atual.
+- `lib/sales-policy.json`: confirmação de preços, habilitação de retirada, produtos indisponíveis e limites de venda. O catálogo público contém apenas dados da vitrine; custos são persistidos exclusivamente no banco protegido.
 - `lib/server/`: validações, cookies/sessões, cliente Mercado Pago, idempotência e verificações de pagamento/Webhooks.
 - `proxy.ts` e `security-headers.mjs`: CSP por resposta e cabeçalhos de segurança.
 - `docs/SEGURANCA.md`: revisão manual, controles, evidências e limites da validação.

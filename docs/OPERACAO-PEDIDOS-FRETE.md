@@ -51,18 +51,15 @@ O carrinho e o checkout compartilham o cálculo. A cotação vale por 10 minutos
 
 ## Enviar mensagens ao cliente
 
-Cada pedido pago abre com o quadro **Enviar para o cliente**. Os botões abrem o WhatsApp da loja com uma mensagem completa — primeiro nome, itens comprados (cada combo uma vez), frete, cupom, total e endereço de entrega ou da loja, sem o número do pedido — e já atualizam a etapa:
+Cada pedido abre com **Etapa e mensagem ao cliente**, o único lugar para mudar a etapa e preparar o aviso correspondente.
 
-- **Enviar: pagamento confirmado** → etapa “Em separação”.
-- **Enviar: separado e embalado** (entrega) ou **pronto para retirar** (retirada) → “Embalado e pronto” (exige todos os itens conferidos).
-- **Enviar: saiu para entrega** → informe em quantos minutos chega; a previsão é salva no pedido e entra na mensagem e na página do cliente.
-- **Enviar agradecimento e concluir** → “Concluído”, com convite para avaliar.
+1. Escolha **Etapa do pedido**. Para saída para entrega, informe a previsão de chegada de 1–240 minutos no mesmo bloco.
+2. Toque em **Salvar etapa e copiar mensagem**. O servidor confere o pagamento e a embalagem antes de salvar; etapa e prazo são gravados juntos. A cópia só ocorre após a confirmação da alteração.
+3. Cole na conversa e confira o texto antes de enviar. **Copiar mensagem atual** e **Abrir no WhatsApp** usam apenas a etapa já salva e não avançam o pedido. Quando há alterações não salvas, esses dois botões ficam bloqueados.
 
-Confira o texto no WhatsApp e toque em enviar. Se o cliente não marcou atualizações pelo WhatsApp no checkout, o painel lembra de enviar só o necessário sobre o pedido. Na página do pedido, o botão **Falar com a loja** do cliente também envia os itens, o total e a forma de recebimento, sem o código do pedido.
+Se o navegador bloquear a área de transferência, o painel mostra o texto para selecionar e copiar manualmente. As mensagens incluem primeiro nome, itens (cada combo uma vez), frete, cupom, total e recebimento, sem o código do pedido. O link direto `api.whatsapp.com/send` mantém os emojis no WhatsApp Web. O envio manual continua exigindo tocar em Enviar dentro do WhatsApp.
 
-Os links abrem diretamente `api.whatsapp.com/send`, preservando o texto Unicode e evitando o redirecionamento de `wa.me` que pode transformar emojis em `�`. Não há envio automático por esse link: a equipe ainda confere a mensagem e toca em enviar no WhatsApp.
-
-Ao lado de cada aviso existe **Copiar**. Esse botão copia a mensagem completa, com emojis e formatação, para colar na conversa; ele não atualiza a etapa nem salva uma previsão de entrega. Se o navegador bloquear a área de transferência, o painel mostra um campo de texto para selecionar e copiar manualmente. Uma mensagem de saída para entrega continua exigindo uma previsão válida.
+Abaixo ficam o checklist de embalagem e as seções que podem ser expandidas: **Dados do cliente e entrega/retirada**, **Equipe, anotações e custo da entrega** e **Valores, custos e pagamento**. Impressão, mapas, contatos, conciliação e custos continuam disponíveis. Clientes que não autorizaram avisos automáticos devem receber apenas o atendimento necessário à compra.
 
 O cliente acompanha as etapas em **Acompanhar pagamento** (`/pagamento/retorno`), no navegador em que comprou. A página se atualiza a cada minuto enquanto estiver aberta e não mostra contatos, endereço nem notas internas.
 
@@ -74,7 +71,7 @@ Use um asterisco de cada lado para negrito: `*Pagamento confirmado*`. Negrito co
 
 ## Visão geral
 
-A primeira tela do painel mostra as vendas e os pedidos pagos de hoje, os pagamentos pendentes, o ticket médio do período e o **quadro de pedidos em andamento** (pagos a separar, em separação, prontos e saiu para entrega). Toque em um cartão para abrir o pedido com **Enviar para o cliente**. Os resultados do período, o gráfico e os produtos mais vendidos ficam logo abaixo. A conferência de configurações da loja está em **Mais opções → Configuração**.
+A primeira tela do painel mostra as vendas e os pedidos pagos de hoje, os pagamentos pendentes, o ticket médio do período e o **quadro de pedidos em andamento** (pagos a separar, em separação, prontos e saiu para entrega). Toque em um cartão para abrir o pedido. O resumo de lucro leva a **Financeiro**, onde ficam período, gráfico, composição do resultado, custos pendentes e produtos mais vendidos. A conferência de configurações está em **Configuração**. No celular, o botão de menu abre todas as áreas agrupadas.
 
 ## Impressora térmica
 
@@ -98,7 +95,7 @@ O aviso funciona com o painel aberto. Navegadores podem suspender páginas em se
 2. Confira pagamento, modo de recebimento, endereço/telefone e observações do cliente.
 3. Selecione **Em separação** e marque cada produto depois de conferir peso, porções, integridade e embalagem. O frete não entra no checklist.
 4. Marque **Embalado e pronto** após conferir todos os itens. A alteração consulta novamente o pagamento no Mercado Pago. Pedidos pendentes ou reembolsados não são liberados.
-5. Para entrega, registre o entregador, informe e salve a **previsão de chegada (1–240 minutos)** nos detalhes e selecione **Saiu para entrega**. Para retirada, entregue à pessoa responsável. Marque **Concluído** ao finalizar.
+5. Para entrega, registre o entregador nos dados da equipe. No bloco de etapa e mensagem, selecione **Saiu para entrega**, informe a **previsão de chegada (1–240 minutos)** e salve. Para retirada, entregue à pessoa responsável. Marque **Concluído** ao finalizar.
 
 Se desmarcar um item pronto, o pedido volta para separação. Pedidos que já saíram ou foram concluídos exigem voltar à etapa de separação antes de alterar o checklist. Notas internas são privadas da equipe. O botão de impressão gera um resumo de embalagem, sem valor de documento fiscal, e só fica habilitado para pedidos pagos.
 
@@ -112,4 +109,4 @@ As credenciais reais de Mercado Pago e a hospedagem precisam ser homologadas ant
 
 ## Contato e avisos do cliente
 
-Nos detalhes do pedido, a equipe vê nome, e-mail, telefone e autorização de WhatsApp. O checkout solicita telefone também para retirada; pedidos antigos só exibem os contatos que já haviam sido registrados. O histórico de avisos distingue fila, aceite pelo provedor, falha e envio incerto. Configure **Mensagens aos clientes** conforme [NOTIFICACOES.md](NOTIFICACOES.md). O número oficial da loja é **(11) 5199-3525**.
+Nos detalhes do pedido, a equipe vê nome, e-mail, telefone e autorização de WhatsApp. O checkout solicita telefone também para retirada; pedidos antigos só exibem os contatos que já haviam sido registrados. O histórico de avisos distingue fila, aceite pelo provedor, falha e envio incerto. Configure **E-mails automáticos** conforme [NOTIFICACOES.md](NOTIFICACOES.md). O número oficial da loja é **(11) 5199-3525**.

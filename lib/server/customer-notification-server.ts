@@ -8,5 +8,6 @@ export const customerNotifications = createCustomerNotifications({
     BREVO_API_KEY: process.env.BREVO_API_KEY,
     BREVO_SENDER_EMAIL: process.env.BREVO_SENDER_EMAIL,
     BREVO_WHATSAPP_SENDER: process.env.BREVO_WHATSAPP_SENDER,
+    APP_URL: process.env.APP_URL,
   },
 });

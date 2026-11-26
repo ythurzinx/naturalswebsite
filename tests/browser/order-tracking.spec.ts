@@ -14,6 +14,7 @@ test("customers follow the preparation steps and the arrival estimate after payi
         stage,
         etaMinutes: stage === "out_for_delivery" ? 25 : null,
         testMode: false,
+        emailState: "accepted",
       },
     }),
   );
@@ -22,6 +23,7 @@ test("customers follow the preparation steps and the arrival estimate after payi
   if (await cookie.isVisible().catch(() => false)) await cookie.click();
   const timeline = page.getByRole("list", { name: "Etapas do pedido" });
   await expect(timeline.locator("li")).toHaveCount(5);
+  await expect(page.getByText("A confirmação foi encaminhada ao e-mail", { exact: false })).toBeVisible();
   await expect(timeline.locator("li.done")).toHaveCount(1);
   await expect(timeline.locator('li[aria-current="step"]')).toContainText(
     "Em separação",
@@ -41,4 +43,22 @@ test("customers follow the preparation steps and the arrival estimate after payi
   ).toBe(true);
   if (info.project.name === "mobile-390")
     await page.screenshot({ path: info.outputPath("acompanhamento.png") });
+});
+
+test("a pending payment confirms automatically from the server and reports the email honestly", async ({ page }) => {
+  await page.clock.install();
+  let paid = false;
+  await page.route("**/api/orders/**", (route) => route.fulfill({ json: {
+    orderId: "ORD01AUTOMATICFIXTURE", state: paid ? "paid" : "pending", totalCents: 1200,
+    fulfillment: "pickup", stage: paid ? "new" : null, testMode: false, emailState: paid ? "pending" : null,
+  } }));
+  await page.goto("/pagamento/retorno?status=approved");
+  await expect(page.getByRole("status")).toHaveText("Aguardando confirmação");
+  await expect(page.getByRole("list", { name: "Etapas do pedido" })).toHaveCount(0);
+  paid = true;
+  await page.clock.runFor(5100);
+  await expect(page.getByRole("status")).toHaveText("Pagamento confirmado");
+  await expect(page.getByRole("list", { name: "Etapas do pedido" })).toBeVisible();
+  await expect(page.getByText("Estamos preparando a confirmação por e-mail.", { exact: false })).toBeVisible();
+  await expect(page.getByText("A confirmação foi encaminhada ao e-mail", { exact: false })).toHaveCount(0);
 });

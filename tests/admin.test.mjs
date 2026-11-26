@@ -76,12 +76,17 @@ test("admin edits in 100 g preserve the existing per-kg storage contract", () =>
   assert.equal(saved.costCents, 8000);
   assert.equal(saved.weightLabel, "A granel · preço por 100 g");
   assert.equal(saved.priceUnit, undefined);
+  const precise = validateProduct({ ...product, priceUnit: "100g", priceCents: 1200, costCents: 5367, costUnit: "kg" }, "prod-1");
+  assert.equal(precise.costCents, 5367);
+  assert.equal(precise.costUnit, undefined);
   for (const value of [
     { ...product, priceUnit: "unit" },
     { ...product, priceUnit: "100g", priceCents: 100000001 },
     { ...product, priceUnit: "100g", priceCents: 10000001 },
     { ...product, priceUnit: "100g", costCents: 10000001 },
     { ...product, isBulk: false, priceUnit: "100g" },
+    { ...product, costUnit: "100g" },
+    { ...product, isBulk: false, costUnit: "kg" },
   ])
     assert.throws(() => validateProduct(value, "prod-1"));
 });

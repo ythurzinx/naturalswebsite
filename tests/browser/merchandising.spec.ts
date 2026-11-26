@@ -1,3 +1,4 @@
+import { navigateAdmin } from "./admin-navigation";
 import { test, expect } from "@playwright/test";
 import { readinessFixture } from "./readiness-fixture";
 
@@ -331,9 +332,7 @@ test("admin publishes chosen discounts, shows MPV08 diagnosis and estimates a de
     exact: true,
   });
   if (await cookie.isVisible()) await cookie.click();
-  await page
-    .getByRole("button", { name: "Ofertas e combos", exact: true })
-    .click();
+  await navigateAdmin(page, "Ofertas e combos");
   await page.getByLabel("Desconto no combo (%)", { exact: true }).fill("10");
   await expect(page.locator(".combo-price-preview")).toContainText("19,80");
   await page
@@ -364,15 +363,12 @@ test("admin publishes chosen discounts, shows MPV08 diagnosis and estimates a de
       path: info.outputPath("painel-ofertas-celular.png"),
       fullPage: true,
     });
-  await page.getByRole("button", { name: "Mais opções", exact: true }).click();
-  await page.getByRole("button", { name: "Pagamentos", exact: true }).click();
+  await navigateAdmin(page, "Pagamentos");
   await expect(page.locator(".payment-diagnostics")).toContainText("MPV08");
   await expect(page.locator(".payment-diagnostics")).toContainText(
     "Credenciais",
   );
-  await page
-    .getByRole("button", { name: "Frete e entregas", exact: true })
-    .click();
+  await navigateAdmin(page, "Frete e entregas");
   await page
     .getByLabel("CEP de destino para teste", { exact: true })
     .fill("06754-100");

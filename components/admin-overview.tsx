@@ -53,16 +53,22 @@ const columns = [
 ] as const;
 
 // Daily cockpit: today's numbers and every paid order still in progress,
-// grouped by step. Tapping a card opens the order with "Enviar para o cliente".
+// grouped by step. Tapping a card opens its stage, message and packing workflow.
 export function AdminOverview({
   today,
   averageTicketCents,
+  profitCents = null,
+  missingCosts = 0,
+  days = 30,
   orders,
   onOpen,
   onNavigate,
 }: {
   today: Today | null;
   averageTicketCents: number | null;
+  profitCents?: number | null;
+  missingCosts?: number;
+  days?: number;
   orders: Order[];
   onOpen: (id: string) => void;
   onNavigate: (tab: string) => void;
@@ -126,6 +132,23 @@ export function AdminOverview({
             <strong>{card.value}</strong>
           </article>
         ))}
+      </div>
+      <section className="overview-result" aria-label="Resultado da loja">
+        <div className="overview-result-icon"><Wallet size={23} /></div>
+        <div className="overview-result-copy">
+          <span>Lucro estimado · últimos {days} dias</span>
+          <strong>{currency(profitCents)}</strong>
+          <p>{profitCents === null
+            ? missingCosts
+              ? `${missingCosts} ${missingCosts === 1 ? "pedido precisa" : "pedidos precisam"} dos custos para completar o resultado.`
+              : "O resultado aparece quando custos, taxas e entregas estiverem conferidos."
+            : "Depois dos custos dos produtos, taxas, entregas, reembolsos e despesas."}</p>
+        </div>
+        <button type="button" className="button button-outline button-small" onClick={() => onNavigate("finance")}>Ver financeiro</button>
+      </section>
+      <div className="overview-board-heading">
+        <div><span className="eyebrow">CUIDADO EM CADA ETAPA</span><h2>Pedidos para acompanhar</h2></div>
+        <button type="button" className="text-button" onClick={() => onNavigate("orders")}>Ver todos os pedidos →</button>
       </div>
       <section className="overview-board" aria-label="Pedidos em andamento">
         {columns.map(({ id, label, icon: Icon }) => {

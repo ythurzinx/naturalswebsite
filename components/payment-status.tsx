@@ -22,6 +22,7 @@ type Order = {
   fulfillment?: string;
   stage?: "new" | "packing" | "ready" | "out_for_delivery" | "completed" | null;
   etaMinutes?: number | null;
+  emailState?: "pending" | "sending" | "accepted" | "failed" | "unknown" | null;
   summary?: {
     firstName: string;
     shippingCents: number;
@@ -171,7 +172,7 @@ function Status() {
         ) : (
           <Clock3 size={44} strokeWidth={1.3} />
         )}
-        <h2>
+        <h2 role="status" aria-live="polite">
           {loading
             ? "Consultando o pagamento…"
             : order
@@ -199,6 +200,15 @@ function Status() {
                   : "Consulte a equipe para receber ajuda com esta compra."}
             </p>
             {paid && <Timeline order={order} />}
+            {paid && order.emailState && (
+              <p className="payment-email-note">
+                {order.emailState === "accepted"
+                  ? "A confirmação foi encaminhada ao e-mail informado na compra. Confira também a pasta de spam."
+                  : ["pending", "sending"].includes(order.emailState)
+                    ? "Estamos preparando a confirmação por e-mail. Você já pode acompanhar seu pedido aqui."
+                    : "Seu pedido está confirmado. Se o e-mail não chegar, acompanhe as etapas nesta página ou fale com a loja."}
+              </p>
+            )}
           </>
         )}
         <div className="payment-status-actions">
